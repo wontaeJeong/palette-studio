@@ -2,7 +2,7 @@
 
 초기 색상·통합 검증: 2026-10-27. 공통 UI 흐름·폰트 재검증: 2026-11-02. 생성된 수치 결과는 `data/audit-results.json`, `browser-check-results.json`, `integration-check-results.json`에 기록합니다.
 
-1.1.0 폰트 검증 결과는 `font-audit-results.json`, `font-browser-check-results.json`, `font-cdn-check-results.json`에 추가했습니다. 24개 패밀리의 WOFF2 918개는 원본 해시·OFL 고지·버전 고정을 검사했습니다. CDN URL은 패밀리별 첫·마지막 파일 45건의 실제 HTTP 응답을 확인했습니다. 브라우저의 CDN 성공 테스트는 그 원본 WOFF2를 응답으로 제공하는 fixture를 사용하고, 외부 차단·단일 HTML 이동·동봉 전용·시스템 모드도 별도로 확인합니다.
+1.1.0 폰트 검증 결과는 `font-audit-results.json`, `font-browser-check-results.json`, `font-cdn-check-results.json`에 추가했습니다. 24개 패밀리의 WOFF2 918개는 원본 해시·OFL 고지·버전 고정을 검사했습니다. CDN URL은 패밀리별 첫·마지막 파일 45건의 실제 HTTP 응답을 확인했습니다. 브라우저의 CDN 성공 테스트는 그 원본 WOFF2를 응답으로 제공하는 fixture를 사용하고, 오프라인 시나리오는 새 브라우저 프로세스로 캐시를 격리합니다. 외부 차단·단일 HTML 이동·동봉 전용·시스템 모드도 별도로 확인합니다.
 
 ```bash
 python3 scripts/audit-fonts.py

@@ -40,5 +40,6 @@
   ],
   "errors": [],
   "cdnTest": "Intercepted responses use bundled, source-verified WOFF2 bytes; no live availability guarantee.",
+  "offlineIsolation": "fresh browser process",
   "result": "pass"
 }

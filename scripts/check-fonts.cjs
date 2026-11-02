@@ -24,15 +24,15 @@ const options = {
     : {}),
 };
 async function main() {
-  const browser = await chromium.launch(options),
-    report = {
-      families: catalog.fonts.length,
-      passed: [],
-      fontPreviews: [],
-      errors: [],
-      cdnTest:
-        "Intercepted responses use bundled, source-verified WOFF2 bytes; no live availability guarantee.",
-    };
+  let browser = await chromium.launch(options);
+  const report = {
+    families: catalog.fonts.length,
+    passed: [],
+    fontPreviews: [],
+    errors: [],
+    cdnTest:
+      "Intercepted responses use bundled, source-verified WOFF2 bytes; no live availability guarantee.",
+  };
   const server = http.createServer(async (req, res) => {
     try {
       const clean = decodeURIComponent(
@@ -155,11 +155,19 @@ async function main() {
       ),
     );
     report.passed.push("system export has no downloadable font declarations");
-    await context.unrouteAll({ behavior: "wait" });
-    await context.route("https://**", (route) =>
+    // Native FontFace caches can survive document navigation and bypass new routes.
+    // Test an uncached offline client in a fresh browser process.
+    await browser.close();
+    browser = await chromium.launch(options);
+    const offlineContext = await browser.newContext({
+      viewport: { width: 1440, height: 1200 },
+    });
+    await offlineContext.route("https://**", (route) =>
       route.abort("blockedbyclient"),
     );
-    const offline = page;
+    const offline = await offlineContext.newPage();
+    offline.on("pageerror", (e) => report.errors.push(e.message));
+    report.offlineIsolation = "fresh browser process";
     const solo = path.join(
       os.tmpdir(),
       "palette-standalone-" + process.pid + ".html",

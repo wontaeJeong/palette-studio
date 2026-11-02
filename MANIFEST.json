@@ -5058,8 +5058,8 @@
     },
     {
       "path": "data/font-browser-check-results.json",
-      "bytes": 1309,
-      "sha256": "7c189a1cbf32b953dc1d13c895cbb5cf127a6fa5b1464e76361b0c0d98abdf3c"
+      "bytes": 1346,
+      "sha256": "bf51188cbbb8a9ad218a5f7bbf55a95a830778c7859c5b76672790eaee3cabb6"
     },
     {
       "path": "data/font-catalog.js",
@@ -5363,8 +5363,8 @@
     },
     {
       "path": "scripts/check-fonts.cjs",
-      "bytes": 10029,
-      "sha256": "4472fe3a3c9ff47db484d26a5c78ff1a15cbd93b9baa05f2256591fd17dc09e0"
+      "bytes": 10250,
+      "sha256": "b1c8bda97ab5f32b85be83f9cbe7bee5d521a1621991b8bba13f62466d2fca31"
     },
     {
       "path": "scripts/check-integration.cjs",

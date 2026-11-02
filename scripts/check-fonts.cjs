@@ -162,9 +162,11 @@ async function main() {
     const offlineContext = await browser.newContext({
       viewport: { width: 1440, height: 1200 },
     });
-    await offlineContext.route("https://**", (route) =>
-      route.abort("blockedbyclient"),
-    );
+    let blockedRequests = 0;
+    await offlineContext.route(/^https:\/\//, (route) => {
+      blockedRequests++;
+      return route.abort("blockedbyclient");
+    });
     const offline = await offlineContext.newPage();
     offline.on("pageerror", (e) => report.errors.push(e.message));
     report.offlineIsolation = "fresh browser process";
@@ -177,6 +179,11 @@ async function main() {
     await offline.click('[data-step="fonts"]');
     await offline.evaluate(() => PaletteStudio.readyFonts());
     status = await offline.evaluate(() => PaletteFonts.getStatus());
+    assert(
+      blockedRequests > 0,
+      "the offline CDN blocker must match actual font requests",
+    );
+    report.offlineCDNBlockerObserved = true;
     assert.equal(status.body.source, "embedded");
     assert.equal(status.code.source, "embedded");
     report.passed.push(

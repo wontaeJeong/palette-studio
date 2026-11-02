@@ -1,0 +1,22 @@
+{
+  "tailwind": {
+    "version": "4.3.3",
+    "utilities": 945,
+    "variants": 4,
+    "pass": true
+  },
+  "reactTypes": {
+    "version": "19.3.0",
+    "files": 3,
+    "strictTypeCheck": true,
+    "pass": true
+  },
+  "typescript": {
+    "version": "5.9.3"
+  },
+  "profileSchema": {
+    "validatedInstances": 2,
+    "pass": true
+  },
+  "scope": "Source/build contracts only; no React runtime application test."
+}

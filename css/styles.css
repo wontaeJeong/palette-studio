@@ -1,0 +1,67 @@
+/* Color-independent style presets. */
+[data-style="operational"] {
+  --ui-radius: 8px;
+  --ui-card: 10px;
+  --ui-padding: 20px;
+  --ui-height: 38px;
+  --ui-gap: 16px;
+  --ui-font: 14px;
+  --ui-line: 1.55;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}
+[data-style="soft"] {
+  --ui-radius: 10px;
+  --ui-card: 16px;
+  --ui-padding: 24px;
+  --ui-height: 42px;
+  --ui-gap: 20px;
+  --ui-font: 14px;
+  --ui-line: 1.65;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}
+[data-style="outline"] {
+  --ui-radius: 4px;
+  --ui-card: 5px;
+  --ui-padding: 20px;
+  --ui-height: 38px;
+  --ui-gap: 16px;
+  --ui-font: 14px;
+  --ui-line: 1.6;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}
+[data-style="editorial"] {
+  --ui-radius: 4px;
+  --ui-card: 6px;
+  --ui-padding: 28px;
+  --ui-height: 42px;
+  --ui-gap: 24px;
+  --ui-font: 15px;
+  --ui-line: 1.8;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}
+[data-style="compact"] {
+  --ui-radius: 5px;
+  --ui-card: 7px;
+  --ui-padding: 16px;
+  --ui-height: 32px;
+  --ui-gap: 12px;
+  --ui-font: 13px;
+  --ui-line: 1.5;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}
+[data-style="contrast"] {
+  --ui-radius: 4px;
+  --ui-card: 6px;
+  --ui-padding: 20px;
+  --ui-height: 42px;
+  --ui-gap: 16px;
+  --ui-font: 14px;
+  --ui-line: 1.65;
+  --ui-border: 2px;
+  --ui-shadow: none;
+}

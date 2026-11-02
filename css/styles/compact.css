@@ -1,0 +1,11 @@
+[data-style="compact"] {
+  --ui-radius: 5px;
+  --ui-card: 7px;
+  --ui-padding: 16px;
+  --ui-height: 32px;
+  --ui-gap: 12px;
+  --ui-font: 13px;
+  --ui-line: 1.5;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}

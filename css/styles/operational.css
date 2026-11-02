@@ -1,0 +1,11 @@
+[data-style="operational"] {
+  --ui-radius: 8px;
+  --ui-card: 10px;
+  --ui-padding: 20px;
+  --ui-height: 38px;
+  --ui-gap: 16px;
+  --ui-font: 14px;
+  --ui-line: 1.55;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}

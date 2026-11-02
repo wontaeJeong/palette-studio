@@ -1,0 +1,1244 @@
+{
+  "pairs": [
+    {
+      "name": "ink / canvas",
+      "fg": "--color-ink",
+      "bg": "--color-canvas",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-muted / canvas",
+      "fg": "--color-ink-muted",
+      "bg": "--color-canvas",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-subtle / canvas",
+      "fg": "--color-ink-subtle",
+      "bg": "--color-canvas",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link / canvas",
+      "fg": "--color-link",
+      "bg": "--color-canvas",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link-hover / canvas",
+      "fg": "--color-link-hover",
+      "bg": "--color-canvas",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "accent-text / canvas",
+      "fg": "--color-accent-text",
+      "bg": "--color-canvas",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "focus / canvas",
+      "fg": "--color-focus",
+      "bg": "--color-canvas",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "line-strong / canvas",
+      "fg": "--color-line-strong",
+      "bg": "--color-canvas",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "ink / raised",
+      "fg": "--color-ink",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-muted / raised",
+      "fg": "--color-ink-muted",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-subtle / raised",
+      "fg": "--color-ink-subtle",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link / raised",
+      "fg": "--color-link",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link-hover / raised",
+      "fg": "--color-link-hover",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "accent-text / raised",
+      "fg": "--color-accent-text",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "focus / raised",
+      "fg": "--color-focus",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "line-strong / raised",
+      "fg": "--color-line-strong",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "ink / surface",
+      "fg": "--color-ink",
+      "bg": "--color-surface",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-muted / surface",
+      "fg": "--color-ink-muted",
+      "bg": "--color-surface",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-subtle / surface",
+      "fg": "--color-ink-subtle",
+      "bg": "--color-surface",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link / surface",
+      "fg": "--color-link",
+      "bg": "--color-surface",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link-hover / surface",
+      "fg": "--color-link-hover",
+      "bg": "--color-surface",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "accent-text / surface",
+      "fg": "--color-accent-text",
+      "bg": "--color-surface",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "focus / surface",
+      "fg": "--color-focus",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "line-strong / surface",
+      "fg": "--color-line-strong",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "ink / surface-soft",
+      "fg": "--color-ink",
+      "bg": "--color-surface-soft",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-muted / surface-soft",
+      "fg": "--color-ink-muted",
+      "bg": "--color-surface-soft",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-subtle / surface-soft",
+      "fg": "--color-ink-subtle",
+      "bg": "--color-surface-soft",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link / surface-soft",
+      "fg": "--color-link",
+      "bg": "--color-surface-soft",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link-hover / surface-soft",
+      "fg": "--color-link-hover",
+      "bg": "--color-surface-soft",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "accent-text / surface-soft",
+      "fg": "--color-accent-text",
+      "bg": "--color-surface-soft",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "focus / surface-soft",
+      "fg": "--color-focus",
+      "bg": "--color-surface-soft",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "line-strong / surface-soft",
+      "fg": "--color-line-strong",
+      "bg": "--color-surface-soft",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "ink / shell",
+      "fg": "--color-ink",
+      "bg": "--color-shell",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-muted / shell",
+      "fg": "--color-ink-muted",
+      "bg": "--color-shell",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "ink-subtle / shell",
+      "fg": "--color-ink-subtle",
+      "bg": "--color-shell",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link / shell",
+      "fg": "--color-link",
+      "bg": "--color-shell",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "link-hover / shell",
+      "fg": "--color-link-hover",
+      "bg": "--color-shell",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "accent-text / shell",
+      "fg": "--color-accent-text",
+      "bg": "--color-shell",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "focus / shell",
+      "fg": "--color-focus",
+      "bg": "--color-shell",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "line-strong / shell",
+      "fg": "--color-line-strong",
+      "bg": "--color-shell",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "on-accent / accent",
+      "fg": "--color-on-accent",
+      "bg": "--color-accent",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-accent / accent-hover",
+      "fg": "--color-on-accent",
+      "bg": "--color-accent-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-accent / accent-active",
+      "fg": "--color-on-accent",
+      "bg": "--color-accent-active",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-accent / accent-strong",
+      "fg": "--color-on-accent",
+      "bg": "--color-accent-strong",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "accent-text / accent-subtle",
+      "fg": "--color-accent-text",
+      "bg": "--color-accent-subtle",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-selection / selection",
+      "fg": "--color-on-selection",
+      "bg": "--color-selection",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "focus / accent-subtle",
+      "fg": "--color-focus",
+      "bg": "--color-accent-subtle",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "success / success-subtle",
+      "fg": "--color-success",
+      "bg": "--color-success-subtle",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "success / raised",
+      "fg": "--color-success",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-success / success-solid",
+      "fg": "--color-on-success",
+      "bg": "--color-success-solid",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-success / success-hover",
+      "fg": "--color-on-success",
+      "bg": "--color-success-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "success-line / success-subtle",
+      "fg": "--color-success-line",
+      "bg": "--color-success-subtle",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "warning / warning-subtle",
+      "fg": "--color-warning",
+      "bg": "--color-warning-subtle",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "warning / raised",
+      "fg": "--color-warning",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-warning / warning-solid",
+      "fg": "--color-on-warning",
+      "bg": "--color-warning-solid",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-warning / warning-hover",
+      "fg": "--color-on-warning",
+      "bg": "--color-warning-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "warning-line / warning-subtle",
+      "fg": "--color-warning-line",
+      "bg": "--color-warning-subtle",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "danger / danger-subtle",
+      "fg": "--color-danger",
+      "bg": "--color-danger-subtle",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "danger / raised",
+      "fg": "--color-danger",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-danger / danger-solid",
+      "fg": "--color-on-danger",
+      "bg": "--color-danger-solid",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-danger / danger-hover",
+      "fg": "--color-on-danger",
+      "bg": "--color-danger-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "danger-line / danger-subtle",
+      "fg": "--color-danger-line",
+      "bg": "--color-danger-subtle",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "info / info-subtle",
+      "fg": "--color-info",
+      "bg": "--color-info-subtle",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "info / raised",
+      "fg": "--color-info",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-info / info-solid",
+      "fg": "--color-on-info",
+      "bg": "--color-info-solid",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-info / info-hover",
+      "fg": "--color-on-info",
+      "bg": "--color-info-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "info-line / info-subtle",
+      "fg": "--color-info-line",
+      "bg": "--color-info-subtle",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "rejected / rejected-subtle",
+      "fg": "--color-rejected",
+      "bg": "--color-rejected-subtle",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "rejected / raised",
+      "fg": "--color-rejected",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-rejected / rejected-solid",
+      "fg": "--color-on-rejected",
+      "bg": "--color-rejected-solid",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-rejected / rejected-hover",
+      "fg": "--color-on-rejected",
+      "bg": "--color-rejected-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "rejected-line / rejected-subtle",
+      "fg": "--color-rejected-line",
+      "bg": "--color-rejected-subtle",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "status-passed-text / status-passed",
+      "fg": "--color-status-passed-text",
+      "bg": "--color-status-passed",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "status-passed-line / status-passed",
+      "fg": "--color-status-passed-line",
+      "bg": "--color-status-passed",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "status-review-text / status-review",
+      "fg": "--color-status-review-text",
+      "bg": "--color-status-review",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "status-review-line / status-review",
+      "fg": "--color-status-review-line",
+      "bg": "--color-status-review",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "status-rejected-text / status-rejected",
+      "fg": "--color-status-rejected-text",
+      "bg": "--color-status-rejected",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "status-rejected-line / status-rejected",
+      "fg": "--color-status-rejected-line",
+      "bg": "--color-status-rejected",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "status-failed-text / status-failed",
+      "fg": "--color-status-failed-text",
+      "bg": "--color-status-failed",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "status-failed-line / status-failed",
+      "fg": "--color-status-failed-line",
+      "bg": "--color-status-failed",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "status-running-text / status-running",
+      "fg": "--color-status-running-text",
+      "bg": "--color-status-running",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "status-running-line / status-running",
+      "fg": "--color-status-running-line",
+      "bg": "--color-status-running",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "status-queued-text / status-queued",
+      "fg": "--color-status-queued-text",
+      "bg": "--color-status-queued",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "status-queued-line / status-queued",
+      "fg": "--color-status-queued-line",
+      "bg": "--color-status-queued",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "status-cancelled-text / status-cancelled",
+      "fg": "--color-status-cancelled-text",
+      "bg": "--color-status-cancelled",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "status-cancelled-line / status-cancelled",
+      "fg": "--color-status-cancelled-line",
+      "bg": "--color-status-cancelled",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "status-skipped-text / status-skipped",
+      "fg": "--color-status-skipped-text",
+      "bg": "--color-status-skipped",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "status-skipped-line / status-skipped",
+      "fg": "--color-status-skipped-line",
+      "bg": "--color-status-skipped",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "status-unknown-text / status-unknown",
+      "fg": "--color-status-unknown-text",
+      "bg": "--color-status-unknown",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "status-unknown-line / status-unknown",
+      "fg": "--color-status-unknown-line",
+      "bg": "--color-status-unknown",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "sev-critical-text / sev-critical",
+      "fg": "--color-sev-critical-text",
+      "bg": "--color-sev-critical",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "sev-critical-line / sev-critical",
+      "fg": "--color-sev-critical-line",
+      "bg": "--color-sev-critical",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "sev-high-text / sev-high",
+      "fg": "--color-sev-high-text",
+      "bg": "--color-sev-high",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "sev-high-line / sev-high",
+      "fg": "--color-sev-high-line",
+      "bg": "--color-sev-high",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "sev-medium-text / sev-medium",
+      "fg": "--color-sev-medium-text",
+      "bg": "--color-sev-medium",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "sev-medium-line / sev-medium",
+      "fg": "--color-sev-medium-line",
+      "bg": "--color-sev-medium",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "sev-low-text / sev-low",
+      "fg": "--color-sev-low-text",
+      "bg": "--color-sev-low",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "sev-low-line / sev-low",
+      "fg": "--color-sev-low-line",
+      "bg": "--color-sev-low",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "sev-info-text / sev-info",
+      "fg": "--color-sev-info-text",
+      "bg": "--color-sev-info",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "sev-info-line / sev-info",
+      "fg": "--color-sev-info-line",
+      "bg": "--color-sev-info",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "sev-unknown-text / sev-unknown",
+      "fg": "--color-sev-unknown-text",
+      "bg": "--color-sev-unknown",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "sev-unknown-line / sev-unknown",
+      "fg": "--color-sev-unknown-line",
+      "bg": "--color-sev-unknown",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "tooltip-fg / tooltip-bg",
+      "fg": "--color-tooltip-fg",
+      "bg": "--color-tooltip-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "input-fg / input-bg",
+      "fg": "--color-input-fg",
+      "bg": "--color-input-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "input-placeholder / input-bg",
+      "fg": "--color-input-placeholder",
+      "bg": "--color-input-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "input-fg / input-readonly-bg",
+      "fg": "--color-input-fg",
+      "bg": "--color-input-readonly-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "input-fg / input-invalid-bg",
+      "fg": "--color-input-fg",
+      "bg": "--color-input-invalid-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "nav-fg / nav-bg",
+      "fg": "--color-nav-fg",
+      "bg": "--color-nav-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "nav-fg / nav-hover",
+      "fg": "--color-nav-fg",
+      "bg": "--color-nav-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "nav-active-fg / nav-active-bg",
+      "fg": "--color-nav-active-fg",
+      "bg": "--color-nav-active-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "tab-fg / tab-bg",
+      "fg": "--color-tab-fg",
+      "bg": "--color-tab-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "tab-fg / tab-hover-bg",
+      "fg": "--color-tab-fg",
+      "bg": "--color-tab-hover-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "tab-active-fg / tab-bg",
+      "fg": "--color-tab-active-fg",
+      "bg": "--color-tab-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "table-fg / table-head-bg",
+      "fg": "--color-table-fg",
+      "bg": "--color-table-head-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "table-fg / table-row-hover",
+      "fg": "--color-table-fg",
+      "bg": "--color-table-row-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "table-fg / table-row-selected",
+      "fg": "--color-table-fg",
+      "bg": "--color-table-row-selected",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "table-muted / table-row-hover",
+      "fg": "--color-table-muted",
+      "bg": "--color-table-row-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "code-fg / code-bg",
+      "fg": "--color-code-fg",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "code-fg / code-inline-bg",
+      "fg": "--color-code-fg",
+      "bg": "--color-code-inline-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "code-accent / code-bg",
+      "fg": "--color-code-accent",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "code-accent / code-inline-bg",
+      "fg": "--color-code-accent",
+      "bg": "--color-code-inline-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "diff-add-fg / diff-add-bg",
+      "fg": "--color-diff-add-fg",
+      "bg": "--color-diff-add-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "diff-remove-fg / diff-remove-bg",
+      "fg": "--color-diff-remove-fg",
+      "bg": "--color-diff-remove-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "button-secondary-fg / button-secondary-bg",
+      "fg": "--color-button-secondary-fg",
+      "bg": "--color-button-secondary-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "button-secondary-fg / button-secondary-hover",
+      "fg": "--color-button-secondary-fg",
+      "bg": "--color-button-secondary-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "button-secondary-fg / button-secondary-active",
+      "fg": "--color-button-secondary-fg",
+      "bg": "--color-button-secondary-active",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "button-ghost-fg / button-ghost-bg",
+      "fg": "--color-button-ghost-fg",
+      "bg": "--color-button-ghost-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "button-ghost-fg / button-ghost-hover",
+      "fg": "--color-button-ghost-fg",
+      "bg": "--color-button-ghost-hover",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "button-ghost-fg / button-ghost-active",
+      "fg": "--color-button-ghost-fg",
+      "bg": "--color-button-ghost-active",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "disabled-fg / disabled-bg",
+      "fg": "--color-disabled-fg",
+      "bg": "--color-disabled-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "input-border / input-bg",
+      "fg": "--color-input-border",
+      "bg": "--color-input-bg",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "input-border / surface",
+      "fg": "--color-input-border",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "input-hover-border / input-bg",
+      "fg": "--color-input-hover-border",
+      "bg": "--color-input-bg",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "input-invalid-border / input-invalid-bg",
+      "fg": "--color-input-invalid-border",
+      "bg": "--color-input-invalid-bg",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "code-line / code-bg",
+      "fg": "--color-code-line",
+      "bg": "--color-code-bg",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "code-line / raised",
+      "fg": "--color-code-line",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "button-secondary-border / button-secondary-bg",
+      "fg": "--color-button-secondary-border",
+      "bg": "--color-button-secondary-bg",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "nav-active-line / nav-active-bg",
+      "fg": "--color-nav-active-line",
+      "bg": "--color-nav-active-bg",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "tab-active-line / tab-bg",
+      "fg": "--color-tab-active-line",
+      "bg": "--color-tab-bg",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "progress-fill / progress-track",
+      "fg": "--color-progress-fill",
+      "bg": "--color-progress-track",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "switch-thumb / switch-track",
+      "fg": "--color-switch-thumb",
+      "bg": "--color-switch-track",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "switch-checked-thumb / switch-checked",
+      "fg": "--color-switch-checked-thumb",
+      "bg": "--color-switch-checked",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
+      "name": "syntax-key / code-bg",
+      "fg": "--color-syntax-key",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-string / code-bg",
+      "fg": "--color-syntax-string",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-number / code-bg",
+      "fg": "--color-syntax-number",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-boolean / code-bg",
+      "fg": "--color-syntax-boolean",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-null / code-bg",
+      "fg": "--color-syntax-null",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-comment / code-bg",
+      "fg": "--color-syntax-comment",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-punctuation / code-bg",
+      "fg": "--color-syntax-punctuation",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-function / code-bg",
+      "fg": "--color-syntax-function",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-keyword / code-bg",
+      "fg": "--color-syntax-keyword",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-tag / code-bg",
+      "fg": "--color-syntax-tag",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "syntax-attribute / code-bg",
+      "fg": "--color-syntax-attribute",
+      "bg": "--color-code-bg",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "card-total / raised",
+      "fg": "--color-card-total",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "card-active / raised",
+      "fg": "--color-card-active",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "card-passed / raised",
+      "fg": "--color-card-passed",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "card-review / raised",
+      "fg": "--color-card-review",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "card-rejected / raised",
+      "fg": "--color-card-rejected",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "card-failed / raised",
+      "fg": "--color-card-failed",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "chart-1 / raised",
+      "fg": "--color-chart-1",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-1 / surface",
+      "fg": "--color-chart-1",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-2 / raised",
+      "fg": "--color-chart-2",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-2 / surface",
+      "fg": "--color-chart-2",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-3 / raised",
+      "fg": "--color-chart-3",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-3 / surface",
+      "fg": "--color-chart-3",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-4 / raised",
+      "fg": "--color-chart-4",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-4 / surface",
+      "fg": "--color-chart-4",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-5 / raised",
+      "fg": "--color-chart-5",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-5 / surface",
+      "fg": "--color-chart-5",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-6 / raised",
+      "fg": "--color-chart-6",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-6 / surface",
+      "fg": "--color-chart-6",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-7 / raised",
+      "fg": "--color-chart-7",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-7 / surface",
+      "fg": "--color-chart-7",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-8 / raised",
+      "fg": "--color-chart-8",
+      "bg": "--color-raised",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-8 / surface",
+      "fg": "--color-chart-8",
+      "bg": "--color-surface",
+      "min": 3,
+      "kind": "chart"
+    },
+    {
+      "name": "chart-axis / raised",
+      "fg": "--color-chart-axis",
+      "bg": "--color-raised",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "chart-axis / surface",
+      "fg": "--color-chart-axis",
+      "bg": "--color-surface",
+      "min": 4.5,
+      "kind": "text"
+    }
+  ],
+  "note": "Decorative line, disabled controls and chart pairwise discrimination are not WCAG pass claims."
+}

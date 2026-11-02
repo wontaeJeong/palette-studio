@@ -1,0 +1,11 @@
+[data-style="editorial"] {
+  --ui-radius: 4px;
+  --ui-card: 6px;
+  --ui-padding: 28px;
+  --ui-height: 42px;
+  --ui-gap: 24px;
+  --ui-font: 15px;
+  --ui-line: 1.8;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}

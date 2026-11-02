@@ -1,0 +1,6 @@
+/* Paths relative to this example. In an app, adapt them to the kit's actual location. */
+@import "../../css/fonts-cdn.css";
+@import "../../css/palettes/graphite-plum.css";
+@import "../../css/foundation.css";
+@import "../../css/styles/operational.css";
+/* Import utilities.css only if you use cp-bg-*, cp-text-*, etc. */

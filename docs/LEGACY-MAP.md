@@ -1,0 +1,69 @@
+# 이전 토큰 이름 호환표
+
+원본 `color-tokens.css`에서 확인한 전체 토큰 이름입니다. 새 팔레트는 이름을 모두 포함합니다. 값의 완전 동일을 뜻하지 않습니다. 실제 앱의 CSS 클래스 이름은 확인하지 않았습니다. 대응 유틸리티는 선택적으로 사용할 수 있는 새 클래스입니다.
+
+| 이전 토큰 | 새 토큰 | 유틸리티 예 |
+|---|---|---|
+| `--color-accent` | 동일 | `cp-text-accent` |
+| `--color-accent-strong` | 동일 | `cp-text-accent-strong` |
+| `--color-on-accent` | 동일 | `cp-text-on-accent` |
+| `--color-accent-subtle` | 동일 | `cp-text-accent-subtle` |
+| `--color-accent-text` | 동일 | `cp-text-accent-text` |
+| `--color-accent-line` | 동일 | `cp-text-accent-line` |
+| `--color-canvas` | 동일 | `cp-text-canvas` |
+| `--color-raised` | 동일 | `cp-text-raised` |
+| `--color-surface` | 동일 | `cp-text-surface` |
+| `--color-surface-soft` | 동일 | `cp-text-surface-soft` |
+| `--color-line` | 동일 | `cp-text-line` |
+| `--color-line-strong` | 동일 | `cp-text-line-strong` |
+| `--color-ink` | 동일 | `cp-text-ink` |
+| `--color-ink-muted` | 동일 | `cp-text-ink-muted` |
+| `--color-link` | 동일 | `cp-text-link` |
+| `--color-status-passed` | 동일 | `cp-text-status-passed` |
+| `--color-status-passed-text` | 동일 | `cp-text-status-passed-text` |
+| `--color-status-review` | 동일 | `cp-text-status-review` |
+| `--color-status-review-text` | 동일 | `cp-text-status-review-text` |
+| `--color-status-rejected` | 동일 | `cp-text-status-rejected` |
+| `--color-status-rejected-text` | 동일 | `cp-text-status-rejected-text` |
+| `--color-status-failed` | 동일 | `cp-text-status-failed` |
+| `--color-status-failed-text` | 동일 | `cp-text-status-failed-text` |
+| `--color-status-running` | 동일 | `cp-text-status-running` |
+| `--color-status-running-text` | 동일 | `cp-text-status-running-text` |
+| `--color-status-queued` | 동일 | `cp-text-status-queued` |
+| `--color-status-queued-text` | 동일 | `cp-text-status-queued-text` |
+| `--color-sev-critical` | 동일 | `cp-text-sev-critical` |
+| `--color-sev-critical-text` | 동일 | `cp-text-sev-critical-text` |
+| `--color-sev-high` | 동일 | `cp-text-sev-high` |
+| `--color-sev-high-text` | 동일 | `cp-text-sev-high-text` |
+| `--color-sev-medium` | 동일 | `cp-text-sev-medium` |
+| `--color-sev-medium-text` | 동일 | `cp-text-sev-medium-text` |
+| `--color-sev-low` | 동일 | `cp-text-sev-low` |
+| `--color-sev-low-text` | 동일 | `cp-text-sev-low-text` |
+| `--color-sev-info` | 동일 | `cp-text-sev-info` |
+| `--color-sev-info-text` | 동일 | `cp-text-sev-info-text` |
+| `--color-danger` | 동일 | `cp-text-danger` |
+| `--color-danger-solid` | 동일 | `cp-text-danger-solid` |
+| `--color-danger-subtle` | 동일 | `cp-text-danger-subtle` |
+| `--color-warning` | 동일 | `cp-text-warning` |
+| `--color-warning-solid` | 동일 | `cp-text-warning-solid` |
+| `--color-warning-subtle` | 동일 | `cp-text-warning-subtle` |
+| `--color-success` | 동일 | `cp-text-success` |
+| `--color-success-solid` | 동일 | `cp-text-success-solid` |
+| `--color-success-subtle` | 동일 | `cp-text-success-subtle` |
+| `--color-info` | 동일 | `cp-text-info` |
+| `--color-info-solid` | 동일 | `cp-text-info-solid` |
+| `--color-info-subtle` | 동일 | `cp-text-info-subtle` |
+| `--color-card-total` | 동일 | `cp-text-card-total` |
+| `--color-card-active` | 동일 | `cp-text-card-active` |
+| `--color-card-passed` | 동일 | `cp-text-card-passed` |
+| `--color-card-review` | 동일 | `cp-text-card-review` |
+| `--color-card-rejected` | 동일 | `cp-text-card-rejected` |
+| `--color-card-failed` | 동일 | `cp-text-card-failed` |
+| `--color-chart-1` | 동일 | `cp-text-chart-1` |
+| `--color-chart-2` | 동일 | `cp-text-chart-2` |
+| `--color-chart-3` | 동일 | `cp-text-chart-3` |
+| `--color-code-bg` | 동일 | `cp-text-code-bg` |
+| `--color-code-fg` | 동일 | `cp-text-code-fg` |
+| `--color-code-line` | 동일 | `cp-text-code-line` |
+| `--color-code-inline-bg` | 동일 | `cp-text-code-inline-bg` |
+| `--color-code-accent` | 동일 | `cp-text-code-accent` |

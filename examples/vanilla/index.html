@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>단일 팔레트 사용 예제</title>
+  <script src="../theme-init.js"></script>
+  <link rel="stylesheet" href="../../css/fonts-cdn.css">
+  <link rel="stylesheet" href="../../css/palettes/graphite-plum.css">
+  <link rel="stylesheet" href="../../css/foundation.css">
+  <link rel="stylesheet" href="../../css/styles/operational.css">
+  <style>body{margin:0;min-height:100vh}.example{max-width:700px;margin:0 auto;padding:32px 20px}header{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:24px}h1{font-size:24px}small{display:block;margin-top:6px}</style>
+</head>
+<body class="cp-scope" data-style="operational">
+  <main class="example"><header><div><h1>반입 검사</h1><small class="ui-muted">Graphite / Plum · 독립 실행 예제</small></div><button class="ui-btn" id="toggle">테마 전환</button></header>
+    <form class="ui-card ui-stack" id="example-form"><div class="ui-field"><label for="repo">저장소 주소</label><input id="repo" type="url" class="ui-input" placeholder="https://git.example/team/project" required></div><div class="ui-field"><label for="branch">브랜치</label><input id="branch" class="ui-input" value="main"></div><div class="ui-row"><button type="submit" class="ui-btn ui-btn-primary">검사 요청</button><button type="reset" class="ui-btn">초기화</button><button type="button" class="ui-btn" disabled>검사 중</button></div><p class="ui-muted" id="result" role="status">실제 네트워크 요청을 보내지 않는 UI 예제입니다.</p><pre class="ui-code">{ "decision": "PASS", "findings": 0 }</pre></form>
+  </main>
+  <script>
+    document.getElementById('toggle').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;try{localStorage.setItem('app-theme',theme);}catch{}});
+    document.getElementById('example-form').addEventListener('submit',e=>{e.preventDefault();document.getElementById('result').textContent='✓ 샘플 요청 UI를 확인했습니다.';});
+  </script>
+</body>
+</html>

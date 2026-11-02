@@ -1,0 +1,306 @@
+{
+  "$schemaComment": "Rules for WCAG 2.2 contrast checker; 4.5 normal text, 3.0 non-text or large text. Solid uses on-accent token (light white/dark graphite).",
+  "pairs": [
+    {
+      "name": "body-on-canvas",
+      "fg": "--color-ink",
+      "bg": "--color-canvas",
+      "min": 4.5
+    },
+    {
+      "name": "body-on-raised",
+      "fg": "--color-ink",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "body-on-surface",
+      "fg": "--color-ink",
+      "bg": "--color-surface",
+      "min": 4.5
+    },
+    {
+      "name": "muted-on-canvas",
+      "fg": "--color-ink-muted",
+      "bg": "--color-canvas",
+      "min": 4.5
+    },
+    {
+      "name": "muted-on-raised",
+      "fg": "--color-ink-muted",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "link-on-canvas",
+      "fg": "--color-link",
+      "bg": "--color-canvas",
+      "min": 4.5
+    },
+    {
+      "name": "link-on-raised",
+      "fg": "--color-link",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "accent-button",
+      "fg": "--color-on-accent",
+      "bg": "--color-accent",
+      "min": 4.5
+    },
+    {
+      "name": "accent-text-on-subtle",
+      "fg": "--color-accent-text",
+      "bg": "--color-accent-subtle",
+      "min": 4.5
+    },
+    {
+      "name": "code-text",
+      "fg": "--color-code-fg",
+      "bg": "--color-code-bg",
+      "min": 4.5
+    },
+    {
+      "name": "input-border",
+      "fg": "--color-line-strong",
+      "bg": "--color-raised",
+      "min": 3
+    },
+    {
+      "name": "input-border-on-surface",
+      "fg": "--color-line-strong",
+      "bg": "--color-surface",
+      "min": 3
+    },
+    {
+      "name": "status-passed",
+      "fg": "--color-status-passed-text",
+      "bg": "--color-status-passed",
+      "min": 4.5
+    },
+    {
+      "name": "status-review",
+      "fg": "--color-status-review-text",
+      "bg": "--color-status-review",
+      "min": 4.5
+    },
+    {
+      "name": "status-rejected",
+      "fg": "--color-status-rejected-text",
+      "bg": "--color-status-rejected",
+      "min": 4.5
+    },
+    {
+      "name": "status-failed",
+      "fg": "--color-status-failed-text",
+      "bg": "--color-status-failed",
+      "min": 4.5
+    },
+    {
+      "name": "status-running",
+      "fg": "--color-status-running-text",
+      "bg": "--color-status-running",
+      "min": 4.5
+    },
+    {
+      "name": "status-queued",
+      "fg": "--color-status-queued-text",
+      "bg": "--color-status-queued",
+      "min": 4.5
+    },
+    {
+      "name": "severity-critical",
+      "fg": "--color-sev-critical-text",
+      "bg": "--color-sev-critical",
+      "min": 4.5
+    },
+    {
+      "name": "severity-high",
+      "fg": "--color-sev-high-text",
+      "bg": "--color-sev-high",
+      "min": 4.5
+    },
+    {
+      "name": "severity-medium",
+      "fg": "--color-sev-medium-text",
+      "bg": "--color-sev-medium",
+      "min": 4.5
+    },
+    {
+      "name": "severity-low",
+      "fg": "--color-sev-low-text",
+      "bg": "--color-sev-low",
+      "min": 4.5
+    },
+    {
+      "name": "severity-info",
+      "fg": "--color-sev-info-text",
+      "bg": "--color-sev-info",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-danger-text",
+      "fg": "--color-danger",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-danger-subtle",
+      "fg": "--color-danger",
+      "bg": "--color-danger-subtle",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-danger-solid",
+      "fg": "--color-on-accent",
+      "bg": "--color-danger-solid",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-warning-text",
+      "fg": "--color-warning",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-warning-subtle",
+      "fg": "--color-warning",
+      "bg": "--color-warning-subtle",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-warning-solid",
+      "fg": "--color-on-accent",
+      "bg": "--color-warning-solid",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-success-text",
+      "fg": "--color-success",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-success-subtle",
+      "fg": "--color-success",
+      "bg": "--color-success-subtle",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-success-solid",
+      "fg": "--color-on-accent",
+      "bg": "--color-success-solid",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-info-text",
+      "fg": "--color-info",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-info-subtle",
+      "fg": "--color-info",
+      "bg": "--color-info-subtle",
+      "min": 4.5
+    },
+    {
+      "name": "semantic-info-solid",
+      "fg": "--color-on-accent",
+      "bg": "--color-info-solid",
+      "min": 4.5
+    },
+    {
+      "name": "card-total-on-raised",
+      "fg": "--color-card-total",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "card-active-on-raised",
+      "fg": "--color-card-active",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "card-passed-on-raised",
+      "fg": "--color-card-passed",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "card-review-on-raised",
+      "fg": "--color-card-review",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "card-rejected-on-raised",
+      "fg": "--color-card-rejected",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "card-failed-on-raised",
+      "fg": "--color-card-failed",
+      "bg": "--color-raised",
+      "min": 4.5
+    },
+    {
+      "name": "chart-1-on-raised",
+      "fg": "--color-chart-1",
+      "bg": "--color-raised",
+      "min": 3
+    },
+    {
+      "name": "chart-1-on-surface",
+      "fg": "--color-chart-1",
+      "bg": "--color-surface",
+      "min": 3
+    },
+    {
+      "name": "chart-2-on-raised",
+      "fg": "--color-chart-2",
+      "bg": "--color-raised",
+      "min": 3
+    },
+    {
+      "name": "chart-2-on-surface",
+      "fg": "--color-chart-2",
+      "bg": "--color-surface",
+      "min": 3
+    },
+    {
+      "name": "chart-3-on-raised",
+      "fg": "--color-chart-3",
+      "bg": "--color-raised",
+      "min": 3
+    },
+    {
+      "name": "chart-3-on-surface",
+      "fg": "--color-chart-3",
+      "bg": "--color-surface",
+      "min": 3
+    }
+  ],
+  "charts": {
+    "tokens": [
+      "--color-chart-1",
+      "--color-chart-2",
+      "--color-chart-3"
+    ],
+    "minimumDeltaE76": 20
+  },
+  "forbiddenColors": [
+    "#087e8b",
+    "#3bc9db",
+    "#066a75",
+    "#7fe0ec",
+    "#e6f6f7",
+    "#0d2a30",
+    "#045a63",
+    "#1e9aa8"
+  ],
+  "forbiddenPolicy": "warn"
+}

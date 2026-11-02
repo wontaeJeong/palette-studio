@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light"><meta name="description" content="32 UI palettes, six styles, CDN typography and bundled font fallback. Agent-ready CSS kit.">
+  <title>Palette Studio — UI Color & Style Kit</title>
+  <link rel="stylesheet" href="css/palettes.css">
+  <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/utilities.css">
+  <link rel="stylesheet" href="css/studio.css">
+</head>
+<body>
+  <header class="studio-top">
+    <div class="studio-brand"><span class="studio-logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Palette Studio <span style="font-weight:400;color:#626270;font-size:11px">/ 01</span></div>
+    <nav aria-label="가이드 탐색"><a href="#gallery">팔레트</a><a href="#font-gallery-section">폰트</a><a href="#components">컴포넌트</a><a href="#tokens">토큰</a><a href="#workflow">사용 방법</a></nav>
+  </header>
+  <main class="studio-container">
+    <section class="studio-hero">
+      <div><div class="studio-eyebrow">UI Color, Style & Typography · Offline Edition</div><h1>같은 화면, 다른 인상.</h1><p>포인트 하나부터 글자의 분위기까지.<br>32개 색상 조합·6개 스타일·24개 OFL 폰트를 비교하고, 선택한 기준을 에이전트에게 전달하세요.</p></div>
+      <div class="studio-count"><strong>32 / 06 / 24</strong><br>Palettes &nbsp;·&nbsp; Styles &nbsp;·&nbsp; Fonts</div>
+    </section>
+    <section class="studio-toolbar" aria-label="디자인 선택">
+      <div class="studio-control"><label for="palette">01 · Palette</label><select id="palette"></select></div>
+      <div class="studio-control"><label for="style">02 · Style</label><select id="style"></select></div>
+      <div class="studio-control"><label for="mode">03 · Preview</label><select id="mode"><option value="light">Light</option><option value="dark">Dark</option><option value="split">Light + Dark</option><option value="compare">두 팔레트 비교</option></select></div>
+      <div class="studio-control studio-compare-control" id="compare-control" hidden><label for="compare">Compare with</label><select id="compare"></select></div>
+      <div class="studio-control studio-compare-control" id="compare-mode-control" hidden><label for="compare-mode">Compare mode</label><select id="compare-mode"><option value="light">Light</option><option value="dark">Dark</option></select></div>
+      <div class="studio-actions"><button class="studio-btn" id="copy-css">CSS 복사</button><button class="studio-btn" id="export-css">CSS 저장</button><button class="studio-btn primary" id="export-profile">디자인 프로필 저장 ↗</button></div>
+    </section>
+    <section class="studio-fontbar" aria-label="폰트 선택">
+      <div class="studio-control"><label for="body-font">04 · Body font</label><select id="body-font"></select></div>
+      <div class="studio-control"><label for="code-font">05 · Code font</label><select id="code-font"></select></div>
+      <div class="studio-control"><label for="font-source">Font delivery</label><select id="font-source"><option value="cdn-first">CDN 우선 → 동봉 폰트</option><option value="local-only">동봉 폰트만</option><option value="system">시스템 폰트만</option></select></div>
+      <div class="studio-control"><label for="font-combo">Suggested pair</label><select id="font-combo"><option value="">조합 직접 선택</option></select></div>
+      <div class="studio-font-actions"><button class="studio-btn" id="retry-fonts">폰트 다시 읽기</button><button class="studio-btn" id="export-font-css">폰트 CSS 저장</button></div>
+      <p class="studio-font-status" id="font-status" role="status" aria-live="polite">선택한 폰트를 준비하고 있습니다.</p>
+      <details class="studio-font-details"><summary>한글·영문·코드 폰트 견본</summary><div id="font-samples"></div></details>
+      <details class="studio-font-details"><summary>폰트 출처와 라이선스</summary><div id="font-licenses"></div></details>
+    </section>
+    <div class="studio-selection"><span class="studio-dot" id="selected-dot"></span><strong id="selected-name"></strong><span id="selected-description"></span></div>
+    <div class="studio-stage" id="stage"></div>
+    <div class="studio-profile">
+      <label for="target">적용 대상 <select id="target"><option value="existing-gate">기존 Admission Gate</option><option value="new-app">새 앱 / 다른 앱</option></select></label>
+      <label for="scope">변경 범위 <select id="scope"><option value="dark-only">다크만</option><option value="both">라이트 + 다크</option><option value="light-only">라이트만</option></select></label>
+      <button class="studio-btn" id="copy-prompt">OpenCode 작업지시 복사</button><button class="studio-btn" id="save-prompt">작업지시 저장</button><button class="studio-btn" id="save-link">이 선택 링크 복사</button>
+    </div>
+    <p class="studio-note" id="policy-note"></p>
+    <section class="studio-section" id="gallery">
+      <div class="studio-section-title"><div><h2>팔레트 라이브러리 <span style="font-size:12px;font-weight:500;color:#626270">32 combinations</span></h2><p>바탕과 포인트를 함께 설계했습니다. 카드를 선택하면 위 화면과 토큰이 바뀝니다. 인기 순위가 아닌 폭넓은 조합 후보입니다.</p></div><div class="studio-control"><label for="search">Search palettes</label><input id="search" type="search" placeholder="plum, slate, sage…"></div></div>
+      <div class="studio-filters" id="filters" aria-label="색상 계열"></div>
+      <div class="studio-gallery" id="palette-gallery"></div><p class="studio-note" id="gallery-note" aria-live="polite"></p>
+    </section>
+    <section class="studio-section" id="font-gallery-section">
+      <div class="studio-section-title"><div><h2>글자의 분위기도, 직접 선택.</h2><p>사내·상업용 사용이 허용되는 OFL 폰트 24종. 한글 지원과 용도를 확인하고 같은 문장으로 비교하세요.</p></div><div class="studio-control"><label for="font-search">Search fonts</label><input type="search" id="font-search" placeholder="한글, 코드, 문서, Inter…"></div></div>
+      <div class="studio-filters" id="font-filters" aria-label="폰트 분류"></div>
+      <div class="font-gallery" id="font-gallery"></div>
+      <p class="studio-note" id="font-gallery-note" aria-live="polite"></p>
+      <p class="studio-note">동봉·웹폰트 재배포에는 원래 저작권과 OFL 고지를 유지합니다. 폰트 파일 단독 판매·라이선스 변경은 허용하지 않으며, 수정 배포 시 Reserved Font Name 조건을 따릅니다. 아래 견본은 화면에 보이는 카드부터 필요한 글리프를 읽습니다.</p>
+    </section>
+    <section class="studio-section" id="components"><div class="studio-section-title"><div><h2>버튼부터 오류 상태까지.</h2><p>같은 의미를 유지하는 상태색, 키보드 포커스, 폼 검증, JSON 하이라이트. 버튼의 hover·pressed·focus 상태는 비교용 고정 샘플입니다.</p></div></div><div id="specimens"></div></section>
+    <section class="studio-section" id="tokens"><div class="studio-section-title"><div><h2>색상의 이름보다, 쓰임새.</h2><p>테마마다 같은 189개 의미 토큰을 제공합니다. 색상 셀을 누르면 HEX를 복사합니다.</p></div><div class="studio-control"><label for="token-search">Search tokens</label><input type="search" id="token-search" placeholder="status, code, border…"></div></div><div class="token-scroll"><table class="studio-table"><thead><tr><th>Semantic token</th><th>Light</th><th>Dark</th><th>Utility example</th></tr></thead><tbody id="token-rows"></tbody></table></div></section>
+    <section class="studio-section" id="workflow"><div class="studio-section-title"><div><h2>선택이 구현 기준이 되도록.</h2><p>색상표를 구경한 다음, 내 앱의 실제 화면에서 두세 후보를 확인하세요.</p></div></div><div class="studio-howto"><article><span>01 / EXPLORE</span><h3>색상과 스타일을 따로 선택</h3><p>먼저 포인트와 바탕을 고르고, 다음에 라운드·여백·정보 밀도를 고릅니다. 모든 요소를 한 번에 바꾸면 무엇이 좋아졌는지 판단하기 어렵습니다.</p></article><article><span>02 / COMPARE</span><h3>실제 앱의 같은 화면에 적용</h3><p>일반 목록, 긴 상세, 실패·권한 없음 화면을 같은 데이터로 비교합니다. 이곳의 샘플은 출발점입니다. 실제 Admission Gate 컴포넌트의 검증을 대신하지 않습니다.</p></article><article><span>03 / COMMIT</span><h3>프로필을 저장하고 기준 고정</h3><p>내보낸 JSON과 CSS를 저장소에 넣고 작업지시를 전달합니다. 기존 테마 정의에 병합해 중복을 없애고, 선택 범위 안에서만 색상을 바꿉니다.</p></article></div></section>
+    <footer class="studio-footer"><span>Palette Studio · 1.1.0 · 2026.10.27 · CDN 폰트 / 오프라인 폴백</span><span>선언된 색상 쌍 11,328건 검사 · 전체 앱 접근성 인증은 아님</span></footer>
+  </main>
+  <div class="studio-toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><p style="padding:24px">이 HTML 미리보기는 JavaScript를 사용합니다. 스크립트를 허용하거나 docs/PALETTES.md와 previews 이미지를 확인하세요.</p></noscript>
+  <script src="data/catalog.js"></script>
+  <script src="data/font-catalog.js"></script>
+  <script src="font-loader.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

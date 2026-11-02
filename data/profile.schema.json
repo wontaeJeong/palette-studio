@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Palette Studio design profile",
+  "type": "object",
+  "required": [
+    "palette",
+    "style",
+    "target",
+    "scope"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "kitVersion": {
+      "type": "string"
+    },
+    "palette": {
+      "enum": [
+        "graphite-plum",
+        "slate-indigo",
+        "slate-blue",
+        "navy-cyan",
+        "zinc-violet",
+        "gray-sky",
+        "slate-teal",
+        "stone-emerald",
+        "forest-mint",
+        "warm-sage",
+        "stone-olive",
+        "slate-lime",
+        "sand-amber",
+        "stone-orange",
+        "cream-terracotta",
+        "sand-copper",
+        "zinc-rose",
+        "charcoal-ruby",
+        "warm-burgundy",
+        "pearl-lavender",
+        "graphite-indigo-reference",
+        "slate-steel",
+        "slate-slate",
+        "zinc-zinc",
+        "stone-sand",
+        "neutral-monochrome",
+        "navy-blue",
+        "charcoal-gold",
+        "warm-coral",
+        "slate-turquoise",
+        "paper-ink",
+        "midnight-periwinkle"
+      ]
+    },
+    "style": {
+      "enum": [
+        "operational",
+        "soft",
+        "outline",
+        "editorial",
+        "compact",
+        "contrast"
+      ]
+    },
+    "target": {
+      "enum": [
+        "existing-gate",
+        "new-app"
+      ]
+    },
+    "scope": {
+      "enum": [
+        "dark-only",
+        "both",
+        "light-only"
+      ]
+    },
+    "previewMode": {
+      "enum": [
+        "light",
+        "dark"
+      ]
+    },
+    "tokenPolicy": {
+      "const": "literal-hex-no-color-aliases"
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewScreens": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fonts": {
+      "type": "object",
+      "required": [
+        "body",
+        "code",
+        "source"
+      ],
+      "properties": {
+        "body": {
+          "enum": [
+            "system",
+            "pretendard",
+            "suit",
+            "noto-sans-kr",
+            "ibm-plex-sans-kr",
+            "gothic-a1",
+            "nanum-gothic",
+            "spoqa-han-sans-neo",
+            "wanted-sans",
+            "noto-serif-kr",
+            "inter",
+            "geist",
+            "roboto",
+            "ibm-plex-sans",
+            "source-sans-3",
+            "source-serif-4"
+          ]
+        },
+        "code": {
+          "enum": [
+            "system",
+            "d2coding",
+            "jetbrains-mono",
+            "fira-code",
+            "ibm-plex-mono",
+            "source-code-pro",
+            "roboto-mono",
+            "geist-mono",
+            "inconsolata",
+            "space-mono"
+          ]
+        },
+        "source": {
+          "enum": [
+            "cdn-first",
+            "local-only",
+            "system"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "fontScope": {
+      "const": "global"
+    }
+  },
+  "additionalProperties": true
+}

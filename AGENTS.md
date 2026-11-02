@@ -1,0 +1,15 @@
+# Palette Studio 작업 규칙
+
+- 이 폴더는 색상·스타일 레퍼런스다. 대상 앱의 전체 UI를 교체하는 프레임워크가 아니다.
+- 선택된 `design-profile.json`이 있으면 해당 팔레트·스타일·scope를 따른다. 없으면 후보 비교 작업지시의 범위를 따른다.
+- 기존 Admission Gate의 라이트 컬러는 `dark-only` 범위에서 수정하지 않는다. 전체 팔레트 파일에는 두 모드가 있으므로 그대로 import하지 않는다.
+- 현재 앱의 컴포넌트, CSS 선택자, 테마 설정과 폰트 로더를 우선 재사용한다. 이 키트의 클래스 이름과 실제 앱 클래스 이름이 같다고 가정하지 않는다.
+- 의미 토큰 선언은 직접 `#RRGGBB`로 둔다. `var()` 색상 별칭·투명 색상·런타임 color-mix로 합치지 않는다. 컴포넌트 속성에서 `var(--color-...)`를 소비하는 것은 허용한다.
+- 한 토큰/한 모드에 하나의 canonical 정의만 남긴다. 앱에 모든 팔레트를 싣지 않는다.
+- success / review / rejected / failed, severity 의미를 유지한다. 상태는 문구·아이콘으로 함께 표현한다.
+- 코드 컨테이너에는 배경과 경계선이 모두 필요하다. 포커스를 없애지 않는다. 링크에는 밑줄이나 동등한 비색상 단서가 필요하다.
+- 팔레트의 변경은 `scripts/build.py` 원본에서 하고 생성물을 다시 만든다. `css/foundation.css`는 수동 원본이다.
+- 선언된 쌍 검사: `node scripts/audit.mjs`. 실제 앱의 `themeContrast.test.ts`는 별도로 바뀐 쌍을 등록한다.
+- `reference/*.original.txt`는 보존 자료다. 여기에 있는 이전 별칭과 금지 색상 목록을 새 모든 팔레트의 전역 규칙으로 승격하지 않는다.
+- 폰트는 `data/fonts.json`의 OFL 후보에서 선택한다. CDN URL 버전을 고정하고 동봉 파일의 저작권·라이선스를 유지한다. 직접 바이너리를 수정하거나 라이선스가 불명확한 폰트를 추가하지 않는다.
+- 자세한 적용 규칙은 `agents/DESIGN-CONTRACT.md`, 사용 지침은 `docs/INTEGRATION.md`에서 확인한다.

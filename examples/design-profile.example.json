@@ -1,0 +1,21 @@
+{
+  "$schema": "../data/profile.schema.json",
+  "kitVersion": "1.1.0",
+  "palette": "graphite-plum",
+  "style": "operational",
+  "target": "existing-gate",
+  "scope": "dark-only",
+  "previewMode": "dark",
+  "fonts": {
+    "body": "pretendard",
+    "code": "d2coding",
+    "source": "cdn-first"
+  },
+  "fontScope": "global",
+  "tokenPolicy": "literal-hex-no-color-aliases",
+  "constraints": [
+    "Preserve existing light palette.",
+    "Reuse existing components.",
+    "Merge into canonical theme definitions."
+  ]
+}

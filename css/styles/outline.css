@@ -1,0 +1,11 @@
+[data-style="outline"] {
+  --ui-radius: 4px;
+  --ui-card: 5px;
+  --ui-padding: 20px;
+  --ui-height: 38px;
+  --ui-gap: 16px;
+  --ui-font: 14px;
+  --ui-line: 1.6;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}

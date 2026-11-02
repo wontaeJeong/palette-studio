@@ -1,0 +1,39 @@
+{
+  "browser": "153.0.8010.0",
+  "pages": [
+    "index.html",
+    "START-HERE.html"
+  ],
+  "themeChecks": 64,
+  "styleChecks": 6,
+  "interactions": [
+    "row filters + search",
+    "native modal open + close",
+    "dark-only / light-only / both export isolation",
+    "profile download",
+    "side-by-side comparison + selection persistence",
+    "selection link after section navigation",
+    "reduced motion / forced colors render"
+  ],
+  "viewports": [
+    {
+      "width": 360,
+      "rootHorizontalOverflow": false
+    },
+    {
+      "width": 390,
+      "rootHorizontalOverflow": false
+    },
+    {
+      "width": 768,
+      "rootHorizontalOverflow": false
+    },
+    {
+      "width": 1440,
+      "rootHorizontalOverflow": false
+    }
+  ],
+  "externalRequests": [],
+  "errors": [],
+  "result": "pass"
+}

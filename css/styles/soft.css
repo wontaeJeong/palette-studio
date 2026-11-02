@@ -1,0 +1,11 @@
+[data-style="soft"] {
+  --ui-radius: 10px;
+  --ui-card: 16px;
+  --ui-padding: 24px;
+  --ui-height: 42px;
+  --ui-gap: 20px;
+  --ui-font: 14px;
+  --ui-line: 1.65;
+  --ui-border: 1px;
+  --ui-shadow: none;
+}

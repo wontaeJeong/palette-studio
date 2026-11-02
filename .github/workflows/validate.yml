@@ -1,0 +1,28 @@
+name: Validate palette kit
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check scripts and regenerate contracts
+        run: |
+          node --check app.js
+          node --check font-loader.js
+          python3 scripts/vendor_fonts.py
+          python3 scripts/audit-fonts.py
+          python3 scripts/build.py
+          node scripts/audit.mjs
+          python3 scripts/bundle.py
+      - name: Verify generated sources are committed
+        run: git diff --exit-code -- css data/catalog.js data/font-catalog.js data/fonts.json data/palettes.json data/profile.schema.json START-HERE.html

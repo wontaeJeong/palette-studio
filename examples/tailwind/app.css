@@ -1,0 +1,5 @@
+/* Tailwind v4 build input, not a standalone browser stylesheet. */
+@import "tailwindcss";
+@import "../../css/fonts-cdn.css";
+@import "../../css/palettes/graphite-plum.css";
+@import "../../css/tailwind-v4.css";

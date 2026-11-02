@@ -1,0 +1,5 @@
+/* Pinned font sources. All bundled fonts are OFL-1.1; see assets/fonts/*/OFL.txt. */
+@font-face { font-family: "Pretendard Variable"; font-style: normal; font-weight: 45 920; font-display: swap; src: url("https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/woff2/PretendardVariable.woff2") format("woff2"), url("../assets/fonts/pretendard/PretendardVariable.woff2") format("woff2"); }
+@font-face { font-family: "D2Coding"; font-style: normal; font-weight: 400; font-display: swap; src: url("https://cdn.jsdelivr.net/gh/Joungkyun/font-d2coding@1.3.2/D2Coding.woff2") format("woff2"), url("../assets/fonts/d2coding/D2Coding.woff2") format("woff2"); }
+@font-face { font-family: "D2Coding"; font-style: normal; font-weight: 700; font-display: swap; src: url("https://cdn.jsdelivr.net/gh/Joungkyun/font-d2coding@1.3.2/D2CodingBold.woff2") format("woff2"), url("../assets/fonts/d2coding/D2CodingBold.woff2") format("woff2"); }
+:root { --kit-font-sans: "Pretendard Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif; --kit-font-mono: D2Coding, "SFMono-Regular", Consolas, "Liberation Mono", monospace; }

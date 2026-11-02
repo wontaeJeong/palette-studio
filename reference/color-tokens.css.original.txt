@@ -1,0 +1,147 @@
+/* Graphite & Indigo | Reference palette. Merge into your project's existing theme selectors. */
+/* NOTE: Keep one canonical definition per token/theme after integration. */
+:root {
+  color-scheme: light;
+  --color-accent: #5252BE;
+  --color-accent-strong: #383899;
+  --color-on-accent: #FFFFFF;
+  --color-accent-subtle: #EEEEFF;
+  --color-accent-text: #383899;
+  --color-accent-line: #CBCBFA;
+  --color-canvas: #F8F9FC;
+  --color-raised: #FFFFFF;
+  --color-surface: #F1F3F8;
+  --color-surface-soft: #E9ECF4;
+  --color-line: #E0E4EE;
+  --color-line-strong: #778197;
+  --color-ink: #222636;
+  --color-ink-muted: #606A7C;
+  --color-link: #5252BE;
+
+  --color-status-passed: #ECF7F0;
+  --color-status-passed-text: #247453;
+  --color-status-review: #FFF7E6;
+  --color-status-review-text: #8B5409;
+  --color-status-rejected: #FFF0E5;
+  --color-status-rejected-text: #984719;
+  --color-status-failed: #FDEEF1;
+  --color-status-failed-text: #A63850;
+  --color-status-running: var(--color-accent-subtle);
+  --color-status-running-text: var(--color-accent-text);
+  --color-status-queued: #E9ECF4;
+  --color-status-queued-text: #555F74;
+
+  --color-sev-critical: #FDE7EA;
+  --color-sev-critical-text: #A12E49;
+  --color-sev-high: #FFF0E5;
+  --color-sev-high-text: #984719;
+  --color-sev-medium: #FFF7DA;
+  --color-sev-medium-text: #875C00;
+  --color-sev-low: #EAF1FE;
+  --color-sev-low-text: #385EAD;
+  --color-sev-info: #E9ECF4;
+  --color-sev-info-text: #606A7C;
+
+  --color-danger: #A63850;
+  --color-danger-solid: #A63850;
+  --color-danger-subtle: var(--color-status-failed);
+  --color-warning: #8B5409;
+  --color-warning-solid: #9A5C06;
+  --color-warning-subtle: var(--color-status-review);
+  --color-success: #247453;
+  --color-success-solid: #247453;
+  --color-success-subtle: var(--color-status-passed);
+  --color-info: #385EAD;
+  --color-info-solid: #385EAD;
+  --color-info-subtle: var(--color-sev-low);
+
+  --color-card-total: #667085;
+  --color-card-active: var(--color-accent);
+  --color-card-passed: var(--color-success);
+  --color-card-review: var(--color-warning);
+  --color-card-rejected: #984719;
+  --color-card-failed: var(--color-danger);
+
+  --color-chart-1: #5252BE;
+  --color-chart-2: #277B86;
+  --color-chart-3: #B77732;
+
+  --color-code-bg: #F0F2F8;
+  --color-code-fg: #32364A;
+  --color-code-line: #DDE2ED;
+  --color-code-inline-bg: #E9ECF5;
+  --color-code-accent: #5252BE;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-accent: #AAA9FF;
+  --color-accent-strong: #D2D0FF;
+  --color-on-accent: #0D1018;
+  --color-accent-subtle: #272747;
+  --color-accent-text: #D2D0FF;
+  --color-accent-line: #53539A;
+  --color-canvas: #0D1018;
+  --color-raised: #171B26;
+  --color-surface: #1E2432;
+  --color-surface-soft: #272D40;
+  --color-line: #2C3445;
+  --color-line-strong: #73809A;
+  --color-ink: #EDF0F8;
+  --color-ink-muted: #A5AEC0;
+  --color-link: #AAA9FF;
+
+  --color-status-passed: #17291F;
+  --color-status-passed-text: #8CD5AA;
+  --color-status-review: #332612;
+  --color-status-review-text: #F5C96D;
+  --color-status-rejected: #3A241B;
+  --color-status-rejected-text: #FFB68A;
+  --color-status-failed: #321D28;
+  --color-status-failed-text: #F2A0B0;
+  --color-status-running: var(--color-accent-subtle);
+  --color-status-running-text: var(--color-accent-text);
+  --color-status-queued: #272D40;
+  --color-status-queued-text: #B9C1D2;
+
+  --color-sev-critical: #391A26;
+  --color-sev-critical-text: #FF9AB0;
+  --color-sev-high: #38251C;
+  --color-sev-high-text: #FFB18A;
+  --color-sev-medium: #362B11;
+  --color-sev-medium-text: #F6D06F;
+  --color-sev-low: #172947;
+  --color-sev-low-text: #A8C3FF;
+  --color-sev-info: #272D40;
+  --color-sev-info-text: #B9C1D2;
+
+  --color-danger: #F2A0B0;
+  --color-danger-solid: #F2A0B0;
+  --color-danger-subtle: var(--color-status-failed);
+  --color-warning: #F5C96D;
+  --color-warning-solid: #F5C96D;
+  --color-warning-subtle: var(--color-status-review);
+  --color-success: #8CD5AA;
+  --color-success-solid: #8CD5AA;
+  --color-success-subtle: var(--color-status-passed);
+  --color-info: #A8C3FF;
+  --color-info-solid: #A8C3FF;
+  --color-info-subtle: var(--color-sev-low);
+
+  --color-card-total: #A5AEC0;
+  --color-card-active: var(--color-accent);
+  --color-card-passed: var(--color-success);
+  --color-card-review: var(--color-warning);
+  --color-card-rejected: #FFB68A;
+  --color-card-failed: var(--color-danger);
+
+  --color-chart-1: #AAA9FF;
+  --color-chart-2: #80D5DB;
+  --color-chart-3: #F0B86E;
+
+  --color-code-bg: #171B26;
+  --color-code-fg: #E8EBF5;
+  --color-code-line: #30374A;
+  --color-code-inline-bg: #272D40;
+  --color-code-accent: #AAA9FF;
+}

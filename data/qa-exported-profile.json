@@ -1,0 +1,110 @@
+{
+  "$schema": "./palette-studio/data/profile.schema.json",
+  "kitVersion": "1.1.0",
+  "palette": "graphite-plum",
+  "style": "operational",
+  "target": "existing-gate",
+  "scope": "dark-only",
+  "previewMode": "light",
+  "themeAttribute": "data-theme",
+  "paletteAttribute": "data-palette",
+  "styleAttribute": "data-style",
+  "fonts": {
+    "body": "pretendard",
+    "code": "d2coding",
+    "source": "local-only",
+    "display": "swap",
+    "timeoutMs": 6000,
+    "fallback": [
+      "bundled-woff2",
+      "system"
+    ],
+    "koreanFallback": {
+      "body": "pretendard",
+      "code": "d2coding"
+    },
+    "assetsBase": "./palette-studio/",
+    "fonts": [
+      {
+        "id": "pretendard",
+        "family": "Pretendard Variable",
+        "version": "1.3.9",
+        "versionKind": "font",
+        "license": "OFL-1.1",
+        "licenseUse": {
+          "internalBusiness": true,
+          "commercial": true,
+          "webEmbedding": true,
+          "redistribution": "retain-copyright-and-OFL",
+          "fontModification": "respect-reserved-font-names"
+        },
+        "upstream": "https://github.com/orioncactus/pretendard",
+        "faces": [
+          {
+            "weight": "45 920",
+            "cdn": "https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/woff2/PretendardVariable.woff2",
+            "local": "assets/fonts/pretendard/PretendardVariable.woff2",
+            "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4"
+          }
+        ]
+      },
+      {
+        "id": "d2coding",
+        "family": "D2Coding",
+        "version": "1.3.2",
+        "versionKind": "font",
+        "license": "OFL-1.1",
+        "licenseUse": {
+          "internalBusiness": true,
+          "commercial": true,
+          "webEmbedding": true,
+          "redistribution": "retain-copyright-and-OFL",
+          "fontModification": "respect-reserved-font-names"
+        },
+        "upstream": "https://github.com/naver/d2-coding-font",
+        "faces": [
+          {
+            "weight": "400",
+            "cdn": "https://cdn.jsdelivr.net/gh/Joungkyun/font-d2coding@1.3.2/D2Coding.woff2",
+            "local": "assets/fonts/d2coding/D2Coding.woff2",
+            "sha256": "5066dd00cb1d53cb5aed7880d5b8c513412359085d6d0c67d032347d0471ca8b"
+          },
+          {
+            "weight": "700",
+            "cdn": "https://cdn.jsdelivr.net/gh/Joungkyun/font-d2coding@1.3.2/D2CodingBold.woff2",
+            "local": "assets/fonts/d2coding/D2CodingBold.woff2",
+            "sha256": "1d0ab8e4496c5c95d115b49901d9d6a495a0b4140ca130180220c14b91f5911a"
+          }
+        ]
+      }
+    ]
+  },
+  "fontScope": "global",
+  "fontPolicy": "Use selected delivery policy; CDN -> bundled fonts -> system in cdn-first mode. Merge into existing font loader.",
+  "tokenPolicy": "literal-hex-no-color-aliases",
+  "statusPolicy": "Preserve success/warning/rejected/failed and severity meanings; always pair color with labels or icons.",
+  "integration": {
+    "tokens": "css/palettes/graphite-plum.css",
+    "components": "css/foundation.css",
+    "style": "css/styles/operational.css",
+    "utilities": "css/utilities.css",
+    "tailwind": "css/tailwind-v4.css",
+    "fonts": "font-loader.js",
+    "fontAssets": "assets/fonts/",
+    "note": "Paths are relative to the kit. Font settings apply across color modes; merge the selected color scope into the canonical theme."
+  },
+  "constraints": [
+    "One canonical definition per token/theme.",
+    "Preserve existing light palette when color scope is dark-only.",
+    "No new raw HEX values in application components.",
+    "No color-only state indicators.",
+    "Code containers require fill and visible border.",
+    "Do not bundle all 32 palettes into the production app.",
+    "Keep font URLs version-pinned and ship their OFL licenses."
+  ],
+  "reviewScreens": [
+    "table-with-long-korean-labels",
+    "details-with-json-and-diff",
+    "error-empty-loading-permission-states"
+  ]
+}

@@ -1,0 +1,328 @@
+[
+  {
+    "id": "noto-sans-kr",
+    "package": "@fontsource-variable/noto-sans-kr",
+    "packageVersion": "5.3.1",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/noto-sans-kr/-/noto-sans-kr-5.3.1.tgz",
+    "name": "Noto Sans KR",
+    "role": "body",
+    "group": "ko-sans",
+    "korean": true,
+    "purpose": "다국어 포털·범용 한국어 본문",
+    "upstream": "https://github.com/notofonts/noto-cjk",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "ibm-plex-sans-kr",
+    "package": "@fontsource/ibm-plex-sans-kr",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource/ibm-plex-sans-kr/-/ibm-plex-sans-kr-5.3.0.tgz",
+    "name": "IBM Plex Sans KR",
+    "role": "body",
+    "group": "ko-sans",
+    "korean": true,
+    "purpose": "기술 문서·기업용 대시보드",
+    "upstream": "https://github.com/IBM/plex",
+    "cssFiles": [
+      "400.css",
+      "700.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "gothic-a1",
+    "package": "@fontsource/gothic-a1",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource/gothic-a1/-/gothic-a1-5.3.0.tgz",
+    "name": "Gothic A1",
+    "role": "body",
+    "group": "ko-sans",
+    "korean": true,
+    "purpose": "정직한 고딕·정보 밀도가 높은 화면",
+    "upstream": "https://github.com/google/fonts/tree/main/ofl/gothica1",
+    "cssFiles": [
+      "400.css",
+      "700.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "nanum-gothic",
+    "package": "@fontsource/nanum-gothic",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource/nanum-gothic/-/nanum-gothic-5.3.0.tgz",
+    "name": "Nanum Gothic",
+    "role": "body",
+    "group": "ko-sans",
+    "korean": true,
+    "purpose": "친숙한 한국어 문서·내부 포털",
+    "upstream": "https://github.com/naver/nanumfont",
+    "cssFiles": [
+      "400.css",
+      "700.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "spoqa-han-sans-neo",
+    "package": "spoqa-han-sans",
+    "packageVersion": "3.3.0",
+    "tarball": "https://registry.npmjs.org/spoqa-han-sans/-/spoqa-han-sans-3.3.0.tgz",
+    "name": "Spoqa Han Sans Neo",
+    "role": "body",
+    "group": "ko-sans",
+    "korean": true,
+    "purpose": "차분한 서비스 UI·일반 본문",
+    "upstream": "https://github.com/spoqa/spoqa-han-sans",
+    "cssFiles": [
+      "css/SpoqaHanSansNeo.css"
+    ],
+    "licenseFile": "Subset/SpoqaHanSansNeo/LICENSE"
+  },
+  {
+    "id": "wanted-sans",
+    "package": "wanted-sans",
+    "packageVersion": "1.0.3",
+    "tarball": "https://registry.npmjs.org/wanted-sans/-/wanted-sans-1.0.3.tgz",
+    "name": "Wanted Sans Variable",
+    "role": "body",
+    "group": "ko-sans",
+    "korean": true,
+    "purpose": "기하학적 형태·현대적인 한국어 UI",
+    "upstream": "https://github.com/wanteddev/wanted-sans",
+    "cssFiles": [
+      "fonts/webfonts/variable/complete/WantedSansVariable.css"
+    ],
+    "licenseFile": "fonts/OFL.txt"
+  },
+  {
+    "id": "noto-serif-kr",
+    "package": "@fontsource-variable/noto-serif-kr",
+    "packageVersion": "5.3.1",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/noto-serif-kr/-/noto-serif-kr-5.3.1.tgz",
+    "name": "Noto Serif KR",
+    "role": "body",
+    "group": "ko-serif",
+    "korean": true,
+    "purpose": "긴 글·위키·편집형 화면",
+    "upstream": "https://github.com/notofonts/noto-cjk",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "inter",
+    "package": "@fontsource-variable/inter",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/inter/-/inter-5.3.0.tgz",
+    "name": "Inter",
+    "role": "body",
+    "group": "latin-sans",
+    "korean": false,
+    "purpose": "영문 SaaS·촘촘한 숫자와 UI",
+    "upstream": "https://github.com/rsms/inter",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "geist",
+    "package": "@fontsource-variable/geist",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/geist/-/geist-5.3.0.tgz",
+    "name": "Geist",
+    "role": "body",
+    "group": "latin-sans",
+    "korean": false,
+    "purpose": "절제된 개발 도구·영문 UI",
+    "upstream": "https://github.com/vercel/geist-font",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "roboto",
+    "package": "@fontsource-variable/roboto",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/roboto/-/roboto-5.3.0.tgz",
+    "name": "Roboto",
+    "role": "body",
+    "group": "latin-sans",
+    "korean": false,
+    "purpose": "범용 영문 제품·친숙한 인터페이스",
+    "upstream": "https://github.com/googlefonts/roboto-3-classic",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "ibm-plex-sans",
+    "package": "@fontsource/ibm-plex-sans",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource/ibm-plex-sans/-/ibm-plex-sans-5.3.0.tgz",
+    "name": "IBM Plex Sans",
+    "role": "body",
+    "group": "latin-sans",
+    "korean": false,
+    "purpose": "기술·기업용 영문 UI",
+    "upstream": "https://github.com/IBM/plex",
+    "cssFiles": [
+      "400.css",
+      "700.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "source-sans-3",
+    "package": "@fontsource-variable/source-sans-3",
+    "packageVersion": "5.3.1",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/source-sans-3/-/source-sans-3-5.3.1.tgz",
+    "name": "Source Sans 3",
+    "role": "body",
+    "group": "latin-sans",
+    "korean": false,
+    "purpose": "문서·도움말·차분한 영문 본문",
+    "upstream": "https://github.com/adobe-fonts/source-sans",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "source-serif-4",
+    "package": "@fontsource-variable/source-serif-4",
+    "packageVersion": "5.3.1",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/source-serif-4/-/source-serif-4-5.3.1.tgz",
+    "name": "Source Serif 4",
+    "role": "body",
+    "group": "latin-serif",
+    "korean": false,
+    "purpose": "영문 장문·편집·리포트",
+    "upstream": "https://github.com/adobe-fonts/source-serif",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "fira-code",
+    "package": "@fontsource-variable/fira-code",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/fira-code/-/fira-code-5.3.0.tgz",
+    "name": "Fira Code",
+    "role": "code",
+    "group": "code",
+    "korean": false,
+    "purpose": "코드와 연산자·개발 도구",
+    "upstream": "https://github.com/tonsky/FiraCode",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "ibm-plex-mono",
+    "package": "@fontsource/ibm-plex-mono",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource/ibm-plex-mono/-/ibm-plex-mono-5.3.0.tgz",
+    "name": "IBM Plex Mono",
+    "role": "code",
+    "group": "code",
+    "korean": false,
+    "purpose": "기업용 코드·로그 뷰어",
+    "upstream": "https://github.com/IBM/plex",
+    "cssFiles": [
+      "400.css",
+      "700.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "source-code-pro",
+    "package": "@fontsource-variable/source-code-pro",
+    "packageVersion": "5.3.1",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/source-code-pro/-/source-code-pro-5.3.1.tgz",
+    "name": "Source Code Pro",
+    "role": "code",
+    "group": "code",
+    "korean": false,
+    "purpose": "긴 코드·JSON·절제된 고정폭",
+    "upstream": "https://github.com/adobe-fonts/source-code-pro",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "roboto-mono",
+    "package": "@fontsource-variable/roboto-mono",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/roboto-mono/-/roboto-mono-5.3.0.tgz",
+    "name": "Roboto Mono",
+    "role": "code",
+    "group": "code",
+    "korean": false,
+    "purpose": "범용 로그·숫자·코드",
+    "upstream": "https://github.com/googlefonts/robotomono",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "geist-mono",
+    "package": "@fontsource-variable/geist-mono",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/geist-mono/-/geist-mono-5.3.0.tgz",
+    "name": "Geist Mono",
+    "role": "code",
+    "group": "code",
+    "korean": false,
+    "purpose": "미니멀 개발 UI·영문 터미널",
+    "upstream": "https://github.com/vercel/geist-font",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "inconsolata",
+    "package": "@fontsource-variable/inconsolata",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource-variable/inconsolata/-/inconsolata-5.3.0.tgz",
+    "name": "Inconsolata",
+    "role": "code",
+    "group": "code",
+    "korean": false,
+    "purpose": "인쇄감 있는 가벼운 코드·읽기",
+    "upstream": "https://github.com/googlefonts/Inconsolata",
+    "cssFiles": [
+      "index.css"
+    ],
+    "licenseFile": "LICENSE"
+  },
+  {
+    "id": "space-mono",
+    "package": "@fontsource/space-mono",
+    "packageVersion": "5.3.0",
+    "tarball": "https://registry.npmjs.org/@fontsource/space-mono/-/space-mono-5.3.0.tgz",
+    "name": "Space Mono",
+    "role": "code",
+    "group": "code",
+    "korean": false,
+    "purpose": "레트로 도구·개성이 있는 짧은 코드",
+    "upstream": "https://github.com/googlefonts/spacemono",
+    "cssFiles": [
+      "400.css",
+      "700.css"
+    ],
+    "licenseFile": "LICENSE"
+  }
+]

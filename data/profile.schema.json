@@ -63,8 +63,9 @@
     },
     "target": {
       "enum": [
-        "existing-gate",
-        "new-app"
+        "existing-app",
+        "new-app",
+        "existing-gate"
       ]
     },
     "scope": {

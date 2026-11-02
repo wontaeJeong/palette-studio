@@ -1,39 +1,32 @@
 {
+  "result": "pass",
   "browser": "153.0.8010.0",
-  "pages": [
-    "index.html",
-    "START-HERE.html"
-  ],
-  "themeChecks": 64,
-  "styleChecks": 6,
-  "interactions": [
-    "row filters + search",
-    "native modal open + close",
-    "dark-only / light-only / both export isolation",
-    "profile download",
-    "side-by-side comparison + selection persistence",
-    "selection link after section navigation",
-    "reduced motion / forced colors render"
-  ],
+  "themes": 64,
+  "styles": 6,
+  "fonts": {
+    "body": 15,
+    "code": 9
+  },
   "viewports": [
-    {
-      "width": 360,
-      "rootHorizontalOverflow": false
-    },
-    {
-      "width": 390,
-      "rootHorizontalOverflow": false
-    },
-    {
-      "width": 768,
-      "rootHorizontalOverflow": false
-    },
-    {
-      "width": 1440,
-      "rootHorizontalOverflow": false
-    }
+    360,
+    390,
+    768,
+    1440
   ],
-  "externalRequests": [],
+  "checks": [
+    "generic defaults",
+    "downloads last",
+    "sticky and docked preview",
+    "independent font roles",
+    "empty results",
+    "keyboard focus retained",
+    "profile download",
+    "reload persistence",
+    "legacy link migration",
+    "standalone parity",
+    "short landscape preview",
+    "expanded preview focus visibility"
+  ],
   "errors": [],
-  "result": "pass"
+  "externalRequests": 0
 }

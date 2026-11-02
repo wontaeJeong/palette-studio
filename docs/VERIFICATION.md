@@ -1,6 +1,6 @@
 # 검증 범위와 재현
 
-검증일: 2026-10-27. 생성된 수치 결과는 `data/audit-results.json`, `browser-check-results.json`, `integration-check-results.json`에 기록합니다.
+초기 색상·통합 검증: 2026-10-27. 공통 UI 흐름·폰트 재검증: 2026-11-02. 생성된 수치 결과는 `data/audit-results.json`, `browser-check-results.json`, `integration-check-results.json`에 기록합니다.
 
 1.1.0 폰트 검증 결과는 `font-audit-results.json`, `font-browser-check-results.json`, `font-cdn-check-results.json`에 추가했습니다. 24개 패밀리의 WOFF2 918개는 원본 해시·OFL 고지·버전 고정을 검사했습니다. CDN URL은 패밀리별 첫·마지막 파일 45건의 실제 HTTP 응답을 확인했습니다. 브라우저의 CDN 성공 테스트는 그 원본 WOFF2를 응답으로 제공하는 fixture를 사용하고, 외부 차단·단일 HTML 이동·동봉 전용·시스템 모드도 별도로 확인합니다.
 
@@ -23,7 +23,7 @@ node scripts/check-fonts.cjs
 | 시스템 표시 설정 | CSS 미디어 에뮬레이션 | reduced motion / forced colors의 일부 렌더링 |
 | 오프라인 | HTTP 요청 이벤트 관찰 | 동봉/시스템 모드의 외부 요청 0건; CDN 모드는 선택 폰트·견본 WOFF2만 요청 |
 | Tailwind | v4 custom utilities 실제 컴파일 | 945개 클래스와 4개 상태 variant |
-| React 예제 | TSX strict typecheck | ThemeProvider / ScanPanel / Button 소스 3개 |
+| React 예제 | TSX strict typecheck | ThemeProvider / ProjectPanel / 호환 ScanPanel / Button 소스 |
 | 프로필 | JSON Schema 검사 | 예제와 브라우저 내보내기 2개 |
 
 미리보기는 단일 Chromium 엔진에서 검증했습니다. Safari·Firefox·iOS WebView의 실제 실행, 앱별 포털·모달 동작, 모든 키보드·스크린리더 시나리오를 전부 검증했다는 뜻은 아닙니다. React는 소스 타입을 확인한 통합 예제이며 완성 앱을 실행한 테스트는 아닙니다. 전체 WCAG 인증을 제공하지 않습니다.
@@ -55,7 +55,7 @@ npm install --no-save tailwindcss@4 @tailwindcss/node@4 typescript@5.9.3 @types/
 node scripts/check-integration.cjs
 ```
 
-검사 스크립트는 TypeScript 5.9.3의 JS compiler API를 사용합니다. 타깃 앱에 이 버전을 강제하지 않습니다. 프로필 내보내기 검사는 `browser-check.cjs`가 만든 JSON을 사용하므로 브라우저 검사를 먼저 실행합니다.
+검사 스크립트는 TypeScript 5.9.3의 JS compiler API를 사용합니다. 타깃 앱에 이 버전을 강제하지 않습니다. 프로필 내보내기 검사는 `check-studio-flow.cjs`가 만든 JSON을 사용하므로 브라우저 검사를 먼저 실행합니다.
 
 ## 미리보기 이미지
 
@@ -69,3 +69,9 @@ python3 scripts/package.py
 ```
 
 ZIP에는 파일별 SHA256과 크기를 담은 `MANIFEST.json`이 들어 있습니다. 패키징 시 node_modules·가상환경·캐시는 제외합니다.
+
+## 1.2.0 공통 UI 회귀
+
+`node scripts/check-studio-flow.cjs`는 64개 테마와 6개 스타일, 마지막 단계 다운로드, 본문 15종/코드 9종의 독립 검색·선택, 검색 결과 없음, 키보드 포커스 유지, 선택 복원, 이전 대상 링크 이관을 확인합니다. 360/390/768/1440px에서 선택 목록 끝의 미리보기 위치와 가로 넘침도 검사합니다. 결과는 `data/studio-flow-check-results.json`에 기록합니다.
+
+`studio-common-overview.png`, `studio-flow-desktop.png`, `studio-flow-mobile.png`는 1.2.0의 실제 브라우저 화면입니다. 기본 개요·Plum 비교·모바일·컴포넌트 이미지는 공통 앱 예시로 갱신했습니다. 팔레트 축소 이미지와 참고 색상 보드는 색상값이 동일한 초기 자료입니다. 전체 접근성 인증이나 모든 브라우저 검증을 뜻하지 않습니다.

@@ -4,7 +4,7 @@
 
 | ID | 조합 | 용도 | Light accent | Dark accent |
 |---|---|---|---|---|
-| `graphite-plum` | Graphite / Plum | Admission Gate · 보안 · 개발 도구 | `#78469E` | `#D4A1EB` |
+| `graphite-plum` | Graphite / Plum | 관리 콘솔 · 업무 도구 | `#78469E` | `#D4A1EB` |
 | `slate-indigo` | Slate / Indigo | 업무 SaaS · 관리 콘솔 | `#4F46B5` | `#B5AFFF` |
 | `slate-blue` | Slate / Blue | 범용 제품 · 관리자 | `#2563BB` | `#9DC4FF` |
 | `navy-cyan` | Navy / Cyan | 인프라 · 관측 · 네트워크 | `#087D93` | `#77DBF0` |

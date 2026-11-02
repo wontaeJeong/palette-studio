@@ -1,10 +1,10 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "files": [
     {
       "path": ".github/workflows/validate.yml",
-      "bytes": 869,
-      "sha256": "7b5c27e5ed771576b33a069143212cf5f0a2786e7f0ce3c579986ecb3f553835"
+      "bytes": 1495,
+      "sha256": "65d2ff4861712b3719c1fd95ca24e36e1a63c80a24171316f73e0796f4e96fd9"
     },
     {
       "path": ".gitignore",
@@ -13,8 +13,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 2151,
-      "sha256": "5a8ebfe88fa7ed0195713ae40be31b2bce6aa684092468e5933e723014b682b5"
+      "bytes": 2579,
+      "sha256": "38341a9f7fa5ba555371a9f57494f03215184a231c8c722653ca3f20b304d681"
     },
     {
       "path": "LICENSE",
@@ -23,13 +23,13 @@
     },
     {
       "path": "README.md",
-      "bytes": 7978,
-      "sha256": "05cde17eb756fceadc2bc010456e435b2f0071f79aae24cce1f2c81548d15d24"
+      "bytes": 9206,
+      "sha256": "a91c1656b6fb161a8a67abc9d038df99ec85f62c55583b95834bc21ef0d04a09"
     },
     {
       "path": "START-HERE.html",
-      "bytes": 37073155,
-      "sha256": "ddab3d3cd4c689e8716dc17125556e468e84dfcbebc832a303541d279541c587"
+      "bytes": 37109925,
+      "sha256": "5e10353e96e524eef959491fd603e5258b8219a0265267661af41b28babeb8e0"
     },
     {
       "path": "THIRD-PARTY-NOTICES.md",
@@ -38,13 +38,13 @@
     },
     {
       "path": "agents/APPLY-PROFILE.md",
-      "bytes": 1912,
-      "sha256": "6dc7e743e39c15b2bea6c8bc599a27fa010529b94558eafbc1045c7c07b07b6d"
+      "bytes": 1909,
+      "sha256": "798cb03cfd5238ad8ec556f314ba940e3d65941b69f55ec4ab1128b1a46d1aa3"
     },
     {
       "path": "agents/COMPARE-CANDIDATES.md",
-      "bytes": 2145,
-      "sha256": "1128c2cc31b380533a6ef04bc6de80b8cf54a9d3104c04feeaa91266adb09709"
+      "bytes": 2113,
+      "sha256": "9e719bc50d99c8ddf4b9e5916317ad40423b21545ec86a7397837c33a4570926"
     },
     {
       "path": "agents/COMPARE-FONTS.md",
@@ -78,8 +78,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 33876,
-      "sha256": "dd8caeeccebd9955775f3be61dc66a11df3d35466c0648d1acde1227c7e9d3fb"
+      "bytes": 44757,
+      "sha256": "3289023be6cedca2fa02249e7ff308ebde78ae78a50a12ec1b6ec1ba35e3a229"
     },
     {
       "path": "assets/fonts/d2coding/D2Coding.woff2",
@@ -4978,8 +4978,8 @@
     },
     {
       "path": "css/studio.css",
-      "bytes": 17007,
-      "sha256": "63b0ca32e3e32922e9f7da65bcb87e200e85aefded480d73ec21bdb0f6d64e7d"
+      "bytes": 31366,
+      "sha256": "efe5e2808d99fe29fd50f965e51862126364a3994de1282c66e8da1dc6606658"
     },
     {
       "path": "css/styles/compact.css",
@@ -5033,13 +5033,13 @@
     },
     {
       "path": "data/browser-check-results.json",
-      "bytes": 809,
-      "sha256": "c428856b448d7ca198b2b3ad2a2bdbf921d3071b6ee6e1efaef1e5c045e6409e"
+      "bytes": 585,
+      "sha256": "81f1813e01287ceb5f75fcfc66c9d1beb3cc10204e4751c77275937821c4bbcd"
     },
     {
       "path": "data/catalog.js",
-      "bytes": 459270,
-      "sha256": "ed0cb04e5e519b14d39427d1059a25c7ec6f8a972cb285db780e5bd5475b6dab"
+      "bytes": 459256,
+      "sha256": "10d83d7a13a8c8fe7a59226df1ff7ac9f210eaee8d4d161d520f923eeedb0b39"
     },
     {
       "path": "data/contrast-pairs.json",
@@ -5058,8 +5058,8 @@
     },
     {
       "path": "data/font-browser-check-results.json",
-      "bytes": 1252,
-      "sha256": "1cb6f2fe1d3b12a77273bab938c15cfdaf1de89c63d49e04db156f87467c80a8"
+      "bytes": 1262,
+      "sha256": "cd4bc0c5677b27b2c71fc0574cabbf32f5663678cef0d8aa4bcea4d5cbce1321"
     },
     {
       "path": "data/font-catalog.js",
@@ -5089,27 +5089,32 @@
     {
       "path": "data/integration-check-results.json",
       "bytes": 412,
-      "sha256": "7b1d8dd112c7437362e1cad0f841722dd5075ef97ba5cc6d223b6a6e73b2051b"
+      "sha256": "db78fcc5fb1f795a913520e2df91e343a96b5de9f3b6c057d9e89524c550620d"
     },
     {
       "path": "data/palettes.json",
-      "bytes": 627390,
-      "sha256": "2cdfcb8dd6ca37e3b1ab67de9a48dbe5bb56a19c4698738d53837d312e2e02de"
+      "bytes": 627376,
+      "sha256": "9e254af2690390fe3640caf5948d96d304c82a0de042354bb9d6ac5571e342e0"
     },
     {
       "path": "data/profile.schema.json",
-      "bytes": 3072,
-      "sha256": "422196f0859cb17ec3badd9f74d1f3ae20a97eec614dfdb8d8faed5d49edce81"
+      "bytes": 3096,
+      "sha256": "748c17863103c848061c8922baffef914bd52a3144b269fe7adccc6b35f4d33d"
     },
     {
       "path": "data/qa-exported-profile.json",
-      "bytes": 3969,
-      "sha256": "32801b4a1d72d0473392e6162569f95673db3995d390a43fc086a04a55bbbd61"
+      "bytes": 5138,
+      "sha256": "1e620259ee5768dfbd20ef80300f2832de21d01953f4748a29a5af8bfc9272f5"
     },
     {
       "path": "data/ramps.json",
       "bytes": 11679,
       "sha256": "671be508c5e93128f5f078e22b23f751b2cd79740d26b0626c2bb18b0eb57264"
+    },
+    {
+      "path": "data/studio-flow-check-results.json",
+      "bytes": 585,
+      "sha256": "81f1813e01287ceb5f75fcfc66c9d1beb3cc10204e4751c77275937821c4bbcd"
     },
     {
       "path": "data/tokens.csv",
@@ -5143,13 +5148,13 @@
     },
     {
       "path": "docs/FONTS.md",
-      "bytes": 6870,
-      "sha256": "36c2237f6ee4692bc482dbfc56173fde6933c15b53790ad1757f8de7d4553522"
+      "bytes": 7133,
+      "sha256": "b5cbe74be8ae8302db901d376ae100d5d535ec5c64dbbe0212bed8e7a55f50da"
     },
     {
       "path": "docs/INTEGRATION.md",
-      "bytes": 6755,
-      "sha256": "94c5107717c7fb607d98be8c5dba2808fc2bf53aebaa785686870347cd7fdc61"
+      "bytes": 6791,
+      "sha256": "0b943c8c8f4220b203244bc19b1d9de5b8c0c478d03d5820c40cf727052c59a4"
     },
     {
       "path": "docs/LEGACY-MAP.md",
@@ -5158,8 +5163,8 @@
     },
     {
       "path": "docs/PALETTES.md",
-      "bytes": 3285,
-      "sha256": "8f45fd2fe905c88a7bddde3372b22f71c29ab088d73e11dcbcb789a9a98ac552"
+      "bytes": 3274,
+      "sha256": "380f26b66a95c128a102072b5954e18bd8db48547c7e278ed47d1089a0892c62"
     },
     {
       "path": "docs/PROVENANCE.md",
@@ -5183,23 +5188,38 @@
     },
     {
       "path": "docs/VERIFICATION.md",
-      "bytes": 4761,
-      "sha256": "792be80288b2b2195508bfd9d93c71d7c713ec9e01c4943a02b1c071a1543240"
+      "bytes": 5738,
+      "sha256": "f6d475f322a1498c2cca485e58ad3cfe12a223e256095decc558a9d2d5ec1c2f"
     },
     {
       "path": "docs/WORKFLOW.md",
-      "bytes": 2980,
-      "sha256": "fc4ba3f247b146e3d6e535746a08076480b139b5a27b9692cb4c0202f150ea50"
+      "bytes": 3379,
+      "sha256": "5e08bb28cd7f8e65b585075abee22356065b5de49291715ca645ca5169d6a179"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-11-02-common-studio.md",
+      "bytes": 2407,
+      "sha256": "8238567eba374c485b5b1c873215e7e49b820feedea9a4e208b82e61cdf69c19"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-11-02-common-studio-design.md",
+      "bytes": 2212,
+      "sha256": "5ea3985a38ea2371d402191ffeb2828443ba8fde6bd8d936cb6cc6e3ae1125fe"
     },
     {
       "path": "examples/design-profile.example.json",
-      "bytes": 518,
-      "sha256": "656bb2b8d2a7b49a9470bf148fd836170e1301f461b1ef6bbb4170c1ee75da11"
+      "bytes": 509,
+      "sha256": "30c99c6c119927fdf89e6f98d6d673cbdd669d426c199fba4829584d1b06c35c"
+    },
+    {
+      "path": "examples/react/ProjectPanel.tsx",
+      "bytes": 1561,
+      "sha256": "69b1e832a3cd74ccda0721cbd3bcfd8a9e27ec5cbbe4422d8ee0f6ac0bfd5114"
     },
     {
       "path": "examples/react/ScanPanel.tsx",
-      "bytes": 1573,
-      "sha256": "e4c2e0e4b36ebcbb9dc71c753aa54d5a88a128eb878b3ceb0757d12aca8bfb64"
+      "bytes": 124,
+      "sha256": "e34d0e3de5d25e1816be717e8fd73570938cb34a334d46001f10a7df74c994f4"
     },
     {
       "path": "examples/react/ThemeProvider.tsx",
@@ -5213,8 +5233,8 @@
     },
     {
       "path": "examples/tailwind/Button.tsx",
-      "bytes": 487,
-      "sha256": "29e2c64d9e04c9ded8cd880163346d9201c6f7e1896e17d48a5d10aa84c8e5db"
+      "bytes": 493,
+      "sha256": "2e6d1bd0fd81eea5d98167cc3df010d965147cd7dfbc405dc39c9ce897482c45"
     },
     {
       "path": "examples/tailwind/app.css",
@@ -5228,8 +5248,8 @@
     },
     {
       "path": "examples/vanilla/index.html",
-      "bytes": 2236,
-      "sha256": "8022c819637398e47208b1ccf57b935cf16e9a3c788e111ea42c7a4b10e69c52"
+      "bytes": 2242,
+      "sha256": "0874033c41fc62eb994f96150498a1ff8bd829270dd03fb75cefbaec6600733f"
     },
     {
       "path": "font-loader.js",
@@ -5238,8 +5258,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 9857,
-      "sha256": "49c13d5cde3c652d1de883e3785bd5715b43994cabdc3a0523d521fd5e5c1931"
+      "bytes": 21411,
+      "sha256": "4c2bd7ebdd79073abe9f7102a498ddc61047f52ea0e09bd7cb3415c97b1ee807"
     },
     {
       "path": "previews/color-board-dark.png",
@@ -5253,18 +5273,18 @@
     },
     {
       "path": "previews/components-dark.png",
-      "bytes": 89404,
-      "sha256": "30d9270c88903c8abc56082c158245eb153ef022827a6f4ab8e2282bd9eade67"
+      "bytes": 99545,
+      "sha256": "64202b510dde8f6113235e66a047b0290432124a26aa56c77fc949a069ed0c1e"
     },
     {
       "path": "previews/font-catalog.png",
-      "bytes": 298159,
-      "sha256": "94441287b74b7e9ee874d9599911887d8348e2fd0cfa1bce0daa0686eab23f17"
+      "bytes": 380861,
+      "sha256": "0579b3ba9ff4c317ba3ffc48bf4d619ceb40f954f99c55f8be4012f027cb8586"
     },
     {
       "path": "previews/mobile-dark.png",
-      "bytes": 65920,
-      "sha256": "6481ccdfe37d03a0a9995bc2324bebc5a2e42124bea7a8f4f2c832adde9b5c60"
+      "bytes": 50371,
+      "sha256": "5f7da6630ebfad1ce8589d8dbe63c4ec71f45e6032a8819fd07955ed0df8cb17"
     },
     {
       "path": "previews/palettes-dark.png",
@@ -5278,18 +5298,33 @@
     },
     {
       "path": "previews/plum-light-dark.png",
-      "bytes": 164453,
-      "sha256": "760bacdf64775e3211944da79e619fadbf64f38220f610e0d3ff658ee7d24433"
+      "bytes": 96210,
+      "sha256": "67bcc280f65eb05868adc1b247edf04b930d7e5eb5c37fe14a2940102711c196"
+    },
+    {
+      "path": "previews/studio-common-overview.png",
+      "bytes": 137823,
+      "sha256": "6b54551f33980c74fc812f8bc469c135495c77832c6fb6a598d77e6ca96fd4b0"
+    },
+    {
+      "path": "previews/studio-flow-desktop.png",
+      "bytes": 164213,
+      "sha256": "9fcf914313a6446780677795f874f82a6d7ca830bda9df99e66557456d4c953b"
+    },
+    {
+      "path": "previews/studio-flow-mobile.png",
+      "bytes": 62626,
+      "sha256": "e458b458a8a3847ebea6ab461f94788a4855104e87a507886ebdb595a3ce3e52"
     },
     {
       "path": "previews/studio-overview.png",
-      "bytes": 136586,
-      "sha256": "1c8af5376d64a4f8de86fdf936c146fcf7f97c5ce5748762bd7e9f2c0b8e2e5e"
+      "bytes": 137823,
+      "sha256": "6b54551f33980c74fc812f8bc469c135495c77832c6fb6a598d77e6ca96fd4b0"
     },
     {
       "path": "previews/typography-picker.png",
-      "bytes": 138722,
-      "sha256": "c23c54b708ace1301874d561198d8d48af3edeff4a2a344879ee91cbae3878c7"
+      "bytes": 175063,
+      "sha256": "9dfce0bc047f8f61138af247044314d0f92938c51bf203d2224b42211f6b2391"
     },
     {
       "path": "reference/color-audit.rules.json.original.txt",
@@ -5313,28 +5348,33 @@
     },
     {
       "path": "scripts/browser-check.cjs",
-      "bytes": 7644,
-      "sha256": "897aa11873d2e46744545aa6074d3c0a6ec274e6305c8ba3f7c3a0f7eaedc3f6"
+      "bytes": 121,
+      "sha256": "f4604d59b327b5e23abe403529b0e6a51b8129f665fa5a5cd9f12bf0a280c8ab"
     },
     {
       "path": "scripts/build.py",
-      "bytes": 28703,
-      "sha256": "8a6d8b546b026b359f433e569e0619e12a2b85bcfdacca90363c0dd9dcbe8b62"
+      "bytes": 28695,
+      "sha256": "861a39f2e5531798c2b434d205fe444d9953b51e6ee846d1e2e4b5d9809c8ac0"
     },
     {
       "path": "scripts/bundle.py",
-      "bytes": 957,
-      "sha256": "c1912ee83445fe68c1e29105cb3e9d10cdf7a438f2922956bba04bea72bb6e8b"
+      "bytes": 966,
+      "sha256": "f3c00138a9d4d49d9e299a28cf6c28b5adc8ecfe48f585a85136ca656b581f78"
     },
     {
       "path": "scripts/check-fonts.cjs",
-      "bytes": 7588,
-      "sha256": "2eb81fa17021bde46cacf5620c270132a445c932977032cf9961e44d78cd5da4"
+      "bytes": 9604,
+      "sha256": "86995ee8b5a6a2889212719efdfda4314dd81d667db4ee6f66ccc99bd21ba747"
     },
     {
       "path": "scripts/check-integration.cjs",
-      "bytes": 3128,
-      "sha256": "8bad4017f3ce44412456e03a696b2f3d7e6e5356e63c8fd9c38115e3143241e7"
+      "bytes": 3162,
+      "sha256": "b7a0b24f2d32352029283fd07c833545ea2315b24a99d9b36058ed95d51e34e5"
+    },
+    {
+      "path": "scripts/check-studio-flow.cjs",
+      "bytes": 13995,
+      "sha256": "8c8f1ca22a9392872e852743460c4784257490303293e050254d0421a35b5981"
     },
     {
       "path": "scripts/import_font_packages.py",
@@ -5343,8 +5383,8 @@
     },
     {
       "path": "scripts/package.py",
-      "bytes": 1085,
-      "sha256": "18ebe36b44a1b936de752f44e05b905b7df073893df59c5d0d0221ee40420269"
+      "bytes": 1161,
+      "sha256": "115311c7f782305cf4bc65a8df50dec999a9d08e96e45e3ed961f448c1fb95a2"
     },
     {
       "path": "scripts/render_boards.py",

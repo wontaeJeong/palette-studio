@@ -14,7 +14,7 @@ async function main(){
  for(const c of all)assert(output.includes('.'+c),'Missing utility: '+c);
  for(const c of variants)assert(output.includes(c.replace(':','\\:')),'Missing variant: '+c);
  const reactRoot=path.dirname(require.resolve('@types/react/package.json'));
- const files=['examples/react/ThemeProvider.tsx','examples/react/ScanPanel.tsx','examples/tailwind/Button.tsx'].map(p=>path.join(root,p));
+ const files=['examples/react/ThemeProvider.tsx','examples/react/ScanPanel.tsx','examples/react/ProjectPanel.tsx','examples/tailwind/Button.tsx'].map(p=>path.join(root,p));
  const options={noEmit:true,strict:true,skipLibCheck:true,target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.ESNext,moduleResolution:ts.ModuleResolutionKind.Bundler,jsx:ts.JsxEmit.ReactJSX,lib:['lib.es2022.d.ts','lib.dom.d.ts'],baseUrl:root,paths:{react:[path.join(reactRoot,'index.d.ts')],'react/jsx-runtime':[path.join(reactRoot,'jsx-runtime.d.ts')]}};
  const program=ts.createProgram(files,options),diagnostics=ts.getPreEmitDiagnostics(program);
  if(diagnostics.length){const message=ts.formatDiagnosticsWithColorAndContext(diagnostics,{getCanonicalFileName:x=>x,getCurrentDirectory:()=>root,getNewLine:()=> '\n'});throw new Error(message);}

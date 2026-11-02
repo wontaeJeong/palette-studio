@@ -1,12 +1,12 @@
 # 기존 앱 / React / Tailwind 통합
 
-## 기존 Admission Gate
+## 기존 앱
 
-이 키트는 사내 저장소 전체를 확인한 결과물이 아닙니다. 기존 정의를 교체할 때는 내보낸 `design-profile.json`의 scope를 우선합니다. 이전 선호는 라이트 컬러 유지, 다크만 개편입니다.
+이 키트는 특정 앱의 전체 소스를 분석한 결과물이 아닙니다. 기존 정의를 변경할 때는 내보낸 `design-profile.json`의 scope를 우선합니다. 다크만 변경할지, 라이트만 변경할지, 두 모드를 바꿀지는 적용 대상에 맞게 선택합니다.
 
-1. `START-HERE.html`에서 기존 Admission Gate / 다크만으로 내보내면 `selected-theme.css`에 다크 선언만 담깁니다.
+1. 확인·내보내기 단계에서 기존 앱 / 다크만으로 내보내면 `selected-theme.css`에 다크 선언만 담깁니다.
 2. 기존 `html[data-theme="dark"]` 등 프로젝트의 canonical 테마 정의에 선언값을 병합합니다. 기존 토큰 이름과 다른 역할만 명시적으로 매핑합니다. 새 override 파일을 계속 쌓지 않습니다.
-3. 기존 `themeContrast.test.ts`의 전경·배경 쌍을 갱신합니다. 키트의 `data/contrast-pairs.json`에서 실제 사용 쌍을 참고하세요. 이 키트의 검사기는 그 프로젝트 테스트를 대체하지 않습니다.
+3. 기존 앱 대비 검증의 전경·배경 쌍을 갱신합니다. 키트의 `data/contrast-pairs.json`에서 실제 사용 쌍을 참고하세요. 이 키트의 검사기는 그 프로젝트 테스트를 대체하지 않습니다.
 
 확인된 이전 토큰 이름은 모두 새 카탈로그에 있습니다. 예: `--color-canvas`, `--color-raised`, `--color-line-strong`, `--color-status-passed`, `--color-sev-critical`, `--color-card-active`, `--color-code-bg`. `docs/LEGACY-MAP.md`에 전체 목록을 제공합니다. 이 이름들이 React 클래스 이름이라는 뜻은 아닙니다. 기존 `.card`, `.badge` 등의 컴포넌트 클래스는 유지하고 색상 속성을 의미 토큰에 연결하세요.
 
@@ -28,7 +28,7 @@
 
 ```tsx
 <button className="rounded-lg border px-4 py-2 cp-bg-accent cp-text-on-accent cp-border-accent hover:cp-bg-accent-hover hover:cp-border-accent-hover focus-visible:outline-3 focus-visible:outline-offset-3 [outline-color:var(--color-focus)]">
-  검사 실행
+  프로젝트 추가
 </button>
 ```
 
@@ -42,7 +42,7 @@
 
 첫 페인트 깜박임을 줄이는 `examples/theme-init.js`는 `<head>`에서 CSS보다 먼저 실행할 수 있습니다. CSP가 있는 앱은 기존 nonce/hash 또는 외부 script 정책에 맞춰 사용하세요. 그 정책을 완화할 필요는 없습니다. SSR이면 서버 쿠키·기존 프레임워크 테마 처리와 중복되지 않게 조정합니다.
 
-1.1.0 폰트 선택은 컬러 변경 범위와 별개이며 두 모드에 공통입니다. 기존 로더에 `design-profile.json`의 fonts 정책을 병합하세요. `selected-theme.css`에도 폰트 정의가 들어 있으므로 별도로 `selected-fonts.css`까지 중복 import하지 않습니다. 라이선스·CSP·경로는 `docs/FONTS.md`를 따릅니다.
+폰트 선택은 컬러 변경 범위와 별개이며 두 모드에 공통입니다. 기존 로더에 `design-profile.json`의 fonts 정책을 병합하세요. `selected-theme.css`에도 폰트 정의가 들어 있으므로 별도로 `selected-fonts.css`까지 중복 import하지 않습니다. 라이선스·CSP·경로는 `docs/FONTS.md`를 따릅니다.
 
 포털로 렌더링하는 dialog/tooltip은 토큰을 읽는 DOM 범위 밖으로 나가지 않도록 합니다. 앱 토큰을 `html`에 두면 보통 body 포털도 상속합니다. 일부 패널에만 토큰을 둘 때는 포털 컨테이너도 같은 테마 범위로 맞춰야 합니다. 미리보기는 각 테마 범위 안에 dialog를 배치합니다.
 

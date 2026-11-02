@@ -1,17 +1,17 @@
 {
   "$schema": "./palette-studio/data/profile.schema.json",
-  "kitVersion": "1.1.0",
-  "palette": "graphite-plum",
-  "style": "operational",
-  "target": "existing-gate",
+  "kitVersion": "1.2.0",
+  "palette": "midnight-periwinkle",
+  "style": "outline",
+  "target": "existing-app",
   "scope": "dark-only",
   "previewMode": "light",
   "themeAttribute": "data-theme",
   "paletteAttribute": "data-palette",
   "styleAttribute": "data-style",
   "fonts": {
-    "body": "pretendard",
-    "code": "d2coding",
+    "body": "suit",
+    "code": "jetbrains-mono",
     "source": "local-only",
     "display": "swap",
     "timeoutMs": 6000,
@@ -26,9 +26,9 @@
     "assetsBase": "./palette-studio/",
     "fonts": [
       {
-        "id": "pretendard",
-        "family": "Pretendard Variable",
-        "version": "1.3.9",
+        "id": "suit",
+        "family": "SUIT Variable",
+        "version": "2.0.3",
         "versionKind": "font",
         "license": "OFL-1.1",
         "licenseUse": {
@@ -38,13 +38,42 @@
           "redistribution": "retain-copyright-and-OFL",
           "fontModification": "respect-reserved-font-names"
         },
-        "upstream": "https://github.com/orioncactus/pretendard",
+        "upstream": "https://github.com/sunn-us/SUIT",
         "faces": [
           {
-            "weight": "45 920",
-            "cdn": "https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/woff2/PretendardVariable.woff2",
-            "local": "assets/fonts/pretendard/PretendardVariable.woff2",
-            "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4"
+            "weight": "100 900",
+            "cdn": "https://cdn.jsdelivr.net/gh/sunn-us/SUIT@2.0.3/fonts/variable/woff2/SUIT-Variable.woff2",
+            "local": "assets/fonts/suit/SUIT-Variable.woff2",
+            "sha256": "a48c5a20d3834ca28e41dd91acd79a17d2d14470990a81d79027f614e66b76ef"
+          }
+        ]
+      },
+      {
+        "id": "jetbrains-mono",
+        "family": "JetBrains Mono",
+        "version": "2.304",
+        "versionKind": "font",
+        "license": "OFL-1.1",
+        "licenseUse": {
+          "internalBusiness": true,
+          "commercial": true,
+          "webEmbedding": true,
+          "redistribution": "retain-copyright-and-OFL",
+          "fontModification": "respect-reserved-font-names"
+        },
+        "upstream": "https://github.com/JetBrains/JetBrainsMono",
+        "faces": [
+          {
+            "weight": "400",
+            "cdn": "https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@v2.304/fonts/webfonts/JetBrainsMono-Regular.woff2",
+            "local": "assets/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2",
+            "sha256": "a9cb1cd82332b23a47e3a1239d25d13c86d16c4220695e34b243effa999f45f2"
+          },
+          {
+            "weight": "700",
+            "cdn": "https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@v2.304/fonts/webfonts/JetBrainsMono-Bold.woff2",
+            "local": "assets/fonts/jetbrains-mono/JetBrainsMono-Bold.woff2",
+            "sha256": "c503cc5ec5f8b2c7666b7ecda1adf44bd45f2e6579b2eba0fc292150416588a2"
           }
         ]
       },
@@ -84,9 +113,9 @@
   "tokenPolicy": "literal-hex-no-color-aliases",
   "statusPolicy": "Preserve success/warning/rejected/failed and severity meanings; always pair color with labels or icons.",
   "integration": {
-    "tokens": "css/palettes/graphite-plum.css",
+    "tokens": "css/palettes/midnight-periwinkle.css",
     "components": "css/foundation.css",
-    "style": "css/styles/operational.css",
+    "style": "css/styles/outline.css",
     "utilities": "css/utilities.css",
     "tailwind": "css/tailwind-v4.css",
     "fonts": "font-loader.js",

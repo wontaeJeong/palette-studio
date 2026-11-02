@@ -26,3 +26,19 @@ jobs:
           python3 scripts/bundle.py
       - name: Verify generated sources are committed
         run: git diff --exit-code -- css data/catalog.js data/font-catalog.js data/fonts.json data/palettes.json data/profile.schema.json START-HERE.html
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser QA dependencies
+        run: |
+          npm install --prefix "$RUNNER_TEMP/palette-qa" playwright@1.62.1
+          "$RUNNER_TEMP/palette-qa/node_modules/.bin/playwright" install --with-deps chromium
+          echo "NODE_PATH=$RUNNER_TEMP/palette-qa/node_modules" >> "$GITHUB_ENV"
+      - name: Verify selection flow and font fallback
+        run: |
+          node scripts/check-studio-flow.cjs
+          node scripts/check-fonts.cjs

@@ -7,7 +7,7 @@
   },
   "reactTypes": {
     "version": "19.3.0",
-    "files": 3,
+    "files": 4,
     "strictTypeCheck": true,
     "pass": true
   },

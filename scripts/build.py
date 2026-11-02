@@ -40,7 +40,7 @@ BASES = {
 }
 # id, base, light accent, strong, dark accent, strong, display name, family, useful contexts
 SPECS = [
- ('graphite-plum','graphite','#78469E','#623680','#D4A1EB','#EAC7F6','Graphite / Plum','purple','Admission Gate · 보안 · 개발 도구'),
+ ('graphite-plum','graphite','#78469E','#623680','#D4A1EB','#EAC7F6','Graphite / Plum','purple','관리 콘솔 · 업무 도구'),
  ('slate-indigo','slate','#4F46B5','#39318F','#B5AFFF','#D3CFFF','Slate / Indigo','blue','업무 SaaS · 관리 콘솔'),
  ('slate-blue','slate','#2563BB','#194D96','#9DC4FF','#C5DEFF','Slate / Blue','blue','범용 제품 · 관리자'),
  ('navy-cyan','navy','#087D93','#075D70','#77DBF0','#B1EEFA','Navy / Cyan','blue','인프라 · 관측 · 네트워크'),
@@ -163,7 +163,7 @@ def main():
     for key in keys:
         short=key.removeprefix('--color-')
         catalog.append({'token':key,'classSuffix':short,'classes':{p:'cp-'+p+'-'+short for p in ['bg','text','border','fill','stroke']},'category':short.split('-')[0]})
-    data={'version':'1.1.0','created':'2026-10-27','defaultPalette':'graphite-plum','defaultStyle':'operational','styles':STYLES,'palettes':palettes,'tokens':catalog,'chartPatterns':['solid','diagonal','dots','cross','horizontal','vertical','grid','dash'],'scope':'Static color-pair checks, not whole-application WCAG certification.'}
+    data={'version':'1.2.0','created':'2026-10-27','defaultPalette':'slate-blue','defaultStyle':'operational','styles':STYLES,'palettes':palettes,'tokens':catalog,'chartPatterns':['solid','diagonal','dots','cross','horizontal','vertical','grid','dash'],'scope':'Static color-pair checks, not whole-application WCAG certification.'}
     write('data/palettes.json',json.dumps(data,ensure_ascii=False,indent=2)+'\n')
     write('data/catalog.js','/* generated; file:// compatible, no fetch */\nwindow.PALETTE_KIT = '+json.dumps(data,ensure_ascii=False,separators=(',',':'))+';\n')
     write('data/tokens.json',json.dumps(catalog,ensure_ascii=False,indent=2)+'\n')
@@ -239,7 +239,7 @@ def main():
     index=['# 팔레트 선택표\n','아래 32종은 이 키트의 큐레이션이며 인기 순위가 아닙니다. 기본 바탕과 포인트를 함께 설계했습니다.\n','| ID | 조합 | 용도 | Light accent | Dark accent |\n|---|---|---|---|---|']
     for p,s in zip(palettes,SPECS):index.append(f'| `{p["id"]}` | {p["name"]} | {p["use"]} | `{s[2]}` | `{s[4]}` |')
     write('docs/PALETTES.md','\n'.join(index)+'\n')
-    schema={'$schema':'https://json-schema.org/draft/2020-12/schema','title':'Palette Studio design profile','type':'object','required':['palette','style','target','scope'],'properties':{'$schema':{'type':'string'},'kitVersion':{'type':'string'},'palette':{'enum':[p['id'] for p in palettes]},'style':{'enum':[s['id'] for s in STYLES]},'target':{'enum':['existing-gate','new-app']},'scope':{'enum':['dark-only','both','light-only']},'previewMode':{'enum':['light','dark']},'tokenPolicy':{'const':'literal-hex-no-color-aliases'},'constraints':{'type':'array','items':{'type':'string'}},'reviewScreens':{'type':'array','items':{'type':'string'}}},'additionalProperties':True}
+    schema={'$schema':'https://json-schema.org/draft/2020-12/schema','title':'Palette Studio design profile','type':'object','required':['palette','style','target','scope'],'properties':{'$schema':{'type':'string'},'kitVersion':{'type':'string'},'palette':{'enum':[p['id'] for p in palettes]},'style':{'enum':[s['id'] for s in STYLES]},'target':{'enum':['existing-app','new-app','existing-gate']},'scope':{'enum':['dark-only','both','light-only']},'previewMode':{'enum':['light','dark']},'tokenPolicy':{'const':'literal-hex-no-color-aliases'},'constraints':{'type':'array','items':{'type':'string'}},'reviewScreens':{'type':'array','items':{'type':'string'}}},'additionalProperties':True}
     font_catalog=json.loads((ROOT/'data/fonts.source.json').read_text())
     schema['properties']['fonts']={'type':'object','required':['body','code','source'],'properties':{'body':{'enum':['system']+[f['id'] for f in font_catalog['fonts'] if f['role']=='body']},'code':{'enum':['system']+[f['id'] for f in font_catalog['fonts'] if f['role']=='code']},'source':{'enum':['cdn-first','local-only','system']}},'additionalProperties':True}
     schema['properties']['fontScope']={'const':'global'}
@@ -259,7 +259,7 @@ def main():
     olddoc=['# 이전 토큰 이름 호환표\n','원본 `color-tokens.css`에서 확인한 전체 토큰 이름입니다. 새 팔레트는 이름을 모두 포함합니다. 값의 완전 동일을 뜻하지 않습니다. 실제 앱의 CSS 클래스 이름은 확인하지 않았습니다. 대응 유틸리티는 선택적으로 사용할 수 있는 새 클래스입니다.\n','| 이전 토큰 | 새 토큰 | 유틸리티 예 |\n|---|---|---|']
     for key in legacykeys:olddoc.append(f'| `{key}` | 동일 | `cp-text-{key.removeprefix("--color-")}` |')
     write('docs/LEGACY-MAP.md','\n'.join(olddoc)+'\n')
-    write('examples/design-profile.example.json',json.dumps({'$schema':'../data/profile.schema.json','kitVersion':'1.1.0','palette':'graphite-plum','style':'operational','target':'existing-gate','scope':'dark-only','previewMode':'dark','fonts':{'body':'pretendard','code':'d2coding','source':'cdn-first'},'fontScope':'global','tokenPolicy':'literal-hex-no-color-aliases','constraints':['Preserve existing light palette.','Reuse existing components.','Merge into canonical theme definitions.']},ensure_ascii=False,indent=2)+'\n')
+    write('examples/design-profile.example.json',json.dumps({'$schema':'../data/profile.schema.json','kitVersion':'1.2.0','palette':'slate-blue','style':'operational','target':'new-app','scope':'both','previewMode':'light','fonts':{'body':'pretendard','code':'d2coding','source':'cdn-first'},'fontScope':'global','tokenPolicy':'literal-hex-no-color-aliases','constraints':['Apply only the selected theme scope.','Reuse existing components.','Merge into canonical theme definitions.']},ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({'palettes':len(palettes),'modes':len(palettes)*2,'semanticTokens':len(keys),'utilityClasses':len(keys)*5,'styles':len(STYLES),'contrastPairsPerTheme':len(pairs),'rawRamps':len(ramps)}))
 
 def colors_names():return ['success','warning','danger','info','rejected']

@@ -8,11 +8,13 @@
 
 1. 팔레트를 고릅니다. `Light + Dark` 또는 `두 팔레트 비교`로 같은 화면을 비교합니다.
 2. 색상과 별도로 스타일을 고릅니다. Operational / Soft / Outline / Editorial / Compact / Clear Boundaries.
-3. 본문·코드 폰트 또는 추천 조합을 고릅니다. 폰트 카드 24종에서 실제 글자·한글 지원·용도·라이선스를 비교할 수 있습니다.
-4. 적용 대상과 컬러 변경 범위를 고릅니다. 기존 Admission Gate는 **다크만 변경**이 기본입니다.
+3. **폰트**에서 본문용 15종과 코드용 9종을 별도 목록에서 선택합니다. 역할별 검색·한글 지원·실제 글자·라이선스를 비교할 수 있습니다.
+4. **확인·내보내기**에서 선택 요약, 새 앱/기존 앱, 컬러 변경 범위를 확인하고 CSS·JSON·작업지시를 저장합니다. 새 선택은 새 앱 / 라이트+다크가 기본입니다.
 5. **CSS 저장**, **디자인 프로필 저장**, **작업지시 저장**을 각각 누릅니다. 이 세 파일과 키트 폴더를 OpenCode에 전달하세요.
 
-웹 미리보기의 검사 실행은 모달 시연입니다. 실제 API 연결은 없습니다. 선택값은 로컬 브라우저 저장소와 URL fragment에 저장합니다. CDN 모드에서는 선택한 폰트와 보이는 견본에 필요한 WOFF2만 요청하며, 선택 프로필이나 앱 데이터는 전송하지 않습니다. `이 선택 링크 복사`는 같은 파일에 접근할 수 있는 환경에서 선택값을 재현합니다. 파일 자체를 원격으로 공유하는 기능은 아닙니다.
+큰 화면은 선택 패널 옆에 미리보기가 고정되며, 작은 화면은 하단 미리보기의 **크게 보기**로 확장할 수 있습니다. 단계는 자유롭게 왕복하고 선택값은 유지됩니다.
+
+웹 미리보기는 공통 프로젝트 대시보드입니다. 프로젝트 추가는 모달 시연입니다. 실제 API 연결은 없습니다. 선택값은 로컬 브라우저 저장소와 URL fragment에 저장합니다. CDN 모드에서는 선택한 폰트와 보이는 견본에 필요한 WOFF2만 요청하며, 선택 프로필이나 앱 데이터는 전송하지 않습니다. `이 선택 링크 복사`는 같은 파일에 접근할 수 있는 환경에서 선택값을 재현합니다. 파일 자체를 원격으로 공유하는 기능은 아닙니다.
 
 ## 구성
 
@@ -43,7 +45,7 @@
 | `reference/` | 이전 Indigo 참고 토큰·검사 규칙 원문 보존본; 앱 import 금지 |
 | `scripts/` | 생성·정적 검사·오프라인 HTML 빌드·보드 렌더링 |
 
-## 지난 기준과 연결
+## 이전 팔레트의 출처와 연결
 
 `graphite-plum`은 이전에 합의한 핵심값을 유지합니다.
 
@@ -53,6 +55,8 @@
 | `--color-accent-strong` | `#623680` | `#EAC7F6` |
 
 다크 배경 앵커는 canvas `#101114`, raised `#1C1D22`, surface `#25252D`, shell `#18191D`, line `#303038`입니다. **라이트의 전체 토큰은 이번 키트용 보완안**입니다. 사내 저장소의 현재 라이트 팔레트를 추출한 파일이 아닙니다. 기존 앱에서 라이트를 보존하려면 다크 범위로 내보내세요.
+
+신규 프로필은 `existing-app` / `new-app`을 사용합니다. 이전 `target=existing-gate` 링크는 기존 앱으로 이관되며 명시한 scope를 유지합니다. 과거 프로필은 스키마 호환을 유지합니다.
 
 이전에 만든 `Graphite & Indigo | Reference palette`는 `graphite-indigo-reference`에 핵심값을 옮겼습니다. 전체 이전 토큰 이름을 포함하면서 별칭은 직접 HEX로 풀고, 지원 역할과 검사 쌍을 보완했습니다. Slate와 나머지 30종은 이번에 작성한 후보입니다. 기존 Gate의 전체 최신 소스·클래스 이름을 확인했다는 뜻은 아닙니다. 상세 이력: `docs/PROVENANCE.md`.
 
@@ -72,12 +76,12 @@
 ```html
 <html data-theme="dark">
   <body class="cp-scope" data-style="operational">
-    <button class="ui-btn ui-btn-primary">검사 실행</button>
+    <button class="ui-btn ui-btn-primary">프로젝트 추가</button>
   </body>
 </html>
 ```
 
-`foundation.css` 뒤에 스타일을 불러오세요. `utilities.css`와 `tailwind-v4.css`는 대체 관계입니다. 기존 Gate에는 이 예제를 그대로 추가하지 말고 `docs/INTEGRATION.md`의 기존 토큰 병합 경로를 사용하세요.
+`foundation.css` 뒤에 스타일을 불러오세요. `utilities.css`와 `tailwind-v4.css`는 대체 관계입니다. 기존 앱에는 이 예제를 그대로 추가하지 말고 `docs/INTEGRATION.md`의 기존 토큰 병합 경로를 사용하세요.
 
 ## OpenCode에 전달
 
@@ -103,3 +107,14 @@ python3 scripts/render_boards.py
 사용 허락: `LICENSE`. 폰트는 각 OFL 라이선스로 동봉하며 `THIRD-PARTY-NOTICES.md`를 따릅니다. 브랜드 로고 원본이나 외부 아이콘 팩은 동봉하지 않습니다. 샘플의 작은 방패 표식은 이 키트의 CSS/SVG 예제이며 기존 브랜드 로고 원본이 아닙니다.
 
 브라우저 캡처와 빌드·타입 검사 범위, 선택적 재현 명령은 `docs/VERIFICATION.md`에 있습니다. 에이전트 활용 방식은 `docs/WORKFLOW.md`를 참고하세요.
+
+## 1.2.0 UI 개선
+
+- 앱 중립적인 프로젝트 예시와 기본 프로필.
+- 색상 → 스타일 → 폰트 → 확인·내보내기. 다운로드는 마지막 단계에만 표시.
+- 데스크톱 sticky 미리보기 / 모바일 하단 고정·확대 미리보기.
+- 본문·코드 폰트의 분리된 검색·목록·선택 상태, 스타일 카드와 검색 결과 없음 안내.
+
+![공통 선택 화면](previews/studio-common-overview.png)
+
+검사: `node scripts/browser-check.cjs` 또는 `node scripts/check-studio-flow.cjs`. CDN·동봉 폰트 검사는 `node scripts/check-fonts.cjs`입니다.

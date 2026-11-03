@@ -1,0 +1,22 @@
+{
+  "project": "Example Admin Console",
+  "palette": "slate-blue",
+  "style": "operational",
+  "target": "existing-app",
+  "scope": "dark-only",
+  "layout": "existing",
+  "framework": "react",
+  "fonts": {
+    "body": "pretendard",
+    "code": "d2coding",
+    "source": "local-only"
+  },
+  "icons": [
+    "house",
+    "layout-dashboard",
+    "search",
+    "settings",
+    "shield-check",
+    "triangle-alert"
+  ]
+}

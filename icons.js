@@ -35,7 +35,7 @@
     category: choose(saved.category, categories.map(function (c) { return c[0]; }), "all"),
     query: "",
     selected: saved.selected || "shield-check",
-    codeKind: choose(saved.codeKind, ["react", "html", "css"], "react")
+    codeKind: choose(saved.codeKind, ["react", "lucide", "html", "css"], "react")
   };
   var byName = new Map(icons.map(function (icon) { return [icon.name, icon]; }));
   if (!byName.has(state.selected)) state.selected = icons[0] ? icons[0].name : "";
@@ -144,6 +144,20 @@
         "/* Inline SVG must use stroke='currentColor'. */";
     }
     var comp = componentName(icon.name);
+    if (state.codeKind === "react") {
+      var iconName = JSON.stringify(icon.label);
+      var selectedVariant = state.variant === "outline" ? "default" :
+        state.variant === "duotone" ? "muted" : "accent";
+      if (state.variant === "filled") return
+        'import { ' + comp + ', IconTile } from "@palette-studio/icons-react";\n\n' +
+        "<IconTile icon={" + comp + "} size={" + state.size +
+        "} aria-label={" + iconName + "} />";
+      return 'import { ' + comp + ' } from "@palette-studio/icons-react";\n\n' +
+        "<" + comp + " size={" + state.size + "} strokeWidth={" + state.stroke +
+        '} variant="' + selectedVariant + '"' +
+        (state.variant === "duotone" ? ' tone="duotone"' : "") +
+        ' aria-hidden />';
+    }
     var element = "<" + comp + " size={" + state.size + "} strokeWidth={" + state.stroke +
       '} style={{ color: "var(' + token + ')" }} aria-hidden="true" />';
     if (state.variant === "filled") {

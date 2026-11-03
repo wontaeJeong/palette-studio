@@ -28,7 +28,7 @@ Named ESM exports permit bundler tree-shaking; a runtime lookup registry of ever
 
 Props: React SVG attributes, forwardRef, size, strokeWidth, className, color, semantic variant (default/muted/accent/success/warning/danger/info), tone (single/duotone).
 
-Unlabeled icons are decorative by default (`aria-hidden`), and a `title`, `aria-label`, or `aria-labelledby` makes the SVG meaningful with role `img`. IconTile fills a tile **behind** the outline glyph; it is not a separate filled glyph pack. Duotone alternates strokes; it does not invent native icon fills.
+Unlabeled icons are decorative by default (`aria-hidden`), and a `title`, `aria-label`, or `aria-labelledby` makes the SVG meaningful with role `img`. IconTile fills a tile **behind** the outline glyph; it is not a separate filled glyph pack. Duotone alternates strokes across separate SVG shapes. Single-path icons remain monochrome; it does not invent native icon fills.
 
 CSS variables use exactly the parent Palette Studio semantic palette tokens and fall back to inherited currentColor if absent. Package works with server rendering and requires no network access or icon font. No global stylesheet injection.
 

@@ -40,7 +40,7 @@ test("SSR: palette tokens, currentColor, refs and accessible name defaults", () 
   }));
   assert.match(tile, /background:var\(--color-accent, currentColor\)/);
   assert.match(tile, /var\(--color-on-accent, #fff\)/);
-  const duo = renderToStaticMarkup(createElement(icons.Activity, { tone: "duotone" }));
+  const duo = renderToStaticMarkup(createElement(icons.House, { tone: "duotone" }));
   assert.match(duo, /stroke="var\(--color-accent, currentColor\)"/);
 });
 test("bundlers can tree-shake named imports", async () => {

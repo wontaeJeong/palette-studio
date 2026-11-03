@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Palette Studio 아이콘 라이브러리: Lucide SVG, Light/Dark 및 32개 팔레트 대응">
+  <title>Icon Studio · Palette Studio</title>
+  <link rel="stylesheet" href="css/palettes.css">
+  <link rel="stylesheet" href="css/icon-studio.css">
+</head>
+<body>
+  <a class="ic-skip" href="#icon-gallery">아이콘 목록으로 이동</a>
+  <header class="ic-top">
+    <a class="ic-brand" href="START-HERE.html" aria-label="Palette Studio 메인">
+      <span class="ic-logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Palette Studio
+    </a>
+    <nav aria-label="도구 탐색">
+      <a href="START-HERE.html" id="open-palette">팔레트 · 스타일 · 폰트</a>
+      <a href="icons.html" aria-current="page">아이콘</a>
+    </nav>
+  </header>
+  <main class="ic-container">
+    <section class="ic-heading">
+      <div>
+        <p class="ic-eyebrow">Theme-aware icon library</p>
+        <h1>아이콘을 골라 바로 적용하세요.</h1>
+        <p>팔레트에 종속되지 않는 SVG 원본을 Light·Dark로 비교하고, 크기·선 두께·표현 방식을 조정할 수 있습니다.</p>
+      </div>
+      <p class="ic-total"><strong id="total-count">—</strong><span>Lucide SVG icons</span></p>
+    </section>
+    <div class="ic-layout">
+      <aside class="ic-controls" aria-labelledby="controls-heading">
+        <h2 id="controls-heading">선택 옵션</h2>
+        <p class="ic-help">기본 팔레트는 메인 화면에서 마지막으로 선택한 값입니다.</p>
+        <label for="icon-palette">컬러 팔레트</label>
+        <select id="icon-palette"></select>
+        <label for="icon-mode">테마 미리보기</label>
+        <select id="icon-mode">
+          <option value="split">Light + Dark 비교</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+        <label for="icon-variant">아이콘 표현</label>
+        <select id="icon-variant">
+          <option value="outline">Outline</option>
+          <option value="accent">Accent</option>
+          <option value="duotone">Duotone</option>
+          <option value="filled">Filled tile</option>
+        </select>
+        <label for="icon-size">크기 <output id="size-value" for="icon-size">24px</output></label>
+        <input id="icon-size" type="range" min="16" max="40" step="4" value="24">
+        <label for="icon-stroke">선 두께</label>
+        <select id="icon-stroke">
+          <option value="1.5">1.5px</option>
+          <option value="2" selected>2px</option>
+          <option value="2.5">2.5px</option>
+        </select>
+        <p class="ic-hint">Filled tile은 채운 배경에 Outline SVG를 놓는 표현입니다. 별도의 Solid SVG를 의미하지 않습니다.</p>
+      </aside>
+      <section class="ic-library" aria-labelledby="library-heading">
+        <div class="ic-library-top">
+          <div><h2 id="library-heading">아이콘 라이브러리</h2><p id="icon-result-count" role="status" aria-live="polite"></p></div>
+          <label class="ic-search"><span>이름 또는 기능 검색</span><input type="search" id="icon-search" placeholder="search, 보안, dashboard…" autocomplete="off"></label>
+        </div>
+        <div class="ic-categories" id="icon-categories" role="group" aria-label="아이콘 분류"></div>
+        <div id="icon-gallery" class="ic-preview" tabindex="-1"></div>
+      </section>
+      <aside class="ic-details" aria-labelledby="detail-heading">
+        <p class="ic-eyebrow">SELECTED ICON</p>
+        <h2 id="detail-heading">아이콘 상세</h2>
+        <div id="icon-detail" aria-live="polite"></div>
+        <div class="ic-actions">
+          <button id="copy-svg" type="button">SVG 복사</button>
+          <button id="download-svg" type="button">SVG 다운로드</button>
+        </div>
+        <label for="icon-code-kind">사용 예제</label>
+        <select id="icon-code-kind">
+          <option value="react">React + lucide-react</option>
+          <option value="html">HTML (Inline SVG)</option>
+          <option value="css">CSS 토큰</option>
+        </select>
+        <pre class="ic-code"><code id="icon-code"></code></pre>
+        <button class="ic-code-copy" id="copy-code" type="button">예제 코드 복사</button>
+        <p class="ic-note">실제 앱에는 선택한 팔레트 1개만 포함하세요. 외부 이미지 링크가 아닌 인라인 SVG에서 <code>currentColor</code>가 상속됩니다.</p>
+      </aside>
+    </div>
+    <footer class="ic-footer">
+      <span>Palette Studio · SVG Icon Kit · CDN 불필요</span>
+      <span>Lucide ISC / 일부 Feather MIT · <a href="assets/icons/LICENSE-LUCIDE.txt">원문 라이선스</a> · <a href="docs/ICON-KIT.md">사용 가이드</a></span>
+    </footer>
+  </main>
+  <div id="icon-toast" class="ic-toast" role="status" aria-live="polite"></div>
+  <noscript><p>아이콘 미리보기에는 JavaScript가 필요합니다. SVG 원본은 assets/icons/에서 직접 사용할 수 있습니다.</p></noscript>
+  <script src="data/catalog.js"></script>
+  <script src="data/icon-parts/navigation.js"></script>
+  <script src="data/icon-parts/actions.js"></script>
+  <script src="data/icon-parts/content.js"></script>
+  <script src="data/icon-parts/identity.js"></script>
+  <script src="data/icon-parts/system.js"></script>
+  <script src="data/icon-parts/system-extra.js"></script>
+  <script src="data/icon-parts/data.js"></script>
+  <script src="data/icon-parts/essentials.js"></script>
+  <script src="icons.js"></script>
+</body>
+</html>

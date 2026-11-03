@@ -2,6 +2,20 @@
 
 32개 컬러 조합, 64개 라이트·다크 테마, 6개 디자인 스타일과 사내·상업용으로 사용할 수 있는 OFL 폰트 24종을 선택하는 디자인 레퍼런스입니다. 특정 프레임워크나 UI 라이브러리에 종속되지 않습니다.
 
+## Agent Handoff · 실사용 워크플로
+
+**[handoff.html](handoff.html)**에서 기존 컬러/스타일/폰트 선택값을 불러와 프로젝트의 실제 목표(기존 앱·신규 앱, Light/Dark 변경 범위, 레이아웃 목적, 프레임워크, 아이콘)를 결정합니다. `design.md`·`design-profile.json`·CSS·에이전트 작업지시·QA 체크리스트를 동일한 규칙으로 생성합니다.
+
+```bash
+# handoff.html에서 내보낸 handoff-config.json 사용
+node scripts/create-design-handoff.cjs --config handoff-config.json --out design/handoff
+node scripts/create-design-handoff.cjs --config handoff-config.json --out design/handoff --check
+```
+
+CLI는 오프라인으로 선택한 SVG, WOFF2 폰트와 라이선스 파일까지 함께 저장합니다. 설명: [design.md](design.md), [에이전트 워크플로](docs/AGENT-WORKFLOW.md), [작업지시 템플릿](agents/APPLY-HANDOFF.md). 특정 제품의 UI 컴포넌트를 강제로 교체하지 않습니다.
+
+**React 프로젝트:** [packages/icons-react](packages/icons-react)에서 95개 아이콘의 typed ESM 모듈·tree-shaking·SSR·접근성을 지원합니다. 프로젝트에서 직접 `npm install`/`npm test`/`npm pack`한 tarball을 사용하세요. npm 레지스트리에 배포된 패키지가 아닙니다.
+
 ## Icon Kit · 범용 테마 대응 아이콘
 
 **[icons.html](icons.html)** — 95개 Lucide SVG 아이콘을 팔레트 32종의 Light/Dark에서 비교합니다. 이름·한국어 검색, Outline/Accent/Duotone/Filled tile 표현, 크기·두께 조절 및 SVG 복사·다운로드가 가능합니다. 개별 원본은 `assets/icons/`, 통합 가이드는 [docs/ICON-KIT.md](docs/ICON-KIT.md)입니다.
@@ -24,6 +38,10 @@
 
 | 경로 | 용도 |
 |---|---|
+| `handoff.html`, `handoff.js`, `data/handoff-core.js` | 오프라인 에이전트용 디자인 선택·프로필·문서 내보내기 |
+| `scripts/create-design-handoff.cjs` | Node CLI로 SVG·WOFF2와 라이선스 포함 재현 가능한 핸드오프 |
+| `packages/icons-react/` | TypeScript 기반 React SVG 패키지(정적 명명 export / SSR) |
+| `design.md`, `docs/AGENT-WORKFLOW.md` | 디자인 원칙·에이전트 실전 적용 절차 |
 | `START-HERE.html` | 단독 실행 가능한 전체 미리보기 |
 | `index.html`, `app.js`, `css/studio.css` | 수정 가능한 미리보기 원본 |
 | `css/palettes/` | 팔레트별 단일 CSS, 각 파일에 두 모드 포함 |

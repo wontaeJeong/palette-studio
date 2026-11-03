@@ -20,6 +20,10 @@ jobs:
           node --check app.js
           node --check font-loader.js
           node --check icons.js
+          node --check handoff.js
+          node --check data/handoff-core.js
+          node scripts/build-icons-react.mjs --check
+          node scripts/test-design-handoff.cjs
           node scripts/check-icons.cjs
           python3 scripts/vendor_fonts.py
           python3 scripts/audit-fonts.py
@@ -45,3 +49,17 @@ jobs:
           node scripts/check-studio-flow.cjs
           node scripts/check-fonts.cjs
           node scripts/check-icon-studio.cjs
+          node scripts/check-handoff-browser.cjs
+  react-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install React icon package dependencies
+        run: npm install --prefix packages/icons-react --no-audit --no-fund
+      - name: Verify React build, SSR, a11y and tree-shaking
+        run: npm test --prefix packages/icons-react
+      - name: Verify distributable tarball
+        run: npm pack --dry-run --prefix packages/icons-react

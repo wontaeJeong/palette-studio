@@ -1,0 +1,28 @@
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+const root = path.resolve(__dirname,"..");
+const get = (p)=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
+const catalog=get("data/palettes.json"),legacy=get("data/profile.schema.json");
+const configSchema=get("data/handoff-config.schema.json"),profileSchema=get("data/handoff-profile.schema.json");
+const raw=fs.readFileSync(path.join(root,"packages/icons-react/src/catalog.ts"),"utf8");
+const icons=JSON.parse(raw.match(/export const iconCatalog = (\[[\s\S]*\]) as const;/)[1]);
+const expected={palette:catalog.palettes.map(x=>x.id),style:catalog.styles.map(x=>x.id),icons:icons.map(x=>x.name)};
+for(const schema of [configSchema,profileSchema]){
+ assert.deepEqual(schema.properties.palette.enum,expected.palette);
+ assert.deepEqual(schema.properties.style.enum,expected.style);
+ assert.deepEqual(schema.properties.fonts.properties.body.enum,legacy.properties.fonts.properties.body.enum);
+ assert.deepEqual(schema.properties.fonts.properties.code.enum,legacy.properties.fonts.properties.code.enum);
+ const list=schema===configSchema ? schema.properties.icons : schema.properties.icons.properties.names;
+ assert.deepEqual(list.items.enum,expected.icons);
+ assert(schema.required.includes("scope"));
+}
+const sample=get("examples/handoff-config.example.json");
+for(const key of configSchema.required)assert(Object.hasOwn(sample,key),"Missing example "+key);
+const core=require("../data/handoff-core.js");
+const fontCatalog=get("data/fonts.json");
+const normalized=core.normalize(sample,catalog,fontCatalog,icons);
+assert.deepEqual(normalized.icons,sample.icons);
+const profile=core.profile(normalized,catalog);
+for(const key of profileSchema.required)assert(Object.hasOwn(profile,key),"Missing profile "+key);
+console.log(JSON.stringify({schemaVersions:2,palettes:expected.palette.length,styles:expected.style.length,icons:expected.icons.length,pass:true}));

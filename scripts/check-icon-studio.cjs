@@ -32,6 +32,10 @@ const assert = require("node:assert/strict");
   assert.equal(await page.locator("#icon-gallery svg").first().getAttribute("stroke-width"), "2.5");
   await page.selectOption("#icon-code-kind", "react");
   assert((await page.locator("#icon-code").innerText()).includes("ShieldCheck"));
+  assert((await page.locator("#icon-code").innerText()).includes("@palette-studio/icons-react"));
+  await page.selectOption("#icon-code-kind", "lucide");
+  assert((await page.locator("#icon-code").innerText()).includes("lucide-react"));
+  await page.selectOption("#icon-code-kind", "react");
   const download = await Promise.all([
     page.waitForEvent("download"),
     page.click("#download-svg")

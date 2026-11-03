@@ -20,3 +20,9 @@
 
 - 아이콘은 `assets/icons/`의 Lucide SVG를 재사용하고 `docs/ICON-KIT.md`의 currentColor·라이선스 규칙을 따른다. 브랜드 로고처럼 취급하지 않는다.
 - `icons.html`은 독립 실행 브라우저이며, 본문·폰트·팔레트 선택 화면의 `START-HERE.html` 생성 결과를 임의로 깨뜨리지 않는다.
+
+- 에이전트 대상 디자인 작업에서는 `design.md`(공용 원칙)와 프로젝트에서 생성된 `design-profile.json` + `design.md`(선택 기준)를 구분한다. 프로젝트별 고정 프로필을 우선한다.
+- `handoff.html`과 CLI는 `data/handoff-core.js`의 생성 함수를 공유한다. 구현 계약·CSS·작업지시·검증 산출물을 별도 문자열로 중복 정의하지 않는다.
+- CLI는 `scripts/create-design-handoff.cjs`, 회귀 검사는 `scripts/test-design-handoff.cjs`. `--check`는 어떤 파일도 수정하지 않고 생성 드리프트만 검출한다.
+- React 아이콘 원본은 `assets/icons/*.svg`; 변환 원본은 `scripts/build-icons-react.mjs`, 생성물은 `packages/icons-react/src/icons/*.ts`, 배포 전에는 `npm test`와 `npm pack --dry-run`을 확인한다.
+- 기존 `START-HERE.html`은 개별 SVG/React 작업을 위해 자동 재번들하지 않는다. 패키지는 npm 레지스트리에 공개되어 있다고 가정하지 않는다.

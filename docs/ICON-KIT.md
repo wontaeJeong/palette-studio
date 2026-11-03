@@ -48,3 +48,24 @@ node scripts/check-icon-studio.cjs # Playwright + Chromium 필요
 ```
 
 브라우저 테스트는 palette/theme/variant/검색/다운로드/모바일 폭을 검증하며, 키트 전체 앱의 색 대비 승인 또는 프로젝트별 UI 테스트를 대체하지는 않습니다.
+
+## React package (tree-shakeable)
+
+`packages/icons-react`에는 이 저장소의 95개 SVG에서 생성한 개별 ESM + 타입 선언이 있습니다. 인라인 SVG `currentColor` 기반이므로 현재 테마의 `--color-*` 값을 사용합니다. `lucide-react`를 이미 사용 중인 프로젝트라면 불필요한 패키지 중복을 만들지 않는 것이 우선입니다.
+
+```bash
+cd packages/icons-react && npm install && npm test && npm pack
+```
+
+생성한 `.tgz`를 대상 앱에 로컬 설치하세요. 외부 npm에 게시된 패키지는 아닙니다.
+
+```tsx
+import { ShieldCheck, Icon, IconTile } from "@palette-studio/icons-react";
+<ShieldCheck size={20} variant="accent" aria-hidden />
+<Icon icon={ShieldCheck} title="검증 완료" variant="success" />
+<IconTile icon={ShieldCheck} title="보안" />
+```
+
+`Icon`에 문자열 이름을 전달하기 위해 95개 전체를 동적 레지스트리로 가져오지 마세요. named import를 그대로 사용하면 트리 셰이킹이 가능합니다. 접근 가능한 이름이 있으면 role=img, 없으면 기본 장식용 SVG입니다. `scripts/build-icons-react.mjs --check`로 SVG와 컴포넌트의 생성 드리프트를 검사합니다.
+
+기계 판독 가능한 선택 프로필·에이전트 작업 계약은 `handoff.html`, `scripts/create-design-handoff.cjs`와 `docs/AGENT-WORKFLOW.md`를 참고하세요.

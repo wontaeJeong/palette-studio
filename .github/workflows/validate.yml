@@ -19,6 +19,8 @@ jobs:
         run: |
           node --check app.js
           node --check font-loader.js
+          node --check icons.js
+          node scripts/check-icons.cjs
           python3 scripts/vendor_fonts.py
           python3 scripts/audit-fonts.py
           python3 scripts/build.py
@@ -42,3 +44,4 @@ jobs:
         run: |
           node scripts/check-studio-flow.cjs
           node scripts/check-fonts.cjs
+          node scripts/check-icon-studio.cjs

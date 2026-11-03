@@ -2,6 +2,10 @@
 
 32개 컬러 조합, 64개 라이트·다크 테마, 6개 디자인 스타일과 사내·상업용으로 사용할 수 있는 OFL 폰트 24종을 선택하는 디자인 레퍼런스입니다. 특정 프레임워크나 UI 라이브러리에 종속되지 않습니다.
 
+## Icon Kit · 범용 테마 대응 아이콘
+
+**[icons.html](icons.html)** — 95개 Lucide SVG 아이콘을 팔레트 32종의 Light/Dark에서 비교합니다. 이름·한국어 검색, Outline/Accent/Duotone/Filled tile 표현, 크기·두께 조절 및 SVG 복사·다운로드가 가능합니다. 개별 원본은 `assets/icons/`, 통합 가이드는 [docs/ICON-KIT.md](docs/ICON-KIT.md)입니다.
+
 ## 먼저 열 파일
 
 **`START-HERE.html`을 브라우저에서 여세요.** 기본은 CDN 우선이며 차단·오프라인일 때 내장 폰트로 폴백합니다. 서버나 설치 없이 사용할 수 있습니다. 폴더를 분리해도 이 HTML 하나로 팔레트 선택·비교·검색·내보내기가 동작합니다. iOS 파일 미리보기에서 스크립트가 제한되면 데스크톱 브라우저로 여세요.
@@ -41,6 +45,8 @@
 | `docs/` | 팔레트·스타일·CSS·통합·출처·검증 가이드 |
 | `agents/` | 적용 계약, 비교 지시, 적용 지시, 결정 기록 양식 |
 | `examples/` | Vanilla HTML / React TSX / Tailwind CSS 예제 |
+| `icons.html`, `icons.js`, `css/icon-studio.css` | 별도 오프라인 아이콘 선택·미리보기 화면 |
+| `assets/icons/`, `data/icon-parts/` | 95개 Lucide SVG 원본 및 카테고리별 브라우저 카탈로그 |
 | `previews/` | 정확한 색상값으로 그린 정적 팔레트 보드 PNG |
 | `reference/` | 이전 Indigo 참고 토큰·검사 규칙 원문 보존본; 앱 import 금지 |
 | `scripts/` | 생성·정적 검사·오프라인 HTML 빌드·보드 렌더링 |
@@ -104,7 +110,7 @@ python3 scripts/render_boards.py
 
 일반 텍스트 쌍은 4.5:1, 지정한 입력 경계·포커스·차트와 같은 비텍스트 쌍은 3:1 기준으로 검사합니다. 장식용 카드 경계는 의도적으로 더 은은할 수 있습니다. 키트의 정적 통과가 전체 앱의 WCAG 준수를 의미하지는 않습니다. 차트에는 직접 라벨·패턴도 사용하세요.
 
-사용 허락: `LICENSE`. 폰트는 각 OFL 라이선스로 동봉하며 `THIRD-PARTY-NOTICES.md`를 따릅니다. 브랜드 로고 원본이나 외부 아이콘 팩은 동봉하지 않습니다. 샘플의 작은 방패 표식은 이 키트의 CSS/SVG 예제이며 기존 브랜드 로고 원본이 아닙니다.
+사용 허락: `LICENSE`. 폰트는 각 OFL 라이선스로 동봉하며 `THIRD-PARTY-NOTICES.md`를 따릅니다. 브랜드 로고 원본은 동봉하지 않습니다. 95개 범용 Lucide SVG 아이콘은 공식 소스와 라이선스를 함께 제공합니다. 샘플의 작은 방패 표식은 이 키트의 CSS/SVG 예제이며 기존 브랜드 로고 원본이 아닙니다.
 
 브라우저 캡처와 빌드·타입 검사 범위, 선택적 재현 명령은 `docs/VERIFICATION.md`에 있습니다. 에이전트 활용 방식은 `docs/WORKFLOW.md`를 참고하세요.
 

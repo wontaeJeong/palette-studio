@@ -1,0 +1,32 @@
+# UI Screenshots · Palette Studio
+
+These are **real Chromium screenshots**, not mockup illustrations. The generator opens checked-in HTML/CSS/JS with `file://` in a fresh Playwright browser context and disables HTTP traffic.
+
+## Generated captures
+
+| Preview | Scope |
+|---|---|
+| studio-overview-light.png / studio-overview-dark.png | Main palette selector desktop 1440×980 |
+| studio-fonts-desktop.png | Main font picker |
+| studio-mobile-light.png / studio-mobile-dark.png | Main UI mobile preview dock, 390×844 |
+| icon-studio-desktop.png / icon-studio-dark.png | Icon Studio, category identity, selected shield-check |
+| icon-studio-mobile.png | Icon Studio full mobile page |
+| agent-handoff-desktop.png / agent-handoff-dark.png | Agent Handoff controls, two themes / dark preview |
+| agent-handoff-mobile.png | Agent Handoff full mobile page |
+
+## Reproduce
+
+Install Playwright Chromium (Node 22+, `playwright@1.62.1`), then run:
+
+```bash
+NODE_PATH=/path/to/playwright/node_modules node scripts/capture-previews.cjs
+node scripts/check-screenshot-freshness.cjs
+```
+
+GitHub Actions `Refresh UI screenshots` runs on the initial screenshot PR branch and is also available through **Actions → Refresh UI screenshots → Run workflow** after merge. It writes images and the manifest to the selected branch. Review the image diff before merging.
+
+`screenshots.json` records the browser version, dimensions, byte counts, SHA-256 of each PNG, and fingerprint of the UI source files. CI runs a cheap freshness guard: changed UI source requires screenshots to be regenerated. The freshness guard checks file presence, integrity and source drift, **not visual accessibility or layout quality**.
+
+Captures use the checked-in font files (or system fonts as selected) and do not require external websites. Differences in OS/font rendering or Chromium version can affect image bytes; commit new images only after visual review.
+
+Older `previews/*.png` files are retained for historical reference; the screenshots in `screenshots.json` and the README gallery are the maintained set.

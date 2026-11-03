@@ -103,8 +103,10 @@ function main() {
     files++;
   }
   const profile = handoff.profile(config, catalog);
+  save("handoff-config.json", JSON.stringify(config, null, 2) + "\n");
+  save("handoff-config.schema.json", read(path.join(root, "data/handoff-config.schema.json")));
   save("design-profile.json", JSON.stringify(profile, null, 2) + "\n");
-  save("design-profile.schema.json", read(path.join(root, "data/profile.schema.json")));
+  save("design-profile.schema.json", read(path.join(root, "data/handoff-profile.schema.json")));
   save("design.md", handoff.designMD(config, catalog));
   save("selected-theme.css", handoff.themeCSS(config, catalog));
   save("selected-style.css", handoff.styleCSS(config, catalog));
@@ -139,7 +141,10 @@ function main() {
     for (const font of unique) {
       for (const face of font.faces) {
         const source = path.join(root, face.local);
-        save("fonts/" + font.id + "/" + path.basename(face.local), fs.readFileSync(source));
+        const bytes = fs.readFileSync(source);
+        if (face.sha256 && crypto.createHash("sha256").update(bytes).digest("hex") !== face.sha256)
+          throw Error("Font integrity check failed: " + face.local);
+        save("fonts/" + font.id + "/" + path.basename(face.local), bytes);
       }
       save("fonts/" + font.id + "/OFL.txt", fs.readFileSync(
         path.join(root, "assets/fonts", font.id, "OFL.txt")));

@@ -12,7 +12,7 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 node scripts/create-design-handoff.cjs --config handoff-config.json --out design/handoff --check
 ```
 
-CLI는 오프라인으로 선택한 SVG, WOFF2 폰트와 라이선스 파일까지 함께 저장합니다. 설명: [design.md](design.md), [에이전트 워크플로](docs/AGENT-WORKFLOW.md), [작업지시 템플릿](agents/APPLY-HANDOFF.md). 특정 제품의 UI 컴포넌트를 강제로 교체하지 않습니다.
+CLI는 오프라인으로 선택한 SVG, WOFF2 폰트와 라이선스 파일까지 함께 저장하고, WOFF2 SHA-256과 [프로필·설정 JSON Schema](data/handoff-profile.schema.json)를 검증할 수 있도록 포함합니다. 설명: [design.md](design.md), [에이전트 워크플로](docs/AGENT-WORKFLOW.md), [작업지시 템플릿](agents/APPLY-HANDOFF.md). 특정 제품의 UI 컴포넌트를 강제로 교체하지 않습니다.
 
 **React 프로젝트:** [packages/icons-react](packages/icons-react)에서 95개 아이콘의 typed ESM 모듈·tree-shaking·SSR·접근성을 지원합니다. 프로젝트에서 직접 `npm install`/`npm test`/`npm pack`한 tarball을 사용하세요. npm 레지스트리에 배포된 패키지가 아닙니다.
 

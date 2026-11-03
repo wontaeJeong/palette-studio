@@ -22,6 +22,8 @@ Or use flags:
 node scripts/create-design-handoff.cjs --project 'Example Admin' --palette slate-blue --style operational --target existing-app --scope dark-only --layout existing --framework react --font-source local-only --out ./design/handoff
 ```
 
+The CLI also exports `handoff-config.json` and two versioned JSON Schemas (`handoff-config.schema.json`, `design-profile.schema.json`) for editor/agent validation. Local WOFF2 contents are checked against the catalog SHA-256 before copying.
+
 The CLI does not need npm, a network connection, credentials or API keys. It produces design-profile.json, a **project-specific** design.md, semantic CSS scoped to the selected modes, optional style CSS, font CSS, selected font WOFF2 binaries with OFL notices, selected SVG originals with Lucide license, AGENT-TASK.md and QA-CHECKLIST.md. The `--check` command detects drift without writing.
 
 Only the selected fonts and SVGs are copied. The code generator is deterministic; there is no random design injection or dependency on the latest web trend.
@@ -71,5 +73,5 @@ When a product cannot follow a chosen style due to its existing constraints, rec
 - Original `START-HERE.html` and its offline bundler remain unchanged.
 - `handoff.html` is another offline standalone page with the same palette catalogue.
 - `data/handoff-core.js` is used by both the browser and CLI to avoid inconsistent outputs.
-- Project handoff uses `data/profile.schema.json` as a compatible schema; unknown extension fields are allowed, so old profile consumers retain palette/style/scope.
+- Project handoff uses dedicated `data/handoff-config.schema.json` and `data/handoff-profile.schema.json` contracts; generated profiles preserve legacy palette/style/scope fields while adding explicit layout/framework/icon metadata.
 - `npm pack` is local only. No publishing or login is performed.

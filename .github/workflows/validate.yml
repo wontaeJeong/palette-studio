@@ -23,6 +23,7 @@ jobs:
           node --check handoff.js
           node --check data/handoff-core.js
           node scripts/build-icons-react.mjs --check
+          node scripts/check-handoff-schemas.cjs
           node scripts/test-design-handoff.cjs
           node scripts/check-icons.cjs
           python3 scripts/vendor_fonts.py

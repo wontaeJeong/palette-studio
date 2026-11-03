@@ -62,4 +62,4 @@ jobs:
       - name: Verify React build, SSR, a11y and tree-shaking
         run: npm test --prefix packages/icons-react
       - name: Verify distributable tarball
-        run: npm pack --dry-run --prefix packages/icons-react
+        run: npm pack ./packages/icons-react --dry-run

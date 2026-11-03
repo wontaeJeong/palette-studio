@@ -19,7 +19,7 @@
   const initial = core.defaults(catalog, fonts, icons);
   const primary = {
     palette: main.palette || initial.palette, style: main.style || initial.style,
-    target: main.target || initial.target, scope: main.scope || initial.scope,
+    target: main.target === "existing-gate" ? "existing-app" : (main.target || initial.target), scope: main.scope || initial.scope,
     fonts: { body: main.bodyFont || initial.fonts.body,
       code: main.codeFont || initial.fonts.code,
       source: main.fontSource || initial.fonts.source },
@@ -91,7 +91,7 @@
     try { localStorage.setItem("palette-studio-handoff-v1", JSON.stringify(config)); }
     catch (_) {}
     const params = new URLSearchParams();
-    for (const key of ["palette", "style", "layout", "target", "scope", "framework"]) {
+    for (const key of ["palette", "style", "layout", "target", "scope", "framework", "project"]) {
       params.set(key, config[key]);
     }
     params.set("bodyFont", config.fonts.body);

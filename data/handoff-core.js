@@ -17,14 +17,12 @@
   var targets = ["new-app", "existing-app"];
   var fontSources = ["cdn-first", "local-only", "system"];
   var iconPresets = {
-    existing: ["home", "search", "settings", "circle-check"],
+    existing: ["house", "search", "settings", "circle-check"],
     dashboard: ["layout-dashboard", "search", "plus", "settings", "circle-check", "triangle-alert"],
     content: ["book-open", "file-text", "search", "bookmark", "external-link"],
     workflow: ["check", "circle-alert", "chevron-right", "upload", "clock"],
     marketing: ["arrow-right", "check", "sparkles", "external-link"]
   };
-  // The original Lucide catalog uses "house", not "home".
-  iconPresets.existing[0] = "house";
   function check(value, available, field) {
     if (!available.includes(value)) throw Error("Invalid " + field + ": " + value);
     return value;
@@ -77,6 +75,8 @@
         return f.role === role;
       }).map(function (f) { return f.id; })), role + " font");
     });
+    // System-only means effective font roles are system, even if a stale config lists another family.
+    if (result.fonts.source === "system") { result.fonts.body = "system"; result.fonts.code = "system"; }
     if (!Array.isArray(result.icons) || result.icons.length > 24)
       throw Error("Choose at most 24 icons");
     result.icons = Array.from(new Set(result.icons.map(String)));

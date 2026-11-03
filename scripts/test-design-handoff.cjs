@@ -20,6 +20,8 @@ const testCases = [
   {target:"new-app",scope:"both",layout:"dashboard",fonts:{body:"pretendard",code:"d2coding",source:"local-only"},icons:["shield-check"]},
 ];
 assert.equal(catalog.palettes.length,32);
+assert.deepEqual(core.normalize({fonts:{source:"system",body:"pretendard",code:"d2coding"}},catalog,fonts,icons).fonts,
+  {body:"system",code:"system",source:"system"});
 assert.equal(icons.length,95);
 assert.throws(() => core.normalize({palette:"not-a-palette"},catalog,fonts,icons),/Invalid palette/);
 assert.throws(() => core.normalize({icons:["../../../secret"]},catalog,fonts,icons),/Invalid icon/);

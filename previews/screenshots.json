@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "engine": "Chromium (Playwright)",
+  "browserVersion": "151.0.7922.34",
+  "deviceScaleFactor": 1,
+  "network": "offline",
+  "sourceFiles": [
+    "index.html",
+    "app.js",
+    "css/studio.css",
+    "css/foundation.css",
+    "css/styles.css",
+    "css/utilities.css",
+    "css/palettes.css",
+    "font-loader.js",
+    "data/catalog.js",
+    "data/font-catalog.js",
+    "data/fonts.json",
+    "icons.html",
+    "icons.js",
+    "css/icon-studio.css",
+    "handoff.html",
+    "handoff.js",
+    "css/handoff.css",
+    "data/handoff-core.js",
+    "scripts/capture-previews.cjs",
+    "data/icon-parts/actions.js",
+    "data/icon-parts/content.js",
+    "data/icon-parts/data.js",
+    "data/icon-parts/essentials.js",
+    "data/icon-parts/identity.js",
+    "data/icon-parts/navigation.js",
+    "data/icon-parts/system-extra.js",
+    "data/icon-parts/system.js"
+  ],
+  "sourceHash": "29ed931a95a9cc9f80a328438c9527532e2d431bfc73f385eafb1e0ee0c87c8c",
+  "screenshots": [
+    {
+      "path": "studio-overview-light.png",
+      "width": 1440,
+      "height": 980,
+      "bytes": 136528,
+      "sha256": "690f90cb02cefe38ddaa3a2d9371c8d69b2d018f2c8703c469940d85a922df26"
+    },
+    {
+      "path": "studio-overview-dark.png",
+      "width": 1440,
+      "height": 980,
+      "bytes": 137839,
+      "sha256": "f112591e92827088b57dd6dff1a0591ebb0265861efb7df1c8a490faa8afd625"
+    },
+    {
+      "path": "studio-fonts-desktop.png",
+      "width": 1440,
+      "height": 980,
+      "bytes": 132580,
+      "sha256": "4b98454f5f450a29941515c5be82cd51f7c3d04f7dc02605f008a18f9ef3457d"
+    },
+    {
+      "path": "studio-mobile-light.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 59984,
+      "sha256": "bec81bb640c86325e16b81a454b4f4f8646c5bb0939db1cbbd197c49583c3519"
+    },
+    {
+      "path": "studio-mobile-dark.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 60244,
+      "sha256": "33b2eae5a9fa4e48e05b90b4b671203140fe775976fdef0d295dae3159fea848"
+    },
+    {
+      "path": "icon-studio-desktop.png",
+      "width": 1460,
+      "height": 990,
+      "bytes": 155565,
+      "sha256": "5376b7e96c182047002878d6b422c256c7410fca3e8650f96e46b01e081b19be"
+    },
+    {
+      "path": "icon-studio-dark.png",
+      "width": 1460,
+      "height": 990,
+      "bytes": 132030,
+      "sha256": "04a9f9af530691c1c3b352f9d7909a93116c0babbb1597cbac59a71c5c543bee"
+    },
+    {
+      "path": "icon-studio-mobile.png",
+      "width": 390,
+      "height": 2654,
+      "bytes": 140281,
+      "sha256": "17663f43df28ff73023beb152d52a0fd9930d0a2fe81d734cb7a099ca48766d0"
+    },
+    {
+      "path": "agent-handoff-desktop.png",
+      "width": 1460,
+      "height": 990,
+      "bytes": 167774,
+      "sha256": "69d8c36194e090d34f34f8b4e4bd0c496b3f56e20d1aff71df0c615c81ae3563"
+    },
+    {
+      "path": "agent-handoff-dark.png",
+      "width": 1460,
+      "height": 990,
+      "bytes": 154533,
+      "sha256": "42285dd606165cbc9aeff54f380a7374f56ccb0d2951a15c33d1e12fb0cb7aa5"
+    },
+    {
+      "path": "agent-handoff-mobile.png",
+      "width": 390,
+      "height": 3529,
+      "bytes": 208873,
+      "sha256": "2e09dae8d09c33e5c13861021cd16789f4987569df8093ccbbec906f7df1f965"
+    }
+  ]
+}

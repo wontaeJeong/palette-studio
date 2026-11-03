@@ -1,0 +1,44 @@
+{
+  "name": "@palette-studio/icons-react",
+  "version": "0.1.0",
+  "description": "Tree-shakeable theme-aware React SVG icons generated from pinned Lucide originals",
+  "type": "module",
+  "license": "SEE LICENSE",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "LICENSE-LUCIDE.txt"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js"
+    }
+  },
+  "scripts": {
+    "generate": "node ../../scripts/build-icons-react.mjs",
+    "build": "npm run generate && tsc --project tsconfig.json",
+    "check": "node ../../scripts/build-icons-react.mjs --check",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "packcheck": "npm pack --dry-run"
+  },
+  "peerDependencies": {
+    "react": ">=18 <20"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "typescript": "5.9.3",
+    "esbuild": "0.25.12"
+  }
+}

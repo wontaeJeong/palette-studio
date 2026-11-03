@@ -17,3 +17,6 @@
 - 앱 예시는 업종에 종속되지 않는 프로젝트 UI로 유지한다. 새 선택의 기본은 새 앱 / 라이트+다크다.
 - 다운로드는 확인·내보내기 단계에만 둔다. 선택 중 미리보기를 유지하고 본문·코드 폰트의 역할별 목록을 합치지 않는다.
 - 흐름 변경은 `scripts/check-studio-flow.cjs`, 폰트 변경은 `scripts/check-fonts.cjs`에서 실제 브라우저로 확인한다.
+
+- 아이콘은 `assets/icons/`의 Lucide SVG를 재사용하고 `docs/ICON-KIT.md`의 currentColor·라이선스 규칙을 따른다. 브랜드 로고처럼 취급하지 않는다.
+- `icons.html`은 독립 실행 브라우저이며, 본문·폰트·팔레트 선택 화면의 `START-HERE.html` 생성 결과를 임의로 깨뜨리지 않는다.

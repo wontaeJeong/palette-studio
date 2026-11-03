@@ -28,3 +28,9 @@ Original kit code and documentation are MIT licensed. The following unchanged fo
 | Geist Mono | 5.3.0 (package) | `assets/fonts/geist-mono/OFL.txt` | https://github.com/vercel/geist-font |
 | Inconsolata | 5.3.0 (package) | `assets/fonts/inconsolata/OFL.txt` | https://github.com/googlefonts/Inconsolata |
 | Space Mono | 5.3.0 (package) | `assets/fonts/space-mono/OFL.txt` | https://github.com/googlefonts/spacemono |
+
+## Third-party SVG icons
+
+- Lucide Icons, pinned source commit `4b203ec9b6002fd74fd5dadc8612220e64289305`; ISC License, with Feather-derived icons under MIT.
+- 95 selected original SVGs and full license including Feather attribution: `assets/icons/LICENSE-LUCIDE.txt`.
+- Source: https://github.com/lucide-icons/lucide

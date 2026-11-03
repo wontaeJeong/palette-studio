@@ -126,17 +126,21 @@
   }
   function codeExample(icon) {
     var svg = svgSource(icon, state.size, state.stroke, false);
-    var token = state.variant === "outline" ? "--color-ink" : "--color-accent";
+    var token = state.variant === "outline" ? "--color-ink" :
+      state.variant === "duotone" ? "--color-ink-muted" :
+      state.variant === "filled" ? "--color-on-accent" : "--color-accent";
     if (state.codeKind === "html") {
-      return '<span style="color: var(' + token + '); display:inline-flex">\n  ' +
+      return '<span style="' + (state.variant === "filled" ?
+        "background:var(--color-accent);color:var(--color-on-accent);padding:8px;border-radius:8px;" :
+        "color:var(" + token + ");") + 'display:inline-flex">\n  ' +
         svg + "\n</span>\n<!-- SVG is inline, so currentColor is inherited. -->";
     }
     if (state.codeKind === "css") {
       return ".app-icon { color: var(--color-ink); width: " + state.size +
         "px; height: " + state.size + "px; }\n" +
         ".app-icon--accent { color: var(--color-accent); }\n" +
-        ".app-icon--duotone > :nth-child(even) { stroke: var(--color-accent); }\n" +
-        ".app-icon-tile { background: var(--color-accent); color: var(--color-on-accent); }\n" +
+        ".icon-duotone svg > :nth-child(even) { stroke: var(--color-accent); }\n" +
+        ".icon-tile { display:inline-flex; padding:8px; border-radius:8px; background:var(--color-accent); color:var(--color-on-accent); }\n" +
         "/* Inline SVG must use stroke='currentColor'. */";
     }
     var comp = componentName(icon.name);

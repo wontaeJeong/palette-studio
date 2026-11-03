@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Palette Studio agent implementation profile",
+  "description": "Machine-readable locked design selection; compatible with legacy palette/style/target/scope fields.",
+  "type": "object",
+  "required": [
+    "profileVersion",
+    "kitVersion",
+    "project",
+    "palette",
+    "style",
+    "target",
+    "scope",
+    "layout",
+    "framework",
+    "fonts",
+    "icons",
+    "tokenPolicy"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "profileVersion": {
+      "const": "2.0.0"
+    },
+    "kitVersion": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[^<>\\\\n]{1,64}$"
+    },
+    "palette": {
+      "type": "string",
+      "enum": [
+        "graphite-plum",
+        "slate-indigo",
+        "slate-blue",
+        "navy-cyan",
+        "zinc-violet",
+        "gray-sky",
+        "slate-teal",
+        "stone-emerald",
+        "forest-mint",
+        "warm-sage",
+        "stone-olive",
+        "slate-lime",
+        "sand-amber",
+        "stone-orange",
+        "cream-terracotta",
+        "sand-copper",
+        "zinc-rose",
+        "charcoal-ruby",
+        "warm-burgundy",
+        "pearl-lavender",
+        "graphite-indigo-reference",
+        "slate-steel",
+        "slate-slate",
+        "zinc-zinc",
+        "stone-sand",
+        "neutral-monochrome",
+        "navy-blue",
+        "charcoal-gold",
+        "warm-coral",
+        "slate-turquoise",
+        "paper-ink",
+        "midnight-periwinkle"
+      ]
+    },
+    "style": {
+      "type": "string",
+      "enum": [
+        "operational",
+        "soft",
+        "outline",
+        "editorial",
+        "compact",
+        "contrast"
+      ]
+    },
+    "target": {
+      "enum": [
+        "new-app",
+        "existing-app"
+      ]
+    },
+    "scope": {
+      "enum": [
+        "both",
+        "dark-only",
+        "light-only"
+      ]
+    },
+    "layout": {
+      "enum": [
+        "existing",
+        "dashboard",
+        "content",
+        "workflow",
+        "marketing"
+      ]
+    },
+    "framework": {
+      "enum": [
+        "react",
+        "vanilla",
+        "astro"
+      ]
+    },
+    "fonts": {
+      "type": "object",
+      "required": [
+        "body",
+        "code",
+        "source"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "body": {
+          "enum": [
+            "system",
+            "pretendard",
+            "suit",
+            "noto-sans-kr",
+            "ibm-plex-sans-kr",
+            "gothic-a1",
+            "nanum-gothic",
+            "spoqa-han-sans-neo",
+            "wanted-sans",
+            "noto-serif-kr",
+            "inter",
+            "geist",
+            "roboto",
+            "ibm-plex-sans",
+            "source-sans-3",
+            "source-serif-4"
+          ]
+        },
+        "code": {
+          "enum": [
+            "system",
+            "d2coding",
+            "jetbrains-mono",
+            "fira-code",
+            "ibm-plex-mono",
+            "source-code-pro",
+            "roboto-mono",
+            "geist-mono",
+            "inconsolata",
+            "space-mono"
+          ]
+        },
+        "source": {
+          "enum": [
+            "cdn-first",
+            "local-only",
+            "system"
+          ]
+        }
+      }
+    },
+    "icons": {
+      "type": "object",
+      "required": [
+        "names",
+        "source",
+        "strategy"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "names": {
+          "type": "array",
+          "maxItems": 24,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "activity",
+              "archive",
+              "arrow-left",
+              "arrow-right",
+              "bell",
+              "binary",
+              "book-open",
+              "bookmark",
+              "bot",
+              "boxes",
+              "calendar",
+              "chart-line",
+              "chart-no-axes-column",
+              "chart-pie",
+              "check",
+              "chevron-down",
+              "chevron-left",
+              "chevron-right",
+              "circle-alert",
+              "circle-check",
+              "circle-question-mark",
+              "circle-x",
+              "clipboard",
+              "clipboard-check",
+              "clock",
+              "cloud",
+              "cloud-upload",
+              "code",
+              "compass",
+              "copy",
+              "cpu",
+              "database",
+              "download",
+              "ellipsis",
+              "external-link",
+              "eye",
+              "eye-off",
+              "file",
+              "file-text",
+              "folder",
+              "folder-open",
+              "git-branch",
+              "git-pull-request",
+              "hard-drive",
+              "house",
+              "image",
+              "info",
+              "key-round",
+              "layers",
+              "layout-dashboard",
+              "layout-grid",
+              "link-2",
+              "list",
+              "list-filter",
+              "loader-circle",
+              "lock",
+              "lock-open",
+              "log-in",
+              "log-out",
+              "menu",
+              "minus",
+              "monitor",
+              "moon",
+              "network",
+              "panel-left",
+              "pencil",
+              "plus",
+              "refresh-cw",
+              "rotate-ccw",
+              "save",
+              "scan",
+              "search",
+              "server",
+              "settings",
+              "share-2",
+              "shield",
+              "shield-check",
+              "sliders-horizontal",
+              "sparkles",
+              "sun",
+              "table",
+              "tag",
+              "terminal",
+              "trash",
+              "trending-up",
+              "triangle-alert",
+              "upload",
+              "user",
+              "user-plus",
+              "user-round",
+              "users",
+              "wifi",
+              "workflow",
+              "x",
+              "zap"
+            ]
+          }
+        },
+        "source": {
+          "const": "palette-studio/assets/icons"
+        },
+        "strategy": {
+          "const": "static-import"
+        }
+      }
+    },
+    "tokenPolicy": {
+      "const": "literal-hex-no-color-aliases"
+    },
+    "fontScope": {
+      "const": "global"
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewScreens": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "selectedStyle": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

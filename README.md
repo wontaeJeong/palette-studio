@@ -20,6 +20,22 @@ CLI는 오프라인으로 선택한 SVG, WOFF2 폰트와 라이선스 파일까�
 
 **[icons.html](icons.html)** — 95개 Lucide SVG 아이콘을 팔레트 32종의 Light/Dark에서 비교합니다. 이름·한국어 검색, Outline/Accent/Duotone/Filled tile 표현, 크기·두께 조절 및 SVG 복사·다운로드가 가능합니다. 개별 원본은 `assets/icons/`, 통합 가이드는 [docs/ICON-KIT.md](docs/ICON-KIT.md)입니다.
 
+## 최신 UI 화면 (실제 Chromium 캡처)
+
+스크린샷은 리포지토리의 **현재** `index.html`, `icons.html`, `handoff.html`을 오프라인 Chromium에서 실행해 생성합니다. 테마 변경, 모바일 레이아웃과 아이콘 상세를 포함합니다.
+
+| Palette Studio · Light | Palette Studio · Dark |
+|---|---|
+| ![팔레트 선택 화면 라이트](previews/studio-overview-light.png) | ![팔레트 선택 화면 다크](previews/studio-overview-dark.png) |
+
+| Icon Studio · Light + Dark | Agent Handoff · Light + Dark |
+|---|---|
+| ![테마에 따라 색이 바뀌는 SVG 아이콘 화면](previews/icon-studio-desktop.png) | ![에이전트 디자인 핸드오프 설정 화면](previews/agent-handoff-desktop.png) |
+
+모바일 화면: [Palette Studio](previews/studio-mobile-light.png) · [Icon Studio](previews/icon-studio-mobile.png) · [Agent Handoff](previews/agent-handoff-mobile.png). 추가 캡처: [폰트 선택](previews/studio-fonts-desktop.png), [아이콘 다크](previews/icon-studio-dark.png), [핸드오프 다크](previews/agent-handoff-dark.png).
+
+캡처 갱신 방법은 [previews/README.md](previews/README.md)를 참고하세요. `scripts/check-screenshot-freshness.cjs`는 UI 소스와 스크린샷 매니페스트가 일치하는지 검사합니다.
+
 ## 먼저 열 파일
 
 **`START-HERE.html`을 브라우저에서 여세요.** 기본은 CDN 우선이며 차단·오프라인일 때 내장 폰트로 폴백합니다. 서버나 설치 없이 사용할 수 있습니다. 폴더를 분리해도 이 HTML 하나로 팔레트 선택·비교·검색·내보내기가 동작합니다. iOS 파일 미리보기에서 스크립트가 제한되면 데스크톱 브라우저로 여세요.
@@ -139,6 +155,6 @@ python3 scripts/render_boards.py
 - 데스크톱 sticky 미리보기 / 모바일 하단 고정·확대 미리보기.
 - 본문·코드 폰트의 분리된 검색·목록·선택 상태, 스타일 카드와 검색 결과 없음 안내.
 
-![공통 선택 화면](previews/studio-common-overview.png)
+![최신 공통 선택 화면](previews/studio-overview-light.png)
 
 검사: `node scripts/browser-check.cjs` 또는 `node scripts/check-studio-flow.cjs`. CDN·동봉 폰트 검사는 `node scripts/check-fonts.cjs`입니다.

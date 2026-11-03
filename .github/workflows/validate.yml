@@ -26,6 +26,7 @@ jobs:
           node scripts/check-handoff-schemas.cjs
           node scripts/test-design-handoff.cjs
           node scripts/check-icons.cjs
+          node scripts/check-screenshot-freshness.cjs
           python3 scripts/vendor_fonts.py
           python3 scripts/audit-fonts.py
           python3 scripts/build.py

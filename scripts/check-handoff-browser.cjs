@@ -37,4 +37,6 @@ const assert = require("node:assert/strict");
   console.log(JSON.stringify({palettes:32,modeContrast:true,selectedScope:"dark-only",
     exported:true,smallViewport:true,jsErrors:0,pass:true}));
   await browser.close();
+  // Exercise the catalog-to-handoff journey through the existing CI browser entry point.
+  require('./check-catalog-browser.cjs');
 })().catch((e)=>{console.error(e);process.exitCode=1});

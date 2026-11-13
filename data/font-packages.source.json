@@ -75,7 +75,7 @@
     "role": "body",
     "group": "ko-sans",
     "korean": true,
-    "purpose": "차분한 서비스 UI·일반 본문",
+    "purpose": "서비스 UI·일반 본문",
     "upstream": "https://github.com/spoqa/spoqa-han-sans",
     "cssFiles": [
       "css/SpoqaHanSansNeo.css"
@@ -188,7 +188,7 @@
     "role": "body",
     "group": "latin-sans",
     "korean": false,
-    "purpose": "문서·도움말·차분한 영문 본문",
+    "purpose": "문서·도움말·영문 본문",
     "upstream": "https://github.com/adobe-fonts/source-sans",
     "cssFiles": [
       "index.css"

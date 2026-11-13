@@ -17,17 +17,38 @@ const { pathToFileURL } = require("node:url");
     await page.goto(url);
     assert.equal(await page.locator("[data-set]").count(), 6);
     assert.equal(await page.locator("[data-component]").count(), 18);
-    await page.locator('[data-set="precision"]').click();
-    assert.equal(
-      await page.evaluate(() => document.activeElement.dataset.set),
-      "precision",
+    assert.equal(await page.locator("h1").innerText(), "디자인 도감");
+    assert(
+      await page
+        .locator("#catalog-search")
+        .evaluate((el) => el.getBoundingClientRect().top < innerHeight),
     );
+    await page.locator('[data-set="precision"]').click();
+    await page.locator("#recommended-only").check();
+    assert.equal(await page.locator("[data-component]").count(), 6);
+    assert.equal(
+      await page
+        .locator('#catalog-palette optgroup[label="권장 팔레트"] option')
+        .count(),
+      3,
+    );
+    assert(
+      (await page.locator("#recommendation-reason").innerText()).includes(
+        "입력",
+      ),
+    );
+    await page.locator("#recommended-only").uncheck();
+
     assert.equal(await page.locator("#catalog-style").inputValue(), "outline");
     await page.fill("#catalog-search", "잠깐");
     assert.equal(await page.locator("[data-component]").count(), 1);
     await page.locator('[data-component="toast"]').click();
     await page.locator('#component-dialog [data-variant="solid"]').click();
-    await page.locator('#component-dialog [data-demo="toast"]').click();
+    await page
+      .locator(
+        '#component-dialog .preview-pane[data-theme="light"] [data-demo="toast"]',
+      )
+      .click();
     assert(await page.locator("#demo-toast").isVisible());
     await page.locator("#dismiss-toast").click({ timeout: 2000 });
     assert(!(await page.locator("#demo-toast").isVisible()));
@@ -48,7 +69,11 @@ const { pathToFileURL } = require("node:url");
     assert.equal(await page.locator("[data-component]").count(), 3);
     await page.locator('[data-component="dialog"]').click();
     await page.locator('#component-dialog [data-variant="solid"]').click();
-    await page.locator('#component-dialog [data-demo="dialog"]').click();
+    await page
+      .locator(
+        '#component-dialog .preview-pane[data-theme="light"] [data-demo="dialog"]',
+      )
+      .click();
     assert.equal(
       await page.locator("#demo-dialog").getAttribute("data-treatment"),
       "solid",
@@ -65,7 +90,46 @@ const { pathToFileURL } = require("node:url");
     await page.keyboard.press("Escape");
     await page.keyboard.press("Escape");
     await page.selectOption("#catalog-category", "all");
-    await page.selectOption("#catalog-theme", "dark");
+    const designBeforeTheme = await page.evaluate(() =>
+      PaletteCatalog.getConfig(),
+    );
+    await page.click("#ui-theme");
+    assert.deepEqual(
+      await page.evaluate(() => PaletteCatalog.getConfig()),
+      designBeforeTheme,
+    );
+    assert.equal(
+      await page
+        .locator('[data-component="button"]')
+        .evaluate(
+          (el) =>
+            el.closest("article").querySelectorAll(".preview-pane").length,
+        ),
+      2,
+    );
+    await page.selectOption("#catalog-navigation", "hybrid");
+    assert.equal(
+      await page.locator("#navigation-preview .shell-side").count(),
+      2,
+    );
+    await page.selectOption("#catalog-motion", "extended");
+    await page
+      .locator('[data-motion-play="slide"][data-motion-mode="light"]')
+      .click();
+    assert.equal(
+      await page
+        .locator("#motion-light-slide")
+        .evaluate((el) => getComputedStyle(el).animationName),
+      "ps-enter-slide",
+    );
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    assert.equal(
+      await page
+        .locator("#motion-light-slide")
+        .evaluate((el) => getComputedStyle(el).animationName),
+      "none",
+    );
+    await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.selectOption("#catalog-palette", "warm-sage");
     assert.equal(
       (await page.evaluate(() => PaletteCatalog.getConfig())).designSelection
@@ -202,22 +266,28 @@ const { pathToFileURL } = require("node:url");
         .click();
       switchColors.push(
         await page
-          .locator("#component-dialog .sample-switch")
+          .locator(
+            '#component-dialog .preview-pane[data-theme="light"] .sample-switch',
+          )
           .evaluate((el) => getComputedStyle(el).backgroundColor),
       );
     }
     assert.equal(new Set(switchColors).size, 3);
     assert(
       await page
-        .locator("#component-dialog .sample-switch")
+        .locator(
+          '#component-dialog .preview-pane[data-theme="light"] .sample-switch',
+        )
         .evaluate((el) => el.getBoundingClientRect().width >= 40),
     );
     await page.keyboard.press("Escape");
     await page.locator('[data-component="accordion"]').click();
-    await page.locator("#component-dialog summary").click();
+    await page.locator("#component-dialog summary").first().click();
     assert(
-      (await page.locator("#component-dialog details").getAttribute("open")) !==
-        null,
+      (await page
+        .locator("#component-dialog details")
+        .first()
+        .getAttribute("open")) !== null,
     );
     await page.keyboard.press("Escape");
     assert.deepEqual(errors, []);

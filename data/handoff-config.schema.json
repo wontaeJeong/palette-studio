@@ -405,6 +405,21 @@
               ]
             }
           }
+        },
+        "motion": {
+          "enum": [
+            "none",
+            "quick",
+            "standard",
+            "extended"
+          ]
+        },
+        "navigation": {
+          "enum": [
+            "top",
+            "left",
+            "hybrid"
+          ]
         }
       }
     }

@@ -1,20 +1,28 @@
 /* One offline catalog for the browser, CLI and generated implementation briefs. */
 (function (root, factory) {
-  if (typeof module === "object" && module.exports) module.exports = factory();
-  else root.PaletteDesignCatalog = factory();
-})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+  if (typeof module === "object" && module.exports)
+    module.exports = factory(require("./ui-presets.js"));
+  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets);
+})(typeof globalThis !== "undefined" ? globalThis : this, function (ui) {
   "use strict";
+  const {
+    navigationPresets,
+    motionPresets,
+    navigationBrief,
+    motionBrief,
+    motionCSS,
+  } = ui;
   const treatments = {
     soft: {
-      name: "은은한 면",
+      name: "기본 배경",
       rule: "Use --color-raised background, --color-ink text and --color-line border; reserve accent for the primary action.",
     },
     outline: {
-      name: "선으로 또렷하게",
+      name: "윤곽선",
       rule: "Use --color-canvas background, --color-ink text and --color-line-strong 1px border; no shadow.",
     },
     solid: {
-      name: "강조색으로 선명하게",
+      name: "강조색",
       rule: "Use --color-accent background and --color-on-accent text for the leading control or header, with neutral content surfaces. Keep warning/error semantic colors.",
     },
   };
@@ -197,61 +205,150 @@
   const sets = [
     {
       id: "studio",
-      name: "차분한 스튜디오",
-      tag: "균형 잡힌 기본",
-      description:
-        "보라 포인트와 단정한 윤곽. 업무 도구부터 개인 프로젝트까지.",
+      name: "기본 프로젝트",
+      tag: "기본형",
+      description: "플럼 · 반경 8px · 간격 16px",
       palette: "graphite-plum",
       style: "operational",
       variant: "soft",
+      recommendedPalettes: ["graphite-plum", "slate-indigo", "slate-teal"],
+      recommendedComponents: [
+        "button",
+        "card",
+        "tabs",
+        "menu",
+        "toast",
+        "empty",
+      ],
+      recommendationReason:
+        "프로젝트 목록과 상세 전환을 위한 카드·탭·메뉴와 작업 결과 알림을 권장합니다.",
+      componentOverrides: {
+        button: "solid",
+        badge: "outline",
+      },
+      defaultMotion: "standard",
     },
     {
       id: "bloom",
-      name: "부드러운 라운지",
-      tag: "편안하고 친근하게",
-      description: "라벤더와 넉넉한 여백. 일상 서비스와 커뮤니티에.",
+      name: "설정·개인화",
+      tag: "카드형",
+      description: "라벤더 · 카드 반경 16px · 간격 20px",
       palette: "pearl-lavender",
       style: "soft",
       variant: "soft",
+      recommendedPalettes: ["pearl-lavender", "warm-sage", "zinc-rose"],
+      recommendedComponents: ["input", "switch", "checkbox", "card", "toast"],
+      recommendationReason:
+        "설정 값 입력, 알림 켜기·끄기, 다중 선택과 저장 결과 안내를 권장합니다.",
+      componentOverrides: {
+        button: "solid",
+        switch: "solid",
+      },
+      defaultMotion: "standard",
     },
     {
       id: "precision",
-      name: "명료한 워크스페이스",
-      tag: "선명한 정보 위계",
-      description: "블루 포인트와 또렷한 선. 복잡한 입력과 승인 작업에.",
+      name: "입력·승인",
+      tag: "윤곽선형",
+      description: "블루 · 반경 4px · 1px 경계",
       palette: "slate-blue",
       style: "outline",
       variant: "outline",
+      recommendedPalettes: ["slate-blue", "slate-steel", "slate-indigo"],
+      recommendedComponents: [
+        "input",
+        "select",
+        "checkbox",
+        "dialog",
+        "alert",
+        "button",
+      ],
+      recommendationReason:
+        "입력·선택·동의 항목과 제출 전 확인창, 검증 안내를 권장합니다.",
+      componentOverrides: {
+        button: "solid",
+        alert: "soft",
+      },
+      defaultMotion: "quick",
     },
     {
       id: "editorial",
-      name: "종이 위의 이야기",
-      tag: "읽는 경험에 집중",
-      description: "종이 톤과 절제된 면. 문서와 콘텐츠 서비스에.",
+      name: "문서·콘텐츠",
+      tag: "문서형",
+      description: "페이퍼 · 본문 15px · 행간 1.8",
       palette: "paper-ink",
       style: "editorial",
       variant: "outline",
+      recommendedPalettes: ["paper-ink", "stone-sand", "neutral-monochrome"],
+      recommendedComponents: [
+        "breadcrumb",
+        "tabs",
+        "accordion",
+        "tooltip",
+        "empty",
+      ],
+      recommendationReason:
+        "문서 위치 경로, 섹션 탭, 접기·펼치기와 용어 도움말을 권장합니다.",
+      componentOverrides: {
+        badge: "soft",
+      },
+      defaultMotion: "none",
     },
     {
       id: "console",
-      name: "집중하는 콘솔",
-      tag: "촘촘하고 효율적으로",
-      description: "시안 포인트와 작은 간격. 운영 화면과 개발 도구에.",
+      name: "운영·데이터",
+      tag: "고밀도형",
+      description: "시안 · 컨트롤 32px · 간격 12px",
       palette: "navy-cyan",
       style: "compact",
       variant: "soft",
+      recommendedPalettes: ["navy-cyan", "midnight-periwinkle", "slate-slate"],
+      recommendedComponents: [
+        "tabs",
+        "menu",
+        "pagination",
+        "toast",
+        "alert",
+        "badge",
+      ],
+      recommendationReason:
+        "데이터 탐색을 위한 탭·메뉴·페이지 이동과 운영 상태·오류 안내를 권장합니다.",
+      componentOverrides: {
+        button: "outline",
+        badge: "outline",
+        alert: "outline",
+      },
+      defaultMotion: "quick",
     },
     {
       id: "signal",
-      name: "분명한 시그널",
-      tag: "중요한 행동을 강조",
-      description: "에메랄드와 명확한 경계. 주요 행동이 잘 보이는 서비스에.",
+      name: "상태·알림",
+      tag: "경계 강조형",
+      description: "에메랄드 · 2px 경계 · 간격 16px",
       palette: "stone-emerald",
       style: "contrast",
       variant: "solid",
+      recommendedPalettes: ["stone-emerald", "charcoal-ruby", "sand-amber"],
+      recommendedComponents: ["button", "dialog", "alert", "badge", "toast"],
+      recommendationReason:
+        "상태 표시, 오류 안내, 작업 결과 알림과 주요 동작 확인창을 권장합니다.",
+      componentOverrides: {
+        dialog: "outline",
+        input: "outline",
+        card: "soft",
+      },
+      defaultMotion: "standard",
     },
   ].map((set) => ({
     ...set,
+    defaultNavigation: {
+      studio: "left",
+      bloom: "top",
+      precision: "left",
+      editorial: "left",
+      console: "hybrid",
+      signal: "top",
+    }[set.id],
     config: {
       palette: set.palette,
       style: set.style,
@@ -263,8 +360,13 @@
     if (!set) throw Error("Invalid design selection set: " + id);
     return {
       set: id,
+      motion: set.defaultMotion,
+      navigation: set.defaultNavigation,
       components: Object.fromEntries(
-        components.map((c) => [c.id, set.variant]),
+        components.map((c) => [
+          c.id,
+          set.componentOverrides[c.id] || set.variant,
+        ]),
       ),
     };
   }
@@ -272,6 +374,16 @@
     if (!input || typeof input !== "object" || Array.isArray(input))
       throw Error("Invalid design selection");
     const result = selection(input.set);
+    if (input.motion !== undefined) {
+      if (!motionPresets.some((m) => m.id === input.motion))
+        throw Error("Invalid design selection motion");
+      result.motion = input.motion;
+    }
+    if (input.navigation !== undefined) {
+      if (!navigationPresets.some((n) => n.id === input.navigation))
+        throw Error("Invalid design selection navigation");
+      result.navigation = input.navigation;
+    }
     const overrides = input.components === undefined ? {} : input.components;
     if (!overrides || typeof overrides !== "object" || Array.isArray(overrides))
       throw Error("Invalid design selection components");
@@ -295,6 +407,15 @@
         " (" +
         set.id +
         "). Palette/style/font overrides in the profile take precedence.",
+      "Recommended palette alternatives: " +
+        set.recommendedPalettes.join(", ") +
+        ". Keep the explicitly selected palette; do not silently replace it.",
+      "Recommended components: " +
+        set.recommendedComponents.join(", ") +
+        ". " +
+        set.recommendationReason,
+      motionBrief(selected.motion),
+      navigationBrief(selected.navigation),
       "Apply the selected style radius, padding, gap and control height from selected-style.css; control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
       "",
       ...components.map(
@@ -317,5 +438,17 @@
       "",
     ].join("\n");
   }
-  return { sets, components, treatments, selection, normalize, brief };
+  return {
+    sets,
+    components,
+    treatments,
+    selection,
+    normalize,
+    brief,
+    navigationPresets,
+    navigationBrief,
+    motionPresets,
+    motionCSS,
+    motionBrief,
+  };
 });

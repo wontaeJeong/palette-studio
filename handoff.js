@@ -63,6 +63,7 @@
     "design-profile.json": JSON.stringify(core.profile(c, catalog), null, 2) + "\n",
     "selected-theme.css": core.themeCSS(c, catalog),
     "selected-style.css": core.styleCSS(c, catalog),
+    "selected-motion.css": core.motionCSS(c),
     "selected-fonts.css": core.fontCSS(c, fonts),
     "AGENT-TASK.md": core.agentTask(c,catalog),
     "QA-CHECKLIST.md": core.checklist(c)

@@ -1,0 +1,43 @@
+/* Application chrome. Palette previews carry independent data-theme attributes. */
+:root {
+  --tool-canvas: #f6f6f8;
+  --tool-raised: #ffffff;
+  --tool-surface: #f2f0f5;
+  --tool-line: #dedee7;
+  --tool-line-strong: #777786;
+  --tool-ink: #25252d;
+  --tool-muted: #626270;
+  --tool-accent: #78469e;
+  --tool-accent-strong: #623680;
+  --tool-accent-soft: #eee6f4;
+  --tool-on-accent: #ffffff;
+}
+:root[data-ui-theme="dark"] {
+  color-scheme: dark;
+  --tool-canvas: #101114;
+  --tool-raised: #1c1d22;
+  --tool-surface: #25252d;
+  --tool-line: #40404d;
+  --tool-line-strong: #9690a0;
+  --tool-ink: #f4f2f6;
+  --tool-muted: #beb9c7;
+  --tool-accent: #d4a1eb;
+  --tool-accent-strong: #eac7f6;
+  --tool-accent-soft: #302338;
+  --tool-on-accent: #24162b;
+}
+[data-ui-theme-toggle] {
+  font: inherit;
+  font-size: 12px;
+  background: var(--tool-raised);
+  color: var(--tool-ink);
+  border: 1px solid var(--tool-line-strong);
+  border-radius: 6px;
+  min-height: 34px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+[data-ui-theme-toggle]:focus-visible {
+  outline: 3px solid var(--tool-accent);
+  outline-offset: 3px;
+}

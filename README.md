@@ -4,6 +4,10 @@
 
 ## 실행
 
+웹: [디자인 도감](https://wontaejeong.github.io/palette-studio/catalog.html) · [팔레트·스타일·폰트](https://wontaejeong.github.io/palette-studio/)
+
+GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다. 업데이트를 머지하면 같은 주소에 반영됩니다.
+
 저장소를 내려받은 뒤 다음 파일을 브라우저에서 엽니다. 미리보기 사용에는 서버나 패키지 설치가 필요하지 않습니다.
 
 | 파일 | 기능 |
@@ -19,13 +23,16 @@
 
 ### 디자인 세트와 컴포넌트 도감
 
-- 6개 세트: 차분한 스튜디오, 부드러운 라운지, 명료한 워크스페이스, 종이 위의 이야기, 집중하는 콘솔, 분명한 시그널.
+- 6개 세트: 기본 프로젝트, 설정·개인화, 입력·승인, 문서·콘텐츠, 운영·데이터, 상태·알림.
 - 세트 선택 시 팔레트·스타일·본문/코드 폰트·컴포넌트 기본 표현을 적용합니다.
 - 18개 요소를 한국어 설명, 정식 이름, 영문 이름, 용도로 검색할 수 있습니다.
 - 입력·피드백·오버레이·탐색·콘텐츠로 분류합니다.
-- 요소별로 은은한 면 / 윤곽선 / 강조색 표현을 선택합니다. 세트를 다시 고르면 개별 표현이 초기화됩니다.
+- 요소별로 기본 배경 / 윤곽선 / 강조색 표현을 선택합니다. 세트를 다시 고르면 개별 표현이 초기화됩니다.
 - 알림, 확인창, 드로어, 입력, 스위치, 체크박스, 탭, 페이지 이동, 접기 등의 동작을 확인할 수 있습니다.
-- Light/Dark, 팔레트, 스타일 변경 시 미리보기에 반영합니다.
+- 모든 프리셋·요소·배치·애니메이션은 Light/Dark를 나란히 표시합니다. 도구 자체의 라이트/다크 설정은 별도로 저장하며 내보내는 프로필에 포함하지 않습니다.
+- 프리셋마다 권장 팔레트 3개와 권장 요소 5~6개, 기본 메뉴 배치·애니메이션·요소별 표현을 지정합니다. 권장 요소만 표시할 수 있으며 전체 목록도 사용할 수 있습니다.
+- 메뉴 배치는 상단 / 좌측 / 상단+좌측 3종입니다. 메뉴 크기와 모바일 드로어 전환 기준을 작업지시에 포함합니다.
+- CSS 애니메이션은 전환 없음(0ms) / 빠른 전환(120ms) / 기본 전환(180ms) / 긴 전환(260ms) 4종입니다. 페이드·이동·확대·펼치기 시연과 CSS 저장을 지원하며 동작 줄이기 설정을 따릅니다.
 - 선택은 로컬 저장소와 URL fragment에 저장합니다. 공유 링크는 같은 키트 파일에 접근할 수 있는 환경에서 선택을 복원합니다.
 - 생성된 작업지시에는 선택 프로필, 범위별 실제 색상 HEX, 스타일 수치, 요소별 표현과 동작 기준을 포함합니다.
 
@@ -64,6 +71,7 @@
 | `design.md` | 프로젝트 디자인 기준과 적용 규칙 |
 | `selected-theme.css` | 선택한 팔레트와 허용된 모드의 색상 토큰 |
 | `selected-style.css` | 반경·간격·높이 등 스타일 변수 |
+| `selected-motion.css` | 선택한 애니메이션과 동작 줄이기 규칙 |
 | `selected-fonts.css` | 본문·코드 폰트와 공급 정책 |
 | `AGENT-TASK.md` | 요소별 선택과 구현 동작을 포함한 작업지시 |
 | `QA-CHECKLIST.md` | 상태·키보드·반응형·테마 검증 항목 |
@@ -81,9 +89,9 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 
 다음 캡처는 현재 HTML을 오프라인 Chromium에서 실행해 생성합니다. 이미지와 UI 소스의 해시는 `previews/screenshots.json`에 기록합니다.
 
-| 디자인 도감 · Light | 디자인 도감 · Dark |
+| 디자인 도감 | 컴포넌트 Light / Dark |
 |---|---|
-| ![세트 선택과 도감 라이트 화면](previews/design-catalog-desktop.png) | ![세트 선택과 도감 다크 화면](previews/design-catalog-dark.png) |
+| ![프리셋 선택과 도감](previews/design-catalog-desktop.png) | ![컴포넌트의 라이트·다크 동시 비교](previews/design-catalog-components.png) |
 
 | 요소 상세 | 모바일 도감 |
 |---|---|
@@ -96,6 +104,8 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 | 아이콘 | 에이전트 핸드오프 |
 |---|---|
 | ![아이콘 검색과 미리보기](previews/icon-studio-desktop.png) | ![핸드오프 설정과 문서 미리보기](previews/agent-handoff-desktop.png) |
+
+[메뉴 배치](previews/design-catalog-layout.png) · [애니메이션](previews/design-catalog-motion.png) · [도구 다크 UI](previews/design-catalog-ui-dark.png)
 
 추가 캡처: [폰트 선택](previews/studio-fonts-desktop.png), [모바일 팔레트](previews/studio-mobile-light.png), [모바일 아이콘](previews/icon-studio-mobile.png), [모바일 핸드오프](previews/agent-handoff-mobile.png).
 

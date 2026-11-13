@@ -8,7 +8,7 @@
       "id": "operational",
       "name": "Operational",
       "label": "운영 콘솔",
-      "description": "작은 라운드, 평평한 카드, 명확한 정보 계층. Gate 기본 추천.",
+      "description": "반경 8px · 카드 반경 10px · 패딩 20px · 간격 16px.",
       "radius": "8px",
       "card": "10px",
       "padding": "20px",
@@ -22,8 +22,8 @@
     {
       "id": "soft",
       "name": "Soft Product",
-      "label": "부드러운 SaaS",
-      "description": "넉넉한 여백과 16px 카드. 채도는 포인트에만 사용.",
+      "label": "카드 반경 16px",
+      "description": "반경 10px · 카드 반경 16px · 패딩 24px · 간격 20px.",
       "radius": "10px",
       "card": "16px",
       "padding": "24px",
@@ -3629,7 +3629,7 @@
       "name": "Warm Stone / Sage",
       "base": "stone",
       "family": "green",
-      "use": "차분한 콘텐츠 · 생산성",
+      "use": "콘텐츠 · 생산성 도구",
       "origin": "new-curated",
       "modes": {
         "light": {
@@ -7157,7 +7157,7 @@
       "name": "Warm Stone / Burgundy",
       "base": "stone",
       "family": "red",
-      "use": "프리미엄 콘텐츠 · 편집",
+      "use": "콘텐츠 · 편집 도구",
       "origin": "new-curated",
       "modes": {
         "light": {
@@ -8725,7 +8725,7 @@
       "name": "Slate / Slate",
       "base": "slate",
       "family": "neutral",
-      "use": "절제된 관리자 · 인프라",
+      "use": "관리자 · 인프라",
       "origin": "new-curated",
       "modes": {
         "light": {
@@ -10293,7 +10293,7 @@
       "name": "Navy / Blue",
       "base": "navy",
       "family": "blue",
-      "use": "신뢰 중심 금융 · 보안",
+      "use": "금융 · 보안",
       "origin": "new-curated",
       "modes": {
         "light": {
@@ -10685,7 +10685,7 @@
       "name": "Charcoal / Gold",
       "base": "neutral",
       "family": "warm",
-      "use": "차분한 프리미엄 · 큐레이션",
+      "use": "카탈로그 · 큐레이션",
       "origin": "new-curated",
       "modes": {
         "light": {

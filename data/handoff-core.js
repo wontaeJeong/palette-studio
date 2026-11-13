@@ -291,12 +291,14 @@
       "- design-profile.json — machine-readable selection (source of truth)",
       "- selected-theme.css — only the chosen palette and allowed scope",
       "- selected-style.css — optional style variables",
+      "- selected-motion.css — scoped CSS animations and reduced-motion policy",
       "- selected-fonts.css — font families and offline/CDN policy",
       "- AGENT-TASK.md — concise implementation brief",
       "- QA-CHECKLIST.md — test evidence checklist",
       ""
     ].join("\n");
   }
+  function motionCSS(config) { return designs.motionCSS(config.designSelection ? designs.normalize(config.designSelection).motion : "none"); }
   function agentTask(config, catalog) {
     return [
       "# Agent task — apply selected design",
@@ -304,7 +306,7 @@
         "", "## Inline handoff for a standalone prompt", "",
         "The following locked profile and CSS are included so this brief can be used on its own. Save the profile as design-profile.json and the CSS as the canonical selected-theme.css / selected-style.css sources, adapt existing selectors, and produce design.md and QA evidence from these decisions. Do not add a second theme engine.",
         "", "```json", JSON.stringify(profile(config, catalog), null, 2), "```", "",
-        "```css", themeCSS(config, catalog), styleCSS(config, catalog), "```", ""
+        "```css", themeCSS(config, catalog), styleCSS(config, catalog), motionCSS(config), "```", ""
       ] : []),
       designs.brief(config.designSelection),
       "",
@@ -359,7 +361,7 @@
   }
   return {layouts: layouts, frameworks: frameworks, scopes: scopes, targets: targets,
     fontSources: fontSources, iconPresets: iconPresets,
-    defaults: defaults, normalize: normalize, profile: profile, themeCSS: themeCSS,
+    motionCSS: motionCSS, defaults: defaults, normalize: normalize, profile: profile, themeCSS: themeCSS,
     styleCSS: styleCSS, fontCSS: fontCSS, designMD: designMD,
     agentTask: agentTask, checklist: checklist, chosenFonts: chosenFonts};
 });

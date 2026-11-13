@@ -305,6 +305,158 @@
       "additionalProperties": {
         "type": "string"
       }
+    },
+    "designSelection": {
+      "type": "object",
+      "required": [
+        "set",
+        "components"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "set": {
+          "enum": [
+            "studio",
+            "bloom",
+            "precision",
+            "editorial",
+            "console",
+            "signal"
+          ]
+        },
+        "components": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "button": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "input": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "select": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "switch": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "checkbox": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "toast": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "alert": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "dialog": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "drawer": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "tooltip": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "menu": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "tabs": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "breadcrumb": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "pagination": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "card": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "badge": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "accordion": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "empty": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

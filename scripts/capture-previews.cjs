@@ -17,6 +17,7 @@ const pathsToHash = [
   "font-loader.js", "data/catalog.js", "data/font-catalog.js", "data/fonts.json",
   "icons.html", "icons.js", "css/icon-studio.css", "handoff.html",
   "handoff.js", "css/handoff.css", "data/handoff-core.js",
+  "catalog.html", "catalog.js", "css/catalog.css", "data/design-catalog.js",
   "scripts/capture-previews.cjs",
   ...fs.readdirSync(path.join(root,"data/icon-parts"))
     .filter((file) => file.endsWith(".js")).sort()
@@ -34,6 +35,8 @@ const screenshots = [
   "agent-handoff-desktop.png",
   "agent-handoff-dark.png",
   "agent-handoff-mobile.png",
+  "design-catalog-desktop.png", "design-catalog-dark.png",
+  "design-catalog-detail.png", "design-catalog-mobile.png",
 ];
 function sourceHash() {
   return sha(pathsToHash.map((file) =>
@@ -132,6 +135,24 @@ async function main() {
         "palette=slate-teal&style=operational&target=new-app&scope=both&layout=workflow&framework=react&fontSource=system&bodyFont=system&codeFont=system",390,844);
       await page.locator("#ah-preview-grid .ah-mock").first().waitFor();
       await shoot(page,"agent-handoff-mobile.png",{fullPage:true});
+      await context.close();
+    }
+    // Set-first library and real interactive component detail.
+    {
+      const {page,context}=await open("catalog.html","",1440,1200);
+      await page.locator('[data-set="studio"]').waitFor();
+      await shoot(page,"design-catalog-desktop.png");
+      await page.selectOption('#catalog-theme','dark');
+      await shoot(page,"design-catalog-dark.png");
+      await page.selectOption('#catalog-theme','light');
+      await page.locator('[data-component="dialog"]').click();
+      await shoot(page,"design-catalog-detail.png");
+      await context.close();
+    }
+    {
+      const {page,context}=await open("catalog.html","",390,844);
+      await page.locator('[data-set="studio"]').waitFor();
+      await shoot(page,"design-catalog-mobile.png",{fullPage:true});
       await context.close();
     }
     if(pageErrors.length)throw Error("Page errors:\n"+pageErrors.join("\n"));

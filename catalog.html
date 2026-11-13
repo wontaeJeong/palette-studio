@@ -1,0 +1,217 @@
+<!doctype html>
+<html
+  lang="ko"
+  data-palette="graphite-plum"
+  data-theme="light"
+  data-style="operational"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>디자인 도감 · Palette Studio</title>
+    <meta
+      name="description"
+      content="완성된 디자인 세트를 눈으로 고르고, UI 컴포넌트 도감에서 조합해 에이전트 작업지시를 만드세요."
+    />
+    <link rel="stylesheet" href="css/palettes.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/catalog.css" />
+  </head>
+  <body>
+    <a class="skip" href="#sets">디자인 세트로 이동</a>
+    <header class="top">
+      <a class="brand" href="catalog.html"
+        ><span class="brand-mark" aria-hidden="true">P</span> Palette Studio
+        <span class="edition">DESIGN LIBRARY</span></a
+      >
+      <nav aria-label="도구 선택">
+        <a href="catalog.html" aria-current="page">디자인 도감</a
+        ><a href="START-HERE.html">팔레트 · 폰트</a
+        ><a href="icons.html">아이콘</a><a href="handoff.html">Agent Handoff</a>
+      </nav>
+    </header>
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow">LOOK. CHOOSE. BUILD.</p>
+          <h1>좋아 보이는 디자인을,<br />내 프로젝트의 언어로.</h1>
+          <p class="lede">
+            이름을 몰라도 괜찮아요. 어울리는 세트를 고르고,<br />필요한 요소를
+            살펴보세요. 구현 지시는 저희가 정리할게요.
+          </p>
+        </div>
+        <aside class="intro-note">
+          <span class="note-number">01 → 02 → 03</span>
+          <p>
+            세트 고르기 <span>→</span> 도감에서 다듬기
+            <span>→</span> 에이전트에게 전달
+          </p>
+          <small>6개의 디자인 세트 · 18개의 UI 요소 · Light & Dark</small>
+        </aside>
+      </section>
+      <section id="sets" aria-labelledby="sets-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">01 / COLLECTIONS</p>
+            <h2 id="sets-heading">잘 어울리는 것들부터.</h2>
+          </div>
+          <p>색상·형태·폰트·컴포넌트가 함께 선택됩니다.</p>
+        </div>
+        <div id="set-grid" class="set-grid"></div>
+      </section>
+      <section class="workbench" aria-labelledby="encyclopedia-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">02 / COMPONENT ENCYCLOPEDIA</p>
+            <h2 id="encyclopedia-heading">이런 요소를 찾고 있었나요?</h2>
+          </div>
+          <p id="selection-label" aria-live="polite"></p>
+        </div>
+        <div class="toolbar">
+          <label class="search-label"
+            >모양과 용도로 찾기<input
+              type="search"
+              id="catalog-search"
+              placeholder="예: 잠깐 뜨는 알림, 확인창, Toast…" /></label
+          ><label
+            >종류<select id="catalog-category">
+              <option value="all">모든 요소</option>
+            </select></label
+          ><label
+            >미리보기<select id="catalog-theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select></label
+          ><label>색상<select id="catalog-palette"></select></label
+          ><label>형태<select id="catalog-style"></select></label>
+        </div>
+        <p class="help">
+          카드를 누르면 이름과 용도를 배우고, 다른 표현을 골라 직접 눌러볼 수
+          있어요. 세트를 다시 고르면 개별 변경이 초기화됩니다.
+        </p>
+        <div class="library-layout">
+          <div>
+            <div class="component-grid" id="component-grid"></div>
+            <p id="no-results" hidden>
+              찾는 요소가 없어요. 다른 이름이나 용도로 검색해 보세요.
+            </p>
+          </div>
+          <aside class="selection-panel">
+            <p class="eyebrow">YOUR DESIGN RECIPE</p>
+            <h3>나의 디자인 조합</h3>
+            <div id="recipe"></div>
+            <p class="help">
+              현재 선택이 작업지시에 반영됩니다. 실제 프로젝트에 필요한 요소에
+              적용하세요.
+            </p>
+            <a href="#handoff" class="primary jump">작업지시 확인하기 ↓</a
+            ><button type="button" id="share-selection">
+              이 조합 링크 복사
+            </button>
+            <p id="save-status" class="help" role="status"></p>
+          </aside>
+        </div>
+      </section>
+      <section id="handoff" class="handoff" aria-labelledby="handoff-heading">
+        <div>
+          <p class="eyebrow">03 / READY FOR YOUR AGENT</p>
+          <h2 id="handoff-heading">고른 디자인, 그대로 전달하세요.</h2>
+          <p>색상·간격·요소별 표현과 동작까지 담긴 작업지시입니다.</p>
+          <div class="export-buttons">
+            <button class="primary" id="copy-brief" type="button">
+              작업지시 복사</button
+            ><button id="download-brief" type="button">작업지시 저장</button
+            ><button id="download-config" type="button">설정 JSON 저장</button
+            ><a id="open-handoff" href="handoff.html"
+              >프로젝트 설정 · 전체 내보내기 ↗</a
+            >
+          </div>
+          <p class="help">
+            설정 JSON은 기존 CLI에서도 사용할 수 있어요. 프로젝트 설정에서 적용
+            범위·프레임워크·폰트를 조정하고 CSS와 프로필을 함께 내보내세요.
+          </p>
+        </div>
+        <label class="brief-label"
+          >에이전트 작업지시 미리보기<textarea
+            id="agent-brief"
+            readonly
+            rows="13"
+          ></textarea>
+        </label>
+      </section>
+    </main>
+    <footer>
+      Palette Studio / 눈으로 고르고, 명확하게 전달하기.<a href="README.md"
+        >사용 가이드 ↗</a
+      >
+    </footer>
+    <dialog id="component-dialog" aria-labelledby="detail-title">
+      <div class="detail-top">
+        <p id="detail-category" class="eyebrow"></p>
+        <button
+          type="button"
+          data-close="component-dialog"
+          aria-label="요소 상세 닫기"
+        >
+          닫기 ×
+        </button>
+      </div>
+      <h2 id="detail-title"></h2>
+      <p id="detail-purpose"></p>
+      <div
+        id="variant-picker"
+        class="variant-picker"
+        role="group"
+        aria-label="요소 표현 선택"
+      ></div>
+      <div id="detail-demo" class="detail-demo"></div>
+      <p class="help">
+        미리보기에서 동작을 눌러보세요. 아래 동작 기준은 구현할 에이전트에게
+        함께 전달됩니다.
+      </p>
+      <h3>구현 동작 기준</h3>
+      <p id="detail-behavior" lang="en"></p>
+      <button class="primary" type="button" data-close="component-dialog">
+        이 선택으로 계속하기
+      </button>
+    </dialog>
+    <dialog id="demo-dialog" aria-labelledby="demo-title">
+      <h2 id="demo-title">변경 내용을 저장할까요?</h2>
+      <p>프로젝트의 새 디자인을 적용합니다.</p>
+      <div class="demo-actions">
+        <button type="button" data-close="demo-dialog">취소</button
+        ><button type="button" class="primary" data-close="demo-dialog">
+          저장
+        </button>
+      </div>
+    </dialog>
+    <dialog id="demo-drawer" class="drawer" aria-labelledby="drawer-title">
+      <button type="button" data-close="demo-drawer">닫기 ×</button>
+      <h2 id="drawer-title">프로젝트 상세</h2>
+      <p>현재 맥락을 유지하면서 자세한 내용을 확인해요.</p>
+      <label>프로젝트 이름<input value="새로운 프로젝트" /></label>
+    </dialog>
+    <div id="demo-toast" class="demo-toast" role="status" hidden>
+      <span>✓ 변경 내용을 저장했어요.</span
+      ><button type="button" id="dismiss-toast" aria-label="알림 닫기">
+        ×
+      </button>
+    </div>
+    <div id="catalog-status" class="status" role="status"></div>
+    <noscript>디자인 도감을 사용하려면 JavaScript를 켜주세요.</noscript>
+    <script src="data/catalog.js"></script>
+    <script src="data/font-catalog.js"></script>
+    <script src="font-loader.js"></script>
+    <script src="data/icon-parts/navigation.js"></script>
+    <script src="data/icon-parts/actions.js"></script>
+    <script src="data/icon-parts/content.js"></script>
+    <script src="data/icon-parts/identity.js"></script>
+    <script src="data/icon-parts/system.js"></script>
+    <script src="data/icon-parts/system-extra.js"></script>
+    <script src="data/icon-parts/data.js"></script>
+    <script src="data/icon-parts/essentials.js"></script>
+    <script src="data/design-catalog.js"></script>
+    <script src="data/handoff-core.js"></script>
+    <script src="catalog.js"></script>
+  </body>
+</html>

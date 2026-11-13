@@ -1,9 +1,10 @@
 /* Shared pure renderers for file:// Studio and dependency-free Node CLI. */
 (function (root, createCore) {
-  var api = createCore();
+  var designs = typeof module !== "undefined" && module.exports ? require("./design-catalog.js") : root.PaletteDesignCatalog;
+  var api = createCore(designs);
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.PaletteHandoff = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (designs) {
   "use strict";
   var layouts = {
     existing: "Preserve the existing application shell, information architecture and interaction conventions.",
@@ -83,6 +84,7 @@
     result.icons.forEach(function (name) {
       check(name, icons.map(function (i) { return i.name; }), "icon");
     });
+    if (config.designSelection !== undefined) result.designSelection = designs.normalize(config.designSelection);
     return result;
   }
   function selected(config, catalog) {
@@ -94,6 +96,7 @@
   function profile(config, catalog) {
     var choice = selected(config, catalog);
     return {
+      ...(config.designSelection ? {designSelection: designs.normalize(config.designSelection)} : {}),
       profileVersion: "2.0.0",
       kitVersion: catalog.version,
       project: config.project,
@@ -268,6 +271,7 @@
       "- Icon-only controls need accessible labels; decorative icons should be aria-hidden. Do not communicate severity with icons alone.",
       "- Filled tile is a colored wrapper behind the original outline glyph, not a different solid icon shape.",
       "",
+      designs.brief(config.designSelection),
       "## Components and data",
       "",
       "- Reuse existing UI components (e.g. Radix/shadcn), toast and chart packages where present; this kit is not a replacement component framework.",
@@ -293,9 +297,16 @@
       ""
     ].join("\n");
   }
-  function agentTask(config) {
+  function agentTask(config, catalog) {
     return [
       "# Agent task — apply selected design",
+      ...(config.designSelection && catalog ? [
+        "", "## Inline handoff for a standalone prompt", "",
+        "The following locked profile and CSS are included so this brief can be used on its own. Save the profile as design-profile.json and the CSS as the canonical selected-theme.css / selected-style.css sources, adapt existing selectors, and produce design.md and QA evidence from these decisions. Do not add a second theme engine.",
+        "", "```json", JSON.stringify(profile(config, catalog), null, 2), "```", "",
+        "```css", themeCSS(config, catalog), styleCSS(config, catalog), "```", ""
+      ] : []),
+      designs.brief(config.designSelection),
       "",
       "Use the repository's existing agent workflow (including Superpowers if enabled) rather than repeating generic planning boilerplate.",
       "",
@@ -337,6 +348,7 @@
       "- [ ] Tables, code blocks and charts keep legibility, contrast, units and labels.",
       "- [ ] Existing SSR/hydration, CSP and theme persistence were not regressed.",
       "",
+      ...(config.designSelection ? designs.components.map(function(c) { return "- [ ] " + c.name + ": selected treatment, keyboard, states and responsive behavior verified where used."; }) : []),
       "## Evidence log",
       "- Changed UI/routes:",
       "- Tests and browser states verified:",

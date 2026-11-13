@@ -39,6 +39,12 @@
     if (hash.has(urlKey)) candidates.fonts[fontKey] = hash.get(urlKey);
   }
   if (hash.has("icons")) candidates.icons = hash.get("icons").split(",").filter(Boolean);
+  if (hash.has("catalogConfig")) {
+    try { Object.assign(candidates, JSON.parse(hash.get("catalogConfig"))); } catch (_) {}
+  }
+  if (hash.has("designSelection")) {
+    try { candidates.designSelection = JSON.parse(hash.get("designSelection")); } catch (_) {}
+  }
   let config;
   try { config = core.normalize(candidates, catalog, fonts, icons); }
   catch (_) { config = core.normalize(initial, catalog, fonts, icons); }
@@ -58,7 +64,7 @@
     "selected-theme.css": core.themeCSS(c, catalog),
     "selected-style.css": core.styleCSS(c, catalog),
     "selected-fonts.css": core.fontCSS(c, fonts),
-    "AGENT-TASK.md": core.agentTask(c),
+    "AGENT-TASK.md": core.agentTask(c,catalog),
     "QA-CHECKLIST.md": core.checklist(c)
   });
   function toast(message) {
@@ -98,6 +104,7 @@
     params.set("codeFont", config.fonts.code);
     params.set("fontSource", config.fonts.source);
     params.set("icons", config.icons.join(","));
+    if (config.designSelection) params.set("designSelection", JSON.stringify(config.designSelection));
     try { history.replaceState(null, "", location.pathname + location.search + "#" + params); }
     catch (_) {}
   }

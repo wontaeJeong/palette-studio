@@ -111,7 +111,7 @@ function main() {
   save("selected-theme.css", handoff.themeCSS(config, catalog));
   save("selected-style.css", handoff.styleCSS(config, catalog));
   save("selected-fonts.css", handoff.fontCSS(config, fonts));
-  save("AGENT-TASK.md", handoff.agentTask(config));
+  save("AGENT-TASK.md", handoff.agentTask(config,catalog));
   save("QA-CHECKLIST.md", handoff.checklist(config));
   save("README.md", [
     "# Palette Studio project handoff",

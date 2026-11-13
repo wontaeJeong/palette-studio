@@ -8,29 +8,31 @@
 <link rel="stylesheet" href="css/palettes.css">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/handoff.css">
+<link rel="stylesheet" href="css/tool-theme.css">
 </head>
 <body>
 <a class="ah-skip" href="#handoff-selection">설정 선택으로 이동</a>
 <header class="ah-top">
-  <a class="ah-brand" href="START-HERE.html">Palette Studio</a>
+  <a class="ah-brand" href="index.html">Palette Studio</a>
   <nav aria-label="도구 선택">
-    <a href="START-HERE.html">팔레트 · 폰트</a>
+    <a href="index.html">팔레트 · 폰트</a>
     <a href="catalog.html">디자인 도감</a>
     <a href="icons.html">아이콘</a>
     <a href="handoff.html" aria-current="page">Agent Handoff</a>
+  <button type="button" data-ui-theme-toggle aria-label="도구 다크 모드">다크 UI</button>
   </nav>
 </header>
 <main class="ah-container">
   <div class="ah-head">
-    <div><p class="ah-eyebrow">From design choices to agent-ready deliverables</p>
-      <h1>선택한 디자인을 구현 계약으로 전달하세요.</h1>
-      <p>컬러·타이포그래피·아이콘·UI 의도를 고른 뒤, 디자인 기준과 검증 체크리스트를 한 번에 만듭니다. 현재 앱을 통째로 교체하는 템플릿은 아닙니다.</p>
+    <div>
+      <h1>디자인 적용 설정 · 파일 내보내기</h1>
+      <p>프로젝트·적용 범위·프레임워크를 설정하고 CSS, 프로필, 작업지시, QA 목록을 생성합니다.</p>
     </div>
     <a class="ah-doclink" href="docs/AGENT-WORKFLOW.md">에이전트 사용 가이드</a>
   </div>
   <div class="ah-grid">
     <section class="ah-panel" id="handoff-selection" aria-labelledby="selection-heading">
-      <div class="ah-panel-top"><span>01 / DECIDE</span><h2 id="selection-heading">선택 기준</h2></div>
+      <div class="ah-panel-top"><span>설정</span><h2 id="selection-heading">선택 기준</h2></div>
       <div class="ah-fields">
         <label>프로젝트 이름<input id="ah-project" type="text" maxlength="64" value="My Web App"></label>
         <label>팔레트<select id="ah-palette"></select></label>
@@ -69,7 +71,7 @@
       </section>
     </section>
     <section class="ah-panel ah-preview-panel" aria-labelledby="preview-heading">
-      <div class="ah-panel-top"><span>02 / INSPECT</span><h2 id="preview-heading">즉시 비교</h2></div>
+      <div class="ah-panel-top"><span>미리보기</span><h2 id="preview-heading">즉시 비교</h2></div>
       <div class="ah-switch" role="group" aria-label="테마 미리보기">
         <button type="button" data-mode="split" aria-pressed="true">둘 다</button>
         <button type="button" data-mode="light" aria-pressed="false">Light</button>
@@ -83,13 +85,14 @@
       </section>
     </section>
     <section class="ah-panel ah-export-panel" aria-labelledby="export-heading">
-      <div class="ah-panel-top"><span>03 / HAND OFF</span><h2 id="export-heading">구현 산출물</h2></div>
+      <div class="ah-panel-top"><span>내보내기</span><h2 id="export-heading">구현 산출물</h2></div>
       <p>이 JSON은 CLI의 입력입니다. CLI로 실행하면 SVG·폰트 바이너리·라이선스까지 함께 묶습니다.</p>
       <button class="ah-primary" type="button" id="ah-config-download">핸드오프 설정 JSON 저장</button>
       <div class="ah-export-actions">
         <button type="button" data-export="design.md">design.md 저장</button>
         <button type="button" data-export="design-profile.json">프로필 JSON 저장</button>
         <button type="button" data-export="selected-theme.css">테마 CSS 저장</button>
+        <button type="button" data-export="selected-motion.css">애니메이션 CSS 저장</button>
         <button type="button" data-export="selected-style.css">스타일 CSS 저장</button>
         <button type="button" data-export="selected-fonts.css">폰트 CSS 저장</button>
         <button type="button" data-export="AGENT-TASK.md">작업 지시 저장</button>
@@ -116,8 +119,10 @@
 <script src="data/icon-parts/system-extra.js"></script>
 <script src="data/icon-parts/data.js"></script>
 <script src="data/icon-parts/essentials.js"></script>
+<script src="data/ui-presets.js"></script>
 <script src="data/design-catalog.js"></script>
 <script src="data/handoff-core.js"></script>
 <script src="handoff.js"></script>
+<script src="ui-theme.js"></script>
 </body>
 </html>

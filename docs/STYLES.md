@@ -4,8 +4,8 @@
 
 | ID | 스타일 | 컨트롤 | 기본 글자 | 카드 라운드 | 패딩 | 간격 | 용도 |
 |---|---|---|---|---|---|---|---|
-| `operational` | Operational | 38px | 14px | 10px | 20px | 16px | 작은 라운드, 평평한 카드, 명확한 정보 계층. Gate 기본 추천. |
-| `soft` | Soft Product | 42px | 14px | 16px | 24px | 20px | 넉넉한 여백과 16px 카드. 채도는 포인트에만 사용. |
+| `operational` | Operational | 38px | 14px | 10px | 20px | 16px | 반경 8px · 카드 반경 10px · 패딩 20px · 간격 16px. |
+| `soft` | Soft Product | 42px | 14px | 16px | 24px | 20px | 반경 10px · 카드 반경 16px · 패딩 24px · 간격 20px. |
 | `outline` | Outline | 38px | 14px | 5px | 20px | 16px | 작은 라운드, 강한 카드 경계, 그림자 없는 도구형 UI. |
 | `editorial` | Editorial | 42px | 15px | 6px | 28px | 24px | 20px 섹션 제목과 긴 행간, 문서·위키·콘텐츠 중심. |
 | `compact` | Compact | 32px | 13px | 7px | 16px | 12px | 32px 컨트롤과 조밀한 표. 데스크톱 운영 화면용. |

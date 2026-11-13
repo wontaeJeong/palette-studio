@@ -7,25 +7,27 @@
   <title>Icon Studio · Palette Studio</title>
   <link rel="stylesheet" href="css/palettes.css">
   <link rel="stylesheet" href="css/icon-studio.css">
+<link rel="stylesheet" href="css/tool-theme.css">
 </head>
 <body>
   <a class="ic-skip" href="#icon-gallery">아이콘 목록으로 이동</a>
   <header class="ic-top">
-    <a class="ic-brand" href="START-HERE.html" aria-label="Palette Studio 메인">
+    <a class="ic-brand" href="index.html" aria-label="Palette Studio 메인">
       <span class="ic-logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Palette Studio
     </a>
     <nav aria-label="도구 탐색">
-      <a href="START-HERE.html" id="open-palette">팔레트 · 스타일 · 폰트</a>
+      <a href="index.html" id="open-palette">팔레트 · 스타일 · 폰트</a>
       <a href="icons.html" aria-current="page">아이콘</a>
       <a href="catalog.html">디자인 도감</a>
       <a href="handoff.html">Agent Handoff</a>
-    </nav>
+    <button type="button" data-ui-theme-toggle aria-label="도구 다크 모드">다크 UI</button>
+  </nav>
   </header>
   <main class="ic-container">
     <section class="ic-heading">
       <div>
-        <p class="ic-eyebrow">Theme-aware icon library</p>
-        <h1>아이콘을 골라 바로 적용하세요.</h1>
+
+        <h1>아이콘 선택 · SVG 내보내기</h1>
         <p>팔레트에 종속되지 않는 SVG 원본을 Light·Dark로 비교하고, 크기·선 두께·표현 방식을 조정할 수 있습니다.</p>
       </div>
       <p class="ic-total"><strong id="total-count">—</strong><span>Lucide SVG icons</span></p>
@@ -104,5 +106,6 @@
   <script src="data/icon-parts/data.js"></script>
   <script src="data/icon-parts/essentials.js"></script>
   <script src="icons.js"></script>
+<script src="ui-theme.js"></script>
 </body>
 </html>

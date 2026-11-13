@@ -21,11 +21,17 @@
     );
   const params = new URLSearchParams(location.hash.slice(1));
   let config,
-    theme = params.get("theme") === "dark" ? "dark" : "light",
+    theme = "light",
     active = null,
     toastTimer,
     statusTimer;
   let recovery = "";
+  try {
+    theme =
+      localStorage.getItem("palette-studio-ui-theme") ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  } catch {}
+  if (!["light", "dark"].includes(theme)) theme = "light";
   const initial = () =>
     core.normalize(
       {
@@ -66,18 +72,22 @@
   }
   const button = (text, action = "", primary = false) =>
     '<button type="button" class="sample-button ' +
-    (primary ? "sample-primary sample-emphasis" : "sample-emphasis") +
+    (primary
+      ? "sample-primary sample-emphasis"
+      : action === "cancel"
+        ? ""
+        : "sample-emphasis") +
     '"' +
     (action ? ' data-demo="' + action + '"' : "") +
     ">" +
     text +
     "</button>";
-  function demo(id, variant, preview = false) {
-    const uid = (preview ? "preview-" : "detail-") + id;
+  function demo(id, variant, preview = false, pane = "light") {
+    const uid = (preview ? "preview-" : "detail-") + id + "-" + pane;
     const content = {
       button:
         '<div class="sample-actions">' +
-        button("시작하기", "action", variant !== "outline") +
+        button("실행", "action", variant !== "outline") +
         button("취소", "cancel") +
         "</div>",
       input:
@@ -89,15 +99,15 @@
       checkbox:
         '<label class="sample-check sample-emphasis"><input type="checkbox" checked>업데이트 소식 받기</label><label class="sample-check sample-emphasis"><input type="checkbox">주간 요약 받기</label>',
       toast: preview
-        ? '<div class="sample-box sample-emphasis">✓ 변경 내용을 저장했어요.</div>'
+        ? '<div class="sample-box sample-emphasis">✓ 변경 내용을 저장했습니다.</div>'
         : button("저장 알림 띄우기", "toast", true),
       alert:
-        '<div class="sample-box sample-warning"><strong>△ 확인이 필요해요</strong><p>변경 내용을 한 번 더 확인하세요.</p></div>',
+        '<div class="sample-box sample-warning"><strong>△ 입력 확인 필요</strong><p>변경 내용을 한 번 더 확인하세요.</p></div>',
       dialog: preview
         ? '<div class="sample-box"><h4 class="sample-emphasis">변경 내용을 저장할까요?</h4><p>작업 내용을 반영합니다.</p><div class="sample-actions"><span class="sample-badge">취소</span><span class="sample-badge sample-primary">저장</span></div></div>'
         : button("확인창 열어보기", "dialog", true),
       drawer: preview
-        ? '<div class="sample-box sample-emphasis" style="margin-left:22%;width:78%;border-radius:0"><h4>프로젝트 상세</h4><p>맥락을 이어서 확인해요.</p><div class="mini-line"></div></div>'
+        ? '<div class="sample-box sample-emphasis" style="margin-left:22%;width:78%;border-radius:0"><h4>프로젝트 상세</h4><p>프로젝트 상세 정보입니다.</p><div class="mini-line"></div></div>'
         : button("옆 패널 열어보기", "drawer", true),
       tooltip:
         '<div class="sample-tooltip">' +
@@ -109,7 +119,7 @@
         uid +
         '" class="tip" role="tooltip"' +
         (preview ? ' style="display:block"' : "") +
-        ">프로젝트를 함께 관리해요.</span></div>",
+        ">프로젝트 설정을 표시합니다.</span></div>",
       menu: preview
         ? '<div class="sample-box sample-emphasis">프로젝트 동작 ▾<hr>이름 바꾸기<br>복제하기</div>'
         : '<details><summary class="sample-button sample-emphasis">프로젝트 동작 ▾</summary><ul class="menu-items"><li>' +
@@ -130,18 +140,18 @@
         uid +
         '-panel" aria-labelledby="' +
         uid +
-        '-overview">프로젝트의 주요 내용을 확인해요.</div>',
+        '-overview">프로젝트 개요입니다.</div>',
       breadcrumb:
         '<nav aria-label="현재 위치"><ol class="sample-crumbs"><li><a href="#sets">홈</a></li><li><a href="#encyclopedia-heading">프로젝트</a></li><li class="sample-emphasis" aria-current="page">상세</li></ol></nav>',
       pagination:
         '<nav class="sample-actions" aria-label="페이지"><button type="button" class="sample-button" data-page="prev" aria-label="이전 페이지" disabled>‹</button><span class="sample-badge sample-emphasis" aria-current="page" data-page-number>1 / 3</span><button type="button" class="sample-button" data-page="next" aria-label="다음 페이지">›</button></nav>',
-      card: '<article class="sample-box"><h4 class="sample-emphasis">새로운 프로젝트</h4><p>아이디어를 한곳에 모으세요.</p><span class="sample-badge">멤버 3명</span></article>',
+      card: '<article class="sample-box"><h4 class="sample-emphasis">샘플 프로젝트</h4><p>담당 팀: Product Team</p><span class="sample-badge">멤버 3명</span></article>',
       badge:
         '<div class="sample-actions"><span class="sample-badge sample-emphasis">진행 중</span><span class="sample-badge sample-success">✓ 완료</span></div>',
       accordion:
         '<details class="sample-box"><summary class="sample-emphasis">어떻게 시작하나요?</summary><p>세트를 고르고 프로젝트에 필요한 요소를 확인하세요.</p></details>',
       empty:
-        '<div class="sample-empty"><strong class="sample-emphasis">아직 프로젝트가 없어요</strong><p>첫 아이디어를 추가해 보세요.</p>' +
+        '<div class="sample-empty"><strong class="sample-emphasis">등록된 프로젝트 없음</strong><p>프로젝트를 추가하면 목록에 표시됩니다.</p>' +
         button("프로젝트 만들기", "action", variant === "solid") +
         "</div>",
     }[id];
@@ -158,7 +168,7 @@
   async function copy(text) {
     try {
       await navigator.clipboard.writeText(text);
-      notice("복사했어요.");
+      notice("복사했습니다.");
     } catch {
       const t = document.createElement("textarea");
       t.value = text;
@@ -166,7 +176,9 @@
       t.select();
       const ok = document.execCommand("copy");
       t.remove();
-      notice(ok ? "복사했어요." : "복사가 제한됩니다. 저장 버튼을 이용하세요.");
+      notice(
+        ok ? "복사했습니다." : "복사가 제한됩니다. 저장 버튼을 이용하세요.",
+      );
     }
   }
   function download(name, text) {
@@ -191,7 +203,6 @@
     const url = new URL(location.href);
     url.hash = new URLSearchParams({
       selection: JSON.stringify(linkConfig()),
-      theme,
     }).toString();
     return url.href;
   }
@@ -200,12 +211,12 @@
     try {
       localStorage.setItem("palette-studio-handoff-v1", JSON.stringify(linked));
       $("save-status").textContent =
-        recovery || "이 브라우저에 선택을 저장했어요.";
+        recovery || "이 브라우저에 선택을 저장했습니다.";
     } catch {
       $("save-status").textContent =
-        "브라우저 저장이 제한돼요. 링크나 설정 JSON으로 보관하세요.";
+        "브라우저 저장을 사용할 수 없습니다. 링크나 설정 JSON으로 보관하세요.";
     }
-    const p = new URLSearchParams({ selection: JSON.stringify(linked), theme });
+    const p = new URLSearchParams({ selection: JSON.stringify(linked) });
     try {
       history.replaceState(
         null,
@@ -218,52 +229,178 @@
       "handoff.html#catalogConfig=" +
       encodeURIComponent(JSON.stringify(linked));
   }
+  function shell(navigation, mini = false) {
+    return (
+      '<span class="shell shell-layout-' +
+      navigation +
+      '" aria-label="' +
+      esc(designs.navigationPresets.find((n) => n.id === navigation).name) +
+      '">' +
+      (navigation !== "left"
+        ? '<span class="shell-top"><strong>프로젝트</strong><span>개요　설정</span></span>'
+        : "") +
+      '<span class="shell-body">' +
+      (navigation !== "top"
+        ? '<span class="shell-side"><strong>메뉴</strong><span>목록</span><span>설정</span></span>'
+        : "") +
+      '<span class="shell-content"><strong>프로젝트 목록</strong><span class="shell-line"></span><span class="shell-line"></span><span class="mini-action">추가</span></span></span></span>'
+    );
+  }
+  function paired(body, extra = "") {
+    return ["light", "dark"]
+      .map(
+        (mode) =>
+          '<div class="preview-pane ' +
+          extra +
+          '" data-theme="' +
+          mode +
+          '" data-palette="' +
+          esc(config.palette) +
+          '" data-style="' +
+          esc(config.style) +
+          '"><span class="pane-label">' +
+          (mode === "light" ? "Light" : "Dark") +
+          "</span>" +
+          body(mode) +
+          "</div>",
+      )
+      .join("");
+  }
   function renderSets() {
     $("set-grid").innerHTML = designs.sets
       .map(
-        (set, index) =>
+        (set) =>
           '<button type="button" class="set-card" data-set="' +
           set.id +
           '" aria-pressed="' +
           (config.designSelection.set === set.id) +
-          '"><span class="set-mini" data-palette="' +
-          set.palette +
-          '" data-theme="' +
-          theme +
-          '" data-style="' +
-          set.style +
-          '"><span class="mini-panel"><span class="mini-kicker">PROJECT / 0' +
-          (index + 1) +
-          '</span><span class="mini-heading">작은 아이디어의 시작</span><span class="mini-line"></span><span class="mini-line" style="width:55%"></span></span><span class="mini-action">새 프로젝트 +</span><span class="mini-notice">✓ 변경 내용을 저장했어요</span></span><span class="set-caption"><span class="set-tag">' +
-          set.tag +
-          "</span><strong>" +
+          '"><span class="set-pair">' +
+          ["light", "dark"]
+            .map(
+              (mode) =>
+                '<span class="set-mini" data-theme="' +
+                mode +
+                '" data-palette="' +
+                set.palette +
+                '" data-style="' +
+                set.style +
+                '"><span class="pane-label">' +
+                (mode === "light" ? "Light" : "Dark") +
+                "</span>" +
+                shell(set.defaultNavigation, true) +
+                "</span>",
+            )
+            .join("") +
+          '</span><span class="set-caption"><strong>' +
           set.name +
           "</strong><small>" +
           set.description +
+          "</small><small>" +
+          designs.navigationPresets.find((n) => n.id === set.defaultNavigation)
+            .name +
+          " · " +
+          designs.motionPresets.find((m) => m.id === set.defaultMotion).name +
           "</small></span></button>",
       )
       .join("");
   }
+  function renderPalettes(set) {
+    const group = (label, rows) =>
+      '<optgroup label="' +
+      label +
+      '">' +
+      rows
+        .map((p) => '<option value="' + p.id + '">' + esc(p.name) + "</option>")
+        .join("") +
+      "</optgroup>";
+    $("catalog-palette").innerHTML =
+      group(
+        "권장 팔레트",
+        set.recommendedPalettes.map((id) =>
+          palettes.palettes.find((p) => p.id === id),
+        ),
+      ) +
+      group(
+        "전체 팔레트",
+        palettes.palettes.filter(
+          (p) => !set.recommendedPalettes.includes(p.id),
+        ),
+      );
+    $("catalog-palette").value = config.palette;
+  }
+  function renderAuxiliary() {
+    const selection = config.designSelection;
+    $("catalog-motion").value = selection.motion;
+    $("catalog-navigation").value = selection.navigation;
+    $("navigation-description").textContent =
+      designs.navigationPresets.find((n) => n.id === selection.navigation)
+        .description +
+      " · 768px 미만에서는 상단 메뉴 버튼과 내비게이션 드로어로 전환합니다.";
+    $("navigation-preview").innerHTML = paired(() =>
+      shell(selection.navigation),
+    );
+    $("selected-motion-preview").textContent = core.motionCSS(config);
+    $("motion-preview").innerHTML = paired(
+      (mode) =>
+        '<div class="motion-effects" data-ps-motion="' +
+        selection.motion +
+        '">' +
+        [
+          ["fade", "페이드"],
+          ["slide", "이동"],
+          ["scale", "확대"],
+          ["expand", "펼치기"],
+        ]
+          .map(
+            ([id, label]) =>
+              "<div><span>" +
+              label +
+              '</span><div class="motion-stage"><div class="motion-tile" id="motion-' +
+              mode +
+              "-" +
+              id +
+              '">예시</div></div><button type="button" data-motion-play="' +
+              id +
+              '" data-motion-mode="' +
+              mode +
+              '">재생</button></div>',
+          )
+          .join("") +
+        "</div>",
+    );
+  }
   function renderComponents() {
     const q = $("catalog-search").value.trim().toLocaleLowerCase(),
       category = $("catalog-category").value;
+    const set = designs.sets.find((s) => s.id === config.designSelection.set);
+    const recommended = set.recommendedComponents;
     const matches = designs.components.filter(
       (c) =>
         (category === "all" || category === c.category) &&
+        (!$("recommended-only").checked || recommended.includes(c.id)) &&
         [c.name, c.label, c.purpose, c.keywords]
           .join(" ")
           .toLocaleLowerCase()
           .includes(q),
     );
+    matches.sort(
+      (a, b) =>
+        Number(recommended.includes(b.id)) - Number(recommended.includes(a.id)),
+    );
     $("component-grid").innerHTML = matches
       .map(
         (c) =>
           '<article class="component-card"><div class="component-preview" inert aria-hidden="true">' +
-          demo(c.id, config.designSelection.components[c.id], true) +
+          paired((mode) =>
+            demo(c.id, config.designSelection.components[c.id], true, mode),
+          ) +
           '</div><button type="button" class="component-caption" data-component="' +
           c.id +
           '"><strong>' +
           c.label +
+          (recommended.includes(c.id)
+            ? ' <span class="recommend-badge">권장</span>'
+            : "") +
           "</strong><small>" +
           c.name +
           " / " +
@@ -296,7 +433,9 @@
           "</button>",
       )
       .join("");
-    $("detail-demo").innerHTML = demo(active, variant);
+    $("detail-demo").innerHTML = paired((mode) =>
+      demo(active, variant, false, mode),
+    );
   }
   function render() {
     document.documentElement.dataset.palette = config.palette;
@@ -304,31 +443,59 @@
     document.documentElement.dataset.theme = theme;
     $("catalog-palette").value = config.palette;
     $("catalog-style").value = config.style;
-    $("catalog-theme").value = theme;
+    $("ui-theme").textContent = theme === "dark" ? "라이트 UI" : "다크 UI";
+    $("ui-theme").setAttribute("aria-pressed", String(theme === "dark"));
     const set = designs.sets.find((s) => s.id === config.designSelection.set),
       p = palettes.palettes.find((p) => p.id === config.palette),
       s = palettes.styles.find((s) => s.id === config.style);
-    const custom = Object.values(config.designSelection.components).filter(
-      (v) => v !== set.variant,
+    renderPalettes(set);
+    renderAuxiliary();
+    $("recommendation-reason").textContent = set.recommendationReason;
+    const defaults = designs.selection(set.id).components;
+    const custom = Object.entries(config.designSelection.components).filter(
+      ([id, v]) => v !== defaults[id],
     ).length;
     $("selection-label").textContent =
       set.name + " · " + custom + "개 요소 변경";
     $("recipe").innerHTML =
-      '<div class="swatches" aria-hidden="true">' +
-      [
-        "--color-canvas",
-        "--color-surface",
-        "--color-line-strong",
-        "--color-accent",
-        "--color-ink",
-      ]
+      ["light", "dark"]
         .map(
-          (t) => '<span style="background:' + p.modes[theme][t] + '"></span>',
+          (mode) =>
+            '<div class="swatches" aria-label="' +
+            mode +
+            ' 색상 견본"><small>' +
+            mode +
+            "</small>" +
+            [
+              "--color-canvas",
+              "--color-surface",
+              "--color-line-strong",
+              "--color-accent",
+              "--color-ink",
+            ]
+              .map(
+                (t) =>
+                  '<span style="background:' + p.modes[mode][t] + '"></span>',
+              )
+              .join("") +
+            "</div>",
         )
         .join("") +
-      "</div>" +
       [
-        ["시작 세트", set.name],
+        ["프리셋", set.name],
+        [
+          "메뉴 배치",
+          designs.navigationPresets.find(
+            (n) => n.id === config.designSelection.navigation,
+          ).name,
+        ],
+        [
+          "애니메이션",
+          designs.motionPresets.find(
+            (m) => m.id === config.designSelection.motion,
+          ).name,
+        ],
+        ["디자인 모드", "Light + Dark"],
         ["색상", p.name],
         ["형태", s.name],
         ["개별 변경", custom + " / 18"],
@@ -366,11 +533,21 @@
     $("set-grid")
       .querySelector('[data-set="' + id + '"]')
       .focus({ preventScroll: true });
-    notice(set.name + " 세트를 선택했어요.");
+    notice(set.name + " 프리셋을 선택했습니다.");
   }
   $("catalog-palette").innerHTML = palettes.palettes
     .map((p) => '<option value="' + p.id + '">' + esc(p.name) + "</option>")
     .join("");
+  for (const [key, items] of [
+    ["navigation", designs.navigationPresets],
+    ["motion", designs.motionPresets],
+  ])
+    $("catalog-" + key).innerHTML = items
+      .map(
+        (item) =>
+          '<option value="' + item.id + '">' + esc(item.name) + "</option>",
+      )
+      .join("");
   $("catalog-style").innerHTML = palettes.styles
     .map((s) => '<option value="' + s.id + '">' + esc(s.name) + "</option>")
     .join("");
@@ -386,10 +563,43 @@
   });
   $("catalog-search").addEventListener("input", renderComponents);
   $("catalog-category").addEventListener("change", renderComponents);
-  $("catalog-theme").addEventListener("change", (e) => {
-    theme = e.target.value;
-    render();
+  $("recommended-only").addEventListener("change", renderComponents);
+  $("ui-theme").addEventListener("click", () => {
+    theme = theme === "light" ? "dark" : "light";
+    try {
+      localStorage.setItem("palette-studio-ui-theme", theme);
+    } catch {}
+    document.documentElement.dataset.theme = theme;
+    $("ui-theme").textContent = theme === "dark" ? "라이트 UI" : "다크 UI";
+    $("ui-theme").setAttribute("aria-pressed", String(theme === "dark"));
   });
+  for (const key of ["motion", "navigation"])
+    $("catalog-" + key).addEventListener("change", (e) => {
+      config = core.normalize(
+        {
+          ...config,
+          designSelection: { ...config.designSelection, [key]: e.target.value },
+        },
+        palettes,
+        fonts,
+        icons,
+      );
+      render();
+      $(key === "motion" ? "motion-options" : "layout-options").open = true;
+    });
+  $("motion-preview").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-motion-play]");
+    if (!b) return;
+    const sample = $(
+      "motion-" + b.dataset.motionMode + "-" + b.dataset.motionPlay,
+    );
+    sample.className = "motion-tile";
+    void sample.offsetWidth;
+    sample.classList.add("ps-motion-" + b.dataset.motionPlay);
+  });
+  $("download-motion").addEventListener("click", () =>
+    download("selected-motion.css", core.motionCSS(config)),
+  );
   for (const key of ["palette", "style"])
     $("catalog-" + key).addEventListener("change", (e) => {
       config = core.normalize(
@@ -426,6 +636,12 @@
     }
     const b = e.target.closest("[data-demo]");
     if (b) {
+      const mode = b.closest("[data-theme]")?.dataset.theme || "light";
+      for (const id of ["demo-toast", "demo-dialog", "demo-drawer"]) {
+        $(id).dataset.theme = mode;
+        $(id).dataset.palette = config.palette;
+        $(id).dataset.style = config.style;
+      }
       if (b.dataset.demo === "toast") {
         $("component-dialog").append($("demo-toast"));
         clearTimeout(toastTimer);
@@ -449,8 +665,8 @@
       } else
         notice(
           b.dataset.demo === "cancel"
-            ? "취소했어요."
-            : "동작을 실행했어요. 미리보기 예시입니다.",
+            ? "취소했습니다."
+            : "샘플 동작을 실행했습니다. 미리보기 예시입니다.",
         );
     }
     const tab = e.target.closest("[data-tab]");
@@ -476,8 +692,8 @@
     parent.nextElementSibling.setAttribute("aria-labelledby", tab.id);
     parent.nextElementSibling.textContent =
       tab.dataset.tab === "overview"
-        ? "프로젝트의 주요 내용을 확인해요."
-        : "오늘 디자인을 변경했어요.";
+        ? "프로젝트 개요입니다."
+        : "디자인 변경 기록 1건";
   }
   document.addEventListener("keydown", (e) => {
     const tab = e.target.closest("[data-tab]");

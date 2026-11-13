@@ -8,8 +8,44 @@ const core = require("../data/handoff-core.js");
 const catalog = require("../data/palettes.json");
 const fonts = require("../data/fonts.json");
 assert.equal(designs.sets.length, 6);
+assert.equal(designs.navigationPresets.length, 3);
+assert.equal(designs.motionPresets.length, 4);
+for (const motion of designs.motionPresets) {
+  const config = core.normalize(
+    {
+      designSelection: { set: "studio", motion: motion.id, navigation: "top" },
+    },
+    catalog,
+    fonts,
+    [],
+  );
+  assert(core.motionCSS(config).includes(motion.duration + "ms"));
+  assert(core.motionCSS(config).includes("prefers-reduced-motion: reduce"));
+  assert(core.agentTask(config, catalog).includes("Navigation layout:"));
+}
+assert.throws(
+  () => designs.normalize({ set: "studio", motion: "spin" }),
+  /Invalid design selection motion/,
+);
+assert.throws(
+  () => designs.normalize({ set: "studio", navigation: "bottom" }),
+  /Invalid design selection navigation/,
+);
 assert.equal(designs.components.length, 18);
 for (const set of designs.sets) {
+  assert(set.recommendedPalettes.includes(set.palette));
+  assert(
+    set.recommendedPalettes.every((id) =>
+      catalog.palettes.some((p) => p.id === id),
+    ),
+  );
+  assert(set.recommendedComponents.length >= 4);
+  assert(
+    set.recommendedComponents.every((id) =>
+      designs.components.some((c) => c.id === id),
+    ),
+  );
+  assert(set.recommendationReason.length > 10);
   const selection = designs.selection(set.id);
   const config = core.normalize(
     { ...set.config, designSelection: selection },
@@ -49,6 +85,11 @@ for (const invalid of [
     /design selection/i,
   );
 }
+assert.equal(
+  new Set(designs.sets.map((s) => s.recommendedComponents.join(","))).size,
+  6,
+);
+assert.equal(designs.selection("precision").components.button, "solid");
 const legacy = core.normalize({}, catalog, fonts, []);
 assert(!Object.hasOwn(core.profile(legacy, catalog), "designSelection"));
 const selection = designs.selection("studio");
@@ -85,6 +126,10 @@ try {
   );
   assert(core.agentTask(config, catalog).includes("--color-accent:"));
   assert(core.agentTask(config, catalog).includes("--ui-radius:"));
+  assert.equal(
+    fs.readFileSync(path.join(temp, "out/selected-motion.css"), "utf8"),
+    core.motionCSS(config),
+  );
   const dark = { ...config, scope: "dark-only" };
   assert(!core.agentTask(dark, catalog).includes(':root[data-theme="light"]'));
   assert.deepEqual(

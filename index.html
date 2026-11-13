@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light" />
     <meta
       name="description"
-      content="32 UI palettes, six styles, CDN typography and bundled font fallback. Agent-ready CSS kit."
+      content="32 color palettes, six styles, body and code font selection, CSS and JSON export."
     />
     <title>Palette Studio — UI Color & Style Kit</title>
     <link rel="stylesheet" href="css/palettes.css" />
@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/utilities.css" />
     <link rel="stylesheet" href="css/studio.css" />
-  </head>
+  <link rel="stylesheet" href="css/tool-theme.css">
+</head>
   <body>
     <a class="studio-skip" href="#preview-content">적용 미리보기로 이동</a>
     <header class="studio-top">
@@ -23,21 +24,13 @@
           ><i></i><i></i><i></i><i></i></span
         >Palette Studio
       </div>
-      <span class="studio-top-note">색상 · 스타일 · 타이포그래피 · <a href="catalog.html">디자인 도감</a></span>
+      <span class="studio-top-note">색상 · 스타일 · 타이포그래피 · <a href="catalog.html">디자인 도감</a> · <button type="button" data-ui-theme-toggle aria-label="도구 다크 모드">다크 UI</button></span>
     </header>
     <main class="studio-container" id="builder">
       <section class="studio-hero">
         <div>
-          <div class="studio-eyebrow">A design kit for any app</div>
-          <h1>내 앱에 맞는 조합을 찾으세요.</h1>
-          <p>
-            색상, 형태, 글자를 차례로 비교하고 완성된 선택을 코드로
-            가져가세요.<br />어떤 앱에도 적용할 수 있는 32개 팔레트 · 6개 스타일
-            · 무료 폰트 24종.
-          </p>
-        </div>
-        <div class="studio-count">
-          <strong>32 / 06 / 24</strong><br />Palettes · Styles · Fonts
+          <h1>팔레트 · 스타일 · 폰트</h1>
+          <p>팔레트 32개 · 스타일 6개 · 본문 폰트 15종 · 코드 폰트 9종</p>
         </div>
       </section>
       <nav class="studio-steps" aria-label="디자인 선택 단계">
@@ -64,7 +57,7 @@
             <div class="step-intro">
               <small>STEP 01 / COLOR</small>
               <h2 id="palette-heading" tabindex="-1">
-                바탕과 포인트를 골라보세요.
+                팔레트 선택
               </h2>
               <p>
                 카드를 고르면 미리보기에 바로 적용됩니다. 밝은 테마와 어두운
@@ -86,9 +79,7 @@
                     >
                   </h2>
                   <p>
-                    바탕과 포인트를 함께 설계했습니다. 카드를 선택하면 고정
-                    미리보기와 토큰이 바뀝니다. 인기 순위가 아닌 폭넓은 조합
-                    후보입니다.
+                    팔레트를 선택하면 미리보기와 색상 토큰에 적용됩니다.
                   </p>
                 </div>
                 <div class="studio-control">
@@ -117,7 +108,7 @@
           >
             <div class="step-intro">
               <small>STEP 02 / STYLE</small>
-              <h2 id="style-heading" tabindex="-1">같은 색상, 다른 형태.</h2>
+              <h2 id="style-heading" tabindex="-1">스타일 선택</h2>
               <p>
                 라운드, 여백, 정보 밀도를 비교하세요. 선택한 색상은 그대로
                 적용됩니다.
@@ -133,7 +124,7 @@
               <section class="studio-section" id="components">
                 <div class="studio-section-title">
                   <div>
-                    <h2>버튼부터 오류 상태까지.</h2>
+                    <h2>컴포넌트 상태 미리보기</h2>
                     <p>
                       같은 의미를 유지하는 상태색, 키보드 포커스, 폼 검증, JSON
                       하이라이트. 버튼의 hover·pressed·focus 상태는 비교용 고정
@@ -149,7 +140,7 @@
               <section class="studio-section" id="tokens">
                 <div class="studio-section-title">
                   <div>
-                    <h2>색상의 이름보다, 쓰임새.</h2>
+                    <h2>의미 토큰과 색상값</h2>
                     <p>
                       테마마다 같은 189개 의미 토큰을 제공합니다. 색상 셀을
                       누르면 HEX를 복사합니다.
@@ -189,7 +180,7 @@
             <div class="step-intro">
               <small>STEP 03 / TYPOGRAPHY</small>
               <h2 id="fonts-heading" tabindex="-1">
-                본문과 코드, 각자의 글자.
+                본문·코드 폰트 선택
               </h2>
               <p>
                 본문용 15종과 코드용 9종을 따로 고르세요. 모든 후보에
@@ -319,7 +310,7 @@
             <div class="step-intro">
               <small>STEP 04 / EXPORT</small>
               <h2 id="export-heading" tabindex="-1">
-                선택을 확인하고 가져가세요.
+                설정 확인 · 내보내기
               </h2>
               <p>
                 언제든 앞 단계로 돌아갈 수 있습니다. 적용할 테마 범위를 확인한
@@ -387,10 +378,9 @@
             <section class="studio-section" id="workflow">
               <div class="studio-section-title">
                 <div>
-                  <h2>선택이 구현 기준이 되도록.</h2>
+                  <h2>프로젝트 적용 절차</h2>
                   <p>
-                    색상표를 구경한 다음, 내 앱의 실제 화면에서 두세 후보를
-                    확인하세요.
+                    선택한 설정을 실제 앱에 적용하고 동일한 화면·데이터로 비교합니다.
                   </p>
                 </div>
               </div>
@@ -400,8 +390,7 @@
                   <h3>색상과 스타일을 따로 선택</h3>
                   <p>
                     먼저 포인트와 바탕을 고르고, 다음에 라운드·여백·정보 밀도를
-                    고릅니다. 모든 요소를 한 번에 바꾸면 무엇이 좋아졌는지
-                    판단하기 어렵습니다.
+                    고릅니다. 색상과 스타일은 독립적으로 변경할 수 있습니다.
                   </p>
                 </article>
                 <article>
@@ -409,7 +398,7 @@
                   <h3>실제 앱의 같은 화면에 적용</h3>
                   <p>
                     일반 목록, 긴 상세, 실패·권한 없음 화면을 같은 데이터로
-                    비교합니다. 이곳의 샘플은 출발점입니다. 실제 앱 컴포넌트의
+                    비교합니다. 샘플은 미리보기용 데이터입니다. 실제 앱 컴포넌트의
                     검증을 대신하지 않습니다.
                   </p>
                 </article>
@@ -513,5 +502,6 @@
     <script src="data/font-catalog.js"></script>
     <script src="font-loader.js"></script>
     <script src="app.js"></script>
-  </body>
+  <script src="ui-theme.js"></script>
+</body>
 </html>

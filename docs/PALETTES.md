@@ -13,7 +13,7 @@
 | `slate-teal` | Slate / Teal | B2B SaaS · 데이터 도구 | `#0B7772` | `#7AD9CC` |
 | `stone-emerald` | Stone / Emerald | 금융 · 승인 워크플로 | `#087A55` | `#7ADBB2` |
 | `forest-mint` | Forest / Mint | 지속가능성 · 웰니스 | `#256C4C` | `#8DDFB6` |
-| `warm-sage` | Warm Stone / Sage | 차분한 콘텐츠 · 생산성 | `#536B49` | `#BDD3AA` |
+| `warm-sage` | Warm Stone / Sage | 콘텐츠 · 생산성 도구 | `#536B49` | `#BDD3AA` |
 | `stone-olive` | Stone / Olive | 지식 관리 · 아웃도어 | `#687229` | `#C9D783` |
 | `slate-lime` | Slate / Lime | 모니터링 · 실험 도구 | `#597613` | `#B9DE70` |
 | `sand-amber` | Sand / Amber | 운영 · 예약 · 큐레이션 | `#976208` | `#EAC16B` |
@@ -22,16 +22,16 @@
 | `sand-copper` | Sand / Copper | 브랜드 사이트 · 카탈로그 | `#945A35` | `#DFA97D` |
 | `zinc-rose` | Zinc / Rose | 커뮤니티 · 콘텐츠 서비스 | `#B33862` | `#F5A2BE` |
 | `charcoal-ruby` | Charcoal / Ruby | 강조형 업무 도구 · 브랜드 | `#B02F49` | `#F49DAF` |
-| `warm-burgundy` | Warm Stone / Burgundy | 프리미엄 콘텐츠 · 편집 | `#853B56` | `#DEA4B9` |
+| `warm-burgundy` | Warm Stone / Burgundy | 콘텐츠 · 편집 도구 | `#853B56` | `#DEA4B9` |
 | `pearl-lavender` | Pearl / Lavender | 노트 · 개인 지식 관리 | `#766092` | `#CCB7E5` |
 | `graphite-indigo-reference` | Graphite / Indigo Reference | 기존 color-tokens.css 참고안 | `#5252BE` | `#AAA9FF` |
 | `slate-steel` | Slate / Steel | 엔터프라이즈 · 문서 | `#526C88` | `#ACBED6` |
-| `slate-slate` | Slate / Slate | 절제된 관리자 · 인프라 | `#475569` | `#CBD5E1` |
+| `slate-slate` | Slate / Slate | 관리자 · 인프라 | `#475569` | `#CBD5E1` |
 | `zinc-zinc` | Zinc / Zinc | 중립 제품 · 디자인 도구 | `#52525B` | `#D4D4D8` |
 | `stone-sand` | Stone / Sand | 라이프스타일 · 기록 | `#79674D` | `#D6C5AA` |
 | `neutral-monochrome` | Neutral / Monochrome | 사진 · 포트폴리오 · 범용 | `#292929` | `#E7E7E7` |
-| `navy-blue` | Navy / Blue | 신뢰 중심 금융 · 보안 | `#285DB6` | `#9DBEFF` |
-| `charcoal-gold` | Charcoal / Gold | 차분한 프리미엄 · 큐레이션 | `#8D690E` | `#E4C578` |
+| `navy-blue` | Navy / Blue | 금융 · 보안 | `#285DB6` | `#9DBEFF` |
+| `charcoal-gold` | Charcoal / Gold | 카탈로그 · 큐레이션 | `#8D690E` | `#E4C578` |
 | `warm-coral` | Warm Cream / Coral | 협업 · 커뮤니티 · 라이프 | `#AC4B46` | `#F2AAA0` |
 | `slate-turquoise` | Slate / Turquoise | 협업 · 기술 포털 | `#087A80` | `#7CD6D9` |
 | `paper-ink` | Paper / Ink Green | 문서 · 위키 · 읽기 중심 | `#3D5846` | `#B0CBB5` |

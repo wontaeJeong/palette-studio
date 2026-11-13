@@ -59,7 +59,7 @@
     });
     try { history.replaceState(null, "", location.pathname + location.search + "#" + p.toString()); }
     catch (_) {}
-    $("open-palette").href = "START-HERE.html#palette=" + encodeURIComponent(state.palette);
+    $("open-palette").href = "index.html#palette=" + encodeURIComponent(state.palette);
   }
   function svgSource(icon, size, stroke, decorative) {
     var sizeValue = Number(size) || 24;

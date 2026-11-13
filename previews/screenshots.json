@@ -23,10 +23,13 @@
     "handoff.js",
     "css/handoff.css",
     "data/handoff-core.js",
+    "ui-theme.js",
+    "css/tool-theme.css",
     "catalog.html",
     "catalog.js",
     "css/catalog.css",
     "data/design-catalog.js",
+    "data/ui-presets.js",
     "scripts/capture-previews.cjs",
     "data/icon-parts/actions.js",
     "data/icon-parts/content.js",
@@ -37,112 +40,133 @@
     "data/icon-parts/system-extra.js",
     "data/icon-parts/system.js"
   ],
-  "sourceHash": "e6b6f541777e376875b198c29c8af147d81f9de9a8c0c23ac8ad8ebb2c3d41f9",
+  "sourceHash": "e99f83e40e03fabed4c60532168a96cd14321a9b2be347b171c55f28c160f9b2",
   "screenshots": [
     {
       "path": "studio-overview-light.png",
       "width": 1440,
       "height": 980,
-      "bytes": 147607,
-      "sha256": "32790b3c6c7fad899bbaedd2cbb5ab2705113553672003aa560d6a2dce2c0ce9"
+      "bytes": 132273,
+      "sha256": "2deb44fdaf3d951ab888499e507d68cc1da57632a6018e0805ab2fe726a19251"
     },
     {
       "path": "studio-overview-dark.png",
       "width": 1440,
       "height": 980,
-      "bytes": 148879,
-      "sha256": "40e09f682ac89f32a2546fe4c7031df886160661e93bb2dda84c901b7a69a305"
+      "bytes": 133161,
+      "sha256": "a154853281f7661d58c71366b9684efdfbf82eab094d0efd08cf7c14cf05b941"
     },
     {
       "path": "studio-fonts-desktop.png",
       "width": 1440,
       "height": 980,
-      "bytes": 145657,
-      "sha256": "7c26e7ddb1d91cce868b2daa5a0d87dc38a148f17285bf4bf694fbb83867807f"
+      "bytes": 139139,
+      "sha256": "964edb2dc734dca3cb7609c53b04b1ae5baff746224ba9e713ef70b8f191ccd5"
     },
     {
       "path": "studio-mobile-light.png",
       "width": 390,
       "height": 844,
-      "bytes": 63984,
-      "sha256": "256387c0ea27e836625254037862e008ba466f8bcbdd8d94ee99b9000398b5c7"
+      "bytes": 60385,
+      "sha256": "6d3da079aebef5677b20abdc6d64e685018cbc9f21e6992aed52849ad62a2982"
     },
     {
       "path": "studio-mobile-dark.png",
       "width": 390,
       "height": 844,
-      "bytes": 64413,
-      "sha256": "805417204af7337f9db361d11482220be8e03fcfc5f1d8351290a265aaac33fa"
+      "bytes": 60826,
+      "sha256": "7c49d9fb6f0c4cbf0a088a0e927352e5201d0f7ec531c522f2744cf4991bc050"
     },
     {
       "path": "icon-studio-desktop.png",
       "width": 1460,
       "height": 990,
-      "bytes": 159434,
-      "sha256": "144f29801af585e2337a71a4adb66df7489971d8fb861feeebbc30d23ed7787b"
+      "bytes": 163113,
+      "sha256": "aa398fe446b19f0021e23ff4f1b82982d36be323855cf9d9f7349cb3d92807f1"
     },
     {
       "path": "icon-studio-dark.png",
       "width": 1460,
       "height": 990,
-      "bytes": 133825,
-      "sha256": "5ba3666e45cf1010ffb7e31f0458c91d2a1041eb54f8ea1a7cf563c2101c14b2"
+      "bytes": 137167,
+      "sha256": "7db3ca65ba32d0d8dabf3d38512a55d8131840906ffabad0560a56e1116e1f8b"
     },
     {
       "path": "icon-studio-mobile.png",
       "width": 390,
-      "height": 2621,
-      "bytes": 137889,
-      "sha256": "a02c8332686f210c6db7d92b4919735dd0c9ff6b70e743998b5dc59b57f23323"
+      "height": 2627,
+      "bytes": 136293,
+      "sha256": "1e2a19036dc2b8afa75ee82dc3f5208d635c96691d10eea1eca5fdeb411e452b"
     },
     {
       "path": "agent-handoff-desktop.png",
       "width": 1460,
       "height": 990,
-      "bytes": 180286,
-      "sha256": "cb5a5dd72282bf54a2107612801480cc80b74413b37102d8dd0f0d0cc66d38ea"
+      "bytes": 177658,
+      "sha256": "00accba4b5d1e4f2523276f622ebcc769e2ca49b4a21c1e0895f6f64ca0a99f9"
     },
     {
       "path": "agent-handoff-dark.png",
       "width": 1460,
       "height": 990,
-      "bytes": 167287,
-      "sha256": "95f3dbed5bd789d81339c4c057a9deaf8a1376043a44b9230ee528d064a914ef"
+      "bytes": 164478,
+      "sha256": "234f78d8dac203a7481471b580af3c2e609a1fc847c600d909ee9594d1b5142d"
     },
     {
       "path": "agent-handoff-mobile.png",
       "width": 390,
-      "height": 3472,
-      "bytes": 212518,
-      "sha256": "82a8d2280d4c9cc50d3d67da786ad005769654047455342c53c345ab2ae9522f"
+      "height": 3416,
+      "bytes": 198967,
+      "sha256": "f80e22e8b42c1bafe4be4cdfb17629deca4071e0f22d3acdf0f46cecb7e2b7d9"
     },
     {
       "path": "design-catalog-desktop.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 164663,
-      "sha256": "e68e927f98df415062aa71d9a9a774ca09174616fb5b5cc21300636dc0e1375c"
+      "bytes": 161995,
+      "sha256": "5c595fd185b9dd6d9f887d2681f65c39ce96072970b456a6196bafae5022c92a"
     },
     {
-      "path": "design-catalog-dark.png",
+      "path": "design-catalog-components.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 166315,
-      "sha256": "a18ac3307b445b74c837a04b543ffc91f1cf7188ed214a5a71db2bf3f985afdd"
+      "bytes": 170339,
+      "sha256": "ee330d0f40968eea44895784cf332b44f7369c23ea0f3e28e9d96a4f4f9634f1"
     },
     {
       "path": "design-catalog-detail.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 174834,
-      "sha256": "6f7775450685bc0ccc5e8378c9188a9a181fe8e8c708f1a74bd4d75ab02e3925"
+      "bytes": 153927,
+      "sha256": "081fcab20ae66a65192d295ee15c8b7edcd578a45fb0a04e1709e8c785a2379e"
+    },
+    {
+      "path": "design-catalog-layout.png",
+      "width": 1440,
+      "height": 1200,
+      "bytes": 157334,
+      "sha256": "411b19a9f3ee91e1720dcc5499baf91bc5008a01735bcf1a860823d9eb8b3606"
+    },
+    {
+      "path": "design-catalog-motion.png",
+      "width": 1440,
+      "height": 1200,
+      "bytes": 123202,
+      "sha256": "ad4d53a89e21f69218c184a87d19bbea7dc87b0fc43963250587d57fc68050e1"
+    },
+    {
+      "path": "design-catalog-ui-dark.png",
+      "width": 1440,
+      "height": 1200,
+      "bytes": 159001,
+      "sha256": "141deceb54b5177f3efc062ad3fbcdde44f39a8a28c5645442c96d1e89b325c5"
     },
     {
       "path": "design-catalog-mobile.png",
       "width": 390,
-      "height": 5636,
-      "bytes": 398989,
-      "sha256": "3a68b9e40bd99f3b82188747478a5fcf6b1ea409b4a2d0bd88370a6f54468bb6"
+      "height": 7613,
+      "bytes": 460460,
+      "sha256": "a77d912f8e207d8b0c6d411e9e5576ae55e0e666c90d1f1628e051b4507fdb66"
     }
   ]
 }

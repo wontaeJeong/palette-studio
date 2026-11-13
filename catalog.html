@@ -11,7 +11,7 @@
     <title>디자인 도감 · Palette Studio</title>
     <meta
       name="description"
-      content="완성된 디자인 세트를 눈으로 고르고, UI 컴포넌트 도감에서 조합해 에이전트 작업지시를 만드세요."
+      content="디자인 프리셋, 권장 팔레트·컴포넌트 선택, 미리보기, 에이전트 작업지시 생성"
     />
     <link rel="stylesheet" href="css/palettes.css" />
     <link rel="stylesheet" href="css/styles.css" />
@@ -22,38 +22,32 @@
     <header class="top">
       <a class="brand" href="catalog.html"
         ><span class="brand-mark" aria-hidden="true">P</span> Palette Studio
-        <span class="edition">DESIGN LIBRARY</span></a
-      >
+      </a>
       <nav aria-label="도구 선택">
         <a href="catalog.html" aria-current="page">디자인 도감</a
-        ><a href="START-HERE.html">팔레트 · 폰트</a
-        ><a href="icons.html">아이콘</a><a href="handoff.html">Agent Handoff</a>
+        ><a href="index.html">팔레트 · 폰트</a><a href="icons.html">아이콘</a
+        ><a href="handoff.html">Agent Handoff</a
+        ><button
+          type="button"
+          id="ui-theme"
+          aria-label="도구 다크 모드"
+          aria-pressed="false"
+        >
+          다크 UI
+        </button>
       </nav>
     </header>
     <main>
       <section class="intro">
         <div>
-          <p class="eyebrow">LOOK. CHOOSE. BUILD.</p>
-          <h1>좋아 보이는 디자인을,<br />내 프로젝트의 언어로.</h1>
-          <p class="lede">
-            이름을 몰라도 괜찮아요. 어울리는 세트를 고르고,<br />필요한 요소를
-            살펴보세요. 구현 지시는 저희가 정리할게요.
-          </p>
+          <h1>디자인 도감</h1>
+          <p class="lede">프리셋 선택 · 컴포넌트 비교 · 작업지시 내보내기</p>
         </div>
-        <aside class="intro-note">
-          <span class="note-number">01 → 02 → 03</span>
-          <p>
-            세트 고르기 <span>→</span> 도감에서 다듬기
-            <span>→</span> 에이전트에게 전달
-          </p>
-          <small>6개의 디자인 세트 · 18개의 UI 요소 · Light & Dark</small>
-        </aside>
       </section>
       <section id="sets" aria-labelledby="sets-heading">
         <div class="section-head">
           <div>
-            <p class="eyebrow">01 / COLLECTIONS</p>
-            <h2 id="sets-heading">잘 어울리는 것들부터.</h2>
+            <h2 id="sets-heading">디자인 프리셋</h2>
           </div>
           <p>색상·형태·폰트·컴포넌트가 함께 선택됩니다.</p>
         </div>
@@ -62,14 +56,18 @@
       <section class="workbench" aria-labelledby="encyclopedia-heading">
         <div class="section-head">
           <div>
-            <p class="eyebrow">02 / COMPONENT ENCYCLOPEDIA</p>
-            <h2 id="encyclopedia-heading">이런 요소를 찾고 있었나요?</h2>
+            <h2 id="encyclopedia-heading">컴포넌트 목록</h2>
           </div>
           <p id="selection-label" aria-live="polite"></p>
         </div>
+        <p id="recommendation-reason" class="help"></p>
+        <label class="recommend-filter"
+          ><input type="checkbox" id="recommended-only" />권장 요소만
+          표시</label
+        >
         <div class="toolbar">
           <label class="search-label"
-            >모양과 용도로 찾기<input
+            >컴포넌트 검색<input
               type="search"
               id="catalog-search"
               placeholder="예: 잠깐 뜨는 알림, 확인창, Toast…" /></label
@@ -77,45 +75,55 @@
             >종류<select id="catalog-category">
               <option value="all">모든 요소</option>
             </select></label
-          ><label
-            >미리보기<select id="catalog-theme">
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-            </select></label
           ><label>색상<select id="catalog-palette"></select></label
-          ><label>형태<select id="catalog-style"></select></label>
+          ><label>형태<select id="catalog-style"></select></label
+          ><label>메뉴 배치<select id="catalog-navigation"></select></label
+          ><label>CSS 애니메이션<select id="catalog-motion"></select></label>
         </div>
         <p class="help">
-          카드를 누르면 이름과 용도를 배우고, 다른 표현을 골라 직접 눌러볼 수
-          있어요. 세트를 다시 고르면 개별 변경이 초기화됩니다.
+          요소를 선택하면 표현과 동작을 확인할 수 있습니다. 프리셋을 다시
+          선택하면 개별 변경이 초기화됩니다.
         </p>
+        <details class="preview-options" id="layout-options">
+          <summary>메뉴 배치 미리보기 · Light / Dark</summary>
+          <div id="navigation-preview" class="paired-layout"></div>
+          <p id="navigation-description" class="help"></p>
+        </details>
+        <details class="preview-options" id="motion-options">
+          <summary>CSS 애니메이션 미리보기 · Light / Dark</summary>
+          <p class="help">
+            각 효과의 재생 버튼으로 선택한 속도를 확인합니다. 시스템 동작 줄이기
+            설정에서는 애니메이션을 실행하지 않습니다.
+          </p>
+          <div id="motion-preview"></div>
+          <button type="button" id="download-motion">
+            애니메이션 CSS 저장
+          </button>
+        </details>
+        <style id="selected-motion-preview"></style>
         <div class="library-layout">
           <div>
             <div class="component-grid" id="component-grid"></div>
             <p id="no-results" hidden>
-              찾는 요소가 없어요. 다른 이름이나 용도로 검색해 보세요.
+              검색 결과가 없습니다. 검색어나 분류를 변경하세요.
             </p>
           </div>
           <aside class="selection-panel">
-            <p class="eyebrow">YOUR DESIGN RECIPE</p>
-            <h3>나의 디자인 조합</h3>
+            <h3>선택 요약</h3>
             <div id="recipe"></div>
             <p class="help">
               현재 선택이 작업지시에 반영됩니다. 실제 프로젝트에 필요한 요소에
               적용하세요.
             </p>
-            <a href="#handoff" class="primary jump">작업지시 확인하기 ↓</a
-            ><button type="button" id="share-selection">
-              이 조합 링크 복사
-            </button>
+            <a href="#handoff" class="primary jump">작업지시 확인 ↓</a
+            ><button type="button" id="share-selection">선택 링크 복사</button>
             <p id="save-status" class="help" role="status"></p>
           </aside>
         </div>
       </section>
       <section id="handoff" class="handoff" aria-labelledby="handoff-heading">
         <div>
-          <p class="eyebrow">03 / READY FOR YOUR AGENT</p>
-          <h2 id="handoff-heading">고른 디자인, 그대로 전달하세요.</h2>
+          <h2 id="handoff-heading">에이전트 작업지시</h2>
           <p>색상·간격·요소별 표현과 동작까지 담긴 작업지시입니다.</p>
           <div class="export-buttons">
             <button class="primary" id="copy-brief" type="button">
@@ -127,7 +135,7 @@
             >
           </div>
           <p class="help">
-            설정 JSON은 기존 CLI에서도 사용할 수 있어요. 프로젝트 설정에서 적용
+            설정 JSON을 CLI 입력으로 사용할 수 있습니다. 프로젝트 설정에서 적용
             범위·프레임워크·폰트를 조정하고 CSS와 프로필을 함께 내보내세요.
           </p>
         </div>
@@ -140,11 +148,7 @@
         </label>
       </section>
     </main>
-    <footer>
-      Palette Studio / 눈으로 고르고, 명확하게 전달하기.<a href="README.md"
-        >사용 가이드 ↗</a
-      >
-    </footer>
+    <footer>Palette Studio<a href="README.md">사용 가이드 ↗</a></footer>
     <dialog id="component-dialog" aria-labelledby="detail-title">
       <div class="detail-top">
         <p id="detail-category" class="eyebrow"></p>
@@ -166,13 +170,13 @@
       ></div>
       <div id="detail-demo" class="detail-demo"></div>
       <p class="help">
-        미리보기에서 동작을 눌러보세요. 아래 동작 기준은 구현할 에이전트에게
-        함께 전달됩니다.
+        미리보기에서 동작을 확인할 수 있습니다. 아래 구현 기준은 작업지시에
+        포함됩니다.
       </p>
       <h3>구현 동작 기준</h3>
       <p id="detail-behavior" lang="en"></p>
       <button class="primary" type="button" data-close="component-dialog">
-        이 선택으로 계속하기
+        선택 적용
       </button>
     </dialog>
     <dialog id="demo-dialog" aria-labelledby="demo-title">
@@ -188,11 +192,11 @@
     <dialog id="demo-drawer" class="drawer" aria-labelledby="drawer-title">
       <button type="button" data-close="demo-drawer">닫기 ×</button>
       <h2 id="drawer-title">프로젝트 상세</h2>
-      <p>현재 맥락을 유지하면서 자세한 내용을 확인해요.</p>
-      <label>프로젝트 이름<input value="새로운 프로젝트" /></label>
+      <p>선택한 프로젝트의 상세 정보입니다.</p>
+      <label>프로젝트 이름<input value="샘플 프로젝트" /></label>
     </dialog>
     <div id="demo-toast" class="demo-toast" role="status" hidden>
-      <span>✓ 변경 내용을 저장했어요.</span
+      <span>✓ 변경 내용을 저장했습니다.</span
       ><button type="button" id="dismiss-toast" aria-label="알림 닫기">
         ×
       </button>
@@ -210,6 +214,7 @@
     <script src="data/icon-parts/system-extra.js"></script>
     <script src="data/icon-parts/data.js"></script>
     <script src="data/icon-parts/essentials.js"></script>
+    <script src="data/ui-presets.js"></script>
     <script src="data/design-catalog.js"></script>
     <script src="data/handoff-core.js"></script>
     <script src="catalog.js"></script>

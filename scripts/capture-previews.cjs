@@ -16,8 +16,8 @@ const pathsToHash = [
   "css/styles.css", "css/utilities.css", "css/palettes.css",
   "font-loader.js", "data/catalog.js", "data/font-catalog.js", "data/fonts.json",
   "icons.html", "icons.js", "css/icon-studio.css", "handoff.html",
-  "handoff.js", "css/handoff.css", "data/handoff-core.js",
-  "catalog.html", "catalog.js", "css/catalog.css", "data/design-catalog.js",
+  "handoff.js", "css/handoff.css", "data/handoff-core.js", "ui-theme.js", "css/tool-theme.css",
+  "catalog.html", "catalog.js", "css/catalog.css", "data/design-catalog.js", "data/ui-presets.js",
   "scripts/capture-previews.cjs",
   ...fs.readdirSync(path.join(root,"data/icon-parts"))
     .filter((file) => file.endsWith(".js")).sort()
@@ -35,8 +35,9 @@ const screenshots = [
   "agent-handoff-desktop.png",
   "agent-handoff-dark.png",
   "agent-handoff-mobile.png",
-  "design-catalog-desktop.png", "design-catalog-dark.png",
+  "design-catalog-desktop.png", "design-catalog-components.png",
   "design-catalog-detail.png", "design-catalog-mobile.png",
+  "design-catalog-layout.png", "design-catalog-motion.png", "design-catalog-ui-dark.png",
 ];
 function sourceHash() {
   return sha(pathsToHash.map((file) =>
@@ -65,7 +66,7 @@ async function main() {
     return {page, context};
   }
   async function shoot(page, filename, opts={}) {
-    await page.evaluate(() => window.scrollTo(0,0));
+    if(!opts.keepScroll) await page.evaluate(() => window.scrollTo(0,0));
     await page.screenshot({path:path.join(previewDir,filename),
       animations:"disabled", caret:"hide", fullPage:Boolean(opts.fullPage)});
     const file=fs.readFileSync(path.join(previewDir,filename));
@@ -142,11 +143,19 @@ async function main() {
       const {page,context}=await open("catalog.html","",1440,1200);
       await page.locator('[data-set="studio"]').waitFor();
       await shoot(page,"design-catalog-desktop.png");
-      await page.selectOption('#catalog-theme','dark');
-      await shoot(page,"design-catalog-dark.png");
-      await page.selectOption('#catalog-theme','light');
+      await page.locator('#component-grid').scrollIntoViewIfNeeded();
+      await shoot(page,"design-catalog-components.png",{keepScroll:true});
       await page.locator('[data-component="dialog"]').click();
       await shoot(page,"design-catalog-detail.png");
+      await page.keyboard.press('Escape');
+      await page.selectOption('#catalog-navigation','hybrid');
+      await page.locator('#layout-options').scrollIntoViewIfNeeded();
+      await shoot(page,"design-catalog-layout.png",{keepScroll:true});
+      await page.selectOption('#catalog-motion','extended');
+      await page.locator('#motion-options').scrollIntoViewIfNeeded();
+      await shoot(page,"design-catalog-motion.png",{keepScroll:true});
+      await page.click('#ui-theme');
+      await shoot(page,"design-catalog-ui-dark.png");
       await context.close();
     }
     {

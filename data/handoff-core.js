@@ -1,9 +1,9 @@
 /* Shared pure renderers for file:// Studio and dependency-free Node CLI. */
 (function (root, createCore) {
-  var api = createCore();
+  var api = createCore(typeof module !== "undefined" && module.exports ? require("./component-catalog.js") : root.PaletteComponents);
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.PaletteHandoff = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (components) {
   "use strict";
   var layouts = {
     existing: "Preserve the existing application shell, information architecture and interaction conventions.",
@@ -83,6 +83,7 @@
     result.icons.forEach(function (name) {
       check(name, icons.map(function (i) { return i.name; }), "icon");
     });
+    if (config.designSelection !== undefined) result.designSelection = components.normalize(config.designSelection);
     return result;
   }
   function selected(config, catalog) {
@@ -94,6 +95,7 @@
   function profile(config, catalog) {
     var choice = selected(config, catalog);
     return {
+      ...(config.designSelection ? {designSelection: config.designSelection, componentRecipes: components.resolve(config.designSelection)} : {}),
       profileVersion: "2.0.0",
       kitVersion: catalog.version,
       project: config.project,
@@ -205,6 +207,7 @@
       "Light and dark colors can both change within the chosen design scope.";
     return [
       "# design.md — " + config.project,
+      components.markdown(config.designSelection),
       "",
       "> Project-specific design contract for coding agents. This is a reference, not permission to rebuild the application's feature architecture.",
       "",
@@ -296,6 +299,7 @@
   function agentTask(config) {
     return [
       "# Agent task — apply selected design",
+      components.markdown(config.designSelection),
       "",
       "Use the repository's existing agent workflow (including Superpowers if enabled) rather than repeating generic planning boilerplate.",
       "",
@@ -318,6 +322,7 @@
   function checklist(config) {
     return [
       "# QA-CHECKLIST.md",
+      config.designSelection ? "- [ ] Every selected component recipe matches design-profile.json, including keyboard behavior and light/dark states." : "",
       "",
       "Scope: " + config.scope + " / " + config.target + " / " + config.framework,
       "",

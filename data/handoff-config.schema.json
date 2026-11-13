@@ -255,6 +255,242 @@
           "zap"
         ]
       }
+    },
+    "designSelection": {
+      "type": "object",
+      "required": [
+        "preset",
+        "overrides"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "preset": {
+          "enum": [
+            "calm",
+            "soft",
+            "outline",
+            "editorial",
+            "compact",
+            "brand"
+          ]
+        },
+        "overrides": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "toast": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "dialog": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "sheet": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "tooltip": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "popover": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "menu": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "alert": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "select": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "combobox": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "tabs": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "sidebar": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "breadcrumb": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "button": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "input": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "textarea": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "checkbox": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "radio": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "switch": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "slider": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "card": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "table": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "pagination": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "accordion": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "progress": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "skeleton": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "empty": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "badge": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "avatar": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "search": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            },
+            "stepper": {
+              "enum": [
+                "neutral",
+                "soft",
+                "accent"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>디자인 도감 · Palette Studio</title>
+    <meta
+      name="description"
+      content="이름을 몰라도 눈으로 고르는 UI 디자인 도감. 화면 프리셋과 30종 컴포넌트를 조합해 에이전트 작업지시로 전달하세요."
+    />
+    <link rel="stylesheet" href="css/palettes.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/catalog.css" />
+  </head>
+  <body>
+    <a class="skip" href="#encyclopedia">컴포넌트 도감으로 이동</a>
+    <header class="top">
+      <a class="brand" href="catalog.html">◈ Palette Studio</a>
+      <nav aria-label="도구">
+        <a href="catalog.html" aria-current="page">디자인 도감</a
+        ><a href="index.html">색상 · 폰트</a><a href="icons.html">아이콘</a
+        ><a href="handoff.html">작업지시</a>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">SEE IT. MIX IT. BUILD IT.</p>
+          <h1>이름은 몰라도,<br />마음에 드는 디자인은 아니까.</h1>
+          <p>
+            완성된 화면으로 시작하고, 원하는 요소만 바꾸세요.<br />눈으로 고른
+            조합이 에이전트의 구체적인 작업지시가 됩니다.
+          </p>
+          <a class="primary" href="#presets">화면부터 고르기 ↗</a>
+          <a href="#encyclopedia">요소 도감 둘러보기 ↓</a>
+        </div>
+        <div class="hero-note">
+          <span>YOUR DESIGN RECIPE</span
+          ><strong
+            ><span>06 <small>화면 프리셋</small></span
+            ><span>30 <small>요소 종류</small></span
+            ><span>90 <small>디자인 견본</small></span></strong
+          >
+          <p>설치 없이 · 로그인 없이 · 브라우저에 자동 저장</p>
+        </div>
+      </section>
+      <section id="presets" aria-labelledby="preset-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">01 / START WITH A SCREEN</p>
+            <h2 id="preset-title">어떤 분위기로 시작할까요?</h2>
+          </div>
+          <p>색뿐 아니라 형태·밀도·글자까지 한 세트로.</p>
+        </div>
+        <div id="preset-grid" class="preset-grid"></div>
+        <p class="muted">
+          현대적인 업무·제품·콘텐츠 UI 패턴을 바탕으로 구성한 추천 조합입니다.
+          사용량 순위나 유행의 통계적 검증을 뜻하지 않습니다.
+        </p>
+      </section>
+      <div class="workbench">
+        <div class="explore">
+          <section id="encyclopedia" aria-labelledby="catalog-title">
+            <p class="eyebrow">02 / FIND THE DETAILS</p>
+            <h2 id="catalog-title">“이런 거” 찾는 디자인 도감</h2>
+            <p>
+              이름 대신 하는 일로 찾아보세요. 같은 요소의 세 가지 디자인을
+              나란히 비교할 수 있어요.
+            </p>
+            <div class="search-row">
+              <label
+                >요소 검색<input
+                  id="search"
+                  type="search"
+                  placeholder="저장하면 잠깐 뜨는 알림, 확인창, 체크…" /></label
+              ><label
+                >분류<select id="category">
+                  <option value="">전체 요소</option>
+                  <option>입력</option>
+                  <option>탐색</option>
+                  <option>피드백</option>
+                  <option>오버레이</option>
+                  <option>구조</option>
+                </select></label
+              >
+            </div>
+            <label class="preview-state-control"
+              >견본 상태<select id="preview-state">
+                <option value="default">기본</option>
+                <option value="hover">마우스 올림</option>
+                <option value="focus">키보드 포커스</option>
+                <option value="disabled">비활성</option>
+                <option value="error">입력 오류</option>
+                <option value="loading">처리 중</option>
+              </select></label
+            >
+            <p class="muted">
+              입력·버튼에 적용되는 시연 상태입니다. 실제 포커스와 마우스 동작도
+              직접 체험할 수 있어요.
+            </p>
+            <p id="result-count" role="status"></p>
+            <a id="comparison-jump" href="#comparison-section" hidden
+              >담아 둔 후보 비교하기 ↓</a
+            >
+            <div id="component-grid"></div>
+            <div id="empty-results" hidden>
+              <h3>맞는 요소를 찾지 못했어요.</h3>
+              <p>‘알림’, ‘입력’, ‘메뉴’처럼 짧게 검색해 보세요.</p>
+              <button id="clear-search">검색 초기화</button>
+            </div>
+          </section>
+        </div>
+        <aside class="selection" aria-labelledby="selection-title">
+          <p class="eyebrow">03 / YOUR COMPOSITION</p>
+          <h2 id="selection-title">지금 고른 조합</h2>
+          <p id="selection-summary"></p>
+          <div class="preview-controls">
+            <label
+              >미리보기 테마<select id="theme">
+                <option value="light">라이트</option>
+                <option value="dark">다크</option>
+              </select></label
+            ><label
+              >화면 종류<select id="screen-type">
+                <option value="dashboard">대시보드</option>
+                <option value="settings">설정 폼</option>
+                <option value="content">문서</option>
+                <option value="landing">랜딩 페이지</option>
+              </select></label
+            ><label>팔레트<select id="palette"></select></label
+            ><label>스타일<select id="style"></select></label
+            ><label>본문 폰트<select id="body-font"></select></label>
+          </div>
+          <div id="screen" class="screen"></div>
+          <details>
+            <summary>요소별 선택 확인</summary>
+            <div id="chosen-list"></div>
+          </details>
+          <div class="selection-actions">
+            <button id="undo" disabled>직전 변경 되돌리기</button
+            ><button id="reset">이 프리셋으로 초기화</button>
+          </div>
+          <a id="handoff-link" class="primary" href="handoff.html"
+            >이 조합으로 작업지시 만들기 ↗</a
+          >
+          <p class="muted">
+            다음 화면에서 적용 범위와 프레임워크를 정하고 JSON·CSS·프롬프트를
+            내보냅니다.
+          </p>
+          <p id="storage-warning" role="status" hidden>
+            브라우저 저장이 제한됩니다. 작업지시 화면에서 JSON을 저장하세요.
+          </p>
+        </aside>
+      </div>
+      <section
+        id="comparison-section"
+        hidden
+        aria-labelledby="comparison-title"
+      >
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">SIDE BY SIDE</p>
+            <h2 id="comparison-title">
+              담아 둔 후보 비교 <span id="compare-count"></span>
+            </h2>
+          </div>
+          <button id="clear-compare">비교 비우기</button>
+        </div>
+        <div id="comparison" class="recipe-grid"></div>
+        <p>서로 다른 요소도 최대 3개까지 담아 비교할 수 있어요.</p>
+      </section>
+      <footer>
+        <strong>고른 디자인을, 구현할 수 있는 언어로.</strong>
+        <p>프리셋 → 요소 교체 → 화면 확인 → 에이전트 작업지시</p>
+        <a href="docs/CATALOG.md">도감 사용법과 디자인 구성 근거</a>
+      </footer>
+    </main>
+    <dialog id="demo-dialog" aria-labelledby="demo-title">
+      <form method="dialog">
+        <button class="dialog-close" aria-label="닫기">×</button>
+        <h2 id="demo-title">프로젝트를 저장할까요?</h2>
+        <p>선택한 디자인을 이 프로젝트에 적용합니다.</p>
+        <label>프로젝트 이름<input value="나의 프로젝트" /></label>
+        <div class="dialog-actions">
+          <button value="cancel">취소</button
+          ><button value="save" class="primary">저장</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="reset-dialog" aria-labelledby="reset-title">
+      <h2 id="reset-title">이 프리셋의 기본값으로 돌아갈까요?</h2>
+      <p>
+        직접 바꾼 요소와 색상·폰트가 초기화됩니다. 초기화 후 되돌릴 수 있습니다.
+      </p>
+      <form method="dialog">
+        <button value="cancel">취소</button
+        ><button value="reset" class="primary">초기화</button>
+      </form>
+    </dialog>
+    <div
+      id="live-toast"
+      class="sample live-toast"
+      role="status"
+      aria-live="polite"
+      hidden
+    ></div>
+    <div id="notice" role="status" aria-live="polite"></div>
+    <script src="data/catalog.js"></script>
+    <script src="data/font-catalog.js"></script>
+    <script src="font-loader.js"></script>
+    <script src="data/component-catalog.js"></script>
+    <script src="catalog.js"></script>
+  </body>
+</html>

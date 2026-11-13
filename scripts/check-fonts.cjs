@@ -242,7 +242,7 @@ async function main() {
       .screenshot({ path: path.join(root, "previews/font-catalog.png") });
     const net = [];
     offline.on("request", (r) => {
-      if (/^https?:/.test(r.url())) net.push(r.url());
+      if (/^https?:/.test(r.url()) && !r.url().startsWith(process.env.PALETTE_QA_ORIGIN || "file:")) net.push(r.url());
     });
     await offline.selectOption("#font-source", "system");
     await offline.evaluate(() => PaletteStudio.readyFonts());

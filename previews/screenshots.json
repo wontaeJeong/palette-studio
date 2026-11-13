@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "engine": "Chromium (Playwright)",
-  "browserVersion": "151.0.7922.34",
+  "browserVersion": "156.0.8078.79",
   "deviceScaleFactor": 1,
   "network": "offline",
   "sourceFiles": [
@@ -23,6 +23,10 @@
     "handoff.js",
     "css/handoff.css",
     "data/handoff-core.js",
+    "catalog.html",
+    "catalog.js",
+    "css/catalog.css",
+    "data/component-catalog.js",
     "scripts/capture-previews.cjs",
     "data/icon-parts/actions.js",
     "data/icon-parts/content.js",
@@ -33,84 +37,98 @@
     "data/icon-parts/system-extra.js",
     "data/icon-parts/system.js"
   ],
-  "sourceHash": "29ed931a95a9cc9f80a328438c9527532e2d431bfc73f385eafb1e0ee0c87c8c",
+  "sourceHash": "b77974c6708fb43de7ec9c818d4cbedfad8441277a296aabb79a2e0f6f7c71d0",
   "screenshots": [
     {
       "path": "studio-overview-light.png",
       "width": 1440,
       "height": 980,
-      "bytes": 136528,
-      "sha256": "690f90cb02cefe38ddaa3a2d9371c8d69b2d018f2c8703c469940d85a922df26"
+      "bytes": 135106,
+      "sha256": "452c0240ba63e15ecc46f10778d2f6385763f7b403c2f0b3c99e9e9a178eca17"
     },
     {
       "path": "studio-overview-dark.png",
       "width": 1440,
       "height": 980,
-      "bytes": 137839,
-      "sha256": "f112591e92827088b57dd6dff1a0591ebb0265861efb7df1c8a490faa8afd625"
+      "bytes": 136286,
+      "sha256": "9cfeeba6f7cf4797f6c2544bf347807dd80ea1e9e952a534b94c5ccda75bf894"
     },
     {
       "path": "studio-fonts-desktop.png",
       "width": 1440,
       "height": 980,
-      "bytes": 132580,
-      "sha256": "4b98454f5f450a29941515c5be82cd51f7c3d04f7dc02605f008a18f9ef3457d"
+      "bytes": 133014,
+      "sha256": "1ddd44abbe1168d49627bc51903e563c5ac02ad589a7d1430b24cc4a89606568"
     },
     {
       "path": "studio-mobile-light.png",
       "width": 390,
       "height": 844,
-      "bytes": 59984,
-      "sha256": "bec81bb640c86325e16b81a454b4f4f8646c5bb0939db1cbbd197c49583c3519"
+      "bytes": 57441,
+      "sha256": "6512fcba122809bdc6d4202156878d1468d27bb9142a5aea23701917e6d120c8"
     },
     {
       "path": "studio-mobile-dark.png",
       "width": 390,
       "height": 844,
-      "bytes": 60244,
-      "sha256": "33b2eae5a9fa4e48e05b90b4b671203140fe775976fdef0d295dae3159fea848"
+      "bytes": 57906,
+      "sha256": "feeb6b723d0f01d4160dc84bcedd70db83d2b34799d2b22a8e94fbfaad7c3eb5"
     },
     {
       "path": "icon-studio-desktop.png",
       "width": 1460,
       "height": 990,
-      "bytes": 155565,
-      "sha256": "5376b7e96c182047002878d6b422c256c7410fca3e8650f96e46b01e081b19be"
+      "bytes": 143977,
+      "sha256": "19c51c10c428c8e8ec9a9798c2a2203ad2240ab8ac8748a1c621e15f884bdb97"
     },
     {
       "path": "icon-studio-dark.png",
       "width": 1460,
       "height": 990,
-      "bytes": 132030,
-      "sha256": "04a9f9af530691c1c3b352f9d7909a93116c0babbb1597cbac59a71c5c543bee"
+      "bytes": 119922,
+      "sha256": "1bdb46d4c7ca1601bbb0ed2fc1c66ed70995a010ebfddd90239775f83722fa1b"
     },
     {
       "path": "icon-studio-mobile.png",
       "width": 390,
-      "height": 2654,
-      "bytes": 140281,
-      "sha256": "17663f43df28ff73023beb152d52a0fd9930d0a2fe81d734cb7a099ca48766d0"
+      "height": 2680,
+      "bytes": 125892,
+      "sha256": "bdea094b2092a233fefd7421f7ccf9b5f493f33af92eceb8bd85f732c071acdb"
     },
     {
       "path": "agent-handoff-desktop.png",
       "width": 1460,
       "height": 990,
-      "bytes": 167774,
-      "sha256": "69d8c36194e090d34f34f8b4e4bd0c496b3f56e20d1aff71df0c615c81ae3563"
+      "bytes": 158579,
+      "sha256": "2f52e7e5ac3fdadbdc1f8657e6bccfc2010fddafdffef5e2b1a284548efba6f0"
     },
     {
       "path": "agent-handoff-dark.png",
       "width": 1460,
       "height": 990,
-      "bytes": 154533,
-      "sha256": "42285dd606165cbc9aeff54f380a7374f56ccb0d2951a15c33d1e12fb0cb7aa5"
+      "bytes": 146878,
+      "sha256": "62ba3e8f721c1827cfbb65455cb83d83db90ded38eda2ad25ca14690ee73ea6c"
     },
     {
       "path": "agent-handoff-mobile.png",
       "width": 390,
-      "height": 3529,
-      "bytes": 208873,
-      "sha256": "2e09dae8d09c33e5c13861021cd16789f4987569df8093ccbbec906f7df1f965"
+      "height": 3562,
+      "bytes": 191978,
+      "sha256": "d957eb59ee893bdd97b5fcbe67b02ef2cd60e81f696416c603c45f1605c73876"
+    },
+    {
+      "path": "catalog-desktop.png",
+      "width": 1440,
+      "height": 1000,
+      "bytes": 134073,
+      "sha256": "a1dc82e8d3826a8bd953c5dabac563eaba44d39d689ea4e0c28b940a5184610f"
+    },
+    {
+      "path": "catalog-mobile.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 51272,
+      "sha256": "77021d25bc6885af6e85f459b38d42902f6d75cd8061d4884f5a3a842ab2de78"
     }
   ]
 }

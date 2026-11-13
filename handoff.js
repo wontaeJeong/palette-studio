@@ -9,7 +9,7 @@
   const esc = (x) => String(x).replace(/[&<>"']/g,
     (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const readSaved = (key) => {
-    try { return JSON.parse(localStorage.getItem(key) || "{}"); }
+    try { const value = JSON.parse(localStorage.getItem(key) || "{}"); return value && typeof value === "object" && !Array.isArray(value) ? value : {}; }
     catch (_) { return {}; }
   };
   const main = readSaved("palette-studio-v1");
@@ -39,6 +39,9 @@
     if (hash.has(urlKey)) candidates.fonts[fontKey] = hash.get(urlKey);
   }
   if (hash.has("icons")) candidates.icons = hash.get("icons").split(",").filter(Boolean);
+  if (hash.has("designSelection")) {
+    try { candidates.designSelection = JSON.parse(hash.get("designSelection")); } catch (_) { /* Retain saved selection on malformed URL. */ }
+  }
   let config;
   try { config = core.normalize(candidates, catalog, fonts, icons); }
   catch (_) { config = core.normalize(initial, catalog, fonts, icons); }
@@ -98,6 +101,7 @@
     params.set("codeFont", config.fonts.code);
     params.set("fontSource", config.fonts.source);
     params.set("icons", config.icons.join(","));
+    if (config.designSelection) params.set("designSelection", JSON.stringify(config.designSelection));
     try { history.replaceState(null, "", location.pathname + location.search + "#" + params); }
     catch (_) {}
   }

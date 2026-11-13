@@ -17,12 +17,15 @@ const pathsToHash = [
   "font-loader.js", "data/catalog.js", "data/font-catalog.js", "data/fonts.json",
   "icons.html", "icons.js", "css/icon-studio.css", "handoff.html",
   "handoff.js", "css/handoff.css", "data/handoff-core.js",
+  "catalog.html", "catalog.js", "css/catalog.css", "data/component-catalog.js",
   "scripts/capture-previews.cjs",
   ...fs.readdirSync(path.join(root,"data/icon-parts"))
     .filter((file) => file.endsWith(".js")).sort()
     .map((file) => "data/icon-parts/" + file),
 ];
 const screenshots = [
+  "catalog-desktop.png",
+  "catalog-mobile.png",
   "studio-overview-light.png",
   "studio-overview-dark.png",
   "studio-fonts-desktop.png",
@@ -52,7 +55,7 @@ async function main() {
       serviceWorkers:"block",
     });
     // Only repository-local, offline assets influence the screenshot.
-    await context.route(/^https?:\/\//, route => route.abort("blockedbyclient"));
+    await context.route(/^https?:\/\//, route => route.request().url().startsWith(process.env.PALETTE_QA_ORIGIN || "file:") ? route.continue() : route.abort("blockedbyclient"));
     const page = await context.newPage();
     page.setDefaultTimeout(20000);
     page.on("pageerror", e => pageErrors.push(file + ": " + e.message));
@@ -132,6 +135,12 @@ async function main() {
         "palette=slate-teal&style=operational&target=new-app&scope=both&layout=workflow&framework=react&fontSource=system&bodyFont=system&codeFont=system",390,844);
       await page.locator("#ah-preview-grid .ah-mock").first().waitFor();
       await shoot(page,"agent-handoff-mobile.png",{fullPage:true});
+      await context.close();
+    }
+    for (const [width,height,name] of [[1440,1000,"catalog-desktop.png"],[390,844,"catalog-mobile.png"]]) {
+      const {page,context}=await open("catalog.html","",width,height);
+      await page.locator("[data-preset]").first().waitFor();
+      await shoot(page,name);
       await context.close();
     }
     if(pageErrors.length)throw Error("Page errors:\n"+pageErrors.join("\n"));

@@ -34,7 +34,7 @@ async function main() {
     external = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("request", (r) => {
-    if (/^https?:/.test(r.url())) external.push(r.url());
+    if (/^https?:/.test(r.url()) && !r.url().startsWith(process.env.PALETTE_QA_ORIGIN || "file:")) external.push(r.url());
   });
   const go = (step) => page.locator(`[data-step="${step}"]`).click();
   try {

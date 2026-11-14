@@ -1,9 +1,9 @@
 /* One offline catalog for the browser, CLI and generated implementation briefs. */
 (function (root, factory) {
   if (typeof module === "object" && module.exports)
-    module.exports = factory(require("./ui-presets.js"), require("./design-concepts.js"));
-  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets, root.PaletteDesignConcepts);
-})(typeof globalThis !== "undefined" ? globalThis : this, function (ui, concepts) {
+    module.exports = factory(require("./ui-presets.js"), require("./design-concepts.js"), require("./navigation-designs.js"));
+  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets, root.PaletteDesignConcepts, root.PaletteNavigationDesigns);
+})(typeof globalThis !== "undefined" ? globalThis : this, function (ui, concepts, navigationDesigns) {
   "use strict";
   const {
     navigationPresets,
@@ -364,6 +364,8 @@
       concept: {studio:"minimal",bloom:"soft",precision:"minimal",editorial:"editorial",console:"compact",signal:"brutalist"}[id],
       motion: set.defaultMotion,
       navigation: set.defaultNavigation,
+      navigationStyle: {studio:"edge",bloom:"pill",precision:"outline",editorial:"underline",console:"fill",signal:"dot"}[id],
+      navigationStructure: {studio:"list",bloom:"list",precision:"grouped",editorial:"grouped",console:"rail",signal:"list"}[id],
       components: Object.fromEntries(
         components.map((c) => [
           c.id,
@@ -389,6 +391,12 @@
       if (!navigationPresets.some((n) => n.id === input.navigation))
         throw Error("Invalid design selection navigation");
       result.navigation = input.navigation;
+    }
+    for (const [field, choices] of [["navigationStyle",navigationDesigns.styles],["navigationStructure",navigationDesigns.structures]]) {
+      if (input[field] !== undefined) {
+        if (!choices.some(choice => choice.id === input[field])) throw Error("Invalid design selection " + field);
+        result[field] = input[field];
+      }
     }
     const overrides = input.components === undefined ? {} : input.components;
     if (!overrides || typeof overrides !== "object" || Array.isArray(overrides))
@@ -423,6 +431,7 @@
       concepts.brief(selected.concept),
       motionBrief(selected.motion),
       navigationBrief(selected.navigation),
+      navigationDesigns.brief(selected.navigationStyle,selected.navigationStructure,selected.navigation),
       "Apply the explicit concept shape, hierarchy and elevation from --concept-* in selected-style.css; the selected style remains the density/control-size adjustment, and selected fonts take precedence. Control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
       "",
       ...components.map(
@@ -454,6 +463,7 @@
     normalize,
     brief,
     navigationPresets,
+    navigationDesigns,
     navigationBrief,
     motionPresets,
     motionCSS,

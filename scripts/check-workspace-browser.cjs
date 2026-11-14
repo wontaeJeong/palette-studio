@@ -8,6 +8,7 @@ const { pathToFileURL } = require("node:url");
   const browser = await chromium.launch({ headless: true });
   try {
     await require("./check-workspace-review.cjs")(browser);
+    await require("./check-navigation-browser.cjs")(browser);
     const context = await browser.newContext({
       viewport: { width: 1440, height: 1000 },
       acceptDownloads: true,

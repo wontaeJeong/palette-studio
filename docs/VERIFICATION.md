@@ -13,7 +13,7 @@ node scripts/check-fonts.cjs
 
 | 확인 | 방법 | 범위 |
 |---|---|---|
-| 정적 대비 | Node 표준 라이브러리로 상대 휘도 계산 | 64개 테마 × 177쌍 = 11,328건 |
+| 정적 대비 | Node 표준 라이브러리로 상대 휘도 계산 | 64개 테마 × 178쌍 = 11,392건 |
 | 토큰 일치 | 생성 CSS와 JSON 비교 | 테마별 의미 토큰 189개 |
 | 브라우저 적용 | Chromium에서 computed custom properties 비교 | 64개 테마 |
 | 스타일 적용 | 컨트롤 높이 computed value 비교 | 6개 스타일 |
@@ -114,7 +114,7 @@ node scripts/check-screenshot-freshness.cjs
 브라우저 범위는 Playwright 1.56.1 / Chromium 141.0.7390.37입니다. Safari/Firefox/iOS·모든 스크린리더나 대상 앱 통합을 검증한 것은 아닙니다. npm 다운로드를 전체 활성 사용자 수로 환산하지 않고, GitHub의 최신 정식 릴리스(게시된 non-prerelease 릴리스, 초안 제외)가 테스트한 대표 패키지 버전과 같다고 가정하지 않습니다. 폰트/아이콘 원본은 이번 변경에서 바꾸지 않았으며 기존 별도 감사 결과는 위의 원래 범위에 한정됩니다. 전체 앱 접근성 인증을 뜻하지 않습니다.
 
 
-최신 main의 작업실 회귀도 통합했습니다. `check-workspace-browser.cjs`는 `check-workspace-review.cjs`를 함께 실행해 입력/버튼 표현의 독립성, 라이트/다크 비교 링크·URL·저장 복원, 시스템 폰트 공급에서 역할별 선택 복구, 내비게이션 버튼의 접근 가능한 이름을 확인합니다. 라이브러리 내보내기 화면은 간결한 한국어 적용 범위·React/Astro 요구사항을 표시하며, 전체 canonical `library-README.md`의 실제 다운로드 바이트를 1440/390px에서 검사합니다. 두 내보내기 캡처를 포함한 최신 manifest는 31개 PNG를 검사합니다.
+최신 main의 작업실 회귀도 통합했습니다. `check-workspace-browser.cjs`는 `check-workspace-review.cjs`를 함께 실행해 입력/버튼 표현의 독립성, 라이트/다크 비교 링크·URL·저장 복원, 시스템 폰트 공급에서 역할별 선택 복구, 내비게이션 버튼의 접근 가능한 이름을 확인합니다. 라이브러리 내보내기 화면은 간결한 한국어 적용 범위·React/Astro 요구사항을 표시하며, 전체 canonical `library-README.md`의 실제 다운로드 바이트를 1440/390px에서 검사합니다. 두 내보내기 캡처를 포함한 최신 manifest는 34개 PNG를 검사합니다.
 
 
 ### 로컬 HTTP QA의 연결 초기화 추적
@@ -141,3 +141,6 @@ PALETTE_URL=http://127.0.0.1:8769/index.html node scripts/check-library-metrics-
 ```
 
 관측한 전송 실패와 제어 조건에서의 통과를 함께 기록하며, 원래 8768 서버의 실패를 통과로 재분류하지 않습니다. 오프라인 기본 검사와 HTTP 검사는 같은 실제 client/UI를 사용합니다.
+
+
+메뉴 스타일 통합 후 `test-navigation-designs.cjs`는 여섯 선택 표시·세 구성의 기본값/이전 설정 이관/유효성/선택 CSS와 CLI를 검증합니다. 작업실 검사는 `check-navigation-browser.cjs`의 실제 메뉴 클릭·현재 화면·키보드·모바일·독립 내보내기 CSS/마크업 검사도 호출합니다. `check-navigation-library-integration.cjs`는 index 1440px와 단일 HTML 390px에서 Glass + 옆선 + 그룹 + 상단/왼쪽 + 실제 Base UI를 함께 선택해 현재 설정 화면 유지, 자동 메트릭 요청 0건, 명시적 조회 전후 파일 일치, Astro 다크 전용 실제 프로필 다운로드와 UI/CLI 파일 바이트 일치를 확인합니다. 최신 캡처는 기존 31개와 메뉴 데스크톱·모바일·핸드오프 3개를 합친 34개입니다. 옆선 메뉴 대비 쌍 추가로 정적 대비 검사는 11,392건입니다.

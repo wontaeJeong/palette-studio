@@ -122,26 +122,33 @@
       '<p class="ah-note">검색 결과가 없습니다.</p>';
     $("ah-icon-count").textContent = config.icons.length + " / 24";
   }
+  const navigationCSS = document.createElement("style");
+  navigationCSS.textContent = window.PaletteNavigationDesigns.allCSS();
+  document.head.append(navigationCSS);
   function renderPreview() {
     const p = catalog.palettes.find((item) => item.id === config.palette);
     const title = config.layout === "content" ? "문서 탐색" :
       config.layout === "workflow" ? "요청 처리" :
       config.layout === "marketing" ? "제품 개요" : "프로젝트 현황";
+    const selection = config.designSelection;
+    const navigation = selection ? window.PaletteNavigationDesigns.markup({style:selection.navigationStyle,structure:selection.navigationStructure,orientation:selection.navigation === "top" ? "horizontal" : "vertical",interactive:false,icons:window.PaletteNavigationDesigns.iconMarkup(icons)}) : "";
     const panes = mode === "split" ? ["light", "dark"] : [mode];
     $("ah-preview-grid").innerHTML = panes.map((theme) =>
       '<div class="ah-mock" data-theme="' + esc(theme) + '" data-palette="' +
         esc(config.palette) + '" data-style="' + esc(config.style) + '" data-concept="' + (config.designSelection?.concept || 'minimal') + '">' +
         '<div class="ah-mock-header"><span>' + esc(p.name) + '</span><span>' +
         (theme === "light" ? "라이트" : "다크") + '</span></div>' +
-        '<div class="ah-mock-area" data-concept-part="surface"><div class="ah-mock-title" data-concept-part="title">' + title + '</div>' +
-        '<div class="ah-mock-tab">개요</div>' +
+        '<div class="ah-mock-area' + (selection ? ' ah-nav-frame' : '') + '" data-concept-part="surface"' + (selection ? ' data-navigation="' + selection.navigation + '" data-menu-structure="' + selection.navigationStructure + '"' : '') + '>' +
+        (selection && selection.navigation === "hybrid" ? '<div class="ah-nav-context">작업 공간 · 계정</div>' : '') + navigation +
+        '<div class="ah-preview-content"><div class="ah-mock-title" data-concept-part="title">' + title + '</div>' +
+        (selection ? '' : '<div class="ah-mock-tab">개요</div>') +
         '<div class="ah-mock-metric">1,284</div>' +
         '<div class="ah-mock-desc">샘플 데이터 · 30일 기준</div>' +
         '<div class="ah-mock-row"><span>진행 항목</span><strong>32</strong></div>' +
         '<div class="ah-mock-row"><span>완료</span><strong class="ah-mock-good">28 · 완료</strong></div>' +
         '<div class="ah-mock-row"><span>검토 필요</span><strong class="ah-mock-warn">4 · 검토</strong></div>' +
         '<div class="ah-mock-row"><span>현재 선택</span><span class="ah-mock-chip">활성</span></div>' +
-        '</div></div>'
+        '</div></div></div>'
     ).join("");
     document.querySelectorAll("[data-mode]").forEach((button) =>
       button.setAttribute("aria-pressed", String(button.dataset.mode === mode)));

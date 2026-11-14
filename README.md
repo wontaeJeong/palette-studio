@@ -176,6 +176,7 @@ node scripts/check-handoff-schemas.cjs
 node scripts/test-design-handoff.cjs
 node scripts/test-design-catalog.cjs
 node scripts/test-design-concepts.cjs
+node scripts/test-navigation-designs.cjs
 node scripts/test-ui-libraries.cjs
 node --test scripts/test-library-metrics.cjs
 ```
@@ -192,6 +193,7 @@ node scripts/check-component-concepts.cjs
 node scripts/check-component-gallery.cjs
 node scripts/check-library-browser.cjs
 node scripts/check-library-selection.cjs
+node scripts/check-navigation-library-integration.cjs
 node scripts/check-library-export-summary.cjs
 node scripts/check-library-metrics-browser.cjs
 node scripts/capture-previews.cjs

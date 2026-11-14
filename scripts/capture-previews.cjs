@@ -37,6 +37,7 @@ const pathsToHash = [
   "catalog.js",
   "css/catalog.css",
   "data/design-catalog.js",
+  "data/navigation-designs.js",
   "data/ui-presets.js",
   "workspace.js",
   "css/workspace.css",
@@ -67,12 +68,15 @@ const screenshots = [
   "studio-overview-light.png",
   "studio-overview-dark.png",
   "studio-fonts-desktop.png",
+  "studio-navigation-desktop.png",
+  "studio-navigation-mobile.png",
   "studio-mobile-light.png",
   "studio-mobile-dark.png",
   "icon-studio-desktop.png",
   "icon-studio-dark.png",
   "icon-studio-mobile.png",
   "agent-handoff-desktop.png",
+  "agent-handoff-navigation.png",
   "agent-handoff-dark.png",
   "agent-handoff-mobile.png",
   "design-catalog-desktop.png",
@@ -190,6 +194,25 @@ async function main() {
       await shoot(page, "studio-fonts-desktop.png", { keepScroll: true });
       await context.close();
     }
+    // Menu recipes: same palette, distinct selected shape and grouping.
+    {
+      const { page, context } = await open(
+        "index.html",
+        "mode=light&fontSource=local-only",
+        1440,
+        1100,
+      );
+      await page.locator("#structure-options > summary").click();
+      await page.selectOption("#catalog-navigationStructure", "grouped");
+      await page.locator('[data-navigation-style="outline"]').click();
+      await page.locator("#structure-options").scrollIntoViewIfNeeded();
+      await shoot(page, "studio-navigation-desktop.png", { keepScroll: true });
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.locator('[data-navigation-style="pill"]').click();
+      await page.locator("#toggle-preview").click();
+      await shoot(page, "studio-navigation-mobile.png", { keepScroll: true });
+      await context.close();
+    }
     // Mobile showcase uses expandable real preview dock, not a scaled desktop image.
     {
       const { page, context } = await open(
@@ -256,6 +279,25 @@ async function main() {
       );
       await page.locator("#ah-preview-grid .ah-mock").first().waitFor();
       await shoot(page, "agent-handoff-mobile.png", { fullPage: true });
+      await context.close();
+    }
+    {
+      const selection = require("../data/design-catalog.js").selection(
+        "precision",
+      );
+      const config = {
+        palette: "graphite-plum",
+        style: "operational",
+        designSelection: selection,
+        fonts: { source: "system" },
+      };
+      const { page, context } = await open(
+        "handoff.html",
+        "catalogConfig=" + encodeURIComponent(JSON.stringify(config)),
+        1460,
+        990,
+      );
+      await shoot(page, "agent-handoff-navigation.png");
       await context.close();
     }
     // Set-first library and real interactive component detail.

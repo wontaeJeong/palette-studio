@@ -49,6 +49,7 @@
     } catch {}
   }
   persistView();
+  let previewPage = "projects";
   let projectDraft = config.project,
     projectValid = true;
   const projects = [
@@ -223,11 +224,22 @@
         const v = config.designSelection.components,
           navigation = config.designSelection.navigation;
         const demo = (id) => catalog.demo(id, v[id], true, mode + "-" + index);
-        const nav = `<nav class="mock-nav" aria-label="샘플 프로젝트 메뉴"><button type="button" aria-label="프로젝트" aria-current="page">${svg(config.icons[0] || "layout-dashboard")}<span>프로젝트</span></button><button type="button" aria-label="설정" data-preview-notice="settings">${svg("settings")}<span>설정</span></button></nav>`;
-        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-concept="${config.designSelection.concept}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "라이트" : "다크"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} 프로젝트</strong><span>제품팀</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><h3>프로젝트 현황</h3></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form"><h4>새 프로젝트</h4><label class="treatment ${v.input}">프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><div class="treatment ${v.button}"><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : ""}">${svg("plus", 16)}프로젝트 추가</button></div></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
+        const nav = window.PaletteNavigationDesigns.markup({
+          style: config.designSelection.navigationStyle,
+          structure: config.designSelection.navigationStructure,
+          orientation: navigation === "top" ? "horizontal" : "vertical",
+          active: previewPage,
+          className:
+            "mock-nav" + (navigation === "hybrid" ? " mock-secondary-nav" : ""),
+          icons: {
+            projects: svg(config.icons[0] || "layout-dashboard"),
+            settings: svg("settings"),
+          },
+        });
+        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-concept="${config.designSelection.concept}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "라이트" : "다크"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-menu-structure="${config.designSelection.navigationStructure}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} 프로젝트</strong><span>제품팀</span></div>${navigation === "hybrid" ? `<div class="mock-context-nav"><span>작업 공간</span><button type="button" data-preview-notice="account">계정</button></div>` : ""}${nav}<div class="mock-main"><div data-preview-projects ${previewPage === "projects" ? "" : "hidden"}><div class="mock-title"><div><h3>프로젝트 현황</h3></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form"><h4>새 프로젝트</h4><label class="treatment ${v.input}">프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><div class="treatment ${v.button}"><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : ""}">${svg("plus", 16)}프로젝트 추가</button></div></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
   name: "My Workspace",
   ready: true
-};</code></pre></div></div></section>`;
+};</code></pre></div><section data-preview-settings ${previewPage === "settings" ? "" : "hidden"}><div class="mock-title"><h3>설정</h3></div><label class="sample-check"><input type="checkbox" checked />이메일 알림</label><label class="sample-check"><input type="checkbox" />주간 요약</label><p class="help">미리보기 설정입니다.</p></section></div></div></section>`;
       })
       .join("");
     $("preview-selection").textContent =
@@ -282,6 +294,10 @@
     $("structure-summary").textContent =
       window.PaletteDesignCatalog.navigationPresets.find(
         (n) => n.id === config.designSelection.navigation,
+      ).name +
+      " · " +
+      window.PaletteNavigationDesigns.styles.find(
+        (n) => n.id === config.designSelection.navigationStyle,
       ).name +
       " · " +
       window.PaletteDesignCatalog.motionPresets.find(
@@ -414,8 +430,20 @@
     }
   });
   $("project-stage").addEventListener("click", (e) => {
-    const b = e.target.closest("[data-preview-notice]");
-    if (b) notify("설정 메뉴의 표시 예시입니다.");
+    const item = e.target.closest("[data-nav-page]");
+    if (item) {
+      const paneIndex = [...$("project-stage").children].indexOf(
+        item.closest("[data-project-preview]"),
+      );
+      previewPage = item.dataset.navPage;
+      renderPreview();
+      $("project-stage")
+        .children[paneIndex].querySelector(`[data-nav-page="${previewPage}"]`)
+        .focus({ preventScroll: true });
+      return;
+    }
+    if (e.target.closest("[data-preview-notice]"))
+      notify("계정 메뉴 예시입니다.");
   });
   $("open-export").addEventListener("click", () => {
     projectDraft = config.project;
@@ -513,10 +541,11 @@
     $("toggle-preview").setAttribute("aria-expanded", "false");
     $("toggle-preview").textContent = "미리보기 확대";
     if (pointerFocus) return;
-    document.activeElement.scrollIntoView({
-      block: "center",
-      behavior: "instant",
-    });
+    if (document.activeElement.matches(":focus-visible"))
+      document.activeElement.scrollIntoView({
+        block: "nearest",
+        behavior: "instant",
+      });
   });
   window.addEventListener("palette-selection", render);
   window.addEventListener("palette-font-status", (e) => {

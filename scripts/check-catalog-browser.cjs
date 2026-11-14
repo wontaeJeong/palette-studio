@@ -16,6 +16,16 @@ const { pathToFileURL } = require("node:url");
     const url = pathToFileURL(path.resolve(__dirname, "../catalog.html")).href;
     await page.goto(url);
     assert.equal(await page.locator("[data-set]").count(), 6);
+    assert.equal(
+      await page.locator(".set-card > .set-pair > .set-mini").count(),
+      12,
+      "two sibling theme previews per set",
+    );
+    assert.equal(
+      await page.locator(".set-card > .set-caption").count(),
+      6,
+      "captions remain outside thumbnails",
+    );
     assert.equal(await page.locator("[data-component]").count(), 19);
     assert.equal(await page.locator("h1").innerText(), "디자인 도감");
     assert(

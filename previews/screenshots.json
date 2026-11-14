@@ -34,6 +34,7 @@
     "catalog.js",
     "css/catalog.css",
     "data/design-catalog.js",
+    "data/navigation-designs.js",
     "data/ui-presets.js",
     "workspace.js",
     "css/workspace.css",
@@ -70,42 +71,56 @@
     "data/icon-parts/system-extra.js",
     "data/icon-parts/system.js"
   ],
-  "sourceHash": "53ab90c5d286c0446ec5a68f12c26da3cd475f2da9860ab68d34f6d15cbb9942",
+  "sourceHash": "24b156ccded65bbba68b42c1e252c8182b3392666969b7d58d988d650c91828d",
   "screenshots": [
     {
       "path": "studio-overview-light.png",
       "width": 1440,
       "height": 980,
-      "bytes": 126593,
-      "sha256": "7f5f13b24ed045820887957525ee31dfd40571f1a30bb7ccc9bfc6435e1ee088"
+      "bytes": 127517,
+      "sha256": "9bc97e54b8c7f5ff525f6b2a4bc526d421e2a72f06fef0b92351a018054c1569"
     },
     {
       "path": "studio-overview-dark.png",
       "width": 1440,
       "height": 980,
-      "bytes": 126940,
-      "sha256": "f709af41a1ce8540ea29d63ae05ebb3ce1bd1afb9d39cfa9a7f718812719b08f"
+      "bytes": 127712,
+      "sha256": "1d92ff499e5c587cd685b0611b882acc59c42b9136a370da704bf5864244d70e"
     },
     {
       "path": "studio-fonts-desktop.png",
       "width": 1440,
       "height": 980,
-      "bytes": 80887,
-      "sha256": "0c5d341e488f54fb3285196ddbc80f7661e8aac01086054f13fb78b69b1a315a"
+      "bytes": 81158,
+      "sha256": "4d055bcbfbbb274d89934b513bd03220a2837653342dbd744ee29f536eb933de"
+    },
+    {
+      "path": "studio-navigation-desktop.png",
+      "width": 1440,
+      "height": 1100,
+      "bytes": 112929,
+      "sha256": "e8301980a838ac214c390e8b38a769fb9cf2996bf046b7800d54a75d219e3b88"
+    },
+    {
+      "path": "studio-navigation-mobile.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 41003,
+      "sha256": "020088d09fc42918d8bababbbbaed090ddf5379f9cbc774de79810a53edcf334"
     },
     {
       "path": "studio-mobile-light.png",
       "width": 390,
       "height": 844,
-      "bytes": 40059,
-      "sha256": "eb3cee4428aa422abb5745b267269e757a24576ae4d53c00357e261994fb6582"
+      "bytes": 42767,
+      "sha256": "3a1b98a75daf8092583cadad6b1bf6fbb1acea778cd48186474b5a34f1aabfc7"
     },
     {
       "path": "studio-mobile-dark.png",
       "width": 390,
       "height": 844,
-      "bytes": 40145,
-      "sha256": "80ba2ca2dae7483958c2389463976774fa5b25c5d5b968edf113344dc6a3b720"
+      "bytes": 42739,
+      "sha256": "64d0cf91df8ba0f3f92916f03c36e882477d08dda57d71853f9d7c2921f01e29"
     },
     {
       "path": "icon-studio-desktop.png",
@@ -118,8 +133,8 @@
       "path": "icon-studio-dark.png",
       "width": 1460,
       "height": 990,
-      "bytes": 121146,
-      "sha256": "63107613c567cf81650418b6b6758bf39b2af906b1e0c82f789c5a169df00f23"
+      "bytes": 121163,
+      "sha256": "e273f33bcabf654c34426fc67ca6a0a288da9f4685714187a33f8eff6708865a"
     },
     {
       "path": "icon-studio-mobile.png",
@@ -150,144 +165,151 @@
       "sha256": "35af2c8b3c5e9452f43539e646dd9a81734c9e523e68aa1b4b2192c5dde97da8"
     },
     {
+      "path": "agent-handoff-navigation.png",
+      "width": 1460,
+      "height": 990,
+      "bytes": 181263,
+      "sha256": "836a6de265f29a0c9440c75a64a36bbd9e2aea1a2935f614a31b20bd619f1892"
+    },
+    {
       "path": "design-catalog-desktop.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 146508,
-      "sha256": "2d3f104ff0c4e23614aaaacc219693bd231911d2c412732be99600a950a20a58"
+      "bytes": 150193,
+      "sha256": "56a3755d57e55d216c18d304ac4cf743a3a96b154001f68b651c469b01b8df44"
     },
     {
       "path": "design-catalog-components.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 181718,
-      "sha256": "2a69665df6cccf674306b98906fe0a2df1001a8afb34d4af59ce444e4771dd51"
+      "bytes": 187168,
+      "sha256": "36fd037375af35d926dc0026008690e31aa2353ac661eb07d19b3de2f7d5a06e"
     },
     {
       "path": "design-catalog-detail.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 142750,
-      "sha256": "d1f97bc8fd07c1fd37acdc5fcac8e53a5c598f8678cfa18e3af6abf8fe208589"
+      "bytes": 145589,
+      "sha256": "9fb91ec86b499b4ef9924fcc20e8506addfd3ed34aad4c8857e7989559d492ca"
     },
     {
       "path": "design-catalog-layout.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 151688,
-      "sha256": "a73bed1ba86c69dd0a207d6f36dccbded1100fb902ce49ab418371b1bfdfc328"
+      "bytes": 112303,
+      "sha256": "a68cace584f5dc0671d3678c1f9d3283addd06ab268e1c24b7151901f32a295b"
     },
     {
       "path": "design-catalog-motion.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 123218,
-      "sha256": "8eef8fd0283881add37eee6f5bd90cc83ad1c98e9115f078e4691139bc0e30f7"
+      "bytes": 89674,
+      "sha256": "1abda33ad835788306a87d622cef83ef2ba267a4a5df675823880a3a6f8b32ef"
     },
     {
       "path": "design-catalog-ui-dark.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 151758,
-      "sha256": "21cc44915638d80762f31b9827ecc2c2bc32b2a32ccbe2cae897e47faedc3dc2"
+      "bytes": 152321,
+      "sha256": "a9441827a54735fd65bc14c29d3e6311bbab488652b7f21f0b53f57697a83e06"
     },
     {
       "path": "design-catalog-mobile.png",
       "width": 390,
-      "height": 8238,
-      "bytes": 493273,
-      "sha256": "7aef4c4d74ee008ae015e072b95efb8bbafa004dec1a6db14310ef28c523564b"
+      "height": 8771,
+      "bytes": 526307,
+      "sha256": "f80844d0d57d0a3ee4d923e087c55062bf505b1b059f5fa879a8cd5b7460e703"
     },
     {
       "path": "studio-concepts-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 197329,
-      "sha256": "412ee837d09297c4ee7c0287a9555f94780da7a7460cf935c57ce882ed0cf7db"
+      "bytes": 194854,
+      "sha256": "bf00b4b03054a41435cda8e2a6f9bb5fde11a80ec749dfc123d8efafd6a75ef0"
     },
     {
       "path": "studio-toast-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 193051,
-      "sha256": "abd1ad7f419af85d4b144b46c883890a5fa81efe1aedbf88f070534e2cc90f93"
+      "bytes": 193313,
+      "sha256": "1c919a5df177c232dc3aeccb4c7efcb12cff53c6f88b9f2633c216dadc61d548"
     },
     {
       "path": "studio-popover-mobile.png",
       "width": 390,
       "height": 1000,
-      "bytes": 62247,
-      "sha256": "c9cb5c41baad671b562dd02f9b1fc69f85aaa8c213ad07bb939a0757fdc8289e"
+      "bytes": 62088,
+      "sha256": "c70113886896ab02a6fb744faea18ed21e583674647850c168d22ec34c36d28b"
     },
     {
       "path": "studio-library-base-ui.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 184270,
-      "sha256": "8db6cdbf7bf7157ae8d57a512f15c47c1e045c755f16a4981e9355c3219f1a77"
+      "bytes": 184292,
+      "sha256": "c458329dc9d56e2314a52f387505d4a48394d6b865ebc5ecc8461a7edb67138f"
     },
     {
       "path": "studio-library-radix.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 162610,
-      "sha256": "6e5bc1ef0dd099a60d23907faccac76cd70fb2329f44dab8b186136e0c7355fa"
+      "bytes": 162740,
+      "sha256": "826d77db8c375feaeb733e7ac528d5f8f1bd66c61f8b5e0123e8a2221463f5e4"
     },
     {
       "path": "studio-library-react-aria.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 162053,
-      "sha256": "3a3fbcbbbe8ddae18ce42338d0808edccdf997a28d77d7ef19fcfc4106547f97"
+      "bytes": 162028,
+      "sha256": "891f59a42b68a11fd63df066c204b220ac260bd0498f0063c9346e32445d588e"
     },
     {
       "path": "studio-library-mui.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 157982,
-      "sha256": "670260e276faae1c8132e4d758a82a0cae7d59e7a033fd5ef2a1a33af88c385c"
+      "bytes": 157989,
+      "sha256": "b220ad03b9918f367ee296bc643a899ef0ca97863b31f189ef3134481b73623d"
     },
     {
       "path": "studio-library-mantine.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 156538,
-      "sha256": "a1af3ffc46a3c8e346e053c73acedf7b53733964cd02dd05536a73e13fbcd0e3"
+      "bytes": 156131,
+      "sha256": "06d21fdf6a1679c4a39c451df5daf864e75cc16c7586c029ea6588a40d22bed4"
     },
     {
       "path": "studio-library-metrics-light.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 186198,
-      "sha256": "48c1776067f3b1c98782c2b3444b58efbf32a8668e6cd8a69c303e527b65da50"
+      "bytes": 187826,
+      "sha256": "7446e05714a5543ddaffcdf54e67f15d5c89fab15234ff5047ed960be4f66cdb"
     },
     {
       "path": "studio-library-metrics-dark.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 205543,
-      "sha256": "ded3ae5fd8cd72d2c2b5d71aba84a988de6d6fb9424511d042359da2035c9ba1"
+      "bytes": 207077,
+      "sha256": "14057088ca889e9f03713173a22f1495066816e575177ac7a537c6d723269bc7"
     },
     {
       "path": "studio-library-metrics-mobile.png",
       "width": 390,
       "height": 1100,
-      "bytes": 86027,
-      "sha256": "1cff2b332fb2224d278dc7dc53e32a87c81572bce2c1ac84addee804c0d333dc"
+      "bytes": 87091,
+      "sha256": "343bb5ae152a4b59721e0c231281e287d02de35002d589adbf53d226a92140e6"
     },
     {
       "path": "studio-export-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 184773,
-      "sha256": "3a555ae44e05772dcf1fb4a274c7466e29660fefbe3d73e284ae31e7dc376e9b"
+      "bytes": 195485,
+      "sha256": "81fd27088861f7e1e1dddcb2308fe1a1b53d2804a3a260d6e3825c16929a7ff7"
     },
     {
       "path": "studio-export-mobile.png",
       "width": 390,
       "height": 1100,
-      "bytes": 77905,
-      "sha256": "27530b37e665332d93d32110c1fde6b7297070bed09636755e335e8fb4576cc3"
+      "bytes": 77909,
+      "sha256": "0aca48b95d65cbae405657669f631049b3ac28ad94c0ce04c80510eb4590e994"
     }
   ]
 }

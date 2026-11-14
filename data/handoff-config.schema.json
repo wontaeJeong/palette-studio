@@ -442,6 +442,23 @@
             "terminal",
             "tactile"
           ]
+        },
+        "navigationStyle": {
+          "enum": [
+            "edge",
+            "underline",
+            "pill",
+            "fill",
+            "outline",
+            "dot"
+          ]
+        },
+        "navigationStructure": {
+          "enum": [
+            "list",
+            "grouped",
+            "rail"
+          ]
         }
       }
     },

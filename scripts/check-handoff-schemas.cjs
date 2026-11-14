@@ -16,6 +16,9 @@ for(const schema of [configSchema,profileSchema]){
  const list=schema===configSchema ? schema.properties.icons : schema.properties.icons.properties.names;
  assert.deepEqual(list.items.enum,expected.icons);
  assert(schema.required.includes("scope"));
+ const nav=require("../data/navigation-designs.js");
+ assert.deepEqual(schema.properties.designSelection.properties.navigationStyle.enum,nav.styles.map(x=>x.id));
+ assert.deepEqual(schema.properties.designSelection.properties.navigationStructure.enum,nav.structures.map(x=>x.id));
 }
 const sample=get("examples/handoff-config.example.json");
 for(const key of configSchema.required)assert(Object.hasOwn(sample,key),"Missing example "+key);

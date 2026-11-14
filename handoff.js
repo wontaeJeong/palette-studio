@@ -130,7 +130,7 @@
       '<div class="ah-mock" data-theme="' + esc(theme) + '" data-palette="' +
         esc(config.palette) + '" data-style="' + esc(config.style) + '">' +
         '<div class="ah-mock-header"><span>' + esc(p.name) + '</span><span>' +
-        theme.toUpperCase() + '</span></div>' +
+        (theme === "light" ? "라이트" : "다크") + '</span></div>' +
         '<div class="ah-mock-area"><div class="ah-mock-title">' + title + '</div>' +
         '<div class="ah-mock-tab">개요</div>' +
         '<div class="ah-mock-metric">1,284</div>' +

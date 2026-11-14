@@ -333,6 +333,7 @@ body {
 }
 .preview-controls {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 16px;
   margin: 22px 0 18px;
@@ -572,9 +573,6 @@ body {
   margin-top: 8px;
   font-size: 10px;
   min-height: 36px;
-}
-.mock-outline {
-  border: 1px solid var(--color-line-strong);
 }
 .mock-bottom {
   display: grid;

@@ -11,8 +11,14 @@ fonts=json.loads((root/'data/fonts.json').read_text())
 embedded={f['local']:base64.b64encode((root/f['local']).read_bytes()).decode() for font in fonts['fonts'] for f in font['faces']}
 def inline_script(match):
     prefix=''
+    payload=''
+    if match[1]=='assets/studio.js':
+        # Inert source payload preserves inspectable, self-contained notices;
+        # React owns the visible disclosure and reads the same complete text.
+        payload='<template data-embedded-library-notices><details id="library-third-party-notices"><summary>라이브러리 전체 라이선스 · 고지 보기</summary><pre>'+html_module.escape(notices)+'</pre></details></template>\n'
+        prefix='window.PALETTE_EMBEDDED_NOTICES = document.querySelector("template[data-embedded-library-notices]").content.querySelector("pre").textContent;\n'
     if match[1]=='font-loader.js':prefix='window.PALETTE_EMBEDDED_FONTS = '+json.dumps(embedded,separators=(',',':'))+';\n'
-    return '<script>\n'+prefix+(root/match[1]).read_text().replace('</script','<\\/script')+'\n</script>'
+    return payload+'<script>\n'+prefix+(root/match[1]).read_text().replace('</script','<\\/script')+'\n</script>'
 html=re.sub(r'<script src="([^"]+)"></script>',inline_script,html)
 (root/'START-HERE.html').write_text(html)
 print('Built START-HERE.html:',len(html.encode()),'bytes')

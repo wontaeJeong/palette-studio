@@ -70,7 +70,11 @@ const {pathToFileURL}=require('node:url');
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no document horizontal overflow');
   }
  }
- const lifecycle=await page.evaluate(()=>{
+ // The imperative API belongs to the independent preview bundle, not the React editor.
+ const standalone=await browser.newPage();
+ await standalone.goto('file://'+path.resolve(__dirname,'../catalog.html')+'#fontSource=system');
+ await standalone.addScriptTag({path:path.resolve(__dirname,'../assets/library-preview.js')});
+ const lifecycle=await standalone.evaluate(()=>{
   const before=[...document.querySelectorAll('[data-library-portal]')].map(el=>el.id);
   const element=document.createElement('div');document.body.append(element);
   const palette=window.PALETTE_KIT.palettes[0],concept=window.PaletteDesignConcepts.get('minimal');
@@ -84,6 +88,7 @@ const {pathToFileURL}=require('node:url');
   handle.unmount();handle.unmount();element.remove();
   return {updated,same,removed:!document.getElementById(id),count:document.querySelectorAll('[data-library-portal]').length===before.length};
  });
+ await standalone.close();
  assert.deepEqual(lifecycle,{updated:true,same:true,removed:true,count:true},'mount/update retains one owned portal and unmount is idempotent');
  await page.evaluate(()=>window.PaletteCatalog.update({uiLibrary:'vanilla'}));
  assert.equal(await page.locator('[data-library-portal]').count(),0,'owned portals removed when library unmounts');
@@ -96,8 +101,10 @@ const {pathToFileURL}=require('node:url');
   await page.keyboard.press('Escape');
  }
  await page.evaluate(()=>window.dispatchEvent(new Event('pagehide')));
+ await page.waitForFunction(()=>document.querySelectorAll('[data-library-portal]').length===0);
  assert.equal(await page.locator('[data-library-portal]').count(),0,'page hide cleans owned roots');
  await page.evaluate(()=>window.dispatchEvent(new Event('pageshow')));
+ await page.waitForFunction(()=>document.querySelectorAll('[data-library-portal]').length===2);
  assert.equal(await page.locator('[data-library-portal]').count(),2,'returning from page cache restores both library panes');
  assert.deepEqual(errors,[],'no runtime errors');
  await browser.close();console.log('Library browser: PASS (five real runtimes, both modes, 390px, scoped portals/toasts, offline START-HERE)');

@@ -6,7 +6,9 @@
     "typecheck": "tsc --noEmit",
     "test:state": "node scripts/run-studio-tests.mjs",
     "test:contracts": "node scripts/run-studio-tests.mjs --contracts",
-    "test": "npm run typecheck && npm run test:state && npm run test:contracts"
+    "test": "npm run typecheck && npm run test:state && npm run test:contracts",
+    "build:studio": "node scripts/build-studio.mjs",
+    "test:studio": "node scripts/check-react-studio.cjs"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",

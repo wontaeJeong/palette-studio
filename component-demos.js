@@ -259,27 +259,43 @@
     closePopup(false);
     for (const el of [...notices.keys()]) dismissToast(el);
   }
+  let disposeListeners = () => {};
   function init(config) {
+    disposeListeners();
+    const controller = new AbortController();
+    disposeListeners = () => {
+      controller.abort();
+      cleanup();
+    };
+    const listen = (target, type, listener, options = {}) =>
+      target.addEventListener(
+        type,
+        listener,
+        typeof options === "boolean"
+          ? { capture: options, signal: controller.signal }
+          : { ...options, signal: controller.signal },
+      );
     getConfig = config;
     const host = $("demo-toast");
     host.replaceChildren();
-    document.addEventListener("pointerover", (e) => {
+    listen(document, "pointerover", (e) => {
       const trigger = e.target.closest('[data-demo="tooltip"]');
       if (trigger) showTip(trigger);
       if (tip?.el.contains(e.target)) clearTimeout(tipClose);
     });
-    document.addEventListener("pointerout", (e) => {
+    listen(document, "pointerout", (e) => {
       if (e.target.closest('[data-demo="tooltip"],.tip')) laterHide();
     });
-    document.addEventListener("focusin", (e) => {
+    listen(document, "focusin", (e) => {
       const trigger = e.target.closest('[data-demo="tooltip"]');
       if (trigger) showTip(trigger);
       else if (tip) hideTip();
     });
-    document.addEventListener("focusout", (e) => {
+    listen(document, "focusout", (e) => {
       if (e.target.closest('[data-demo="tooltip"]')) laterHide();
     });
-    document.addEventListener(
+    listen(
+      document,
       "pointerdown",
       (e) => {
         if (
@@ -291,7 +307,8 @@
       },
       true,
     );
-    document.addEventListener(
+    listen(
+      document,
       "keydown",
       (e) => {
         if (e.key === "Escape" && (tip || popup)) {
@@ -334,7 +351,7 @@
       },
       true,
     );
-    document.addEventListener("click", (e) => {
+    listen(document, "click", (e) => {
       const dismiss = e.target.closest("[data-toast-dismiss]");
       if (dismiss) {
         dismissToast(dismiss.closest(".toast-item"));
@@ -380,7 +397,8 @@
       }
     });
     for (const event of ["resize", "scroll"])
-      window.addEventListener(
+      listen(
+        window,
         event,
         () => {
           if (tip) place(tip.el, tip.trigger);
@@ -389,12 +407,13 @@
         true,
       );
     for (const id of ["component-dialog", "demo-dialog", "demo-drawer"])
-      $(id).addEventListener("close", () => {
+      listen($(id), "close", () => {
         hideTip();
         closePopup(false);
         if (id === "component-dialog")
           for (const el of [...notices.keys()]) dismissToast(el);
       });
+    return disposeListeners;
   }
   function handle(trigger) {
     const action = trigger.dataset.demo;

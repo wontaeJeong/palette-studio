@@ -14171,7 +14171,103 @@ footer {
     display: none;
   }
 }
-.sample-switch{flex-shrink:0}
+.sample-switch {
+  flex-shrink: 0;
+}
+
+/* Small previews use the same recipes as the exported navigation. */
+.navigation-style-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+.navigation-choice {
+  display: block;
+  padding: 10px;
+  min-width: 0;
+  text-align: start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-strong);
+  border-radius: 8px;
+}
+.navigation-choice[aria-pressed="true"] {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+.navigation-choice-label {
+  font-size: 12px;
+  font-weight: 700;
+}
+.navigation-choice small {
+  display: block;
+  font-size: 10px;
+  margin-top: 6px;
+  color: var(--color-ink-muted);
+}
+.navigation-choice-demo {
+  display: block;
+  margin-top: 8px;
+  pointer-events: none;
+  --ps-nav-height: 26px;
+  --ps-nav-font: 10px;
+  --ps-nav-padding: 4px;
+  --ps-nav-item-padding: 4px 6px;
+  --ps-nav-icon: 12px;
+  --ps-nav-gap: 4px;
+}
+.field-label {
+  margin: 12px 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.shell .ps-navigation {
+  --ps-nav-font: 9px;
+  --ps-nav-height: 28px;
+  --ps-nav-padding: 4px;
+  --ps-nav-item-padding: 4px;
+  --ps-nav-gap: 4px;
+  --ps-nav-icon: 12px;
+  --ps-nav-group-font: 8px;
+  --ps-nav-section-gap: 8px;
+}
+.shell .shell-side {
+  padding: 0;
+  flex: 0 0 38%;
+  min-width: 0;
+}
+.shell .shell-top {
+  flex-wrap: wrap;
+}
+.shell[data-menu-structure="rail"] .shell-side {
+  flex-basis: 20%;
+}
+.set-mini .shell .ps-navigation {
+  --ps-nav-height: 14px;
+  --ps-nav-font: 6px;
+  --ps-nav-padding: 2px;
+  --ps-nav-item-padding: 1px 2px;
+  --ps-nav-gap: 2px;
+  --ps-nav-icon: 7px;
+  --ps-nav-group-font: 6px;
+  --ps-nav-section-gap: 2px;
+}
+.set-mini .shell .ps-nav-heading {
+  padding: 0 2px;
+}
+.set-mini .shell .ps-nav-group + .ps-nav-group {
+  padding-top: 2px;
+}
+.set-mini .shell .ps-nav-item::before {
+  width: 3px;
+  height: 3px;
+  inset-inline-start: 2px;
+}
+.set-mini .shell .ps-navigation[data-nav-style="dot"] .ps-nav-item {
+  padding-inline-start: 6px;
+}
+
+.set-mini .shell-top > .ps-navigation { display:flex; }
 
 </style>
     <style>
@@ -14563,7 +14659,7 @@ body {
 }
 .mock-app {
   display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
+  grid-template-columns: 112px minmax(0, 1fr);
 }
 .mock-top {
   grid-column: 1/-1;
@@ -14584,50 +14680,6 @@ body {
 .mock-top > span {
   color: var(--color-ink-muted);
   font-size: 8px;
-}
-.mock-nav {
-  display: flex;
-  flex-direction: column;
-  padding: 12px 5px;
-  gap: 8px;
-  border-right: 1px solid var(--color-line);
-  background: var(--color-raised);
-}
-.mock-nav button {
-  min-height: 36px;
-  padding: 6px;
-  border-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-.mock-nav button[aria-current] {
-  background: var(--color-accent-subtle);
-  color: var(--color-accent-text);
-  border-left: 3px solid var(--color-accent);
-}
-.mock-nav button span {
-  display: none;
-}
-.nav-top {
-  grid-template-columns: 1fr;
-}
-.nav-top .mock-nav,
-.nav-hybrid .mock-nav {
-  grid-column: 1/-1;
-  flex-direction: row;
-  border-right: 0;
-  border-bottom: 1px solid var(--color-line);
-  padding: 6px 12px;
-}
-.nav-top .mock-nav button span,
-.nav-hybrid .mock-nav button span {
-  display: inline;
-  font-size: 9px;
-}
-.nav-hybrid {
-  grid-template-columns: 1fr;
 }
 .mock-main {
   padding: 20px 14px;
@@ -15046,20 +15098,6 @@ body {
   }
 }
 
-/* Hybrid keeps both navigation regions visible in the project example. */
-.nav-hybrid {
-  grid-template-columns: 46px minmax(0, 1fr);
-}
-.nav-hybrid > .mock-secondary-nav {
-  grid-column: 1;
-  flex-direction: column;
-  border-right: 1px solid var(--color-line);
-  border-bottom: 0;
-  padding: 12px 5px;
-}
-.nav-hybrid > .mock-secondary-nav button span {
-  display: none;
-}
 .mock-projects.solid h4.sample-emphasis {
   padding: 8px;
   border-radius: var(--ui-radius);
@@ -15067,6 +15105,91 @@ body {
 @media (max-width: 1100px) {
   .nav-hybrid {
     grid-template-columns: 38px minmax(0, 1fr);
+  }
+}
+
+/* Menu layout uses the shared navigation recipe without replacing its selected state. */
+.project-pane {
+  container-type: inline-size;
+}
+.mock-nav.ps-navigation {
+  --ps-nav-font: 11px;
+  --ps-nav-icon: 16px;
+  --ps-nav-padding: 8px;
+  --ps-nav-item-padding: 8px 6px;
+  --ps-nav-group-font: 10px;
+  border-inline-end: 1px solid var(--color-line);
+}
+.mock-app[data-menu-structure="rail"] {
+  grid-template-columns: 58px minmax(0, 1fr);
+}
+.mock-app.nav-top {
+  grid-template-columns: 1fr;
+}
+.mock-app.nav-top .mock-nav {
+  border-inline-end: 0;
+  border-bottom: 1px solid var(--color-line);
+}
+.mock-context-nav {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 11px;
+}
+.mock-context-nav button {
+  min-height: 32px;
+  padding: 4px 10px;
+}
+.mock-app.nav-hybrid > .mock-secondary-nav {
+  grid-column: 1;
+}
+.mock-app .mock-nav .ps-nav-group {
+  flex-direction: inherit;
+}
+[data-preview-settings] .sample-check {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+  font-size: 12px;
+}
+@container (max-width:420px) {
+  .mock-app,
+  .mock-app[data-menu-structure="rail"],
+  .mock-app.nav-hybrid {
+    grid-template-columns: 1fr;
+  }
+  .mock-app .mock-nav {
+    grid-column: 1/-1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .mock-app .mock-nav .ps-nav-group {
+    flex-wrap: wrap;
+  }
+  .mock-app .mock-nav .ps-nav-group + .ps-nav-group {
+    border-top: 0;
+    border-inline-start: 1px solid var(--color-line);
+    padding-top: 0;
+    padding-inline-start: 6px;
+  }
+  .mock-app .mock-nav[data-nav-structure="rail"] .ps-nav-item .ps-nav-label {
+    position: static;
+    clip-path: none;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    white-space: normal;
+    overflow: visible;
+    border: 0;
+    background: inherit;
+    color: inherit;
   }
 }
 
@@ -15166,15 +15289,26 @@ body {
         </details>
         <details id="structure-options" class="inspector-section">
           <summary>
-            <span>배치 · 전환</span><small id="structure-summary"></small>
+            <span>메뉴 · 전환</span><small id="structure-summary"></small>
           </summary>
           <div class="details-content">
             <div class="field-pair">
               <label>메뉴 배치<select id="catalog-navigation"></select></label
               ><label>전환 속도<select id="catalog-motion"></select></label>
             </div>
+            <label
+              >메뉴 구성<select id="catalog-navigationStructure"></select
+            ></label>
+            <p class="field-label">선택 표시</p>
+            <div
+              id="navigation-style-picker"
+              class="navigation-style-picker"
+              role="group"
+              aria-label="메뉴 선택 표시"
+            ></div>
+            <style id="navigation-design-css"></style>
             <details id="layout-options">
-              <summary>메뉴 배치 비교 · 라이트 / 다크</summary>
+              <summary>메뉴 미리보기</summary>
               <div id="navigation-preview" class="paired-layout"></div>
               <p id="navigation-description" class="help"></p>
             </details>
@@ -15553,19 +15687,19 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       id: "top",
       name: "상단 메뉴",
       description: "상단 높이 56px · 본문 최대 너비 1200px",
-      rule: "Place primary navigation in a 56px top bar, with content max-width 1200px below it. At widths below 768px collapse navigation into a labeled menu trigger and accessible drawer; keep the current page visible.",
+      rule: "Place primary navigation in a 56px top bar, with content max-width 1200px below it. Below 768px use a wrapping horizontal menu with visible item names; keep the current page visible.",
     },
     {
       id: "left",
       name: "좌측 메뉴",
       description: "좌측 너비 232px · 본문 패딩 24px",
-      rule: "Place primary navigation in a 232px left sidebar and content in the remaining width with 24px padding. Below 768px replace the sidebar with a 56px top bar and accessible navigation drawer; preserve focus and current page indication.",
+      rule: "Place primary navigation in a 232px left sidebar and content in the remaining width with 24px padding. Below 768px move the sidebar items into a wrapping horizontal menu above the content; retain visible item names, focus and current page indication.",
     },
     {
       id: "hybrid",
       name: "상단 + 좌측 메뉴",
       description: "상단 56px · 좌측 232px · 본문 패딩 24px",
-      rule: "Use a 56px top bar for workspace/account actions and a 232px left sidebar for section navigation. Keep content padding 24px. Below 768px retain the top bar and move section navigation into an accessible drawer. Avoid duplicating navigation destinations.",
+      rule: "Use a 56px top bar for workspace/account actions and a 232px left sidebar for section navigation. Keep content padding 24px. Below 768px retain the top bar and place section navigation in a wrapping horizontal menu with visible names above the content. Avoid duplicating navigation destinations.",
     },
   ];
   const motionPresets = [
@@ -15650,460 +15784,708 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
 
 </script>
     <script>
+/* Shared navigation recipes for previews and exported CSS. */
+(function (root, factory) {
+  if (typeof module === "object" && module.exports) module.exports = factory();
+  else root.PaletteNavigationDesigns = factory();
+})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+  "use strict";
+  const styles = [
+    {
+      id: "edge",
+      name: "옆선",
+      description: "배경 없이 왼쪽 선",
+      rule: "Keep the selected background unchanged; mark the leading edge with a 3px line and bold text.",
+    },
+    {
+      id: "underline",
+      name: "밑줄",
+      description: "글자 아래 선",
+      rule: "Keep the background unchanged; use a 3px underline and bold text.",
+    },
+    {
+      id: "pill",
+      name: "알약",
+      description: "둥근 선택 영역",
+      rule: "Use a fully rounded selected surface with a visible boundary and bold text.",
+    },
+    {
+      id: "fill",
+      name: "채움",
+      description: "선택 영역 전체 채움",
+      rule: "Fill the selected rectangular item with accent, on-accent text and bold weight.",
+    },
+    {
+      id: "outline",
+      name: "테두리",
+      description: "선택 영역 테두리",
+      rule: "Keep the background unchanged; draw a 2px outline around the selected item and use bold text.",
+    },
+    {
+      id: "dot",
+      name: "점",
+      description: "항목 앞 선택 표시",
+      rule: "Keep the background unchanged; use a visible leading dot and bold text for the current item.",
+    },
+  ];
+  const structures = [
+    { id: "list", name: "목록", description: "아이콘과 이름을 한 줄로 표시" },
+    { id: "grouped", name: "그룹", description: "그룹 이름과 간격으로 구분" },
+    {
+      id: "rail",
+      name: "아이콘",
+      description: "아이콘 중심 · 포커스 시 이름 표시",
+    },
+  ];
+  const esc = (text) =>
+    String(text).replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
+  function get(items, id) {
+    const item = items.find((item) => item.id === id);
+    if (!item) throw Error("Invalid navigation recipe: " + id);
+    return item;
+  }
+  const baseCSS = `
+.ps-navigation { display:flex; flex-direction:column; gap:var(--ps-nav-gap,6px); padding:var(--ps-nav-padding,10px); background:var(--color-nav-bg); color:var(--color-nav-fg); min-width:0; }
+.ps-navigation .ps-nav-group { display:flex; flex-direction:inherit; gap:var(--ps-nav-gap,6px); min-width:0; }
+.ps-navigation .ps-nav-heading { display:none; }
+.ps-navigation .ps-nav-item { box-sizing:border-box; position:relative; display:flex; align-items:center; gap:var(--ps-nav-gap,8px); min-height:var(--ps-nav-height,40px); padding:var(--ps-nav-item-padding,8px 10px); border:2px solid transparent; border-radius:4px; background:var(--color-nav-bg); color:var(--color-nav-fg); font:inherit; font-size:var(--ps-nav-font,14px); font-weight:400; text-align:start; text-decoration:none; cursor:pointer; }
+.ps-navigation .ps-nav-item:hover:not(:disabled) { background:var(--color-nav-hover); }
+.ps-navigation .ps-nav-item:focus-visible { outline:2px solid var(--color-focus-ring); outline-offset:2px; z-index:2; }
+.ps-navigation .ps-nav-item:disabled { cursor:not-allowed; color:var(--color-disabled-fg); background:var(--color-disabled-bg); }
+.ps-navigation .ps-nav-item[aria-current="page"] { font-weight:700; }
+.ps-navigation .ps-nav-icon { display:flex; flex-shrink:0; align-items:center; justify-content:center; width:var(--ps-nav-icon,20px); height:var(--ps-nav-icon,20px); }
+.ps-navigation .ps-nav-icon svg { width:100%; height:100%; }
+.ps-navigation .ps-nav-label { overflow-wrap:anywhere; }
+.ps-navigation[data-nav-orientation="horizontal"] { flex-direction:row; flex-wrap:wrap; align-items:center; }
+.ps-navigation[data-nav-orientation="horizontal"] .ps-nav-group { flex-wrap:wrap; }
+@media (prefers-reduced-motion:reduce) { .ps-navigation .ps-nav-item { transition:none; } }
+`;
+  function styleCSS(id) {
+    get(styles, id);
+    const root = `.ps-navigation[data-nav-style="${id}"]`,
+      active = `${root} .ps-nav-item[aria-current="page"]`;
+    return {
+      edge: `${active} { border-radius:0; border-inline-start:3px solid var(--color-nav-active-line); background:var(--color-nav-bg); }`,
+      underline: `${active} { border-radius:0; border-bottom:3px solid var(--color-nav-active-line); background:var(--color-nav-bg); }`,
+      pill: `${root} .ps-nav-item { border-radius:999px; }\n${active} { background:var(--color-nav-active-bg); color:var(--color-nav-active-fg); border-color:var(--color-nav-active-line); }`,
+      fill: `${active} { border-radius:4px; background:var(--color-accent); color:var(--color-on-accent); border-color:var(--color-accent); }`,
+      outline: `${active} { background:var(--color-nav-bg); border-color:var(--color-nav-active-line); }`,
+      dot: `${root} .ps-nav-item { padding-inline-start:calc(var(--ps-nav-icon,20px) + 2px); }\n${active} { background:var(--color-nav-bg); }\n${active}::before { content:""; position:absolute; inset-inline-start:6px; width:6px; height:6px; border-radius:50%; background:var(--color-nav-fg); }`,
+    }[id];
+  }
+  function structureCSS(id) {
+    get(structures, id);
+    const root = `.ps-navigation[data-nav-structure="${id}"]`;
+    return {
+      list: `${root} { gap:var(--ps-nav-gap,6px); }`,
+      grouped: `${root} { gap:var(--ps-nav-section-gap,18px); }\n${root} .ps-nav-heading { display:block; font-size:var(--ps-nav-group-font,12px); padding:4px 8px; font-weight:700; }\n${root} .ps-nav-group + .ps-nav-group { border-top:1px solid var(--color-line); padding-top:8px; }\n${root}[data-nav-orientation="horizontal"] .ps-nav-group + .ps-nav-group { border-top:0; border-inline-start:1px solid var(--color-line); padding-top:0; padding-inline-start:8px; }`,
+      rail: `${root} .ps-nav-item { justify-content:center; }\n${root} .ps-nav-label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }\n${root} .ps-nav-item:is(:hover,:focus-visible) .ps-nav-label { clip-path:none; width:max-content; max-width:180px; height:auto; margin:0; padding:6px 8px; inset-inline-start:100%; top:0; background:var(--color-tooltip-bg); color:var(--color-tooltip-fg); border:1px solid var(--color-line-strong); border-radius:4px; z-index:3; }\n${root}[data-nav-orientation="horizontal"] .ps-nav-item:is(:hover,:focus-visible) .ps-nav-label { inset-inline-start:0; top:100%; }\n@media (max-width:767px) { ${root} .ps-nav-item { flex-direction:column; } ${root} .ps-nav-item .ps-nav-label, ${root} .ps-nav-item:is(:hover,:focus-visible) .ps-nav-label { position:static; clip-path:none; width:auto; height:auto; margin:0; padding:0; overflow:visible; white-space:normal; background:inherit; color:inherit; border:0; } }`,
+    }[id];
+  }
+  const mobileCSS = `
+@media (max-width:767px) {
+  .ps-navigation { flex-direction:row; flex-wrap:wrap; align-items:center; }
+  .ps-navigation .ps-nav-group { flex-direction:inherit; flex-wrap:wrap; }
+  .ps-navigation[data-nav-structure="grouped"] .ps-nav-group + .ps-nav-group { border-top:0; border-inline-start:1px solid var(--color-line); padding-top:0; padding-inline-start:8px; }
+}
+`;
+  function css(style, structure) {
+    return (
+      baseCSS + styleCSS(style) + "\n" + structureCSS(structure) + mobileCSS
+    );
+  }
+  function allCSS() {
+    return (
+      baseCSS +
+      styles.map((s) => styleCSS(s.id)).join("\n") +
+      "\n" +
+      structures.map((s) => structureCSS(s.id)).join("\n") +
+      mobileCSS
+    );
+  }
+  function iconMarkup(catalog) {
+    return Object.fromEntries(
+      [
+        ["projects", "layout-dashboard"],
+        ["settings", "settings"],
+      ].map(([key, name]) => {
+        const icon = catalog.find((item) => item.name === name);
+        if (!icon) throw Error("Missing navigation icon: " + name);
+        return [
+          key,
+          `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icon.body}</svg>`,
+        ];
+      }),
+    );
+  }
+  function markup({
+    style,
+    structure,
+    orientation = "vertical",
+    interactive = true,
+    active = "projects",
+    icons = {},
+    className = "",
+    label = "프로젝트 메뉴",
+  }) {
+    get(styles, style);
+    get(structures, structure);
+    const tag = interactive ? "button" : "span",
+      root = interactive ? "nav" : "span";
+    const items = [
+      { id: "projects", label: "프로젝트", group: "작업" },
+      { id: "settings", label: "설정", group: "관리" },
+    ];
+    const groups =
+      structure === "grouped" ? items.map((item) => [item]) : [items];
+    return `<${root} class="ps-navigation ${esc(className)}" data-nav-style="${style}" data-nav-structure="${structure}" data-nav-orientation="${orientation === "horizontal" ? "horizontal" : "vertical"}" aria-label="${esc(label)}">${groups.map((group) => `<span class="ps-nav-group">${structure === "grouped" ? `<span class="ps-nav-heading">${group[0].group}</span>` : ""}${group.map((item) => `<${tag} class="ps-nav-item" ${interactive ? `type="button" data-nav-page="${item.id}"` : ""} aria-label="${item.label}" ${item.id === active ? 'aria-current="page"' : ""}><span class="ps-nav-icon" aria-hidden="true">${icons[item.id] || item.label.slice(0, 1)}</span><span class="ps-nav-label">${item.label}</span></${tag}>`).join("")}</span>`).join("")}</${root}>`;
+  }
+  function brief(style, structure, navigation = "left") {
+    const appearance = get(styles, style),
+      layout = get(structures, structure);
+    return [
+      "Navigation appearance: " +
+        appearance.name +
+        " (" +
+        style +
+        "). " +
+        appearance.rule,
+      "Navigation structure: " +
+        layout.name +
+        " (" +
+        structure +
+        "). " +
+        layout.description,
+      "Use .ps-navigation with data-nav-style, data-nav-structure and data-nav-orientation; .ps-nav-group, .ps-nav-heading, .ps-nav-item, .ps-nav-icon and .ps-nav-label match selected-style.css. Use links for routes, buttons for local actions and aria-current=page for the current route. Preserve native keyboard activation, visible focus and accessible names; disabled actions must not activate. Group related routes without duplicating destinations. Retain visible names on narrow screens and focus/hover labels for icon rails. Adapt to the existing app's navigation only within the authorized scope.",
+      "Example markup (replace sample buttons with real links for routes and use selected Lucide SVG icons):",
+      "```html",
+      markup({
+        style,
+        structure,
+        orientation: navigation === "top" ? "horizontal" : "vertical",
+      }),
+      "```",
+    ].join("\n");
+  }
+  return { styles, structures, css, allCSS, markup, iconMarkup, brief };
+});
+
+</script>
+    <script>
 /* One offline catalog for the browser, CLI and generated implementation briefs. */
 (function (root, factory) {
   if (typeof module === "object" && module.exports)
-    module.exports = factory(require("./ui-presets.js"));
-  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets);
-})(typeof globalThis !== "undefined" ? globalThis : this, function (ui) {
-  "use strict";
-  const {
-    navigationPresets,
-    motionPresets,
-    navigationBrief,
-    motionBrief,
-    motionCSS,
-  } = ui;
-  const treatments = {
-    soft: {
-      name: "기본 배경",
-      rule: "Use --color-raised background, --color-ink text and --color-line border; reserve accent for the primary action.",
-    },
-    outline: {
-      name: "윤곽선",
-      rule: "Use --color-canvas background, --color-ink text and --color-line-strong 1px border; no shadow.",
-    },
-    solid: {
-      name: "강조색",
-      rule: "Use --color-accent background and --color-on-accent text for the leading control or header, with neutral content surfaces. Keep warning/error semantic colors.",
-    },
-  };
-  const rows = [
-    [
-      "button",
-      "버튼",
-      "Button",
-      "입력",
-      "누르면 실행되는 기본 동작",
-      "실행 저장 취소 클릭",
-      "Use a native button, min-height 40px; show hover, focus-visible, disabled and loading; prevent duplicate submission.",
-    ],
-    [
-      "input",
-      "입력란",
-      "Text field",
-      "입력",
-      "이름이나 이메일을 적는 칸",
-      "폼 텍스트 이메일",
-      "Use a persistent label, min-height 40px, hint and associated validation message; never use placeholder as the only label.",
-    ],
-    [
-      "select",
-      "선택 목록",
-      "Select",
-      "입력",
-      "여러 선택지 중 하나를 고르는 메뉴",
-      "드롭다운 옵션",
-      "Use a labeled native select or existing accessible listbox; support keyboard arrows and selected/disabled states.",
-    ],
-    [
-      "switch",
-      "켜기 · 끄기",
-      "Switch",
-      "입력",
-      "설정을 바로 켜고 끄는 스위치",
-      "토글 설정",
-      "Use role=switch with an accessible label and checked state; Space toggles; explain save failures and restore prior state.",
-    ],
-    [
-      "checkbox",
-      "체크 항목",
-      "Checkbox",
-      "입력",
-      "여러 항목을 함께 선택하는 표시",
-      "동의 다중 선택",
-      "Use a labeled checkbox with checked, unchecked, disabled and indeterminate states where needed.",
-    ],
-    [
-      "toast",
-      "잠깐 뜨는 알림",
-      "Toast",
-      "피드백",
-      "저장 완료처럼 흐름을 끊지 않는 알림",
-      "스낵바 알림 메시지 저장",
-      "Place at bottom-right on desktop, bottom with 16px inset on mobile; role=status, polite live announcement, dismiss control, 5s timeout paused on hover/focus. Never put essential errors only in a disappearing toast.",
-    ],
-    [
-      "alert",
-      "화면 안 안내문",
-      "Alert",
-      "피드백",
-      "주의나 오류를 화면에 계속 보여주는 안내",
-      "경고 배너 에러",
-      "Keep inline with related content, with text and icon cues. Use role=alert only for newly urgent errors; include recovery action.",
-    ],
-    [
-      "dialog",
-      "중앙 확인창",
-      "Dialog",
-      "오버레이",
-      "작업 전에 확인하거나 내용을 입력하는 창",
-      "모달 팝업 확인 삭제",
-      "Center a max-width 440px dialog with 24px padding and backdrop. Move focus inside, trap Tab, close with Escape, restore trigger focus; destructive actions require explicit confirmation.",
-    ],
-    [
-      "drawer",
-      "옆에서 열리는 패널",
-      "Drawer",
-      "오버레이",
-      "현재 화면을 보며 상세 내용을 여는 패널",
-      "시트 사이드 상세",
-      "Open from right at max-width 380px, full width on mobile. Use modal semantics, focus trap, Escape and focus restoration; keep dismiss control visible.",
-    ],
-    [
-      "tooltip",
-      "짧은 도움말",
-      "Tooltip",
-      "오버레이",
-      "버튼이나 용어에 붙는 짧은 설명",
-      "힌트 설명 마우스",
-      "Show on hover and keyboard focus, associate via aria-describedby, dismiss with Escape; never hide essential instructions or interactive content inside.",
-    ],
-    [
-      "menu",
-      "더보기 메뉴",
-      "Dropdown menu",
-      "탐색",
-      "관련 동작을 작은 목록으로 펼치는 메뉴",
-      "드롭다운 더보기 액션",
-      "Use existing accessible menu with trigger expanded state; support Escape, arrow keys, Home/End and return focus on close.",
-    ],
-    [
-      "tabs",
-      "화면 전환 탭",
-      "Tabs",
-      "탐색",
-      "같은 자리에서 관련 내용을 바꿔 보는 탭",
-      "분류 탭 패널",
-      "Use tablist/tab/tabpanel semantics, selected state and roving tabindex; arrows/Home/End navigate and associated panels update.",
-    ],
-    [
-      "breadcrumb",
-      "현재 위치 경로",
-      "Breadcrumb",
-      "탐색",
-      "어느 화면에 있는지 보여주는 경로",
-      "빵부스러기 경로 내비",
-      "Use labeled navigation and ordered list; current page aria-current=page, previous segments are links with non-color cues.",
-    ],
-    [
-      "pagination",
-      "페이지 넘기기",
-      "Pagination",
-      "탐색",
-      "긴 목록을 여러 페이지로 나누는 이동",
-      "페이지 다음 이전",
-      "Use labeled navigation, aria-current=page and named previous/next controls; preserve filters and disable unavailable directions.",
-    ],
-    [
-      "card",
-      "정보 카드",
-      "Card",
-      "콘텐츠",
-      "관련 내용을 한 덩어리로 모은 상자",
-      "패널 박스 정보",
-      "Use semantic article/section with heading, 20px padding and selected style radius; only add a card boundary for a genuinely grouped entity.",
-    ],
-    [
-      "badge",
-      "작은 상태 표시",
-      "Badge",
-      "콘텐츠",
-      "진행 중이나 완료 상태를 짧게 표시",
-      "칩 태그 상태 라벨",
-      "Pair semantic status color with readable text; no color-only meaning. Static badges are not buttons and must not enter tab order.",
-    ],
-    [
-      "accordion",
-      "접고 펼치는 내용",
-      "Accordion",
-      "콘텐츠",
-      "자주 묻는 질문처럼 필요할 때 펼치는 영역",
-      "FAQ 아코디언 접기",
-      "Use details/summary or heading buttons with expanded/controls; Enter/Space toggles, keep focus visible and content reachable.",
-    ],
-    [
-      "empty",
-      "내용이 없을 때",
-      "Empty state",
-      "콘텐츠",
-      "데이터가 없을 때 다음 행동을 안내하는 화면",
-      "빈 상태 결과 없음 로딩",
-      "Explain what is empty and offer one relevant next action; distinguish no data, no search results, loading, errors and lack of permission.",
-    ],
-  ];
-  const components = rows.map(
-    ([id, label, name, category, purpose, keywords, behavior]) => ({
-      id,
-      label,
-      name,
-      category,
-      purpose,
-      keywords,
-      behavior,
-      variants: Object.keys(treatments),
-    }),
-  );
-  const sets = [
-    {
-      id: "studio",
-      name: "기본 프로젝트",
-      tag: "기본형",
-      description: "플럼 · 반경 8px · 간격 16px",
-      palette: "graphite-plum",
-      style: "operational",
-      variant: "soft",
-      recommendedPalettes: ["graphite-plum", "slate-indigo", "slate-teal"],
-      recommendedComponents: [
-        "button",
-        "card",
-        "tabs",
-        "menu",
-        "toast",
-        "empty",
-      ],
-      recommendationReason:
-        "프로젝트 목록과 상세 전환을 위한 카드·탭·메뉴와 작업 결과 알림을 권장합니다.",
-      componentOverrides: {
-        button: "solid",
-        badge: "outline",
+    module.exports = factory(
+      require("./ui-presets.js"),
+      require("./navigation-designs.js"),
+    );
+  else
+    root.PaletteDesignCatalog = factory(
+      root.PaletteUIPresets,
+      root.PaletteNavigationDesigns,
+    );
+})(
+  typeof globalThis !== "undefined" ? globalThis : this,
+  function (ui, navigationDesigns) {
+    "use strict";
+    const {
+      navigationPresets,
+      motionPresets,
+      navigationBrief,
+      motionBrief,
+      motionCSS,
+    } = ui;
+    const treatments = {
+      soft: {
+        name: "기본 배경",
+        rule: "Use --color-raised background, --color-ink text and --color-line border; reserve accent for the primary action.",
       },
-      defaultMotion: "standard",
-    },
-    {
-      id: "bloom",
-      name: "설정·개인화",
-      tag: "카드형",
-      description: "라벤더 · 카드 반경 16px · 간격 20px",
-      palette: "pearl-lavender",
-      style: "soft",
-      variant: "soft",
-      recommendedPalettes: ["pearl-lavender", "warm-sage", "zinc-rose"],
-      recommendedComponents: ["input", "switch", "checkbox", "card", "toast"],
-      recommendationReason:
-        "설정 값 입력, 알림 켜기·끄기, 다중 선택과 저장 결과 안내를 권장합니다.",
-      componentOverrides: {
-        button: "solid",
-        switch: "solid",
+      outline: {
+        name: "윤곽선",
+        rule: "Use --color-canvas background, --color-ink text and --color-line-strong 1px border; no shadow.",
       },
-      defaultMotion: "standard",
-    },
-    {
-      id: "precision",
-      name: "입력·승인",
-      tag: "윤곽선형",
-      description: "블루 · 반경 4px · 1px 경계",
-      palette: "slate-blue",
-      style: "outline",
-      variant: "outline",
-      recommendedPalettes: ["slate-blue", "slate-steel", "slate-indigo"],
-      recommendedComponents: [
-        "input",
-        "select",
-        "checkbox",
-        "dialog",
-        "alert",
-        "button",
-      ],
-      recommendationReason:
-        "입력·선택·동의 항목과 제출 전 확인창, 검증 안내를 권장합니다.",
-      componentOverrides: {
-        button: "solid",
-        alert: "soft",
+      solid: {
+        name: "강조색",
+        rule: "Use --color-accent background and --color-on-accent text for the leading control or header, with neutral content surfaces. Keep warning/error semantic colors.",
       },
-      defaultMotion: "quick",
-    },
-    {
-      id: "editorial",
-      name: "문서·콘텐츠",
-      tag: "문서형",
-      description: "페이퍼 · 본문 15px · 행간 1.8",
-      palette: "paper-ink",
-      style: "editorial",
-      variant: "outline",
-      recommendedPalettes: ["paper-ink", "stone-sand", "neutral-monochrome"],
-      recommendedComponents: [
-        "breadcrumb",
-        "tabs",
-        "accordion",
-        "tooltip",
-        "empty",
-      ],
-      recommendationReason:
-        "문서 위치 경로, 섹션 탭, 접기·펼치기와 용어 도움말을 권장합니다.",
-      componentOverrides: {
-        badge: "soft",
-      },
-      defaultMotion: "none",
-    },
-    {
-      id: "console",
-      name: "운영·데이터",
-      tag: "고밀도형",
-      description: "시안 · 컨트롤 32px · 간격 12px",
-      palette: "navy-cyan",
-      style: "compact",
-      variant: "soft",
-      recommendedPalettes: ["navy-cyan", "midnight-periwinkle", "slate-slate"],
-      recommendedComponents: [
-        "tabs",
-        "menu",
-        "pagination",
-        "toast",
-        "alert",
-        "badge",
-      ],
-      recommendationReason:
-        "데이터 탐색을 위한 탭·메뉴·페이지 이동과 운영 상태·오류 안내를 권장합니다.",
-      componentOverrides: {
-        button: "outline",
-        badge: "outline",
-        alert: "outline",
-      },
-      defaultMotion: "quick",
-    },
-    {
-      id: "signal",
-      name: "상태·알림",
-      tag: "경계 강조형",
-      description: "에메랄드 · 2px 경계 · 간격 16px",
-      palette: "stone-emerald",
-      style: "contrast",
-      variant: "solid",
-      recommendedPalettes: ["stone-emerald", "charcoal-ruby", "sand-amber"],
-      recommendedComponents: ["button", "dialog", "alert", "badge", "toast"],
-      recommendationReason:
-        "상태 표시, 오류 안내, 작업 결과 알림과 주요 동작 확인창을 권장합니다.",
-      componentOverrides: {
-        dialog: "outline",
-        input: "outline",
-        card: "soft",
-      },
-      defaultMotion: "standard",
-    },
-  ].map((set) => ({
-    ...set,
-    defaultNavigation: {
-      studio: "left",
-      bloom: "top",
-      precision: "left",
-      editorial: "left",
-      console: "hybrid",
-      signal: "top",
-    }[set.id],
-    config: {
-      palette: set.palette,
-      style: set.style,
-      fonts: { body: "pretendard", code: "d2coding", source: "local-only" },
-    },
-  }));
-  function selection(id) {
-    const set = sets.find((s) => s.id === id);
-    if (!set) throw Error("Invalid design selection set: " + id);
-    return {
-      set: id,
-      motion: set.defaultMotion,
-      navigation: set.defaultNavigation,
-      components: Object.fromEntries(
-        components.map((c) => [
-          c.id,
-          set.componentOverrides[c.id] || set.variant,
-        ]),
-      ),
     };
-  }
-  function normalize(input) {
-    if (!input || typeof input !== "object" || Array.isArray(input))
-      throw Error("Invalid design selection");
-    const result = selection(input.set);
-    if (input.motion !== undefined) {
-      if (!motionPresets.some((m) => m.id === input.motion))
-        throw Error("Invalid design selection motion");
-      result.motion = input.motion;
+    const rows = [
+      [
+        "button",
+        "버튼",
+        "Button",
+        "입력",
+        "누르면 실행되는 기본 동작",
+        "실행 저장 취소 클릭",
+        "Use a native button, min-height 40px; show hover, focus-visible, disabled and loading; prevent duplicate submission.",
+      ],
+      [
+        "input",
+        "입력란",
+        "Text field",
+        "입력",
+        "이름이나 이메일을 적는 칸",
+        "폼 텍스트 이메일",
+        "Use a persistent label, min-height 40px, hint and associated validation message; never use placeholder as the only label.",
+      ],
+      [
+        "select",
+        "선택 목록",
+        "Select",
+        "입력",
+        "여러 선택지 중 하나를 고르는 메뉴",
+        "드롭다운 옵션",
+        "Use a labeled native select or existing accessible listbox; support keyboard arrows and selected/disabled states.",
+      ],
+      [
+        "switch",
+        "켜기 · 끄기",
+        "Switch",
+        "입력",
+        "설정을 바로 켜고 끄는 스위치",
+        "토글 설정",
+        "Use role=switch with an accessible label and checked state; Space toggles; explain save failures and restore prior state.",
+      ],
+      [
+        "checkbox",
+        "체크 항목",
+        "Checkbox",
+        "입력",
+        "여러 항목을 함께 선택하는 표시",
+        "동의 다중 선택",
+        "Use a labeled checkbox with checked, unchecked, disabled and indeterminate states where needed.",
+      ],
+      [
+        "toast",
+        "잠깐 뜨는 알림",
+        "Toast",
+        "피드백",
+        "저장 완료처럼 흐름을 끊지 않는 알림",
+        "스낵바 알림 메시지 저장",
+        "Place at bottom-right on desktop, bottom with 16px inset on mobile; role=status, polite live announcement, dismiss control, 5s timeout paused on hover/focus. Never put essential errors only in a disappearing toast.",
+      ],
+      [
+        "alert",
+        "화면 안 안내문",
+        "Alert",
+        "피드백",
+        "주의나 오류를 화면에 계속 보여주는 안내",
+        "경고 배너 에러",
+        "Keep inline with related content, with text and icon cues. Use role=alert only for newly urgent errors; include recovery action.",
+      ],
+      [
+        "dialog",
+        "중앙 확인창",
+        "Dialog",
+        "오버레이",
+        "작업 전에 확인하거나 내용을 입력하는 창",
+        "모달 팝업 확인 삭제",
+        "Center a max-width 440px dialog with 24px padding and backdrop. Move focus inside, trap Tab, close with Escape, restore trigger focus; destructive actions require explicit confirmation.",
+      ],
+      [
+        "drawer",
+        "옆에서 열리는 패널",
+        "Drawer",
+        "오버레이",
+        "현재 화면을 보며 상세 내용을 여는 패널",
+        "시트 사이드 상세",
+        "Open from right at max-width 380px, full width on mobile. Use modal semantics, focus trap, Escape and focus restoration; keep dismiss control visible.",
+      ],
+      [
+        "tooltip",
+        "짧은 도움말",
+        "Tooltip",
+        "오버레이",
+        "버튼이나 용어에 붙는 짧은 설명",
+        "힌트 설명 마우스",
+        "Show on hover and keyboard focus, associate via aria-describedby, dismiss with Escape; never hide essential instructions or interactive content inside.",
+      ],
+      [
+        "menu",
+        "더보기 메뉴",
+        "Dropdown menu",
+        "탐색",
+        "관련 동작을 작은 목록으로 펼치는 메뉴",
+        "드롭다운 더보기 액션",
+        "Use existing accessible menu with trigger expanded state; support Escape, arrow keys, Home/End and return focus on close.",
+      ],
+      [
+        "tabs",
+        "화면 전환 탭",
+        "Tabs",
+        "탐색",
+        "같은 자리에서 관련 내용을 바꿔 보는 탭",
+        "분류 탭 패널",
+        "Use tablist/tab/tabpanel semantics, selected state and roving tabindex; arrows/Home/End navigate and associated panels update.",
+      ],
+      [
+        "breadcrumb",
+        "현재 위치 경로",
+        "Breadcrumb",
+        "탐색",
+        "어느 화면에 있는지 보여주는 경로",
+        "빵부스러기 경로 내비",
+        "Use labeled navigation and ordered list; current page aria-current=page, previous segments are links with non-color cues.",
+      ],
+      [
+        "pagination",
+        "페이지 넘기기",
+        "Pagination",
+        "탐색",
+        "긴 목록을 여러 페이지로 나누는 이동",
+        "페이지 다음 이전",
+        "Use labeled navigation, aria-current=page and named previous/next controls; preserve filters and disable unavailable directions.",
+      ],
+      [
+        "card",
+        "정보 카드",
+        "Card",
+        "콘텐츠",
+        "관련 내용을 한 덩어리로 모은 상자",
+        "패널 박스 정보",
+        "Use semantic article/section with heading, 20px padding and selected style radius; only add a card boundary for a genuinely grouped entity.",
+      ],
+      [
+        "badge",
+        "작은 상태 표시",
+        "Badge",
+        "콘텐츠",
+        "진행 중이나 완료 상태를 짧게 표시",
+        "칩 태그 상태 라벨",
+        "Pair semantic status color with readable text; no color-only meaning. Static badges are not buttons and must not enter tab order.",
+      ],
+      [
+        "accordion",
+        "접고 펼치는 내용",
+        "Accordion",
+        "콘텐츠",
+        "자주 묻는 질문처럼 필요할 때 펼치는 영역",
+        "FAQ 아코디언 접기",
+        "Use details/summary or heading buttons with expanded/controls; Enter/Space toggles, keep focus visible and content reachable.",
+      ],
+      [
+        "empty",
+        "내용이 없을 때",
+        "Empty state",
+        "콘텐츠",
+        "데이터가 없을 때 다음 행동을 안내하는 화면",
+        "빈 상태 결과 없음 로딩",
+        "Explain what is empty and offer one relevant next action; distinguish no data, no search results, loading, errors and lack of permission.",
+      ],
+    ];
+    const components = rows.map(
+      ([id, label, name, category, purpose, keywords, behavior]) => ({
+        id,
+        label,
+        name,
+        category,
+        purpose,
+        keywords,
+        behavior,
+        variants: Object.keys(treatments),
+      }),
+    );
+    const sets = [
+      {
+        id: "studio",
+        name: "기본 프로젝트",
+        tag: "기본형",
+        description: "플럼 · 반경 8px · 간격 16px",
+        palette: "graphite-plum",
+        style: "operational",
+        variant: "soft",
+        recommendedPalettes: ["graphite-plum", "slate-indigo", "slate-teal"],
+        recommendedComponents: [
+          "button",
+          "card",
+          "tabs",
+          "menu",
+          "toast",
+          "empty",
+        ],
+        recommendationReason:
+          "프로젝트 목록과 상세 전환을 위한 카드·탭·메뉴와 작업 결과 알림을 권장합니다.",
+        componentOverrides: {
+          button: "solid",
+          badge: "outline",
+        },
+        defaultMotion: "standard",
+      },
+      {
+        id: "bloom",
+        name: "설정·개인화",
+        tag: "카드형",
+        description: "라벤더 · 카드 반경 16px · 간격 20px",
+        palette: "pearl-lavender",
+        style: "soft",
+        variant: "soft",
+        recommendedPalettes: ["pearl-lavender", "warm-sage", "zinc-rose"],
+        recommendedComponents: ["input", "switch", "checkbox", "card", "toast"],
+        recommendationReason:
+          "설정 값 입력, 알림 켜기·끄기, 다중 선택과 저장 결과 안내를 권장합니다.",
+        componentOverrides: {
+          button: "solid",
+          switch: "solid",
+        },
+        defaultMotion: "standard",
+      },
+      {
+        id: "precision",
+        name: "입력·승인",
+        tag: "윤곽선형",
+        description: "블루 · 반경 4px · 1px 경계",
+        palette: "slate-blue",
+        style: "outline",
+        variant: "outline",
+        recommendedPalettes: ["slate-blue", "slate-steel", "slate-indigo"],
+        recommendedComponents: [
+          "input",
+          "select",
+          "checkbox",
+          "dialog",
+          "alert",
+          "button",
+        ],
+        recommendationReason:
+          "입력·선택·동의 항목과 제출 전 확인창, 검증 안내를 권장합니다.",
+        componentOverrides: {
+          button: "solid",
+          alert: "soft",
+        },
+        defaultMotion: "quick",
+      },
+      {
+        id: "editorial",
+        name: "문서·콘텐츠",
+        tag: "문서형",
+        description: "페이퍼 · 본문 15px · 행간 1.8",
+        palette: "paper-ink",
+        style: "editorial",
+        variant: "outline",
+        recommendedPalettes: ["paper-ink", "stone-sand", "neutral-monochrome"],
+        recommendedComponents: [
+          "breadcrumb",
+          "tabs",
+          "accordion",
+          "tooltip",
+          "empty",
+        ],
+        recommendationReason:
+          "문서 위치 경로, 섹션 탭, 접기·펼치기와 용어 도움말을 권장합니다.",
+        componentOverrides: {
+          badge: "soft",
+        },
+        defaultMotion: "none",
+      },
+      {
+        id: "console",
+        name: "운영·데이터",
+        tag: "고밀도형",
+        description: "시안 · 컨트롤 32px · 간격 12px",
+        palette: "navy-cyan",
+        style: "compact",
+        variant: "soft",
+        recommendedPalettes: [
+          "navy-cyan",
+          "midnight-periwinkle",
+          "slate-slate",
+        ],
+        recommendedComponents: [
+          "tabs",
+          "menu",
+          "pagination",
+          "toast",
+          "alert",
+          "badge",
+        ],
+        recommendationReason:
+          "데이터 탐색을 위한 탭·메뉴·페이지 이동과 운영 상태·오류 안내를 권장합니다.",
+        componentOverrides: {
+          button: "outline",
+          badge: "outline",
+          alert: "outline",
+        },
+        defaultMotion: "quick",
+      },
+      {
+        id: "signal",
+        name: "상태·알림",
+        tag: "경계 강조형",
+        description: "에메랄드 · 2px 경계 · 간격 16px",
+        palette: "stone-emerald",
+        style: "contrast",
+        variant: "solid",
+        recommendedPalettes: ["stone-emerald", "charcoal-ruby", "sand-amber"],
+        recommendedComponents: ["button", "dialog", "alert", "badge", "toast"],
+        recommendationReason:
+          "상태 표시, 오류 안내, 작업 결과 알림과 주요 동작 확인창을 권장합니다.",
+        componentOverrides: {
+          dialog: "outline",
+          input: "outline",
+          card: "soft",
+        },
+        defaultMotion: "standard",
+      },
+    ].map((set) => ({
+      ...set,
+      defaultNavigation: {
+        studio: "left",
+        bloom: "top",
+        precision: "left",
+        editorial: "left",
+        console: "hybrid",
+        signal: "top",
+      }[set.id],
+      config: {
+        palette: set.palette,
+        style: set.style,
+        fonts: { body: "pretendard", code: "d2coding", source: "local-only" },
+      },
+    }));
+    function selection(id) {
+      const set = sets.find((s) => s.id === id);
+      if (!set) throw Error("Invalid design selection set: " + id);
+      return {
+        set: id,
+        motion: set.defaultMotion,
+        navigation: set.defaultNavigation,
+        navigationStyle: {
+          studio: "edge",
+          bloom: "pill",
+          precision: "outline",
+          editorial: "underline",
+          console: "fill",
+          signal: "dot",
+        }[id],
+        navigationStructure: {
+          studio: "list",
+          bloom: "list",
+          precision: "grouped",
+          editorial: "grouped",
+          console: "rail",
+          signal: "list",
+        }[id],
+        components: Object.fromEntries(
+          components.map((c) => [
+            c.id,
+            set.componentOverrides[c.id] || set.variant,
+          ]),
+        ),
+      };
     }
-    if (input.navigation !== undefined) {
-      if (!navigationPresets.some((n) => n.id === input.navigation))
-        throw Error("Invalid design selection navigation");
-      result.navigation = input.navigation;
+    function normalize(input) {
+      if (!input || typeof input !== "object" || Array.isArray(input))
+        throw Error("Invalid design selection");
+      const result = selection(input.set);
+      if (input.motion !== undefined) {
+        if (!motionPresets.some((m) => m.id === input.motion))
+          throw Error("Invalid design selection motion");
+        result.motion = input.motion;
+      }
+      if (input.navigation !== undefined) {
+        if (!navigationPresets.some((n) => n.id === input.navigation))
+          throw Error("Invalid design selection navigation");
+        result.navigation = input.navigation;
+      }
+      for (const [field, choices] of [
+        ["navigationStyle", navigationDesigns.styles],
+        ["navigationStructure", navigationDesigns.structures],
+      ]) {
+        if (input[field] !== undefined) {
+          if (!choices.some((choice) => choice.id === input[field]))
+            throw Error("Invalid design selection " + field);
+          result[field] = input[field];
+        }
+      }
+      const overrides = input.components === undefined ? {} : input.components;
+      if (
+        !overrides ||
+        typeof overrides !== "object" ||
+        Array.isArray(overrides)
+      )
+        throw Error("Invalid design selection components");
+      for (const [id, variant] of Object.entries(overrides)) {
+        const item = components.find((c) => c.id === id);
+        if (!item || !item.variants.includes(variant))
+          throw Error("Invalid design selection component: " + id);
+        result.components[id] = variant;
+      }
+      return result;
     }
-    const overrides = input.components === undefined ? {} : input.components;
-    if (!overrides || typeof overrides !== "object" || Array.isArray(overrides))
-      throw Error("Invalid design selection components");
-    for (const [id, variant] of Object.entries(overrides)) {
-      const item = components.find((c) => c.id === id);
-      if (!item || !item.variants.includes(variant))
-        throw Error("Invalid design selection component: " + id);
-      result.components[id] = variant;
+    function brief(input) {
+      if (input === undefined) return "";
+      const selected = normalize(input),
+        set = sets.find((s) => s.id === selected.set);
+      return [
+        "## Component design selection",
+        "",
+        "Starting set: " +
+          set.name +
+          " (" +
+          set.id +
+          "). Palette/style/font overrides in the profile take precedence.",
+        "Recommended palette alternatives: " +
+          set.recommendedPalettes.join(", ") +
+          ". Keep the explicitly selected palette; do not silently replace it.",
+        "Recommended components: " +
+          set.recommendedComponents.join(", ") +
+          ". " +
+          set.recommendationReason,
+        motionBrief(selected.motion),
+        navigationBrief(selected.navigation),
+        navigationDesigns.brief(
+          selected.navigationStyle,
+          selected.navigationStructure,
+          selected.navigation,
+        ),
+        "Apply the selected style radius, padding, gap and control height from selected-style.css; control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
+        "",
+        ...components.map(
+          (c) =>
+            "- " +
+            c.label +
+            " / " +
+            c.name +
+            " [" +
+            c.id +
+            ": " +
+            selected.components[c.id] +
+            "]: " +
+            treatments[selected.components[c.id]].rule +
+            " " +
+            c.behavior,
+        ),
+        "",
+        "Use these as visual/behavior contracts for components relevant to the requested feature. Do not add unrelated UI solely because it appears in this catalog.",
+        "",
+      ].join("\n");
     }
-    return result;
-  }
-  function brief(input) {
-    if (input === undefined) return "";
-    const selected = normalize(input),
-      set = sets.find((s) => s.id === selected.set);
-    return [
-      "## Component design selection",
-      "",
-      "Starting set: " +
-        set.name +
-        " (" +
-        set.id +
-        "). Palette/style/font overrides in the profile take precedence.",
-      "Recommended palette alternatives: " +
-        set.recommendedPalettes.join(", ") +
-        ". Keep the explicitly selected palette; do not silently replace it.",
-      "Recommended components: " +
-        set.recommendedComponents.join(", ") +
-        ". " +
-        set.recommendationReason,
-      motionBrief(selected.motion),
-      navigationBrief(selected.navigation),
-      "Apply the selected style radius, padding, gap and control height from selected-style.css; control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
-      "",
-      ...components.map(
-        (c) =>
-          "- " +
-          c.label +
-          " / " +
-          c.name +
-          " [" +
-          c.id +
-          ": " +
-          selected.components[c.id] +
-          "]: " +
-          treatments[selected.components[c.id]].rule +
-          " " +
-          c.behavior,
-      ),
-      "",
-      "Use these as visual/behavior contracts for components relevant to the requested feature. Do not add unrelated UI solely because it appears in this catalog.",
-      "",
-    ].join("\n");
-  }
-  return {
-    sets,
-    components,
-    treatments,
-    selection,
-    normalize,
-    brief,
-    navigationPresets,
-    navigationBrief,
-    motionPresets,
-    motionCSS,
-    motionBrief,
-  };
-});
+    return {
+      sets,
+      components,
+      treatments,
+      selection,
+      normalize,
+      brief,
+      navigationPresets,
+      navigationDesigns,
+      navigationBrief,
+      motionPresets,
+      motionCSS,
+      motionBrief,
+    };
+  },
+);
 
 </script>
     <script>
@@ -16266,6 +16648,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       "  --ui-border: " + s.border + ";",
       "  --ui-shadow: " + s.shadow + ";",
       "}",
+      config.designSelection ? designs.navigationDesigns.css(designs.normalize(config.designSelection).navigationStyle, designs.normalize(config.designSelection).navigationStructure) : "",
       ""
     ].join("\n");
   }
@@ -16460,6 +16843,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       "## Real interaction evidence",
       "- [ ] Default/hover/focus-visible/disabled/loading/invalid action states were exercised.",
       "- [ ] Keyboard navigation, tab order and icon-only accessible names were verified.",
+      ...(config.designSelection ? ["- [ ] The selected navigation appearance and structure match the profile; current item, hover, focus, disabled and narrow-screen labels were verified."] : []),
       "- [ ] Empty, error, unauthorized, slow and long-content cases were rendered.",
       "- [ ] Relevant screen checked on desktop and narrow viewport without clipping.",
       "- [ ] Both color modes checked, except preserved modes explicitly out of change scope.",
@@ -16786,22 +17170,17 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         "handoff.html#catalogConfig=" +
         encodeURIComponent(JSON.stringify(linked));
   }
-  function shell(navigation, mini = false) {
-    return (
-      '<span class="shell shell-layout-' +
-      navigation +
-      '" aria-label="' +
-      esc(designs.navigationPresets.find((n) => n.id === navigation).name) +
-      '">' +
-      (navigation !== "left"
-        ? '<span class="shell-top"><strong>프로젝트</strong><span>개요　설정</span></span>'
-        : "") +
-      '<span class="shell-body">' +
-      (navigation !== "top"
-        ? '<span class="shell-side"><strong>메뉴</strong><span>목록</span><span>설정</span></span>'
-        : "") +
-      '<span class="shell-content"><strong>프로젝트 목록</strong><span class="shell-line"></span><span class="shell-line"></span><span class="mini-action">추가</span></span></span></span>'
-    );
+  function menuSample(selection, orientation = "vertical") {
+    return designs.navigationDesigns.markup({
+      style: selection.navigationStyle,
+      structure: selection.navigationStructure,
+      orientation,
+      interactive: false,
+      icons: designs.navigationDesigns.iconMarkup(icons),
+    });
+  }
+  function shell(navigation, mini = false, selection = config.designSelection) {
+    return `<span class="shell shell-layout-${navigation}" data-menu-structure="${selection.navigationStructure}" aria-label="${esc(designs.navigationPresets.find((n) => n.id === navigation).name)}">${navigation !== "left" ? `<span class="shell-top"><strong>프로젝트</strong>${navigation === "top" ? menuSample(selection, "horizontal") : "<span>작업 공간</span>"}</span>` : ""}<span class="shell-body">${navigation !== "top" ? `<span class="shell-side">${menuSample(selection)}</span>` : ""}<span class="shell-content"><strong>프로젝트 목록</strong><span class="shell-line"></span><span class="shell-line"></span><span class="mini-action">추가</span></span></span></span>`;
   }
   function paired(body, extra = "") {
     return ["light", "dark"]
@@ -16844,7 +17223,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
                 '"><span class="pane-label">' +
                 (mode === "light" ? "라이트" : "다크") +
                 "</span>" +
-                shell(set.defaultNavigation, true) +
+                shell(set.defaultNavigation, true, designs.selection(set.id)) +
                 "</span>",
             )
             .join("") +
@@ -16889,10 +17268,20 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     const selection = config.designSelection;
     $("catalog-motion").value = selection.motion;
     $("catalog-navigation").value = selection.navigation;
+    $("catalog-navigationStructure").value = selection.navigationStructure;
+    $("navigation-style-picker").innerHTML = designs.navigationDesigns.styles
+      .map(
+        (style) =>
+          `<button type="button" class="navigation-choice" data-navigation-style="${style.id}" aria-pressed="${style.id === selection.navigationStyle}"><span class="navigation-choice-label">${style.name}</span><span class="navigation-choice-demo" aria-hidden="true">${menuSample({ ...selection, navigationStyle: style.id, navigationStructure: "list" })}</span><small>${style.description}</small></button>`,
+      )
+      .join("");
     $("navigation-description").textContent =
       designs.navigationPresets.find((n) => n.id === selection.navigation)
         .description +
-      " · 768px 미만에서는 상단 메뉴 버튼과 내비게이션 드로어로 전환합니다.";
+      " · " +
+      designs.navigationDesigns.structures.find(
+        (n) => n.id === selection.navigationStructure,
+      ).description;
     $("navigation-preview").innerHTML = paired(() =>
       shell(selection.navigation),
     );
@@ -17052,6 +17441,18 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
             (m) => m.id === config.designSelection.motion,
           ).name,
         ],
+        [
+          "선택 표시",
+          designs.navigationDesigns.styles.find(
+            (n) => n.id === config.designSelection.navigationStyle,
+          ).name,
+        ],
+        [
+          "메뉴 구성",
+          designs.navigationDesigns.structures.find(
+            (n) => n.id === config.designSelection.navigationStructure,
+          ).name,
+        ],
         ["디자인 모드", "라이트 + 다크"],
         ["색상", p.name],
         ["형태", s.name],
@@ -17114,6 +17515,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     .join("");
   for (const [key, items] of [
     ["navigation", designs.navigationPresets],
+    ["navigationStructure", designs.navigationDesigns.structures],
     ["motion", designs.motionPresets],
   ])
     $("catalog-" + key).innerHTML = items
@@ -17147,7 +17549,26 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     $("ui-theme").textContent = theme === "dark" ? "라이트 모드" : "다크 모드";
     $("ui-theme").setAttribute("aria-pressed", String(theme === "dark"));
   });
-  for (const key of ["motion", "navigation"])
+  $("navigation-design-css").textContent = designs.navigationDesigns.allCSS();
+  $("navigation-style-picker").addEventListener("click", (e) => {
+    const button = e.target.closest("[data-navigation-style]");
+    if (!button) return;
+    const id = button.dataset.navigationStyle;
+    config = core.normalize(
+      {
+        ...config,
+        designSelection: { ...config.designSelection, navigationStyle: id },
+      },
+      palettes,
+      fonts,
+      icons,
+    );
+    render();
+    $("navigation-style-picker")
+      .querySelector(`[data-navigation-style="${id}"]`)
+      .focus({ preventScroll: true });
+  });
+  for (const key of ["motion", "navigation", "navigationStructure"])
     $("catalog-" + key).addEventListener("change", (e) => {
       config = core.normalize(
         {
@@ -17394,6 +17815,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     } catch {}
   }
   persistView();
+  let previewPage = "projects";
   let projectDraft = config.project,
     projectValid = true;
   const projects = [
@@ -17567,11 +17989,22 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         const v = config.designSelection.components,
           navigation = config.designSelection.navigation;
         const demo = (id) => catalog.demo(id, v[id], true, mode + "-" + index);
-        const nav = `<nav class="mock-nav" aria-label="샘플 프로젝트 메뉴"><button type="button" aria-label="프로젝트" aria-current="page">${svg(config.icons[0] || "layout-dashboard")}<span>프로젝트</span></button><button type="button" aria-label="설정" data-preview-notice="settings">${svg("settings")}<span>설정</span></button></nav>`;
-        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "라이트" : "다크"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} 프로젝트</strong><span>제품팀</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><h3>프로젝트 현황</h3></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form"><h4>새 프로젝트</h4><label class="treatment ${v.input}">프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><div class="treatment ${v.button}"><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : ""}">${svg("plus", 16)}프로젝트 추가</button></div></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
+        const nav = window.PaletteNavigationDesigns.markup({
+          style: config.designSelection.navigationStyle,
+          structure: config.designSelection.navigationStructure,
+          orientation: navigation === "top" ? "horizontal" : "vertical",
+          active: previewPage,
+          className:
+            "mock-nav" + (navigation === "hybrid" ? " mock-secondary-nav" : ""),
+          icons: {
+            projects: svg(config.icons[0] || "layout-dashboard"),
+            settings: svg("settings"),
+          },
+        });
+        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "라이트" : "다크"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-menu-structure="${config.designSelection.navigationStructure}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} 프로젝트</strong><span>제품팀</span></div>${navigation === "hybrid" ? `<div class="mock-context-nav"><span>작업 공간</span><button type="button" data-preview-notice="account">계정</button></div>` : ""}${nav}<div class="mock-main"><div data-preview-projects ${previewPage === "projects" ? "" : "hidden"}><div class="mock-title"><div><h3>프로젝트 현황</h3></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form"><h4>새 프로젝트</h4><label class="treatment ${v.input}">프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><div class="treatment ${v.button}"><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : ""}">${svg("plus", 16)}프로젝트 추가</button></div></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
   name: "My Workspace",
   ready: true
-};</code></pre></div></div></section>`;
+};</code></pre></div><section data-preview-settings ${previewPage === "settings" ? "" : "hidden"}><div class="mock-title"><h3>설정</h3></div><label class="sample-check"><input type="checkbox" checked />이메일 알림</label><label class="sample-check"><input type="checkbox" />주간 요약</label><p class="help">미리보기 설정입니다.</p></section></div></div></section>`;
       })
       .join("");
     $("preview-selection").textContent =
@@ -17622,6 +18055,10 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     $("structure-summary").textContent =
       window.PaletteDesignCatalog.navigationPresets.find(
         (n) => n.id === config.designSelection.navigation,
+      ).name +
+      " · " +
+      window.PaletteNavigationDesigns.styles.find(
+        (n) => n.id === config.designSelection.navigationStyle,
       ).name +
       " · " +
       window.PaletteDesignCatalog.motionPresets.find(
@@ -17754,8 +18191,20 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     }
   });
   $("project-stage").addEventListener("click", (e) => {
-    const b = e.target.closest("[data-preview-notice]");
-    if (b) notify("설정 메뉴의 표시 예시입니다.");
+    const item = e.target.closest("[data-nav-page]");
+    if (item) {
+      const paneIndex = [...$("project-stage").children].indexOf(
+        item.closest("[data-project-preview]"),
+      );
+      previewPage = item.dataset.navPage;
+      renderPreview();
+      $("project-stage")
+        .children[paneIndex].querySelector(`[data-nav-page="${previewPage}"]`)
+        .focus({ preventScroll: true });
+      return;
+    }
+    if (e.target.closest("[data-preview-notice]"))
+      notify("계정 메뉴 예시입니다.");
   });
   $("open-export").addEventListener("click", () => {
     projectDraft = config.project;
@@ -17828,10 +18277,11 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     $("preview-panel").classList.remove("expanded");
     $("toggle-preview").setAttribute("aria-expanded", "false");
     $("toggle-preview").textContent = "미리보기 확대";
-    document.activeElement.scrollIntoView({
-      block: "center",
-      behavior: "instant",
-    });
+    if (document.activeElement.matches(":focus-visible"))
+      document.activeElement.scrollIntoView({
+        block: "nearest",
+        behavior: "instant",
+      });
   });
   window.addEventListener("palette-selection", render);
   window.addEventListener("palette-font-status", (e) => {

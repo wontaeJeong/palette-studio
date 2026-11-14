@@ -300,22 +300,17 @@
         "handoff.html#catalogConfig=" +
         encodeURIComponent(JSON.stringify(linked));
   }
-  function shell(navigation, mini = false) {
-    return (
-      '<span class="shell shell-layout-' +
-      navigation +
-      '" aria-label="' +
-      esc(designs.navigationPresets.find((n) => n.id === navigation).name) +
-      '">' +
-      (navigation !== "left"
-        ? '<span class="shell-top"><strong>프로젝트</strong><span>개요　설정</span></span>'
-        : "") +
-      '<span class="shell-body">' +
-      (navigation !== "top"
-        ? '<span class="shell-side"><strong>메뉴</strong><span>목록</span><span>설정</span></span>'
-        : "") +
-      '<span class="shell-content"><strong>프로젝트 목록</strong><span class="shell-line"></span><span class="shell-line"></span><span class="mini-action">추가</span></span></span></span>'
-    );
+  function menuSample(selection, orientation = "vertical") {
+    return designs.navigationDesigns.markup({
+      style: selection.navigationStyle,
+      structure: selection.navigationStructure,
+      orientation,
+      interactive: false,
+      icons: designs.navigationDesigns.iconMarkup(icons),
+    });
+  }
+  function shell(navigation, mini = false, selection = config.designSelection) {
+    return `<span class="shell shell-layout-${navigation}" data-menu-structure="${selection.navigationStructure}" aria-label="${esc(designs.navigationPresets.find((n) => n.id === navigation).name)}">${navigation !== "left" ? `<span class="shell-top"><strong>프로젝트</strong>${navigation === "top" ? menuSample(selection, "horizontal") : "<span>작업 공간</span>"}</span>` : ""}<span class="shell-body">${navigation !== "top" ? `<span class="shell-side">${menuSample(selection)}</span>` : ""}<span class="shell-content"><strong>프로젝트 목록</strong><span class="shell-line"></span><span class="shell-line"></span><span class="mini-action">추가</span></span></span></span>`;
   }
   function paired(body, extra = "") {
     return ["light", "dark"]
@@ -358,7 +353,7 @@
                 '"><span class="pane-label">' +
                 (mode === "light" ? "라이트" : "다크") +
                 "</span>" +
-                shell(set.defaultNavigation, true) +
+                shell(set.defaultNavigation, true, designs.selection(set.id)) +
                 "</span>",
             )
             .join("") +
@@ -403,10 +398,20 @@
     const selection = config.designSelection;
     $("catalog-motion").value = selection.motion;
     $("catalog-navigation").value = selection.navigation;
+    $("catalog-navigationStructure").value = selection.navigationStructure;
+    $("navigation-style-picker").innerHTML = designs.navigationDesigns.styles
+      .map(
+        (style) =>
+          `<button type="button" class="navigation-choice" data-navigation-style="${style.id}" aria-pressed="${style.id === selection.navigationStyle}"><span class="navigation-choice-label">${style.name}</span><span class="navigation-choice-demo" aria-hidden="true">${menuSample({ ...selection, navigationStyle: style.id, navigationStructure: "list" })}</span><small>${style.description}</small></button>`,
+      )
+      .join("");
     $("navigation-description").textContent =
       designs.navigationPresets.find((n) => n.id === selection.navigation)
         .description +
-      " · 768px 미만에서는 상단 메뉴 버튼과 내비게이션 드로어로 전환합니다.";
+      " · " +
+      designs.navigationDesigns.structures.find(
+        (n) => n.id === selection.navigationStructure,
+      ).description;
     $("navigation-preview").innerHTML = paired(() =>
       shell(selection.navigation),
     );
@@ -566,6 +571,18 @@
             (m) => m.id === config.designSelection.motion,
           ).name,
         ],
+        [
+          "선택 표시",
+          designs.navigationDesigns.styles.find(
+            (n) => n.id === config.designSelection.navigationStyle,
+          ).name,
+        ],
+        [
+          "메뉴 구성",
+          designs.navigationDesigns.structures.find(
+            (n) => n.id === config.designSelection.navigationStructure,
+          ).name,
+        ],
         ["디자인 모드", "라이트 + 다크"],
         ["색상", p.name],
         ["형태", s.name],
@@ -628,6 +645,7 @@
     .join("");
   for (const [key, items] of [
     ["navigation", designs.navigationPresets],
+    ["navigationStructure", designs.navigationDesigns.structures],
     ["motion", designs.motionPresets],
   ])
     $("catalog-" + key).innerHTML = items
@@ -661,7 +679,26 @@
     $("ui-theme").textContent = theme === "dark" ? "라이트 모드" : "다크 모드";
     $("ui-theme").setAttribute("aria-pressed", String(theme === "dark"));
   });
-  for (const key of ["motion", "navigation"])
+  $("navigation-design-css").textContent = designs.navigationDesigns.allCSS();
+  $("navigation-style-picker").addEventListener("click", (e) => {
+    const button = e.target.closest("[data-navigation-style]");
+    if (!button) return;
+    const id = button.dataset.navigationStyle;
+    config = core.normalize(
+      {
+        ...config,
+        designSelection: { ...config.designSelection, navigationStyle: id },
+      },
+      palettes,
+      fonts,
+      icons,
+    );
+    render();
+    $("navigation-style-picker")
+      .querySelector(`[data-navigation-style="${id}"]`)
+      .focus({ preventScroll: true });
+  });
+  for (const key of ["motion", "navigation", "navigationStructure"])
     $("catalog-" + key).addEventListener("change", (e) => {
       config = core.normalize(
         {

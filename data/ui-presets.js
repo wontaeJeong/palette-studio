@@ -9,19 +9,19 @@
       id: "top",
       name: "상단 메뉴",
       description: "상단 높이 56px · 본문 최대 너비 1200px",
-      rule: "Place primary navigation in a 56px top bar, with content max-width 1200px below it. At widths below 768px collapse navigation into a labeled menu trigger and accessible drawer; keep the current page visible.",
+      rule: "Place primary navigation in a 56px top bar, with content max-width 1200px below it. Below 768px use a wrapping horizontal menu with visible item names; keep the current page visible.",
     },
     {
       id: "left",
       name: "좌측 메뉴",
       description: "좌측 너비 232px · 본문 패딩 24px",
-      rule: "Place primary navigation in a 232px left sidebar and content in the remaining width with 24px padding. Below 768px replace the sidebar with a 56px top bar and accessible navigation drawer; preserve focus and current page indication.",
+      rule: "Place primary navigation in a 232px left sidebar and content in the remaining width with 24px padding. Below 768px move the sidebar items into a wrapping horizontal menu above the content; retain visible item names, focus and current page indication.",
     },
     {
       id: "hybrid",
       name: "상단 + 좌측 메뉴",
       description: "상단 56px · 좌측 232px · 본문 패딩 24px",
-      rule: "Use a 56px top bar for workspace/account actions and a 232px left sidebar for section navigation. Keep content padding 24px. Below 768px retain the top bar and move section navigation into an accessible drawer. Avoid duplicating navigation destinations.",
+      rule: "Use a 56px top bar for workspace/account actions and a 232px left sidebar for section navigation. Keep content padding 24px. Below 768px retain the top bar and place section navigation in a wrapping horizontal menu with visible names above the content. Avoid duplicating navigation destinations.",
     },
   ];
   const motionPresets = [

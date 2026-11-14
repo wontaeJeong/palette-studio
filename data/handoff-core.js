@@ -157,6 +157,7 @@
       "  --ui-border: " + s.border + ";",
       "  --ui-shadow: " + s.shadow + ";",
       "}",
+      config.designSelection ? designs.navigationDesigns.css(designs.normalize(config.designSelection).navigationStyle, designs.normalize(config.designSelection).navigationStructure) : "",
       ""
     ].join("\n");
   }
@@ -351,6 +352,7 @@
       "## Real interaction evidence",
       "- [ ] Default/hover/focus-visible/disabled/loading/invalid action states were exercised.",
       "- [ ] Keyboard navigation, tab order and icon-only accessible names were verified.",
+      ...(config.designSelection ? ["- [ ] The selected navigation appearance and structure match the profile; current item, hover, focus, disabled and narrow-screen labels were verified."] : []),
       "- [ ] Empty, error, unauthorized, slow and long-content cases were rendered.",
       "- [ ] Relevant screen checked on desktop and narrow viewport without clipping.",
       "- [ ] Both color modes checked, except preserved modes explicitly out of change scope.",

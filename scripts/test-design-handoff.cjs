@@ -85,3 +85,5 @@ try {
 
 // Catalog selections extend the same browser/CLI contract. Keep both in CI's existing entry point.
 require('./test-design-catalog.cjs');
+
+require("./test-navigation-designs.cjs");

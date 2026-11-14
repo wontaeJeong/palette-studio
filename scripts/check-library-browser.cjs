@@ -4,12 +4,14 @@ const assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const fs=require('node:fs');
 const path=require('node:path');
+const {pathToFileURL}=require('node:url');
 (async()=>{
  const browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'||r.request().url().startsWith('file:')?r.continue():r.abort());
- await page.goto(process.env.PALETTE_URL||'http://127.0.0.1:8766/index.html');
+ await page.goto(process.env.PALETTE_URL||pathToFileURL(path.resolve(__dirname,'../index.html')).href);
+ assert.deepEqual(errors,[],'initial document initialization');
  await page.waitForFunction(()=>window.PaletteCatalog);
  assert.equal(await page.locator('[data-library-card]').count(),8,'six runtime choices plus two disclosed references');
  for(const width of [1440,390]){

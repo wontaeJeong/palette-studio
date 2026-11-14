@@ -1,7 +1,8 @@
 /* Real Chromium captures of Palette Studio, Icon Studio and Agent Handoff.
  * Run: NODE_PATH=/path/to/playwright node scripts/capture-previews.cjs
  * Captures are intentionally deterministic: offline, same Chromium, fixed
- * viewport, local fonts and no system-dependent time strings.
+ * viewport, local fonts. Metrics replay the checked-in real observation as cache;
+ * its actual query timestamps remain visible (not current live counts).
  */
 "use strict";
 const fs = require("node:fs");
@@ -39,6 +40,22 @@ const pathsToHash = [
   "data/ui-presets.js",
   "workspace.js",
   "css/workspace.css",
+  "component-demos.js",
+  "data/design-concepts.js",
+  "css/concepts.css",
+  "library-workspace.js",
+  "library-metrics.js",
+  "css/library-workspace.css",
+  "data/ui-libraries.js",
+  "data/library-sources.js",
+  "assets/library-preview.js",
+  "assets/library-preview.css",
+  "assets/library-preview-LICENSES.txt",
+  "examples/library-preview/package.json",
+  "examples/library-preview/package-lock.json",
+  "examples/library-preview/build.mjs",
+  ...fs.readdirSync(path.join(root, "examples/library-preview/src")).sort().map(file => "examples/library-preview/src/" + file),
+  "previews/library-metrics-observation.json",
   "scripts/capture-previews.cjs",
   ...fs
     .readdirSync(path.join(root, "data/icon-parts"))
@@ -65,6 +82,13 @@ const screenshots = [
   "design-catalog-layout.png",
   "design-catalog-motion.png",
   "design-catalog-ui-dark.png",
+  "studio-concepts-desktop.png",
+  "studio-toast-desktop.png",
+  "studio-popover-mobile.png",
+  ...["base-ui", "radix", "react-aria", "mui", "mantine"].map(id => "studio-library-" + id + ".png"),
+  "studio-library-metrics-light.png",
+  "studio-library-metrics-dark.png",
+  "studio-library-metrics-mobile.png",
 ];
 function sourceHash() {
   return sha(
@@ -258,6 +282,49 @@ async function main() {
       await shoot(page, "design-catalog-mobile.png", { fullPage: true });
       await context.close();
     }
+    // New vocabulary, polished real overlays and actual locally bundled libraries.
+    {
+      const {page,context}=await open("index.html","fontSource=system&bodyFont=system&codeFont=system",1440,1100);
+      await page.locator(".concept-section").scrollIntoViewIfNeeded();
+      await shoot(page,"studio-concepts-desktop.png",{keepScroll:true});
+      await page.evaluate(()=>{const c=PaletteCatalog.getConfig();PaletteCatalog.update({designSelection:{...c.designSelection,concept:"soft"}});document.querySelector("#components-options").open=true;});
+      await page.locator('[data-component="toast"]').click();
+      await page.locator('#detail-demo [data-theme="dark"] [data-toast-status="success"]').first().click();
+      await page.locator('#detail-demo [data-theme="dark"] [data-toast-status="warning"]').click();
+      await page.locator('.toast-item').first().hover();
+      await shoot(page,"studio-toast-desktop.png");
+      await context.close();
+    }
+    {
+      const {page,context}=await open("index.html","fontSource=system&bodyFont=system&codeFont=system",390,1000);
+      await page.evaluate(()=>{const c=PaletteCatalog.getConfig();PaletteCatalog.update({designSelection:{...c.designSelection,concept:"tactile"}});document.querySelector("#components-options").open=true;});
+      await page.locator('[data-component="popover"]').click();
+      await page.locator('#detail-demo [data-theme="dark"] [data-demo="popover"]').click();
+      await shoot(page,"studio-popover-mobile.png");
+      await context.close();
+    }
+    for(const id of ["base-ui","radix","react-aria","mui","mantine"]){
+      const {page,context}=await open("index.html","fontSource=system&bodyFont=system&codeFont=system",1440,1100);
+      await page.evaluate(id=>{const c=PaletteCatalog.getConfig();PaletteCatalog.update({uiLibrary:id,designSelection:{...c.designSelection,concept:"soft"}});document.querySelector("#library-options").open=true;},id);
+      await page.locator(`[data-library-card="${id}"]`).scrollIntoViewIfNeeded();
+      await page.locator('.library-preview').scrollIntoViewIfNeeded();
+      await shoot(page,"studio-library-"+id+".png",{keepScroll:true});
+      await context.close();
+    }
+    // Actual one-card source snapshot collected by smoke-library-metrics.cjs.
+    // No fixtures or live requests during capture; cache labels/times are real.
+    const observation=JSON.parse(fs.readFileSync(path.join(previewDir,"library-metrics-observation.json"),"utf8"));
+    if(observation.responses.length!==3||observation.responses.some(r=>r.status!==200)||Object.keys(observation.records).length!==3)throw Error("Metrics observation is not a successful live snapshot");
+    for(const width of [1440,390]){
+      const {page,context}=await open("index.html","fontSource=system&bodyFont=system&codeFont=system",width,1100);
+      await page.evaluate(records=>{for(const [key,value] of Object.entries(records))localStorage.setItem(key,JSON.stringify(value));},observation.records);
+      await page.reload();await page.locator("#library-options").evaluate(el=>el.open=true);
+      await page.locator('[data-library-card="base-ui"]').scrollIntoViewIfNeeded();
+      await shoot(page,width===390?"studio-library-metrics-mobile.png":"studio-library-metrics-light.png",{keepScroll:true});
+      if(width===1440){await page.click("#ui-theme");await page.locator('[data-library-card="base-ui"]').scrollIntoViewIfNeeded();await shoot(page,"studio-library-metrics-dark.png",{keepScroll:true});}
+      if(!await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1))throw Error("Metrics capture page overflow "+width);
+      await context.close();
+    }
     if (pageErrors.length)
       throw Error("Page errors:\n" + pageErrors.join("\n"));
     if (
@@ -273,6 +340,7 @@ async function main() {
       browserVersion: browser.version(),
       deviceScaleFactor: 1,
       network: "offline",
+      metricsEvidence: {path:"library-metrics-observation.json",kind:"actual public API observation replayed as cache",capturedAt:observation.capturedAt},
       sourceFiles: pathsToHash,
       sourceHash: sourceHash(),
       screenshots: captured,

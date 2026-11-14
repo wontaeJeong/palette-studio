@@ -35,9 +35,18 @@ GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다.
 |---|---|
 | 입력 | Button, Text field, Select, Switch, Checkbox |
 | 피드백 | Toast, Alert |
-| 오버레이 | Dialog, Drawer, Tooltip |
+| 오버레이 | Dialog, Drawer, Tooltip, Popover |
 | 탐색 | Dropdown menu, Tabs, Breadcrumb, Pagination |
 | 콘텐츠 | Card, Badge, Accordion, Empty state |
+
+### 독립 콘셉트와 실제 UI 라이브러리
+
+- 세트와 별도로 미니멀(Minimal), 소프트(Soft), 에디토리얼(Editorial), 컴팩트(Compact), 브루탈리스트(Brutalist), 글래스(Glass), 익스프레시브(Expressive), 터미널(Terminal), 택타일(Tactile) 9종을 비교합니다. 실제 컴포넌트의 형태·위계·경계·깊이·간격이 달라지며 선택한 본문/코드 폰트는 유지합니다.
+- 기존 UI/Vanilla와 Base UI, Radix Primitives, React Aria, MUI, Mantine을 선택합니다. 별도의 실제 라이브러리 영역은 로컬에 번들한 패키지의 Button·Tooltip·Dialog·Popover·알림을 실행합니다. 일반 프로젝트/도감 예시는 프레임워크 중립입니다.
+- Radix·React Aria 알림은 Sonner 보조 런타임입니다. shadcn/ui는 Base UI/Radix 기반으로 복사해 관리하는 레시피이며 독립 런타임으로 설치하지 않습니다. 선택은 기존 앱의 라이브러리 교체를 승인하거나 대상 프레임워크를 자동 변경하지 않습니다.
+- 라이브러리 카드의 **지표 새로고침**을 누르면 공개 GitHub REST와 npm 다운로드 API를 조회합니다. 초기 메트릭 요청은 0건이며 인증·서버가 필요 없습니다. 소스별 정상 값을 1시간 캐시하고, 부분 실패 시 이전 값·실패·조회 시각을 함께 표시합니다.
+- Stars는 저장소 관심도이며 monorepo 전체일 수 있습니다. npm은 명시된 대표 패키지의 `last-week` 응답 기간 다운로드이며 CI·반복 설치를 포함합니다. Radix는 `@radix-ui/react-dialog`, shadcn은 `shadcn` **CLI 다운로드**입니다. 고유 사용자 수·품질 순위·전체 설치 기반이 아닙니다. 검증 패키지 버전과 최신 저장소 릴리스는 구분됩니다.
+- 라이브 지표는 선택 프로필·공유 URL·내보내기 파일에 포함되지 않습니다. 지표 조회가 차단되어도 오프라인 미리보기·내보내기는 동작합니다.
 
 ### 팔레트·스타일·폰트
 
@@ -92,6 +101,16 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 |---|---|
 | ![미리보기를 유지하며 본문과 코드 글꼴 선택](previews/studio-fonts-desktop.png) | ![모바일 작업실과 확대 가능한 미리보기](previews/studio-mobile-light.png) |
 
+| 콘셉트 비교 | 실제 로컬 Base UI · Light/Dark |
+|---|---|
+| ![9개 독립 콘셉트와 실제 프로젝트](previews/studio-concepts-desktop.png) | ![실제 Base UI 컴포넌트](previews/studio-library-base-ui.png) |
+
+| 제목·설명·작업이 있는 알림 | 실제 메트릭의 캐시 표시 |
+|---|---|
+| ![다크 알림과 남은 시간 동작](previews/studio-toast-desktop.png) | ![실제 Base UI 공개 API 관측값](previews/studio-library-metrics-light.png) |
+
+메트릭 이미지는 `previews/library-metrics-observation.json`의 실제 2026-11-14 공개 API 응답을 오프라인 캐시로 다시 표시한 화면입니다. 현재 실시간 수치라는 뜻은 아닙니다. [다크 지표](previews/studio-library-metrics-dark.png) · [모바일 지표](previews/studio-library-metrics-mobile.png) · [모바일 팝오버](previews/studio-popover-mobile.png) · [Radix](previews/studio-library-radix.png) · [React Aria](previews/studio-library-react-aria.png) · [MUI](previews/studio-library-mui.png) · [Mantine](previews/studio-library-mantine.png)
+
 독립 실행 도구의 추가 화면:
 
 | 디자인 도감 | 컴포넌트 Light / Dark |
@@ -116,13 +135,15 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 
 작업지시와 프로필을 함께 전달하고, 대상 저장소에 있는 `AGENTS.md`는 유지합니다. 지침을 추가하려면 [병합 예시](agents/ROOT-AGENTS-SNIPPET.md)를 참고하세요.
 
-미리보기의 데이터와 동작은 예시입니다. 실제 API 연결은 포함하지 않습니다. 정적 색상 대비 검사 결과는 전체 앱의 접근성 검증을 대체하지 않으며, 실제 화면의 키보드·상태·모바일 레이아웃을 별도로 확인해야 합니다.
+프로젝트 예시의 데이터와 저장 동작은 시연용입니다. 라이브러리 지표만 명시적 새로고침으로 실제 공개 API에 연결합니다. 정적 색상 대비 검사 결과는 전체 앱의 접근성 검증을 대체하지 않으며, 실제 화면의 키보드·상태·모바일 레이아웃을 별도로 확인해야 합니다.
 
 ## 파일 구성
 
 | 경로 | 역할 |
 |---|---|
 | `catalog.html`, `catalog.js`, `css/catalog.css` | 디자인 세트와 컴포넌트 도감 화면 |
+| `library-metrics.js`, `library-workspace.js` | 소스별 메트릭 캐시·명시적 조회·실제 라이브러리 작업실 |
+| `examples/library-preview/`, `data/ui-libraries.js` | 실제 패키지 원본·잠금 버전·공유 내보내기 레시피 |
 | `data/design-concepts.js` | 독립 콘셉트 9종, 공유 CSS·구현 기준 |
 | `component-demos.js` | 툴팁·토스트·메뉴·팝오버·모달 수명과 접근성 |
 | `data/design-catalog.js` | 세트·요소·표현 정의, 선택 검증, 작업지시 규칙 |
@@ -152,6 +173,9 @@ python3 scripts/bundle.py
 node scripts/check-handoff-schemas.cjs
 node scripts/test-design-handoff.cjs
 node scripts/test-design-catalog.cjs
+node scripts/test-design-concepts.cjs
+node scripts/test-ui-libraries.cjs
+node --test scripts/test-library-metrics.cjs
 ```
 
 Playwright가 설치된 환경에서 실행합니다.
@@ -162,6 +186,11 @@ node scripts/check-fonts.cjs
 node scripts/check-icon-studio.cjs
 node scripts/check-handoff-browser.cjs
 node scripts/check-catalog-browser.cjs
+node scripts/check-component-concepts.cjs
+node scripts/check-component-gallery.cjs
+node scripts/check-library-browser.cjs
+node scripts/check-library-selection.cjs
+node scripts/check-library-metrics-browser.cjs
 node scripts/capture-previews.cjs
 node scripts/check-screenshot-freshness.cjs
 ```

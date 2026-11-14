@@ -89,7 +89,7 @@
         </section>
         <details id="library-options" class="inspector-section">
           <summary><span>UI 라이브러리</span><small id="library-summary"></small></summary>
-          <div class="details-content"><p class="help">실제 패키지의 동작을 오프라인으로 비교하세요. 기존 앱에서는 현재 라이브러리를 우선 유지합니다. 선택은 프레임워크를 자동 변경하지 않습니다.</p><div id="library-grid" class="library-grid"></div><p class="help"><a href="assets/library-preview-LICENSES.txt" data-library-license-link>라이브러리 전체 라이선스 · 고지 보기</a></p></div>
+          <div class="details-content"><p class="help">실제 패키지의 동작을 오프라인으로 비교하세요. 기존 앱에서는 현재 라이브러리를 우선 유지합니다. 선택은 프레임워크를 자동 변경하지 않습니다.</p><p class="help">지표는 버튼을 눌렀을 때만 공개 API에서 조회합니다. 정상 값은 소스별로 1시간 캐시합니다. Stars는 저장소 관심도이며 monorepo 전체를 포함할 수 있습니다. npm 다운로드는 CI·반복 설치를 포함한 주간 요청 수로, 고유 사용자 수나 품질 순위가 아닙니다. 대표 패키지는 라이브러리 전체 사용량이 아니며 shadcn 수치는 CLI 다운로드입니다. 검증 버전과 최신 저장소 릴리스는 별개입니다.</p><div id="library-grid" class="library-grid"></div><p class="help"><a href="assets/library-preview-LICENSES.txt" data-library-license-link>라이브러리 전체 라이선스 · 고지 보기</a></p></div>
         </details>
         <details id="typography-options" class="inspector-section">
           <summary><span>글꼴</span><small id="font-summary"></small></summary>
@@ -422,6 +422,7 @@
     <script src="catalog.js"></script>
     <script src="workspace.js"></script>
     <script src="assets/library-preview.js"></script>
+    <script src="library-metrics.js"></script>
     <script src="library-workspace.js"></script>
   </body>
 </html>

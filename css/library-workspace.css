@@ -19,3 +19,13 @@
 @media(max-width:440px) {.library-preview-pane {padding:12px;}.library-card {padding:14px;}}
 
 .library-license-text {max-height:300px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;background:var(--color-code-bg);border:1px solid var(--color-code-line);padding:14px;}
+
+.library-metrics {display:grid;gap:10px;margin-top:12px;line-height:1.6;}
+.metric-source {min-width:0;padding-top:10px;border-top:1px solid var(--color-line);overflow-wrap:anywhere;}
+.metric-heading {display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;justify-content:space-between;}
+.library-metrics a {text-decoration:underline;text-underline-offset:3px;}
+.metric-value {display:block;margin:3px 0;font-size:16px;font-variant-numeric:tabular-nums;line-height:1.5;color:var(--color-ink);}
+.metric-source small {display:block;font-size:10px;}
+.metric-state {font-size:10px;}
+.metric-state[data-metric-state="stale"],.metric-error {color:var(--color-ink);}
+.library-metrics .metric-loading {margin:0;color:var(--color-ink);}

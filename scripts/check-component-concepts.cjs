@@ -219,6 +219,39 @@ const path = require("node:path");
         "reading surfaces stay opaque and undecorated",
       );
     }
+    if (!only || only === "toast-focus") {
+      await page.clock.install();
+      await open("toast");
+      const trigger = page
+        .locator(
+          '#detail-demo [data-theme="light"] [data-toast-status="success"]',
+        )
+        .first();
+      await trigger.click();
+      await trigger.click();
+      assert.equal(await page.locator(".toast-item").count(), 2);
+      await page.locator(".toast-item [data-toast-dismiss]").first().focus();
+      await page.keyboard.press("Enter");
+      assert.equal(await page.locator(".toast-item").count(), 1);
+      assert(
+        await trigger.evaluate((el) => el === document.activeElement),
+        "keyboard dismissal restores the originating trigger while another toast remains",
+      );
+      assert(
+        await page
+          .locator("#component-dialog")
+          .evaluate((el) => el.contains(document.activeElement)),
+        "focus stays inside the open dialog",
+      );
+      await page.locator(".toast-item [data-toast-dismiss]").focus();
+      await page.keyboard.press("Enter");
+      assert.equal(await page.locator(".toast-item").count(), 0);
+      assert(
+        await trigger.evaluate((el) => el === document.activeElement),
+        "final toast dismissal also restores trigger focus",
+      );
+      await page.keyboard.press("Escape");
+    }
     if (!only || only === "stack") {
       await page.clock.install();
       await open("toast");

@@ -135,9 +135,9 @@
     if (!notices.size) {
       host.hidePopover();
       host.hidden = true;
-      if (focused && state.trigger.isConnected)
-        state.trigger.focus({ preventScroll: true });
     }
+    if (focused && state.trigger.isConnected)
+      state.trigger.focus({ preventScroll: true });
   }
   function updateClock(el) {
     const state = notices.get(el);

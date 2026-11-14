@@ -126,12 +126,37 @@
           </summary>
           <div class="details-content">
             <div class="field-pair">
-              <label>메뉴 배치<select id="catalog-navigation"></select></label
-              ><label>전환 속도<select id="catalog-motion"></select></label>
+              <div class="recommended-field">
+                <label
+                  >메뉴 배치<select
+                    id="catalog-navigation"
+                    aria-describedby="navigation-recommendation"
+                  ></select
+                ></label>
+                <p id="navigation-recommendation" class="preset-hint"></p>
+              </div>
+              <div class="recommended-field">
+                <label
+                  >전환 속도<select
+                    id="catalog-motion"
+                    aria-describedby="motion-recommendation"
+                  ></select
+                ></label>
+                <p id="motion-recommendation" class="preset-hint"></p>
+              </div>
             </div>
-            <label
-              >메뉴 구성<select id="catalog-navigationStructure"></select
-            ></label>
+            <div class="recommended-field">
+              <label
+                >메뉴 구성<select
+                  id="catalog-navigationStructure"
+                  aria-describedby="navigationStructure-recommendation"
+                ></select
+              ></label>
+              <p
+                id="navigationStructure-recommendation"
+                class="preset-hint"
+              ></p>
+            </div>
             <p class="field-label">선택 표시</p>
             <div
               id="navigation-style-picker"

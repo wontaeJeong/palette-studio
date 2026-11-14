@@ -159,7 +159,11 @@
     text +
     "</button>";
   function demo(id, variant, preview = false, pane = "light") {
-    const uid = (preview ? "preview-" : "detail-") + id + "-" + pane;
+    const uid =
+      (preview === "inline" ? "inline-" : preview ? "preview-" : "detail-") +
+      id +
+      "-" +
+      pane;
     const content = {
       button:
         '<div class="sample-actions">' +
@@ -282,8 +286,21 @@
         button("프로젝트 만들기", "action", variant === "solid") +
         "</div>",
     }[id];
-    return '<div class="treatment ' + esc(variant) + '">' + content + "</div>";
+    // Static samples and interactive demos share the same markup and treatment.
+    if (preview === "inline") return content.replace(/ data-demo="[^"]*"/g, "");
+    const showSample =
+      !preview &&
+      ["toast", "dialog", "drawer", "tooltip", "menu", "popover"].includes(id);
+    const body = showSample
+      ? '<div class="inline-sample" inert aria-hidden="true">' +
+        demo(id, variant, "inline", pane) +
+        '</div><div class="sample-interaction">' +
+        content +
+        "</div>"
+      : content;
+    return '<div class="treatment ' + esc(variant) + '">' + body + "</div>";
   }
+
   function notice(text) {
     $("catalog-status").textContent = text;
     clearTimeout(statusTimer);
@@ -509,15 +526,44 @@
       );
     $("catalog-palette").value = config.palette;
   }
+  function choiceStatus(selected, recommended) {
+    return (
+      '<span class="choice-statuses">' +
+      (recommended
+        ? '<span class="preset-recommendation">프리셋 추천</span>'
+        : "") +
+      (selected ? '<span class="selection-status">선택됨</span>' : "") +
+      "</span>"
+    );
+  }
   function renderAuxiliary() {
     const selection = config.designSelection;
-    $("catalog-motion").value = selection.motion;
-    $("catalog-navigation").value = selection.navigation;
-    $("catalog-navigationStructure").value = selection.navigationStructure;
+    const recommended = designs.selection(selection.set);
+    for (const [key, items] of [
+      ["navigation", designs.navigationPresets],
+      ["navigationStructure", designs.navigationDesigns.structures],
+      ["motion", designs.motionPresets],
+    ]) {
+      $("catalog-" + key).innerHTML = items
+        .map(
+          (item) =>
+            '<option value="' +
+            item.id +
+            '">' +
+            esc(item.name) +
+            (item.id === recommended[key] ? " · 프리셋 추천" : "") +
+            "</option>",
+        )
+        .join("");
+      $("catalog-" + key).value = selection[key];
+      $(key + "-recommendation").textContent =
+        "프리셋 추천: " +
+        items.find((item) => item.id === recommended[key]).name;
+    }
     $("navigation-style-picker").innerHTML = designs.navigationDesigns.styles
       .map(
         (style) =>
-          `<button type="button" class="navigation-choice" data-navigation-style="${style.id}" aria-pressed="${style.id === selection.navigationStyle}"><span class="navigation-choice-label">${style.name}</span><span class="navigation-choice-demo" aria-hidden="true">${menuSample({ ...selection, navigationStyle: style.id, navigationStructure: "list" })}</span><small>${style.description}</small></button>`,
+          `<button type="button" class="navigation-choice" data-navigation-style="${style.id}" aria-pressed="${style.id === selection.navigationStyle}"><span class="navigation-choice-label">${style.name}</span>${choiceStatus(style.id === selection.navigationStyle, style.id === recommended.navigationStyle)}<span class="navigation-choice-demo" aria-hidden="true">${menuSample({ ...selection, navigationStyle: style.id, navigationStructure: "list" })}</span><small>${style.description}</small></button>`,
       )
       .join("");
     $("navigation-description").textContent =
@@ -565,6 +611,7 @@
       category = $("catalog-category").value;
     const set = designs.sets.find((s) => s.id === config.designSelection.set);
     const recommended = set.recommendedComponents;
+    const defaults = designs.selection(set.id).components;
     const matches = designs.components.filter(
       (c) =>
         (category === "all" || category === c.category) &&
@@ -590,12 +637,14 @@
           '"><strong>' +
           c.label +
           (recommended.includes(c.id)
-            ? ' <span class="recommend-badge">권장</span>'
+            ? ' <span class="recommend-badge">권장 요소</span>'
             : "") +
           "</strong><small>" +
           c.name +
-          " / " +
+          " · 선택됨: " +
           designs.treatments[config.designSelection.components[c.id]].name +
+          "</small><small>프리셋 추천: " +
+          designs.treatments[defaults[c.id]].name +
           "</small><span>" +
           c.purpose +
           " ↗</span></button></article>",
@@ -606,7 +655,10 @@
   function renderDetail() {
     if (!active) return;
     const c = designs.components.find((c) => c.id === active),
-      variant = config.designSelection.components[active];
+      variant = config.designSelection.components[active],
+      recommended = designs.selection(config.designSelection.set).components[
+        active
+      ];
     $("detail-category").textContent = c.category + " / " + c.name;
     $("detail-title").textContent = c.label;
     $("detail-purpose").textContent = c.purpose;
@@ -621,6 +673,7 @@
           (v === variant) +
           '">' +
           designs.treatments[v].name +
+          choiceStatus(v === variant, v === recommended) +
           "</button>",
       )
       .join("");
@@ -761,17 +814,6 @@
   $("catalog-palette").innerHTML = palettes.palettes
     .map((p) => '<option value="' + p.id + '">' + esc(p.name) + "</option>")
     .join("");
-  for (const [key, items] of [
-    ["navigation", designs.navigationPresets],
-    ["navigationStructure", designs.navigationDesigns.structures],
-    ["motion", designs.motionPresets],
-  ])
-    $("catalog-" + key).innerHTML = items
-      .map(
-        (item) =>
-          '<option value="' + item.id + '">' + esc(item.name) + "</option>",
-      )
-      .join("");
   $("catalog-style").innerHTML = palettes.styles
     .map((s) => '<option value="' + s.id + '">' + esc(s.name) + "</option>")
     .join("");
@@ -950,7 +992,7 @@
   );
   window.PaletteCatalog = {
     getConfig: () => JSON.parse(JSON.stringify(config)),
-    libraryFiles: () => core.libraryFiles(config,palettes),
+    libraryFiles: () => core.libraryFiles(config, palettes),
     update(patch) {
       config = core.normalize(
         { ...config, ...patch, fonts: { ...config.fonts, ...patch.fonts } },

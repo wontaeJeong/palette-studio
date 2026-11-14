@@ -42,6 +42,29 @@ test('snapshots stay stable until a commit, are deeply immutable, and reads are 
   assert.notEqual(store.getSnapshot(), snapshot); assert.equal(snapshot.project, 'My Web App');
 });
 
+for (const route of ['initial config', 'nested patch', 'restored JSON']) test(`retained font metadata is recursively owned for ${route}`, () => {
+  const metadata = { label: 'original', tags: [{ value: 'retained' }], optional: null };
+  const input = initial(); input.fonts.metadata = metadata;
+  const restored = route === 'restored JSON' ? restoreSelection(deps, fullHash(input), undefined).config : input;
+  const store = createSelectionStore(deps, route === 'nested patch' ? initial() : restored);
+  if (route === 'nested patch') store.update({ fonts: { metadata } });
+  let calls = 0; store.subscribe(() => { calls++; });
+  const snapshot = store.getSnapshot();
+  assert.equal(Object.isFrozen(restored.fonts.metadata), false);
+  assert.equal(Object.isFrozen(metadata.tags), false);
+  const copy = store.getConfig();
+  restored.fonts.metadata.label = 'source mutation';
+  metadata.tags[0].value = 'input mutation';
+  copy.fonts.metadata.label = 'read mutation';
+  copy.fonts.metadata.tags[0].value = 'nested read mutation';
+  copy.fonts.metadata.tags.push({ value: 'extra' });
+  assert.equal(store.getSnapshot(), snapshot);
+  assert.equal(calls, 0);
+  assert.deepEqual(snapshot.fonts.metadata, { label: 'original', tags: [{ value: 'retained' }], optional: null });
+  for (const value of [snapshot.fonts.metadata, snapshot.fonts.metadata.tags, snapshot.fonts.metadata.tags[0]]) assert.ok(Object.isFrozen(value));
+  assert.deepEqual(store.getConfig().fonts.metadata, { label: 'original', tags: [{ value: 'retained' }], optional: null });
+});
+
 test('invalid patches never commit or notify; successful updates notify once and unsubscribe', () => {
   const store = createSelectionStore(deps, initial());
   let calls = 0; const stop = store.subscribe(() => { calls++; assert.equal(store.getConfig().project, 'Changed App'); });

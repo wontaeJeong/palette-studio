@@ -6,16 +6,28 @@ export function normalizeSelection(dependencies: SelectionDependencies, input: u
   return { ...normalized, designSelection: designs.normalize(normalized.designSelection ?? designs.selection('studio')) };
 }
 
+// Canonical normalization retains extra JSON font properties. Own the entire
+// retained value, including fields outside the finite editor contract.
+function copyValue(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(copyValue);
+  if (value !== null && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, copyValue(item)]));
+  }
+  return value;
+}
+function freezeValue(value: unknown): void {
+  if (value !== null && typeof value === 'object') {
+    for (const item of Object.values(value)) freezeValue(item);
+    Object.freeze(value);
+  }
+}
 function copy(config: SelectionSnapshot): SelectionConfig {
-  return { ...config, fonts: { ...config.fonts }, icons: [...config.icons], designSelection: { ...config.designSelection, components: { ...config.designSelection.components } } };
+  return copyValue(config) as SelectionConfig;
 }
 function immutable(config: SelectionConfig): SelectionSnapshot {
   const owned = copy(config);
-  Object.freeze(owned.fonts);
-  Object.freeze(owned.icons);
-  Object.freeze(owned.designSelection.components);
-  Object.freeze(owned.designSelection);
-  return Object.freeze(owned);
+  freezeValue(owned);
+  return owned;
 }
 
 export function createSelectionStore(dependencies: SelectionDependencies, initialConfig: unknown) {

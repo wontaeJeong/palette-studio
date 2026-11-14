@@ -31,6 +31,7 @@ const help = [
   "  --scope <name>          both|light-only|dark-only",
   "  --layout <name>         existing|dashboard|content|workflow|marketing",
   "  --framework <name>      react|vanilla|astro",
+  "  --ui-library <name>     vanilla|base-ui|radix|react-aria|mui|mantine",
   "  --body-font <id>        from data/fonts.json",
   "  --code-font <id>        from data/fonts.json",
   "  --font-source <name>    cdn-first|local-only|system",
@@ -52,7 +53,7 @@ function parse(argv) {
     const key = arg.slice(2);
     if (flags.has(key)) { result[key] = true; continue; }
     if (!["config", "out", "project", "palette", "style", "target", "scope", "layout",
-      "framework", "body-font", "code-font", "font-source", "icons"].includes(key))
+      "framework", "ui-library", "body-font", "code-font", "font-source", "icons"].includes(key))
       throw Error("Unknown option " + arg);
     if (!argv[i + 1] || argv[i + 1].startsWith("--")) throw Error("Missing value for " + arg);
     result[key] = argv[++i];
@@ -67,6 +68,7 @@ function main() {
       palettes: catalog.palettes.map((p) => p.id),
       styles: catalog.styles.map((s) => s.id),
       layouts: Object.keys(handoff.layouts), frameworks: handoff.frameworks,
+      uiLibraries: require("../data/ui-libraries.js").libraries.map(l=>l.id),
       icons: iconCatalog.map((i) => i.name),
     }, null, 2));
     return;
@@ -74,7 +76,7 @@ function main() {
   let input = flags.config ? JSON.parse(read(path.resolve(flags.config))) : {};
   for (const [flag, field] of Object.entries({
     project: "project", palette: "palette", style: "style", target: "target",
-    scope: "scope", layout: "layout", framework: "framework",
+    scope: "scope", layout: "layout", framework: "framework", "ui-library": "uiLibrary",
   })) if (flags[flag]) input[field] = flags[flag];
   input.fonts = { ...(input.fonts || {}) };
   if (flags["body-font"]) input.fonts.body = flags["body-font"];
@@ -114,6 +116,7 @@ function main() {
   save("selected-fonts.css", handoff.fontCSS(config, fonts));
   save("AGENT-TASK.md", handoff.agentTask(config,catalog));
   save("QA-CHECKLIST.md", handoff.checklist(config));
+  for (const [name,body] of Object.entries(handoff.libraryFiles(config,catalog))) save(name,body);
   save("README.md", [
     "# Palette Studio project handoff",
     "",

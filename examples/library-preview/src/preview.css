@@ -1,0 +1,36 @@
+/* Every preview rule is scoped; semantic colors are consumed from the selected HEX scope. */
+.ps-library {background:var(--color-canvas);line-height:1.5;font-family:var(--kit-font-sans,system-ui);color:var(--color-ink);}
+.ps-library *, .ps-library *::before, .ps-library *::after {box-sizing:border-box;}
+.ps-library .ps-actions {display:flex;align-items:center;flex-wrap:wrap;gap:10px;}
+.ps-library .ps-control {font:inherit;font-size:13px;font-weight:600;line-height:1.3;min-height:max(40px,var(--ui-height,40px));padding:10px 13px;border:var(--concept-border,1px) solid var(--color-line-strong);border-radius:var(--concept-radius,6px);background:var(--color-raised);color:var(--color-ink);cursor:pointer;box-shadow:none;text-transform:none;}
+.ps-library .ps-control:hover {background:var(--color-surface);}
+.ps-library .ps-control.ps-primary {background:var(--color-accent);border-color:var(--color-accent);color:var(--color-on-accent);}
+.ps-library .ps-control.ps-primary:hover {background:var(--color-accent-hover);}
+.ps-library :is(button,a,[tabindex]):focus-visible {outline:3px solid var(--color-focus);outline-offset:3px;}
+.ps-library .ps-surface,.ps-library .ps-toast {background:var(--color-raised);color:var(--color-ink);border:var(--concept-border,1px) solid var(--color-line-strong);border-radius:var(--concept-card,10px);box-shadow:var(--concept-elevation,none);padding:calc(var(--concept-space,16px) * .5 + var(--ui-padding,20px) * .5);}
+.ps-library :is(h2,h3,p) {margin:0 0 16px;}
+.ps-library :is(h2,h3,.ps-concept-title) {font-size:var(--concept-title,24px);font-weight:var(--concept-weight,650);letter-spacing:var(--concept-tracking,-.025em);line-height:1.25;}
+.ps-library .ps-dialog {position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(430px,calc(100vw - 32px));max-height:calc(100dvh - 48px);overflow:auto;z-index:1400;}
+.ps-library .ps-backdrop,.ps-library .ps-modal-overlay {position:fixed;inset:0;z-index:1300;background:#00000055;}
+.ps-library .ps-modal-overlay {display:flex;align-items:center;justify-content:center;padding:24px 16px;overflow:auto;}
+.ps-library .ps-rac-modal {width:min(430px,100%);max-height:calc(100dvh - 48px);overflow:auto;}
+.ps-library .ps-tooltip {background:var(--color-tooltip-bg);color:var(--color-tooltip-fg);padding:9px 13px;border:var(--concept-border,1px) solid var(--color-line-strong);border-radius:var(--concept-radius,6px);font:inherit;font-size:13px;max-width:min(280px,calc(100vw - 24px));z-index:1500;overflow-wrap:anywhere;}
+.ps-library .ps-popover {width:min(310px,calc(100vw - 24px));max-height:calc(100dvh - 40px);overflow:auto;z-index:1400;}
+.ps-library .ps-positioner {z-index:1500;}
+.ps-library .ps-toasts {position:fixed;z-index:1600;right:12px;top:12px;width:min(360px,calc(100vw - 24px));display:flex;flex-direction:column;gap:10px;list-style:none;}
+.ps-library .ps-toast {font-family:inherit;font-size:14px;}
+.ps-library .ps-toast-title {font-weight:700;}
+.ps-library .ps-toast[data-limited] {display:none;}
+.ps-library .ps-toast .ps-actions {margin-top:12px;}
+.ps-library [data-sonner-toaster] {--normal-bg:var(--color-raised);--normal-text:var(--color-ink);--normal-border:var(--color-line-strong);font-family:inherit;z-index:1600;}
+.ps-library [data-sonner-toast].ps-toast {background:var(--color-raised);color:var(--color-ink);border-color:var(--color-line-strong);border-radius:var(--concept-card);box-shadow:var(--concept-elevation);}
+.ps-library [data-sonner-toast] [data-description] {color:var(--color-ink-muted);}
+.ps-library .MuiSnackbar-root {z-index:1600;max-width:calc(100vw - 24px);}
+.ps-library .MuiAlert-icon {color:var(--color-success);}
+.ps-library .MuiDialog-paper {max-width:calc(100vw - 32px);margin:16px;}
+.ps-library[data-concept="terminal"] .ps-surface {border-style:dashed;}
+.ps-library[data-concept="expressive"] .ps-surface {border-radius:26px 8px 26px 8px;}
+.ps-library[data-concept="glass"] .ps-surface {background:var(--color-raised);box-shadow:inset 0 1px 0 #FFFFFF55,0 6px 20px #00000018;}
+.ps-library[data-concept="editorial"] .ps-surface {border-inline-width:0;}
+@media (prefers-reduced-motion:reduce) {.ps-library *, .ps-library *::before, .ps-library *::after {transition:none!important;animation:none!important;scroll-behavior:auto!important;}}
+@media (forced-colors:active) {.ps-library :is(.ps-control,.ps-surface,.ps-tooltip,.ps-toast) {border:1px solid CanvasText;box-shadow:none;background-image:none;}}

@@ -32,7 +32,7 @@
   const candidates = { ...initial, ...primary, ...saved, fonts: {
     ...initial.fonts, ...primary.fonts, ...(saved.fonts || {})
   }};
-  for (const key of ["palette", "style", "target", "scope", "layout", "framework", "project"]) {
+  for (const key of ["palette", "style", "target", "scope", "layout", "framework", "uiLibrary", "project"]) {
     if (hash.has(key)) candidates[key] = hash.get(key);
   }
   for (const [urlKey, fontKey] of [["bodyFont", "body"], ["codeFont", "code"], ["fontSource", "source"]]) {
@@ -51,12 +51,13 @@
   let mode = "split", iconQuery = "", noticeTimer;
   const selects = {
     "ah-palette": "palette", "ah-style": "style", "ah-layout": "layout",
-    "ah-target": "target", "ah-scope": "scope", "ah-framework": "framework",
+    "ah-ui-library": "uiLibrary", "ah-target": "target", "ah-scope": "scope", "ah-framework": "framework",
     "ah-body-font": "body", "ah-code-font": "code", "ah-font-source": "source"
   };
+  $("ah-ui-library").innerHTML=window.PaletteUILibraries.libraries.map(l=>`<option value="${l.id}">${esc(l.name)}</option>`).join("");
   const rows = icons.slice().sort((a, b) => a.name.localeCompare(b.name));
   const tokenFields = ["ah-palette", "ah-style", "ah-target", "ah-scope",
-    "ah-layout", "ah-framework"];
+    "ah-layout", "ah-framework", "ah-ui-library"];
   const doc = (c) => core.designMD(c, catalog);
   const exportsFor = (c) => ({
     "design.md": doc(c),
@@ -66,7 +67,8 @@
     "selected-motion.css": core.motionCSS(c),
     "selected-fonts.css": core.fontCSS(c, fonts),
     "AGENT-TASK.md": core.agentTask(c,catalog),
-    "QA-CHECKLIST.md": core.checklist(c)
+    "QA-CHECKLIST.md": core.checklist(c),
+    ...core.libraryFiles(c,catalog)
   });
   function toast(message) {
     $("ah-toast").textContent = message;
@@ -98,7 +100,7 @@
     try { localStorage.setItem("palette-studio-handoff-v1", JSON.stringify(config)); }
     catch (_) {}
     const params = new URLSearchParams();
-    for (const key of ["palette", "style", "layout", "target", "scope", "framework", "project"]) {
+    for (const key of ["palette", "style", "layout", "target", "scope", "framework", "uiLibrary", "project"]) {
       params.set(key, config[key]);
     }
     params.set("bodyFont", config.fonts.body);
@@ -133,12 +135,12 @@
     const panes = mode === "split" ? ["light", "dark"] : [mode];
     $("ah-preview-grid").innerHTML = panes.map((theme) =>
       '<div class="ah-mock" data-theme="' + esc(theme) + '" data-palette="' +
-        esc(config.palette) + '" data-style="' + esc(config.style) + '">' +
+        esc(config.palette) + '" data-style="' + esc(config.style) + '" data-concept="' + (config.designSelection?.concept || 'minimal') + '">' +
         '<div class="ah-mock-header"><span>' + esc(p.name) + '</span><span>' +
         (theme === "light" ? "라이트" : "다크") + '</span></div>' +
-        '<div class="ah-mock-area' + (selection ? ' ah-nav-frame' : '') + '"' + (selection ? ' data-navigation="' + selection.navigation + '" data-menu-structure="' + selection.navigationStructure + '"' : '') + '>' +
+        '<div class="ah-mock-area' + (selection ? ' ah-nav-frame' : '') + '" data-concept-part="surface"' + (selection ? ' data-navigation="' + selection.navigation + '" data-menu-structure="' + selection.navigationStructure + '"' : '') + '>' +
         (selection && selection.navigation === "hybrid" ? '<div class="ah-nav-context">작업 공간 · 계정</div>' : '') + navigation +
-        '<div class="ah-preview-content"><div class="ah-mock-title">' + title + '</div>' +
+        '<div class="ah-preview-content"><div class="ah-mock-title" data-concept-part="title">' + title + '</div>' +
         (selection ? '' : '<div class="ah-mock-tab">개요</div>') +
         '<div class="ah-mock-metric">1,284</div>' +
         '<div class="ah-mock-desc">샘플 데이터 · 30일 기준</div>' +
@@ -157,11 +159,14 @@
       "ah-style": config.style, "ah-layout": config.layout,
       "ah-target": config.target, "ah-scope": config.scope,
       "ah-framework": config.framework,
+      "ah-ui-library": config.uiLibrary,
       "ah-body-font": config.fonts.body, "ah-code-font": config.fonts.code,
       "ah-font-source": config.fonts.source
     };
     for (const [key, value] of Object.entries(fields)) $(key).value = value;
     renderPicker(); renderPreview();
+    $("ah-library-files").innerHTML=Object.keys(core.libraryFiles(config,catalog)).map(name=>`<button type="button" data-export="${name}">${name} 저장</button>`).join("");
+    $("ah-library-note").textContent=window.PaletteUILibraries.summary(config);
     $("ah-markdown-preview").textContent = doc(config);
     $("ah-error").hidden = true;
     persist();
@@ -217,12 +222,12 @@
     button.addEventListener("click", () => { mode = button.dataset.mode; renderPreview(); }));
   $("ah-config-download").addEventListener("click", () =>
     saveFile("handoff-config.json", JSON.stringify(config, null, 2) + "\n"));
-  document.querySelectorAll("[data-export]").forEach((button) =>
-    button.addEventListener("click", () => {
+  document.addEventListener("click", (event) => {
+      const button=event.target.closest("[data-export]");if(!button)return;
       const file = button.dataset.export;
       const output = exportsFor(config);
       if (Object.hasOwn(output, file)) saveFile(file, output[file]);
-    }));
+    });
   $("ah-copy-design").addEventListener("click", () => copyText(doc(config)));
   $("ah-copy-cli").addEventListener("click", () => copyText($("ah-cli").textContent));
   window.PaletteAgentHandoff = {

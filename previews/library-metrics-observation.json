@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-11-14T05:56:57.763Z",
+  "pageOrigin": "file://index.html",
+  "network": "live public APIs; one explicit Base UI refresh",
+  "library": {
+    "id": "base-ui",
+    "name": "Base UI",
+    "description": "접근성 동작은 라이브러리에 맡기고 형태는 직접 설계할 때. 스타일을 자유롭게 정할 수 있습니다.",
+    "repo": "mui/base-ui",
+    "npmPackage": "@base-ui/react",
+    "docs": "https://base-ui.com/react/overview/quick-start",
+    "runtime": "react",
+    "version": "1.9.0"
+  },
+  "records": {
+    "palette-library-metrics:v1:base-ui:release": {
+      "value": {
+        "noRelease": false,
+        "tag": "v1.9.0",
+        "name": "v1.9.0",
+        "publishedAt": "2026-10-09T08:50:49Z",
+        "url": "https://github.com/mui/base-ui/releases/tag/v1.9.0"
+      },
+      "fetchedAt": 1794635817522,
+      "sourceUrl": "https://api.github.com/repos/mui/base-ui/releases/latest",
+      "library": {
+        "id": "base-ui",
+        "repo": "mui/base-ui",
+        "npmPackage": "@base-ui/react"
+      }
+    },
+    "palette-library-metrics:v1:base-ui:github": {
+      "value": {
+        "stars": 11410,
+        "repo": "mui/base-ui"
+      },
+      "fetchedAt": 1794635817553,
+      "sourceUrl": "https://api.github.com/repos/mui/base-ui",
+      "library": {
+        "id": "base-ui",
+        "repo": "mui/base-ui",
+        "npmPackage": "@base-ui/react"
+      }
+    },
+    "palette-library-metrics:v1:base-ui:npm": {
+      "value": {
+        "downloads": 29705480,
+        "start": "2026-11-06",
+        "end": "2026-11-12",
+        "package": "@base-ui/react"
+      },
+      "fetchedAt": 1794635817748,
+      "sourceUrl": "https://api.npmjs.org/downloads/point/last-week/%40base-ui%2Freact",
+      "library": {
+        "id": "base-ui",
+        "repo": "mui/base-ui",
+        "npmPackage": "@base-ui/react"
+      }
+    }
+  },
+  "renderedText": "GitHub stars ↗\n최신 조회\n11,410\n정상 조회 2026. 11. 14. 5시 56분 57초 UTC\n최신 저장소 릴리스 ↗\n최신 조회\nv1.9.0\n게시 2026. 10. 9. 8시 50분 49초 UTC\n정상 조회 2026. 11. 14. 5시 56분 57초 UTC\n주간 npm · 대표 패키지 ↗\n최신 조회\n29,705,480\n2026-11-06 ~ 2026-11-12\n정상 조회 2026. 11. 14. 5시 56분 57초 UTC",
+  "responses": [
+    {
+      "url": "https://api.github.com/repos/mui/base-ui/releases/latest",
+      "status": 200
+    },
+    {
+      "url": "https://api.github.com/repos/mui/base-ui",
+      "status": 200
+    },
+    {
+      "url": "https://api.npmjs.org/downloads/point/last-week/%40base-ui%2Freact",
+      "status": 200
+    }
+  ]
+}

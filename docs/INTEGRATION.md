@@ -58,6 +58,63 @@
 
 생성 원본은 `scripts/build.py`입니다. JSON과 CSS를 따로 손으로 바꿔 drift를 만들지 마세요. `node scripts/audit.mjs`는 모든 테마와 생성 CSS의 값 일치도 확인합니다. raw ramp에 대해서는 접근성 승인 결과를 제공하지 않습니다. 색상 변경 후에는 기존 앱의 실제 상태·겹침·focus-ring을 별도로 확인하세요.
 
+## 독립 콘셉트와 컴포넌트 미리보기
+
+작업실의 여섯 세트는 업무 시작점이고, 아홉 콘셉트는 별도로 선택하는 형태·타이포 위계·재질 기준입니다. `designSelection.concept`는 `minimal`, `soft`, `editorial`, `compact`, `brutalist`, `glass`, `expressive`, `terminal`, `tactile` 중 하나입니다. 기존 선택에서 이 값이 없으면 studio/precision은 minimal, bloom은 soft, editorial은 editorial, console은 compact, signal은 brutalist로 정규화합니다. 기존 세트 ID와 개별 soft/outline/solid 표현은 보존됩니다.
+
+`data/design-concepts.js`가 브라우저와 CLI의 단일 원본입니다. `node scripts/build-concepts.cjs`는 미리보기용 `css/concepts.css`를 생성합니다. 내보내기의 `selected-style.css`에는 선택한 콘셉트 하나만 같은 함수로 들어갑니다. 샘플 클래스명을 앱의 클래스라고 가정하지 말고 `--concept-*`를 현재 컴포넌트에 연결하세요. 형태·위계·깊이는 콘셉트가, 밀도·컨트롤 크기는 스타일이 담당하며 본문/코드 글꼴 선택은 그대로 유지합니다.
+
+포털 루트에 `data-theme`, `data-palette`, `data-style`, `data-concept`를 전달합니다. Glass의 장식층은 내비게이션·팝오버·대화상자에 제한되고 본문에는 불투명 의미 표면을 유지합니다. 선택된 재질도 토큰의 literal HEX 규칙과 dark-only 색상 범위를 바꾸지 않습니다.
+
+프레임워크 중립 예시는 19종입니다. 툴팁은 고정 앵커·hover/focus·Escape 후 재열기를 지원하며 인터랙티브 내용은 별도 Popover를 씁니다. Toast는 최대 3개, 남은 시간 기준 hover/focus 일시정지, 되돌리기, 영구 오류 안내를 제공합니다. 모달에서 실행하는 알림은 해당 모달 아래 DOM에 두고 top layer로 표시해 보이면서도 조작 가능하게 합니다. 기존 앱에서는 이미 사용하는 접근성 라이브러리를 우선 재사용하세요.
+
+검증: `node scripts/test-design-concepts.cjs`, `node scripts/check-component-concepts.cjs`(Playwright), 기존 카탈로그·작업실·handoff 회귀 검사, `node scripts/audit.mjs`. 최종 단일 HTML은 `python3 scripts/bundle.py`로 다시 만듭니다.
+
+## 실제 UI 라이브러리 비교와 내보내기
+
+`uiLibrary`는 색상·콘셉트·프레임워크와 독립된 선택입니다. 이전 설정은 `vanilla`(기존 UI 재사용)로 정규화됩니다. Base UI, Radix Primitives, React Aria, MUI, Mantine을 고르면 작업실의 별도 실제 라이브러리 영역에서 Button · Tooltip · Dialog · Popover · 알림을 비교합니다. 프로젝트와 컴포넌트 도감 예시는 계속 프레임워크 중립이며, 실제 패키지를 사용한 화면으로 표시하지 않습니다. 기존 앱에서는 선택한 참고 라이브러리보다 현재 앱의 컴포넌트·Provider를 우선합니다.
+
+- Base UI는 자체 Toast, MUI는 Snackbar/Alert, Mantine은 자체 Notifications를 사용합니다. Radix와 React Aria의 알림은 명시적으로 Sonner입니다. React Aria의 alpha Toast API는 사용하지 않습니다. Radix Primitives에는 스타일된 Button이 없으므로 실제 Trigger에 연결한 네이티브 버튼이 올바른 예입니다.
+- 모든 외부 대상은 React 런타임이 필요합니다. Astro는 `@astrojs/react`와 클라이언트 island, Vanilla 대상은 의도적인 React root/bundle 추가가 필요합니다. 선택 버튼은 실제 예시가 보이도록 미리보기 내부를 스크롤하고 모바일에서는 기존 확대 미리보기를 엽니다. 선택 패널 위치와 포커스는 유지합니다. 미리보기 선택만으로 프레임워크가 변경되지 않으며 UI와 `library-README.md`에서 이 조건을 표시합니다.
+- shadcn/ui는 독립 런타임 패키지가 아니라 복사해서 관리하는 컴포넌트 레시피입니다. Base UI/Radix 선택 시 실제 선택 HEX의 `shadcn-tokens.css`가 함께 나옵니다. 현재 컴포넌트의 Tailwind 매핑에 연결하고 과거 `hsl(var(...))` 래퍼를 제거해야 합니다. `shadcn` CLI 다운로드를 컴포넌트 사용량으로 해석하지 않습니다.
+
+`data/ui-libraries.js`의 순수 `recipe(config,catalog)`를 `PaletteHandoff.libraryFiles`가 공유합니다. 확인·내보내기 화면과 독립 handoff 화면 및 CLI는 같은 파일을 생성합니다. `library-theme.ts`에는 허용된 색상 모드의 실제 HEX만 있고 제외 모드는 `applyLibraryTokens(existing,mode)`가 기존 값을 그대로 반환합니다. `library-components.tsx`, 실제 `library-adapter.tsx`, `library-shared.tsx`, `library.css`, 정확한 의존성 목록 `library-packages.json`, 적용 설명이 함께 나옵니다. 내보내기 화면의 짧은 한국어 안내는 선택 라이브러리·색상 범위·React 또는 Astro 요구사항을 요약합니다. 전체 기술 지침은 생략하지 않고 `library-README.md`에 저장합니다. 이 샘플 전체로 앱을 대체하지 말고 이미 쓰는 Provider에 토큰/shape/font를 병합하세요. 폰트 파일과 OFL은 기존 CLI의 fonts 폴더 내보내기를 사용합니다.
+
+포털은 선택 색상·본문 폰트·콘셉트 변수를 가진 별도 DOM 컨테이너 안에 렌더합니다. 실제 앱에 매핑할 때도 해당 스코프와 모드가 포털까지 이어져야 합니다. Light/Dark 예시는 각각 별도 Base UI Provider, Sonner toaster ID, Mantine notification store와 MUI 상태를 소유합니다. 한쪽 알림이 다른 쪽에 복제되지 않으며 해제 시 React root와 포털을 제거합니다. Mantine CSS는 파서로 `.ps-library` 안에 한정하고 CssBaseline 같은 전역 reset은 사용하지 않습니다. 유지해야 할 필수 오류는 토스트에만 두지 마세요.
+
+사용자 실행에는 npm이나 네트워크가 필요하지 않습니다. 번들은 classic script이며 `START-HERE.html`에 그대로 인라인됩니다. 개발 재빌드는 다음과 같습니다.
+
+```bash
+cd examples/library-preview
+npm ci
+npm test
+npm run build
+cd ../..
+node scripts/test-ui-libraries.cjs
+node scripts/check-library-browser.cjs  # Playwright + Chromium 필요
+python3 scripts/bundle.py
+```
+
+원본은 `examples/library-preview/src/`, 버전과 무결성은 `package-lock.json`에 고정합니다. 빌드는 `assets/library-preview.js`, 스코프 CSS, `data/library-sources.js`(같은 실제 소스를 내보내는 생성물), 완전한 `assets/library-preview-LICENSES.txt`를 만듭니다. 번들 재배포 시 전체 라이선스와 고지를 유지하세요. npm tarball에 누락된 한 MIT 라이선스는 `examples/library-preview/licenses/`에 출처와 함께 보존합니다. 검증한 패키지 버전과 온라인 최신 정식 릴리스/다운로드 지표는 별개입니다. 메타데이터는 초기 로드에서 네트워크를 요청하지 않습니다.
+
+## 라이브러리 지표와 오프라인 경계
+
+카드의 **지표 새로고침**만 원격 조회를 시작합니다. `library-metrics.js`의 `PaletteLibraryMetrics.createClient({fetch,storage,now,timeoutMs,ttlMs})`는 `load(library,{force})`, `peek(id)`를 제공합니다. 기본 TTL은 1시간, 소스 요청 제한은 동시에 3개, 슬롯을 확보한 뒤 시작하는 타임아웃은 8초입니다. 같은 카드의 진행 중 조회는 공유합니다. UI 버튼은 `force:true`로 명시적으로 재조회하며, `peek`와 최초 렌더링은 캐시만 읽습니다. 타임아웃 응답이 늦게 도착해도 정상 값으로 반영하지 않습니다.
+
+GitHub 저장소의 stars, `/releases/latest`의 최신 정식 릴리스(게시된 non-prerelease 릴리스, 초안 제외), npm `downloads/point/last-week/<encoded-package>`를 독립적으로 조회합니다. 이 엔드포인트의 404는 “최신 정식 릴리스 없음”으로 표시합니다. 사전 릴리스나 초안까지 없다는 뜻은 아닙니다. 저장소 릴리스는 monorepo의 다른 패키지 릴리스일 수 있고, 카드의 **검증 버전**을 바꾸지 않습니다. npm이 반환한 시작·종료 날짜와 대표 패키지를 그대로 표시합니다. shadcn은 CLI 다운로드이며 Radix의 대표 패키지 수치를 전체 Radix 사용량으로 해석하지 않습니다.
+
+소스마다 정확한 정수, 원본 링크, 정상 조회 시각(UTC), 캐시/기한 경과/오류 상태를 표시합니다. 0은 실제 응답이 0일 때만 유효합니다. 실패·403/429·오프라인·잘못된 JSON/수치/날짜/패키지 응답은 이전 정상 값을 지우지 않으며, 서버가 브라우저에 노출한 재시도 헤더가 있으면 그 시각을 표시합니다. `localStorage` 접근자·읽기·쓰기 실패는 메모리 캐시로 계속 동작하고 나중에 새로고침할 수 있습니다. 차단된 저장소에서는 재시작 후 캐시 복원을 보장하지 않습니다.
+
+`palette-library-metrics:v1:<id>:<source>` 캐시는 관측값 전용입니다. 디자인 설정, `design-profile.json`, 공유 URL, UI/CLI 생성 파일은 변동 지표를 포함하지 않습니다. 대상 앱에 메트릭 클라이언트를 설치할 필요가 없습니다. 오프라인 번들 및 일반 미리보기는 원격 지표 없이 동작하며, 폰트 CDN을 선택한 경우의 기존 폰트 요청 정책은 별도입니다.
+
+```bash
+node --test scripts/test-library-metrics.cjs
+node scripts/check-library-metrics-browser.cjs  # 실제 UI/client, HTTP 경계만 fixture
+node scripts/smoke-library-metrics.cjs          # 선택 실행: 실제 공개 API, Base UI 한 카드
+```
+
+마지막 명령은 네트워크와 공개 API 가용성/할당량에 의존하므로 결정적 CI에 포함하지 않습니다. 성공 시 `previews/library-metrics-observation.json`을 실제 응답으로 갱신하므로, 화면 증거를 새로 유지하려면 이어서 캡처와 freshness 검사를 실행하세요.
+
 ## 메뉴 선택
 
 작업실의 **메뉴 · 전환**에서 메뉴 위치, 구성과 선택 표시를 각각 선택합니다.

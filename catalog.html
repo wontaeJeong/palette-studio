@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/palettes.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/catalog.css" />
+      <link rel="stylesheet" href="css/concepts.css" />
   </head>
   <body>
     <a class="skip" href="#sets">디자인 세트로 이동</a>
@@ -51,7 +52,7 @@
           </div>
           <p>색상·형태·폰트·컴포넌트가 함께 선택됩니다.</p>
         </div>
-        <div id="set-grid" class="set-grid"></div>
+        <div id="set-grid" class="set-grid"></div><label class="catalog-concept-label">디자인 콘셉트<select id="catalog-concept"></select></label><p id="concept-description" class="help"></p>
       </section>
       <section class="workbench" aria-labelledby="encyclopedia-heading">
         <div class="section-head">
@@ -190,9 +191,9 @@
         선택 적용
       </button>
     </dialog>
-    <dialog id="demo-dialog" aria-labelledby="demo-title">
+    <dialog class="demo-surface" id="demo-dialog" aria-labelledby="demo-title">
       <h2 id="demo-title">변경 내용을 저장할까요?</h2>
-      <p>프로젝트의 새 디자인을 적용합니다.</p>
+      <p>프로젝트의 새 디자인을 적용합니다. 팀원에게도 변경 사항이 표시됩니다.</p><div class="sample-box"><strong>샘플 프로젝트</strong><p>색상 · 글꼴 · 컴포넌트 설정</p></div><button type="button" class="sample-button" data-demo="toast" data-toast-status="info">저장 안내 확인</button>
       <div class="demo-actions">
         <button type="button" data-close="demo-dialog">취소</button
         ><button type="button" class="primary" data-close="demo-dialog">
@@ -200,10 +201,10 @@
         </button>
       </div>
     </dialog>
-    <dialog id="demo-drawer" class="drawer" aria-labelledby="drawer-title">
+    <dialog id="demo-drawer" class="drawer demo-surface" aria-labelledby="drawer-title">
       <button type="button" data-close="demo-drawer">닫기 ×</button>
       <h2 id="drawer-title">프로젝트 상세</h2>
-      <p>선택한 프로젝트의 상세 정보입니다.</p>
+      <p>팀의 진행 상황과 프로젝트 정보를 확인하세요.</p><div class="sample-box"><span class="sample-badge sample-review">검토 중</span><p>Product Team · 멤버 3명</p></div>
       <label>프로젝트 이름<input value="샘플 프로젝트" /></label>
     </dialog>
     <div id="demo-toast" class="demo-toast" role="status" hidden>
@@ -226,9 +227,13 @@
     <script src="data/icon-parts/data.js"></script>
     <script src="data/icon-parts/essentials.js"></script>
     <script src="data/ui-presets.js"></script>
+    <script src="data/design-concepts.js"></script>
     <script src="data/navigation-designs.js"></script>
     <script src="data/design-catalog.js"></script>
+    <script src="data/library-sources.js"></script>
+    <script src="data/ui-libraries.js"></script>
     <script src="data/handoff-core.js"></script>
+    <script src="component-demos.js"></script>
     <script src="catalog.js"></script>
   </body>
 </html>

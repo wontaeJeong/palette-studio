@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Build the one-file offline HTML from modular preview sources."""
 from pathlib import Path
-import re,json,base64
+import re,json,base64,html as html_module
 root=Path(__file__).resolve().parents[1]
 html=(root/'index.html').read_text()
 html=re.sub(r'<link\s+rel="stylesheet"\s+href="([^"]+)"\s*/?>',lambda m:'<style>\n'+(root/m[1]).read_text()+'\n</style>',html)
+notices=(root/'assets/library-preview-LICENSES.txt').read_text()
+html=re.sub(r'<a href="assets/library-preview-LICENSES.txt" data-library-license-link>[^<]+</a>', '<details id="library-third-party-notices"><summary>라이브러리 전체 라이선스 · 고지 보기</summary><pre class="library-license-text">'+html_module.escape(notices)+'</pre></details>',html)
 fonts=json.loads((root/'data/fonts.json').read_text())
 embedded={f['local']:base64.b64encode((root/f['local']).read_bytes()).decode() for font in fonts['fonts'] for f in font['faces']}
 def inline_script(match):

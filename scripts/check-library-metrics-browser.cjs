@@ -29,11 +29,11 @@ const url=base+'#fontSource=system&bodyFont=system&codeFont=system';
   const before=await page.evaluate(()=>({config:PaletteCatalog.getConfig(),hash:location.hash,files:PaletteWorkspace.outputs()}));
   await refresh.click();await page.waitForFunction(()=>document.querySelector('[data-library-metrics="base-ui"]').textContent.includes('2,345,678'));
   assert.equal(requests,3);assert.match(await slot.innerText(),/123,456/);assert.match(await slot.innerText(),/2026-11-07.*2026-11-13/s);assert.match(await slot.innerText(),/v99\.0\.0/);
-  assert.match(await page.locator('[data-library-card="base-ui"] small').first().innerText(),/1\.9\.0/,'tested version remains distinct from latest release');
+  assert.match(await page.locator('[data-library-card="base-ui"] small').first().innerText(),/1\.9\.0/,'tested version remains distinct from latest published non-prerelease release');
   assert.deepEqual(await page.evaluate(()=>({config:PaletteCatalog.getConfig(),hash:location.hash,files:PaletteWorkspace.outputs()})),before,'metrics never mutate design config/share URL/exports');
   assert.match(await page.locator('[data-library-card="shadcn"]').innerText(),/CLI/);assert.match(await page.locator('[data-library-card="radix"]').innerText(),/monorepo/i);
   await page.reload();await page.locator('#library-options').evaluate(el=>el.open=true);assert.equal(requests,3);assert.match(await slot.innerText(),/캐시/);assert.match(await slot.innerText(),/2,345,678/);
-  phase='partial';await refresh.click();await page.waitForFunction(()=>document.querySelector('[data-library-metrics="base-ui"]').textContent.includes('503'));assert.match(await slot.innerText(),/이전 값/);assert.match(await slot.innerText(),/2,345,678/);assert.match(await slot.innerText(),/게시된 릴리스 없음/);
+  phase='partial';await refresh.click();await page.waitForFunction(()=>document.querySelector('[data-library-metrics="base-ui"]').textContent.includes('503'));assert.match(await slot.innerText(),/이전 값/);assert.match(await slot.innerText(),/2,345,678/);assert.match(await slot.innerText(),/최신 정식 릴리스 없음/);
   phase='rate';await refresh.click();await page.waitForFunction(()=>document.querySelector('[data-library-metrics="base-ui"]').textContent.includes('429'));assert.match(await slot.innerText(),/재시도/);assert.match(await slot.innerText(),/123,456/);
   // Expired successes remain visible on a later offline initial render.
   await page.evaluate(()=>{for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(key.startsWith('palette-library-metrics:')){const r=JSON.parse(localStorage.getItem(key));r.fetchedAt-=7200000;localStorage.setItem(key,JSON.stringify(r));}}});

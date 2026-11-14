@@ -45,7 +45,7 @@ GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다.
 - 기존 UI/Vanilla와 Base UI, Radix Primitives, React Aria, MUI, Mantine을 선택합니다. 별도의 실제 라이브러리 영역은 로컬에 번들한 패키지의 Button·Tooltip·Dialog·Popover·알림을 실행합니다. 일반 프로젝트/도감 예시는 프레임워크 중립입니다.
 - Radix·React Aria 알림은 Sonner 보조 런타임입니다. shadcn/ui는 Base UI/Radix 기반으로 복사해 관리하는 레시피이며 독립 런타임으로 설치하지 않습니다. 선택은 기존 앱의 라이브러리 교체를 승인하거나 대상 프레임워크를 자동 변경하지 않습니다.
 - 라이브러리 카드의 **지표 새로고침**을 누르면 공개 GitHub REST와 npm 다운로드 API를 조회합니다. 초기 메트릭 요청은 0건이며 인증·서버가 필요 없습니다. 소스별 정상 값을 1시간 캐시하고, 부분 실패 시 이전 값·실패·조회 시각을 함께 표시합니다.
-- Stars는 저장소 관심도이며 monorepo 전체일 수 있습니다. npm은 명시된 대표 패키지의 `last-week` 응답 기간 다운로드이며 CI·반복 설치를 포함합니다. Radix는 `@radix-ui/react-dialog`, shadcn은 `shadcn` **CLI 다운로드**입니다. 고유 사용자 수·품질 순위·전체 설치 기반이 아닙니다. 검증 패키지 버전과 최신 저장소 릴리스는 구분됩니다.
+- Stars는 저장소 관심도이며 monorepo 전체일 수 있습니다. npm은 명시된 대표 패키지의 `last-week` 응답 기간 다운로드이며 CI·반복 설치를 포함합니다. Radix는 `@radix-ui/react-dialog`, shadcn은 `shadcn` **CLI 다운로드**입니다. 고유 사용자 수·품질 순위·전체 설치 기반이 아닙니다. 검증 패키지 버전과 저장소의 최신 정식 릴리스(초안·사전 릴리스 제외)는 구분됩니다.
 - 라이브 지표는 선택 프로필·공유 URL·내보내기 파일에 포함되지 않습니다. 지표 조회가 차단되어도 오프라인 미리보기·내보내기는 동작합니다.
 
 ### 팔레트·스타일·폰트

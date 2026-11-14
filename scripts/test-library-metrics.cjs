@@ -31,7 +31,7 @@ test('rejects invalid npm dates and package mismatch, and malformed releases',as
  for(const delta of [{start:'2026-02-30'},{end:'2026-11-01'},{start:'2026-11-13'},{start:'2026-10-14'},{package:'another-package'},{downloads:null}]){const r=await client({fetch:fixtures({[npmURL]:response({...npm,...delta})})}).load(library);assert.equal(r.npm.value,null);assert.equal(r.github.value.stars,123456);}
  for(const delta of [{tag_name:''},{published_at:'bad'},{published_at:'2026'},{published_at:'2026-02-30T12:00:00Z'},{html_url:'javascript:alert(1)'}]){const r=await client({fetch:fixtures({[repoURL+'/releases/latest']:response({...release,...delta})})}).load(library);assert.equal(r.release.value,null);}
 });
-test('keeps independent successful sources on partial failure; release 404 means no published release',async()=>{
+test('keeps independent successful sources on partial failure; release 404 means no latest published non-prerelease release',async()=>{
  const r=await client({fetch:fixtures({[npmURL]:response({},503),[repoURL+'/releases/latest']:response({},404)})}).load(library);
  assert.equal(r.github.state,'fresh');assert.equal(r.npm.value,null);assert.match(r.npm.error,/503/);assert.equal(r.release.state,'fresh');assert.equal(r.release.value.noRelease,true);
 });

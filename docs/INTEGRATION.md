@@ -95,13 +95,13 @@ node scripts/check-library-browser.cjs  # Playwright + Chromium 필요
 python3 scripts/bundle.py
 ```
 
-원본은 `examples/library-preview/src/`, 버전과 무결성은 `package-lock.json`에 고정합니다. 빌드는 `assets/library-preview.js`, 스코프 CSS, `data/library-sources.js`(같은 실제 소스를 내보내는 생성물), 완전한 `assets/library-preview-LICENSES.txt`를 만듭니다. 번들 재배포 시 전체 라이선스와 고지를 유지하세요. npm tarball에 누락된 한 MIT 라이선스는 `examples/library-preview/licenses/`에 출처와 함께 보존합니다. 검증한 패키지 버전과 온라인 최신 릴리스/다운로드 지표는 별개입니다. 메타데이터는 초기 로드에서 네트워크를 요청하지 않습니다.
+원본은 `examples/library-preview/src/`, 버전과 무결성은 `package-lock.json`에 고정합니다. 빌드는 `assets/library-preview.js`, 스코프 CSS, `data/library-sources.js`(같은 실제 소스를 내보내는 생성물), 완전한 `assets/library-preview-LICENSES.txt`를 만듭니다. 번들 재배포 시 전체 라이선스와 고지를 유지하세요. npm tarball에 누락된 한 MIT 라이선스는 `examples/library-preview/licenses/`에 출처와 함께 보존합니다. 검증한 패키지 버전과 온라인 최신 정식 릴리스/다운로드 지표는 별개입니다. 메타데이터는 초기 로드에서 네트워크를 요청하지 않습니다.
 
 ## 라이브러리 지표와 오프라인 경계
 
 카드의 **지표 새로고침**만 원격 조회를 시작합니다. `library-metrics.js`의 `PaletteLibraryMetrics.createClient({fetch,storage,now,timeoutMs,ttlMs})`는 `load(library,{force})`, `peek(id)`를 제공합니다. 기본 TTL은 1시간, 소스 요청 제한은 동시에 3개, 슬롯을 확보한 뒤 시작하는 타임아웃은 8초입니다. 같은 카드의 진행 중 조회는 공유합니다. UI 버튼은 `force:true`로 명시적으로 재조회하며, `peek`와 최초 렌더링은 캐시만 읽습니다. 타임아웃 응답이 늦게 도착해도 정상 값으로 반영하지 않습니다.
 
-GitHub 저장소의 stars, `/releases/latest`의 최신 게시 릴리스, npm `downloads/point/last-week/<encoded-package>`를 독립적으로 조회합니다. 릴리스 404는 게시된 릴리스가 없다는 정상 결과입니다. 저장소 릴리스는 monorepo의 다른 패키지 릴리스일 수 있고, 카드의 **검증 버전**을 바꾸지 않습니다. npm이 반환한 시작·종료 날짜와 대표 패키지를 그대로 표시합니다. shadcn은 CLI 다운로드이며 Radix의 대표 패키지 수치를 전체 Radix 사용량으로 해석하지 않습니다.
+GitHub 저장소의 stars, `/releases/latest`의 최신 정식 릴리스(게시된 non-prerelease 릴리스, 초안 제외), npm `downloads/point/last-week/<encoded-package>`를 독립적으로 조회합니다. 이 엔드포인트의 404는 “최신 정식 릴리스 없음”으로 표시합니다. 사전 릴리스나 초안까지 없다는 뜻은 아닙니다. 저장소 릴리스는 monorepo의 다른 패키지 릴리스일 수 있고, 카드의 **검증 버전**을 바꾸지 않습니다. npm이 반환한 시작·종료 날짜와 대표 패키지를 그대로 표시합니다. shadcn은 CLI 다운로드이며 Radix의 대표 패키지 수치를 전체 Radix 사용량으로 해석하지 않습니다.
 
 소스마다 정확한 정수, 원본 링크, 정상 조회 시각(UTC), 캐시/기한 경과/오류 상태를 표시합니다. 0은 실제 응답이 0일 때만 유효합니다. 실패·403/429·오프라인·잘못된 JSON/수치/날짜/패키지 응답은 이전 정상 값을 지우지 않으며, 서버가 브라우저에 노출한 재시도 헤더가 있으면 그 시각을 표시합니다. `localStorage` 접근자·읽기·쓰기 실패는 메모리 캐시로 계속 동작하고 나중에 새로고침할 수 있습니다. 차단된 저장소에서는 재시작 후 캐시 복원을 보장하지 않습니다.
 

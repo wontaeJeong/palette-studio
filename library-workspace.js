@@ -18,8 +18,8 @@
   button.disabled=loading;button.textContent=loading?'조회 중…':'지표 새로고침';slot.setAttribute('aria-busy',String(loading));
   slot.innerHTML=(loading?'<p class="metric-loading" role="status">공개 소스 조회 중…</p>':'')+['github','release','npm'].map(source=>{
    const record=result[source],value=record.value;
-   const label=source==='github'?'GitHub stars'+(library.monorepo?' · monorepo':''):source==='release'?'최신 저장소 릴리스':library.packageLabel?'주간 npm · CLI downloads':'주간 npm · 대표 패키지';
-   const text=!value?'—':source==='github'?formatCount(value.stars):source==='npm'?formatCount(value.downloads):value.noRelease?'게시된 릴리스 없음':value.tag;
+   const label=source==='github'?'GitHub stars'+(library.monorepo?' · monorepo':''):source==='release'?'최신 정식 릴리스':library.packageLabel?'주간 npm · CLI downloads':'주간 npm · 대표 패키지';
+   const text=!value?'—':source==='github'?formatCount(value.stars):source==='npm'?formatCount(value.downloads):value.noRelease?'최신 정식 릴리스 없음':value.tag;
    const url=record.sourceUrl||(source==='npm'?'https://api.npmjs.org/downloads/point/last-week/'+encodeURIComponent(library.npmPackage):'https://api.github.com/repos/'+library.repo+(source==='release'?'/releases/latest':''));
    const state=!value&&!record.error?'조회 전':{fresh:'최신 조회',cached:'캐시 · 1시간 이내',stale:record.error?'이전 값 · 조회 실패':'이전 값 · 기한 경과',unavailable:'조회 불가'}[record.state];
    const detail=value&&source==='npm'?`${value.start} ~ ${value.end}`:value&&source==='release'&&!value.noRelease?'게시 '+formatTime(value.publishedAt):'';

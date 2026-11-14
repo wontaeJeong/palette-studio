@@ -1,12 +1,8 @@
 {
   "result": "pass",
-  "browser": "153.0.8010.0",
+  "browser": "151.0.7922.34",
   "themes": 64,
   "styles": 6,
-  "fonts": {
-    "body": 15,
-    "code": 9
-  },
   "viewports": [
     360,
     390,
@@ -14,19 +10,18 @@
     1440
   ],
   "checks": [
-    "generic defaults",
-    "downloads last",
-    "sticky and docked preview",
-    "independent font roles",
-    "empty results",
-    "keyboard focus retained",
-    "profile download",
-    "reload persistence",
-    "legacy link migration",
-    "standalone parity",
-    "short landscape preview",
-    "expanded preview focus visibility"
+    "single workspace without feature tabs",
+    "live search and project creation",
+    "independent fonts",
+    "interactive component treatments",
+    "24-icon selection limit",
+    "browser and CLI output parity",
+    "dark-only export",
+    "share and reload",
+    "legacy and corrupt storage recovery",
+    "invalid project draft preserved",
+    "hybrid navigation and card preview fidelity",
+    "mobile focus visibility"
   ],
-  "errors": [],
-  "externalRequests": 0
+  "errors": []
 }

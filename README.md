@@ -4,20 +4,15 @@
 
 ## 실행
 
-웹: [디자인 도감](https://wontaejeong.github.io/palette-studio/catalog.html) · [팔레트·스타일·폰트](https://wontaejeong.github.io/palette-studio/)
+[Palette Studio 작업실](https://wontaejeong.github.io/palette-studio/)을 열거나, 저장소의 `index.html`을 브라우저에서 여세요. 별도의 서버나 설치가 필요하지 않습니다. `START-HERE.html`은 폰트까지 내장한 단일 파일이며 다른 폴더로 옮겨도 동작합니다.
 
-GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다. 업데이트를 머지하면 같은 주소에 반영됩니다.
+기본 화면은 **하나의 디자인 작업실**입니다. 왼쪽에서 세트를 고르고 색상·형태·글꼴·배치·움직임·컴포넌트·아이콘을 조정하면 오른쪽의 프로젝트 미리보기에 바로 반영됩니다. 기능별 탭이나 다른 편집 화면으로 이동할 필요가 없습니다. 모바일에는 선택한 디자인의 축소 미리보기와 확대 버튼을 제공합니다.
 
-저장소를 내려받은 뒤 다음 파일을 브라우저에서 엽니다. 미리보기 사용에는 서버나 패키지 설치가 필요하지 않습니다.
+상단 **확인 · 내보내기**에서 프로젝트 이름, 적용 범위와 프레임워크를 확인하고 모든 산출물을 생성합니다. 각 선택과 파일은 하나의 설정을 공유하며 브라우저와 CLI는 동일한 생성기를 사용합니다.
 
-| 파일 | 기능 |
-|---|---|
-| [catalog.html](catalog.html) | 디자인 세트 선택, 컴포넌트 도감, 요소별 표현 변경, 작업지시 생성 |
-| [START-HERE.html](START-HERE.html) | 팔레트·스타일·폰트 선택과 내보내기. 폰트가 내장된 단일 HTML |
-| [icons.html](icons.html) | 아이콘 검색, 테마별 미리보기, SVG 복사·저장 |
-| [handoff.html](handoff.html) | 프로젝트 설정, 적용 범위 선택, CSS·프로필·작업지시 생성 |
+기존 `catalog.html`과 `handoff.html`은 예전 링크 호환과 독립 실행을 위해 유지합니다. `icons.html`은 SVG 표현·코드 복사·개별 저장이 필요한 경우 사용하는 독립 아이콘 브라우저입니다. 예전 팔레트·도감·핸드오프 선택 링크의 설정은 작업실에서도 읽을 수 있습니다.
 
-`catalog.html`, `icons.html`, `handoff.html`은 저장소의 관련 CSS·JS·에셋 파일을 함께 사용합니다. `START-HERE.html` 자체의 팔레트·폰트 선택은 해당 HTML만으로 동작하며, 다른 도구로 이동하려면 저장소 파일이 필요합니다.
+GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다.
 
 ## 기능
 
@@ -50,7 +45,7 @@ GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다. 업�
 - 색상과 독립적인 6개 스타일: Operational, Soft, Outline, Editorial, Compact, Clear Boundaries.
 - OFL 폰트 24종: 본문용 15종, 코드용 9종. 역할별 검색·한글 지원·글자 견본·라이선스를 확인합니다.
 - 폰트 공급: 버전이 고정된 CDN 우선 / 동봉 파일 / 시스템 폰트. CDN 실패 시 동봉·시스템 폰트로 폴백합니다.
-- 두 팔레트 비교, 데스크톱 고정 미리보기, 모바일 미리보기 확대.
+- 같은 프로젝트 UI에서 두 팔레트 비교, 데스크톱 고정 미리보기, 모바일 미리보기 확대.
 - 새 앱/기존 앱 및 Light+Dark / Dark only / Light only 적용 범위 선택.
 
 ### 아이콘
@@ -62,7 +57,7 @@ GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다. 업�
 
 ### 에이전트 핸드오프
 
-도감에서 선택 후 **프로젝트 설정 · 전체 내보내기**로 이동하면 프로젝트 이름, 기존/신규 앱, 수정 범위, 레이아웃 목적, React/Vanilla/Astro, 폰트 공급 방식, 아이콘을 조정합니다.
+작업실 상단의 **확인 · 내보내기**를 열어 프로젝트 이름, 기존/신규 앱, 색상 적용 범위, 레이아웃 목적, React/Vanilla/Astro와 폰트 공급 방식을 확인합니다. 아이콘과 디자인 선택값은 편집 중인 설정 그대로 전달됩니다.
 
 | 산출물 | 내용 |
 |---|---|
@@ -89,6 +84,16 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 
 다음 캡처는 현재 HTML을 오프라인 Chromium에서 실행해 생성합니다. 이미지와 UI 소스의 해시는 `previews/screenshots.json`에 기록합니다.
 
+| 통합 작업실 · Light | 통합 작업실 · Dark |
+|---|---|
+| ![팔레트 선택 라이트](previews/studio-overview-light.png) | ![팔레트 선택 다크](previews/studio-overview-dark.png) |
+
+| 글꼴을 다듬는 작업실 | 모바일 작업실 |
+|---|---|
+| ![미리보기를 유지하며 본문과 코드 글꼴 선택](previews/studio-fonts-desktop.png) | ![모바일 작업실과 확대 가능한 미리보기](previews/studio-mobile-light.png) |
+
+독립 실행 도구의 추가 화면:
+
 | 디자인 도감 | 컴포넌트 Light / Dark |
 |---|---|
 | ![프리셋 선택과 도감](previews/design-catalog-desktop.png) | ![컴포넌트의 라이트·다크 동시 비교](previews/design-catalog-components.png) |
@@ -96,10 +101,6 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 | 요소 상세 | 모바일 도감 |
 |---|---|
 | ![요소 설명과 표현 선택](previews/design-catalog-detail.png) | ![모바일 세트 선택과 컴포넌트 도감](previews/design-catalog-mobile.png) |
-
-| 팔레트 선택 · Light | 팔레트 선택 · Dark |
-|---|---|
-| ![팔레트 선택 라이트](previews/studio-overview-light.png) | ![팔레트 선택 다크](previews/studio-overview-dark.png) |
 
 | 아이콘 | 에이전트 핸드오프 |
 |---|---|
@@ -123,7 +124,9 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 |---|---|
 | `catalog.html`, `catalog.js`, `css/catalog.css` | 디자인 세트와 컴포넌트 도감 화면 |
 | `data/design-catalog.js` | 세트·요소·표현 정의, 선택 검증, 작업지시 규칙 |
-| `index.html`, `app.js`, `css/studio.css` | 팔레트·스타일·폰트 선택 원본 |
+| `index.html`, `workspace.js`, `css/workspace.css` | 통합 편집·프로젝트 미리보기·확인 및 내보내기 |
+| `catalog.js` | 공통 선택 상태·프리셋·컴포넌트 동작 |
+| `app.js`, `css/studio.css` | 이전 단계형 편집기의 보존 소스 |
 | `handoff.html`, `handoff.js`, `data/handoff-core.js` | 핸드오프 설정과 공용 생성기 |
 | `scripts/create-design-handoff.cjs` | 오프라인 핸드오프 CLI |
 | `css/palettes/`, `data/palettes.json` | 팔레트별 CSS와 실제 색상 데이터 |

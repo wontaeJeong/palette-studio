@@ -84,3 +84,75 @@ Checked independent source merging, credential omission, response/cache validati
 All implementation, validation and commit work stayed in the delegated isolated feature worktree. Root main was only read; its existing untracked `.serena/` and unrelated worktrees were preserved. Parent reports root main==origin/main at `d69a80c`; Task 3 baseline remains 82b376b. No merge/push/deployment/app installation was performed. Main integration, scoped independent review and final whole-branch review remain with the parent. This Task 3 report does not claim the feature branch already incorporates newly advanced main.
 
 Browser evidence is Chromium only, not Safari/Firefox/iOS or comprehensive assistive-technology certification. API availability/quotas/CORS and retained local storage are external constraints. The live smoke is optional and excluded from deterministic CI. No unresolved deterministic primary-offline suite failures remain.
+
+## Exact HTTP failure transcript retained from tool output
+
+Implementation/capture commit: `932ece9334476be5e47abbf0f307f0803c1373e7`. The following are exact relevant stderr excerpts (paths preserved). Original listeners stored `pageerror.message`, not browser source-frame stacks; those source-frame stacks were not captured and are not fabricated here. Subsequent bounded diagnostics subscribed to `e.stack`, `requestfailed` and non-200 responses but produced no failures.
+
+Old 8766 final full library matrix:
+
+```text
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /Users/wt.jeong/.codex/worktrees/6124/palette-studio/scripts/check-library-browser.cjs:13:13 {
+  name: 'TimeoutError'
+}
+```
+
+Old 8766 initial metrics attempt:
+
+```text
+locator.isEnabled: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('[data-refresh-library="base-ui"]')
+
+    at /Users/wt.jeong/.codex/worktrees/6124/palette-studio/scripts/check-library-metrics-browser.cjs:26:24 {
+  name: 'TimeoutError'
+}
+```
+
+A later old-server metrics attempt reached the final runtime-errors assertion with these actual recorded pageerror messages:
+
+```text
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   "Cannot read properties of undefined (reading 'sets')",
++   "Cannot read properties of undefined (reading 'getConfig')",
++   "Cannot read properties of undefined (reading 'getConfig')",
++   "Cannot read properties of undefined (reading 'getConfig')"
++ ]
+- []
+
+    at /Users/wt.jeong/.codex/worktrees/6124/palette-studio/scripts/check-library-metrics-browser.cjs:57:10
+```
+
+A further old-server attempt loaded eight initial cards and later lost the card on reload:
+
+```text
+locator.innerText: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('[data-library-metrics="base-ui"]')
+
+    at /Users/wt.jeong/.codex/worktrees/6124/palette-studio/scripts/check-library-metrics-browser.cjs:33:138 {
+  name: 'TimeoutError'
+}
+```
+
+Fresh quiet 8768 focused metrics attempt (command included `PALETTE_URL=http://127.0.0.1:8768/index.html`):
+
+```text
+AssertionError [ERR_ASSERTION]: initial document initialization
++ actual - expected
+
++ [
++   "Cannot read properties of undefined (reading 'normalize')",
++   "Cannot read properties of undefined (reading 'getConfig')",
++   "Cannot read properties of undefined (reading 'libraries')"
++ ]
+- []
+
+    at /Users/wt.jeong/.codex/worktrees/6124/palette-studio/scripts/check-library-metrics-browser.cjs:25:31
+```
+
+Quiet-server diagnostic listeners were `page.on('pageerror', e => console.log('pageerror', e.stack))`, `page.on('requestfailed', ...)`, and a response listener that printed non-200 status/URL. Plain load and two loads with the same API-boundary routing all reported `presets:true, concepts:true, libraries:true, catalog:true, cards:8`; no browser stack/requestfailed/non-200 event was printed in those diagnostics. Server evidence path supplied by parent: `/private/tmp/palette-studio-final-http.log`; observed requests were 200. No exact network failure URL was captured because none fired during those diagnostics. The fresh-server failure means old-server logging/backpressure is only a hypothesis, **not** an established root cause. Focused HTTP diagnosis remains an explicit handoff to parent branch review/integration.

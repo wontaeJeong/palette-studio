@@ -81,6 +81,20 @@
 - [ ] Refresh actual Chromium previews, inspect desktop/mobile light/dark captures, run freshness checks. Record before/after initial JS bytes and request behavior under the same browser environment; no unsupported speed claims.
 - [ ] Run build twice and verify no generated tracked diff on second build; run `git diff --check`. Document exact verification commands, remaining environment limits, root/classic vs web artifact distinction. Commit `build: produce web and offline studio distributions`.
 
+## Task 4: Preserve features added to main during the migration
+
+**Context:** During Tasks 1–3, main advanced from `b2f9aa7` to `b034ae0` through #10 (preset recommendations and inline overlay samples) and #11 (dashboard components/statistics previews). Preserve these already-shipped behaviors in the React migration before final delivery. This is compatibility integration, not a redesign or new feature scope. Main remains untouched; only integrate main into the isolated feature branch.
+
+**Files:** Bring the main changes into this worktree, resolve authored merge conflicts, adapt `src/core/types.ts`, `src/studio/SelectionPanel.tsx`, `ComponentPanel.tsx`, `ProjectPreview.tsx`, `DemoBoundary.tsx`, `data.ts`, `shell.html`, shared sample markup/runtime, build and capture scripts as needed. Preserve upstream canonical palette/dashboard data and source tests; regenerate derived artifacts.
+
+**Interfaces:** Same typed state, canonical outputs, real React ownership, bounded legacy demos, classic/offline/web build contracts. Dashboard demo listeners require explicit lifecycle cleanup in the React boundary. New finite component IDs must be accurately typed. Do not duplicate shared sample generation in legacy and React pages.
+
+- [ ] Inspect incoming commits and execute their new behavior tests against the migration before adaptation; record expected missing recommendations/dashboard/inline samples (RED). Integrate `origin/main` at `b034ae0` into this isolated branch, preserving both sources of authored behavior. Regenerate large derived conflicts from source, never silently choose stale generated output.
+- [ ] Preserve all preset recommendation versus selected-state labels and independent choice behavior, inline visible overlay samples with optional interactive controls/focus, all 47 component families, dashboard charts/tables/status and project search isolation. Reuse canonical dashboard metadata/markup through explicit React lifecycle boundaries; keep the editor React-owned.
+- [ ] Pass incoming `check-preset-recommendations`, `check-inline-previews`, `check-dashboard-browser` and expanded gallery/workspace tests for classic, offline and legacy pages. Extend focused web distribution coverage for new dashboard/recommendation behavior at root/subpath. Only adapt transport/scheduling waits when React requires them; retain behavioral assertions.
+- [ ] Pass `npm test`, contrast/schema checks, affected existing flow/navigation/library/React browser contracts, dual distribution tests and deterministic build checks. Update measured resource values against the new main baseline in the same browser if comparisons are retained; distinguish the original migration baseline from the concurrent feature additions.
+- [ ] Regenerate actual captures for the now-current 37-screen manifest; visually inspect desktop/mobile dashboard and baseline editor, run screenshot freshness and `git diff --check`. Update verification docs, self-review and commit the integrated result. Do not push, merge into main or deploy.
+
 ## Final integration
 
 After all task reviews pass, request whole-branch independent review against this plan and approved spec. Fix material findings with failing regression tests, re-run affected checks, and preserve a clean committed branch. Keep main current without touching unrelated files; do not merge/deploy. Report three-step completion only after every acceptance gate has evidence.

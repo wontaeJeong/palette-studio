@@ -132,7 +132,7 @@
       '<div class="ah-mock" data-theme="' + esc(theme) + '" data-palette="' +
         esc(config.palette) + '" data-style="' + esc(config.style) + '" data-concept="' + (config.designSelection?.concept || 'minimal') + '">' +
         '<div class="ah-mock-header"><span>' + esc(p.name) + '</span><span>' +
-        theme.toUpperCase() + '</span></div>' +
+        (theme === "light" ? "라이트" : "다크") + '</span></div>' +
         '<div class="ah-mock-area" data-concept-part="surface"><div class="ah-mock-title" data-concept-part="title">' + title + '</div>' +
         '<div class="ah-mock-tab">개요</div>' +
         '<div class="ah-mock-metric">1,284</div>' +
@@ -159,7 +159,7 @@
     for (const [key, value] of Object.entries(fields)) $(key).value = value;
     renderPicker(); renderPreview();
     $("ah-library-files").innerHTML=Object.keys(core.libraryFiles(config,catalog)).map(name=>`<button type="button" data-export="${name}">${name} 저장</button>`).join("");
-    $("ah-library-note").textContent=window.PaletteUILibraries.recipe(config,catalog).notes.join(" ");
+    $("ah-library-note").textContent=window.PaletteUILibraries.summary(config);
     $("ah-markdown-preview").textContent = doc(config);
     $("ah-error").hidden = true;
     persist();

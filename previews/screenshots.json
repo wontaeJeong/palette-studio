@@ -70,210 +70,224 @@
     "data/icon-parts/system-extra.js",
     "data/icon-parts/system.js"
   ],
-  "sourceHash": "cda5df60d49d345d704edcc643e9d987a7f3542c49df32045a36d5db86b20abf",
+  "sourceHash": "b2dd31752567d0eeccaa5ec0651c0f1b6e0ae53a47645b6da872d569a11134c8",
   "screenshots": [
     {
       "path": "studio-overview-light.png",
       "width": 1440,
       "height": 980,
-      "bytes": 131798,
-      "sha256": "2da71f371efb34c3cf83d6b91263ee691cf7151613c31b3ca414e6c200d1f54b"
+      "bytes": 126593,
+      "sha256": "7f5f13b24ed045820887957525ee31dfd40571f1a30bb7ccc9bfc6435e1ee088"
     },
     {
       "path": "studio-overview-dark.png",
       "width": 1440,
       "height": 980,
-      "bytes": 132401,
-      "sha256": "9a1116e7ab28fe943392b49bca319af7bfc8a58c57a636351e0b52d0365cc6e5"
+      "bytes": 126940,
+      "sha256": "f709af41a1ce8540ea29d63ae05ebb3ce1bd1afb9d39cfa9a7f718812719b08f"
     },
     {
       "path": "studio-fonts-desktop.png",
       "width": 1440,
       "height": 980,
-      "bytes": 101005,
-      "sha256": "8775bb960dedecf695c4f5b3b73334b596bd0565d6c719595cf58c22ccb2792d"
+      "bytes": 80887,
+      "sha256": "0c5d341e488f54fb3285196ddbc80f7661e8aac01086054f13fb78b69b1a315a"
     },
     {
       "path": "studio-mobile-light.png",
       "width": 390,
       "height": 844,
-      "bytes": 47457,
-      "sha256": "b0455c18926ee28d63577c449c40b4f8f09ee52fba57010c2c610212cde12d8c"
+      "bytes": 40059,
+      "sha256": "eb3cee4428aa422abb5745b267269e757a24576ae4d53c00357e261994fb6582"
     },
     {
       "path": "studio-mobile-dark.png",
       "width": 390,
       "height": 844,
-      "bytes": 47765,
-      "sha256": "c87eeaff325c6058c93944099e9d9c17d24565b3a149519ba3ef7c29f79551fc"
+      "bytes": 40145,
+      "sha256": "80ba2ca2dae7483958c2389463976774fa5b25c5d5b968edf113344dc6a3b720"
     },
     {
       "path": "icon-studio-desktop.png",
       "width": 1460,
       "height": 990,
-      "bytes": 163107,
-      "sha256": "7650ddcf0de26b82f925a508f90d566646416eaea77d2e313bab33eac5bfeb36"
+      "bytes": 147710,
+      "sha256": "9d8dd4a5a7592eb467419103671b7f54f87bb51729cf5c6795b84497e894f67c"
     },
     {
       "path": "icon-studio-dark.png",
       "width": 1460,
       "height": 990,
-      "bytes": 137156,
-      "sha256": "e5d05e6ec8183ab00dae59e753590d73f1552ab0efd09602c51a716f428e62b4"
+      "bytes": 121163,
+      "sha256": "e273f33bcabf654c34426fc67ca6a0a288da9f4685714187a33f8eff6708865a"
     },
     {
       "path": "icon-studio-mobile.png",
       "width": 390,
-      "height": 2627,
-      "bytes": 136247,
-      "sha256": "6f685bf8e1f9b836421e78a9d927883a4cbb46da2e0cf535f0460b062243dbad"
+      "height": 2550,
+      "bytes": 121693,
+      "sha256": "eddcca9f926c190f7c7cdca4f4bf97b39cee8cbb71eb62349415eef301a7d086"
     },
     {
       "path": "agent-handoff-desktop.png",
       "width": 1460,
       "height": 990,
-      "bytes": 198712,
-      "sha256": "985cca23f495d2e4e3dba5b01f8d5dbabd3ccc4f1f8d61d03e344187e0f952f5"
+      "bytes": 173226,
+      "sha256": "12f0fc0306e4563575070262b38bb02899b5b548145c866bd55c0dbb91f64689"
     },
     {
       "path": "agent-handoff-dark.png",
       "width": 1460,
       "height": 990,
-      "bytes": 184884,
-      "sha256": "d0adcb3987fdf805bf94d53699ef411197975e80ce064d8014c56b5e5733548d"
+      "bytes": 159359,
+      "sha256": "6cd2f2516bb877db0c3f20b8076766efa106141d5695ca1ad2a6b22bdef07fbd"
     },
     {
       "path": "agent-handoff-mobile.png",
       "width": 390,
-      "height": 3771,
-      "bytes": 227671,
-      "sha256": "f707405bc48a636cdfdb91dd797f7237d6d41ce11f7321571a3019f5526ddebe"
+      "height": 3566,
+      "bytes": 194031,
+      "sha256": "35af2c8b3c5e9452f43539e646dd9a81734c9e523e68aa1b4b2192c5dde97da8"
     },
     {
       "path": "design-catalog-desktop.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 152393,
-      "sha256": "acdeb06d8056e7c3653f5f64238426dbb522e960527163223f411e544c7725f6"
+      "bytes": 146508,
+      "sha256": "2d3f104ff0c4e23614aaaacc219693bd231911d2c412732be99600a950a20a58"
     },
     {
       "path": "design-catalog-components.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 184294,
-      "sha256": "1156e70cedb149f3d1a866a13f0bccb53d1c9550747b5923dab6614db07f0266"
+      "bytes": 181718,
+      "sha256": "2a69665df6cccf674306b98906fe0a2df1001a8afb34d4af59ce444e4771dd51"
     },
     {
       "path": "design-catalog-detail.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 149499,
-      "sha256": "3ab877f3594072878d3a48877a30ce300301c4f8f0bea9d6390b4c28b3859b0b"
+      "bytes": 142750,
+      "sha256": "d1f97bc8fd07c1fd37acdc5fcac8e53a5c598f8678cfa18e3af6abf8fe208589"
     },
     {
       "path": "design-catalog-layout.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 155668,
-      "sha256": "93cd3e35bf5e73511fca360527583b3387384094640888c24f4d468505428d3f"
+      "bytes": 151691,
+      "sha256": "43235c3f0f308c2092a1c5791974dcb15330a6830bf322593f70c5c5254a558f"
     },
     {
       "path": "design-catalog-motion.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 126862,
-      "sha256": "444e11c69d01b5e0b5e5d9e8d61c33c79c51bcc963be89c8bc3b952fee3308f1"
+      "bytes": 123233,
+      "sha256": "9c18fa26e496d8dca4779845194f535e429b933ede042da0f39fdb417b8a1d16"
     },
     {
       "path": "design-catalog-ui-dark.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 156926,
-      "sha256": "0bc303a03a4513e3e36d21de51ab855a492f3317c768a9c7f0a6eca318e4739b"
+      "bytes": 151758,
+      "sha256": "21cc44915638d80762f31b9827ecc2c2bc32b2a32ccbe2cae897e47faedc3dc2"
     },
     {
       "path": "design-catalog-mobile.png",
       "width": 390,
       "height": 8238,
-      "bytes": 503466,
-      "sha256": "b51b1d30938df040e32b263812c605d79262040debfaf1a63adc6ba23a28f473"
+      "bytes": 493273,
+      "sha256": "7aef4c4d74ee008ae015e072b95efb8bbafa004dec1a6db14310ef28c523564b"
     },
     {
       "path": "studio-concepts-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 204979,
-      "sha256": "7ee396052ec81c445d89e3fbc056839770fd0ea537f49e718f4fcd05c951a8ad"
+      "bytes": 197329,
+      "sha256": "412ee837d09297c4ee7c0287a9555f94780da7a7460cf935c57ce882ed0cf7db"
     },
     {
       "path": "studio-toast-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 194182,
-      "sha256": "cc23aace76b7a00ac3f04663ca44f60ad5d19aed4e9f143ed08bbdf8fec6542c"
+      "bytes": 193051,
+      "sha256": "abd1ad7f419af85d4b144b46c883890a5fa81efe1aedbf88f070534e2cc90f93"
     },
     {
       "path": "studio-popover-mobile.png",
       "width": 390,
       "height": 1000,
-      "bytes": 59509,
-      "sha256": "2efef7c48fca72b6452af5936c53bacc7a5f54ed1258cdcd6902b4c789a58e78"
+      "bytes": 62247,
+      "sha256": "c9cb5c41baad671b562dd02f9b1fc69f85aaa8c213ad07bb939a0757fdc8289e"
     },
     {
       "path": "studio-library-base-ui.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 193237,
-      "sha256": "77f8ab0bb72683e307ed1f8a05bf8cc0cf35f0886ec893c80c42b0a5acaec70b"
+      "bytes": 188865,
+      "sha256": "b88c6d607787670d7ba56497204a9da36c62264a5daac230f1d76ceb80eaedc5"
     },
     {
       "path": "studio-library-radix.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 168118,
-      "sha256": "29faff240aa26cdbe2c7fbaa7fbed303254b433669b6ea7a4df23200a0671169"
+      "bytes": 163373,
+      "sha256": "64dcb0ae1da3f196dbf4cf1437065be9c2a9ba06fc6944e93880c0dccb6cc42e"
     },
     {
       "path": "studio-library-react-aria.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 167568,
-      "sha256": "2b61b06baacc425c899a52a5e92dc725bcbcef16a6b77e4035040578696332b3"
+      "bytes": 162753,
+      "sha256": "2137d36dec5f4f3671fea206727ca1660d43e22287bfe69f52914bd9881c77c4"
     },
     {
       "path": "studio-library-mui.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 163286,
-      "sha256": "3121f2561c1736fb623823580917183ca3e34a0a82034923479a7dc29cb7c7d5"
+      "bytes": 158594,
+      "sha256": "cdc4d26e2da712f38571a413e57287e2d0f5dc6c0c85fa6d20d6e4a2c9e8a562"
     },
     {
       "path": "studio-library-mantine.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 161809,
-      "sha256": "b655515a3566465c9a366de8601197e15f3c57eede1242c8d2b81413f4b7e4e6"
+      "bytes": 156863,
+      "sha256": "2ae0ede77b2a6e3df5df938dd891910437e48b3fd7e587882c7b574bea409138"
     },
     {
       "path": "studio-library-metrics-light.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 198141,
-      "sha256": "ce6381d605e00e5e63eaee194c72d7e8604bd04b0bec29c14d47a222cb533836"
+      "bytes": 190780,
+      "sha256": "3c1fd2e4ab12325c07e443b50af8095217f1d74a8adba2f5f570112c18b47301"
     },
     {
       "path": "studio-library-metrics-dark.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 211491,
-      "sha256": "6a9342ff767015d37f598ce0fc2643b4461bcb7c0116883c19ac78fc00c9e32c"
+      "bytes": 203482,
+      "sha256": "998cf38ee907ad6ec2ab1c5e8d26bf1def60f7c60f9ecd159d1e8cb8ba011e8b"
     },
     {
       "path": "studio-library-metrics-mobile.png",
       "width": 390,
       "height": 1100,
-      "bytes": 85030,
-      "sha256": "800d8944d78b0d8f21d89562716bbeb159127f4216a3483316aaf7d068441ee5"
+      "bytes": 83303,
+      "sha256": "bb8804dcca041ce6ec740869272a18c97c809bbeff54347a26f3ff7fff74cd97"
+    },
+    {
+      "path": "studio-export-desktop.png",
+      "width": 1440,
+      "height": 1100,
+      "bytes": 184762,
+      "sha256": "b98234e299ad21164162fa74e7e7c571d4df0d0e784d79943f6a774e8065869f"
+    },
+    {
+      "path": "studio-export-mobile.png",
+      "width": 390,
+      "height": 1100,
+      "bytes": 77905,
+      "sha256": "27530b37e665332d93d32110c1fde6b7297070bed09636755e335e8fb4576cc3"
     }
   ]
 }

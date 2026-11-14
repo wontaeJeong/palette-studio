@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Palette Studio 아이콘 라이브러리: Lucide SVG, Light/Dark 및 32개 팔레트 대응">
-  <title>Icon Studio · Palette Studio</title>
+  <title>아이콘 · Palette Studio</title>
   <link rel="stylesheet" href="css/palettes.css">
   <link rel="stylesheet" href="css/icon-studio.css">
 <link rel="stylesheet" href="css/tool-theme.css">
@@ -16,40 +16,40 @@
       <span class="ic-logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Palette Studio
     </a>
     <nav aria-label="도구 탐색">
-      <a href="index.html" id="open-palette">팔레트 · 스타일 · 폰트</a>
+      <a href="index.html" id="open-palette">디자인 설정</a>
       <a href="icons.html" aria-current="page">아이콘</a>
       <a href="catalog.html">디자인 도감</a>
-      <a href="handoff.html">Agent Handoff</a>
-    <button type="button" data-ui-theme-toggle aria-label="도구 다크 모드">다크 UI</button>
+      <a href="handoff.html">내보내기</a>
+    <button type="button" data-ui-theme-toggle aria-label="도구 다크 모드">다크 모드</button>
   </nav>
   </header>
   <main class="ic-container">
     <section class="ic-heading">
       <div>
 
-        <h1>아이콘 선택 · SVG 내보내기</h1>
-        <p>팔레트에 종속되지 않는 SVG 원본을 Light·Dark로 비교하고, 크기·선 두께·표현 방식을 조정할 수 있습니다.</p>
+        <h1>아이콘</h1>
+        <p>아이콘을 선택하고 크기와 선 두께를 조정하세요.</p>
       </div>
-      <p class="ic-total"><strong id="total-count">—</strong><span>Lucide SVG icons</span></p>
+      <p class="ic-total"><strong id="total-count">—</strong><span>아이콘</span></p>
     </section>
     <div class="ic-layout">
       <aside class="ic-controls" aria-labelledby="controls-heading">
         <h2 id="controls-heading">선택 옵션</h2>
         <p class="ic-help">기본 팔레트는 메인 화면에서 마지막으로 선택한 값입니다.</p>
-        <label for="icon-palette">컬러 팔레트</label>
+        <label for="icon-palette">팔레트</label>
         <select id="icon-palette"></select>
         <label for="icon-mode">테마 미리보기</label>
         <select id="icon-mode">
-          <option value="split">Light + Dark 비교</option>
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
+          <option value="split">라이트 + 다크 비교</option>
+          <option value="light">라이트</option>
+          <option value="dark">다크</option>
         </select>
         <label for="icon-variant">아이콘 표현</label>
         <select id="icon-variant">
-          <option value="outline">Outline</option>
-          <option value="accent">Accent</option>
-          <option value="duotone">Duotone</option>
-          <option value="filled">Filled tile</option>
+          <option value="outline">윤곽선</option>
+          <option value="accent">강조색</option>
+          <option value="duotone">두 색</option>
+          <option value="filled">배경 채움</option>
         </select>
         <label for="icon-size">크기 <output id="size-value" for="icon-size">24px</output></label>
         <input id="icon-size" type="range" min="16" max="40" step="4" value="24">
@@ -59,7 +59,7 @@
           <option value="2" selected>2px</option>
           <option value="2.5">2.5px</option>
         </select>
-        <p class="ic-hint">Filled tile은 채운 배경에 Outline SVG를 놓는 표현입니다. 별도의 Solid SVG를 의미하지 않습니다.</p>
+        <p class="ic-hint">배경 채움은 선 아이콘에 배경색을 추가합니다.</p>
       </aside>
       <section class="ic-library" aria-labelledby="library-heading">
         <div class="ic-library-top">
@@ -90,7 +90,7 @@
       </aside>
     </div>
     <footer class="ic-footer">
-      <span>Palette Studio · SVG Icon Kit · CDN 불필요</span>
+      <span>Palette Studio</span>
       <span>Lucide ISC / 일부 Feather MIT · <a href="assets/icons/LICENSE-LUCIDE.txt">원문 라이선스</a> · <a href="docs/ICON-KIT.md">사용 가이드</a></span>
     </footer>
   </main>

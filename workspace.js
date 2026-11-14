@@ -22,43 +22,51 @@
     );
   let config = catalog.getConfig(),
     previewMode = "split",
-    compare = "slate-indigo";
+    compare = "slate-indigo",
+    compareMode = "light";
+  let savedView = {};
   try {
     const saved = JSON.parse(
       localStorage.getItem("palette-studio-view-v1") || "{}",
     );
-    previewMode = initialView.mode || saved.mode || previewMode;
-    compare = initialView.compare || saved.compare || compare;
+    if (saved && typeof saved === "object" && !Array.isArray(saved))
+      savedView = saved;
   } catch {}
+  previewMode = initialView.mode || savedView.mode || previewMode;
+  compare = initialView.compare || savedView.compare || compare;
+  compareMode = initialView.compareMode || savedView.compareMode || compareMode;
   if (!["split", "light", "dark", "compare"].includes(previewMode))
     previewMode = "split";
-  if (!kit.palettes.some((p) => p.id === compare)) compare = "slate-indigo";
+  if (!["light", "dark"].includes(compareMode)) compareMode = "light";
+  if (!kit.palettes.some((p) => p.id === compare))
+    ((compare = "slate-indigo"), (compareMode = "light"));
   function persistView() {
     try {
       localStorage.setItem(
         "palette-studio-view-v1",
-        JSON.stringify({ mode: previewMode, compare }),
+        JSON.stringify({ mode: previewMode, compare, compareMode }),
       );
     } catch {}
   }
+  persistView();
   let projectDraft = config.project,
     projectValid = true;
   const projects = [
     {
       name: "웹사이트 리뉴얼",
-      team: "Product",
+      team: "제품팀",
       status: "review",
       label: "! 검토 필요",
     },
     {
       name: "디자인 가이드",
-      team: "Design",
+      team: "디자인팀",
       status: "passed",
       label: "✓ 완료",
     },
     {
       name: "모바일 프로젝트",
-      team: "Engineering",
+      team: "개발팀",
       status: "running",
       label: "◷ 진행 중",
     },
@@ -71,7 +79,7 @@
     "selected-motion.css": "애니메이션 CSS",
     "selected-fonts.css": "폰트 CSS",
     "AGENT-TASK.md": "작업지시",
-    "QA-CHECKLIST.md": "QA 체크리스트",
+    "QA-CHECKLIST.md": "검증 목록",
   };
   function outputs() {
     return {
@@ -166,7 +174,7 @@
       list
         .map(
           (f) =>
-            `<article class="font-card" data-font-id="${f.id}"><div><strong>${esc(f.name)}</strong><small>${f.korean ? "한글 포함" : "영문 중심 · 한글 보완"} · OFL</small></div><p class="font-sample">${role === "body" ? "다음 프로젝트를 위한 글꼴 Aa" : "const project = true; 0O 1lI"}</p><button type="button" data-font-role="${role}" data-apply-font="${f.id}" aria-pressed="${config.fonts[role] === f.id}">${config.fonts[role] === f.id ? "선택됨" : "이 글꼴 사용"}</button></article>`,
+            `<article class="font-card" data-font-id="${f.id}"><div><strong>${esc(f.name)}</strong><small>${f.korean ? "한글 포함" : "영문 중심 · 한글 보완"} · OFL</small></div><p class="font-sample">${role === "body" ? "프로젝트 이름 Aa" : "const project = true; 0O 1lI"}</p><button type="button" data-font-role="${role}" data-apply-font="${f.id}" aria-pressed="${config.fonts[role] === f.id}">${config.fonts[role] === f.id ? "선택됨" : "선택"}</button></article>`,
         )
         .join("") || '<p class="help">검색 결과가 없습니다.</p>';
     for (const card of $(role + "-font-gallery").querySelectorAll(
@@ -199,12 +207,14 @@
       previewMode === "split"
         ? ["light", "dark"]
         : previewMode === "compare"
-          ? ["light", "light"]
+          ? [compareMode, compareMode]
           : [previewMode];
     $("preview-mode").value = previewMode;
     $("compact-preview").innerHTML =
       `<span data-palette="${config.palette}" data-theme="light"><i></i><b>Aa</b><em>✓</em></span>`;
     $("compare-control").hidden = previewMode !== "compare";
+    $("compare-mode-control").hidden = previewMode !== "compare";
+    $("compare-mode").value = compareMode;
     $("project-stage").dataset.view = previewMode;
     $("project-stage").innerHTML = modes
       .map((mode, index) => {
@@ -213,8 +223,8 @@
         const v = config.designSelection.components,
           navigation = config.designSelection.navigation;
         const demo = (id) => catalog.demo(id, v[id], true, mode + "-" + index);
-        const nav = `<nav class="mock-nav" aria-label="샘플 프로젝트 메뉴"><button type="button" aria-current="page">${svg(config.icons[0] || "layout-dashboard")}<span>프로젝트</span></button><button type="button" data-preview-notice="settings">${svg("settings")}<span>설정</span></button></nav>`;
-        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-concept="${config.designSelection.concept}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "LIGHT" : "DARK"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} My Workspace</strong><span>Product Team</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><small>WORKSPACE / OVERVIEW</small><h3>좋은 아이디어를,<br>다음 프로젝트로.</h3><p>팀의 작업을 한눈에 확인하세요.</p></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form treatment ${v.input}"><h4>새 프로젝트</h4><label>프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : v.button === "outline" ? "mock-outline" : ""}">${svg("plus", 16)}프로젝트 추가</button></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
+        const nav = `<nav class="mock-nav" aria-label="샘플 프로젝트 메뉴"><button type="button" aria-label="프로젝트" aria-current="page">${svg(config.icons[0] || "layout-dashboard")}<span>프로젝트</span></button><button type="button" aria-label="설정" data-preview-notice="settings">${svg("settings")}<span>설정</span></button></nav>`;
+        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-concept="${config.designSelection.concept}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "라이트" : "다크"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} 프로젝트</strong><span>제품팀</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><h3>프로젝트 현황</h3></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form"><h4>새 프로젝트</h4><label class="treatment ${v.input}">프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><div class="treatment ${v.button}"><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : ""}">${svg("plus", 16)}프로젝트 추가</button></div></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
   name: "My Workspace",
   ready: true
 };</code></pre></div></div></section>`;
@@ -226,7 +236,7 @@
       kit.styles.find((s) => s.id === config.style).name;
   }
   function renderExport() {
-    $("library-export-note").textContent = window.PaletteUILibraries.recipe(config,kit).notes.join(" ");
+    $("library-export-note").textContent = window.PaletteUILibraries.summary(config);
     $("library-export-files").innerHTML = Object.keys(core.libraryFiles(config,kit)).map(name=>`<button type="button" data-export="${name}">${name} 저장</button>`).join("");
     const names = [
       fonts.resolve(config.fonts.body, "body").name,
@@ -256,7 +266,13 @@
           : "라이트와 다크 색상을 함께 내보냅니다.";
   }
   function render() {
+    const previousSource = config.fonts.source;
     config = catalog.getConfig();
+    if (
+      previousSource !== config.fonts.source &&
+      document.querySelector(".font-library").open
+    )
+      for (const role of ["body", "code"]) renderFontGallery(role);
     for (const role of ["body", "code"])
       $(role + "-font").value = config.fonts[role];
     $("font-summary").textContent =
@@ -278,20 +294,28 @@
     document.querySelectorAll("[data-apply-font]").forEach((b) => {
       const selected = b.dataset.applyFont === config.fonts[b.dataset.fontRole];
       b.setAttribute("aria-pressed", String(selected));
-      b.textContent = selected ? "선택됨" : "이 글꼴 사용";
+      b.textContent = selected ? "선택됨" : "선택";
     });
   }
   $("compare-palette").innerHTML = kit.palettes
     .map((p) => `<option value="${p.id}">${esc(p.name)}</option>`)
     .join("");
   $("compare-palette").value = compare;
+  function selectFont(role, id) {
+    const switchSource = config.fonts.source === "system" && id !== "system";
+    update({
+      fonts: { [role]: id, ...(switchSource ? { source: "local-only" } : {}) },
+    });
+    if (switchSource)
+      notify("선택한 글꼴을 사용하도록 동봉 폰트로 변경했습니다.");
+  }
   for (const role of ["body", "code"]) {
     $(role + "-font").innerHTML = fonts
       .choices(role)
       .map((f) => `<option value="${f.id}">${esc(f.name)}</option>`)
       .join("");
     $(role + "-font").addEventListener("change", (e) =>
-      update({ fonts: { [role]: e.target.value } }),
+      selectFont(role, e.target.value),
     );
     $(role + "-font-search").addEventListener("input", () =>
       renderFontGallery(role),
@@ -299,8 +323,11 @@
     $(role + "-font-gallery").addEventListener("click", (e) => {
       const b = e.target.closest("[data-apply-font]");
       if (b) {
-        update({ fonts: { [role]: b.dataset.applyFont } });
-        b.focus({ preventScroll: true });
+        const id = b.dataset.applyFont;
+        selectFont(role, id);
+        $(role + "-font-gallery")
+          .querySelector(`[data-apply-font="${id}"]`)
+          .focus({ preventScroll: true });
       }
     });
   }
@@ -353,6 +380,11 @@
     persistView();
     renderPreview();
   });
+  $("compare-mode").addEventListener("change", (e) => {
+    compareMode = e.target.value;
+    persistView();
+    renderPreview();
+  });
   $("project-stage").addEventListener("input", (e) => {
     if (!e.target.matches("[data-project-search]")) return;
     const box = e.target.closest(".mock-projects"),
@@ -373,7 +405,7 @@
     if (name) {
       projects.push({
         name,
-        team: "Product Team",
+        team: "제품팀",
         status: "running",
         label: "◷ 진행 중",
       });
@@ -499,7 +531,12 @@
     outputs,
     shareURL: () => {
       const u = new URL(location.href);
-      u.hash = new URLSearchParams({ selection: JSON.stringify(config) });
+      u.hash = new URLSearchParams({
+        selection: JSON.stringify(config),
+        mode: previewMode,
+        compare,
+        compareMode,
+      });
       return u.href;
     },
   };

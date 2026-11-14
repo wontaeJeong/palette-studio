@@ -89,6 +89,8 @@ const screenshots = [
   "studio-library-metrics-light.png",
   "studio-library-metrics-dark.png",
   "studio-library-metrics-mobile.png",
+  "studio-export-desktop.png",
+  "studio-export-mobile.png",
 ];
 function sourceHash() {
   return sha(
@@ -323,6 +325,16 @@ async function main() {
       await shoot(page,width===390?"studio-library-metrics-mobile.png":"studio-library-metrics-light.png",{keepScroll:true});
       if(width===1440){await page.click("#ui-theme");await page.locator('[data-library-card="base-ui"]').scrollIntoViewIfNeeded();await shoot(page,"studio-library-metrics-dark.png",{keepScroll:true});}
       if(!await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1))throw Error("Metrics capture page overflow "+width);
+      await context.close();
+    }
+    // Concise Korean export summary; full technical guidance stays in README.
+    for(const width of [1440,390]){
+      const {page,context}=await open("index.html","fontSource=system&bodyFont=system&codeFont=system",width,1100);
+      await page.evaluate(()=>PaletteCatalog.update({uiLibrary:"base-ui",framework:"astro",scope:"dark-only",target:"existing-app"}));
+      await page.locator("#open-export").click();
+      await page.locator("#library-export-note").evaluate(el=>el.closest("details").open=true);
+      await page.locator('#library-export-files [data-export="library-README.md"]').scrollIntoViewIfNeeded();
+      await shoot(page,width===390?"studio-export-mobile.png":"studio-export-desktop.png",{keepScroll:true});
       await context.close();
     }
     if (pageErrors.length)

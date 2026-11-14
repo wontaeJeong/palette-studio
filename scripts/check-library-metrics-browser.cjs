@@ -40,11 +40,16 @@ const url=base+'#fontSource=system&bodyFont=system&codeFont=system';
   await page.reload();await page.locator('#library-options').evaluate(el=>el.open=true);assert.match(await slot.innerText(),/기한 경과/);const countBefore=requests;assert.match(await slot.innerText(),/123,456/);assert.equal(requests,countBefore);
   phase='success';
   // Slow metadata continues to target its own card through real preview/config rerenders.
-  const releases=[];await context.unroute(/^https:\/\/(api.github.com|api.npmjs.org)\//);
-  await context.route(/^https:\/\/(api.github.com|api.npmjs.org)\//,route=>new Promise(resolve=>releases.push(async()=>{const u=route.request().url();await route.fulfill({status:200,json:u.includes('npmjs')?{downloads:3456789,start:'2026-11-07',end:'2026-11-13',package:'@base-ui/react'}:u.endsWith('/latest')?{tag_name:'v100',published_at:'2026-11-12T12:00:00Z',html_url:'https://github.com/mui/base-ui/releases/tag/v100'}:{stargazers_count:234567}});resolve();})));
+  const releases=[];let allRegistered;const registered=new Promise(resolve=>allRegistered=resolve);await context.unroute(/^https:\/\/(api.github.com|api.npmjs.org)\//);
+  await context.route(/^https:\/\/(api.github.com|api.npmjs.org)\//,route=>new Promise(resolve=>{
+   releases.push(async()=>{const u=route.request().url();await route.fulfill({status:200,json:u.includes('npmjs')?{downloads:3456789,start:'2026-11-07',end:'2026-11-13',package:'@base-ui/react'}:u.endsWith('/latest')?{tag_name:'v100',published_at:'2026-11-12T12:00:00Z',html_url:'https://github.com/mui/base-ui/releases/tag/v100'}:{stargazers_count:234567}});resolve();});
+   if(releases.length===3)allRegistered();
+  }));
   await refresh.click();await page.waitForFunction(()=>document.querySelector('[data-refresh-library="base-ui"]').disabled);
   await page.evaluate(()=>PaletteCatalog.update({uiLibrary:'radix',designSelection:{...PaletteCatalog.getConfig().designSelection,concept:'editorial'}}));
   const changed=await page.evaluate(()=>({config:PaletteCatalog.getConfig(),hash:location.hash,files:PaletteWorkspace.outputs()}));
+  let registrationTimer;try{await Promise.race([registered,new Promise((_,reject)=>{registrationTimer=setTimeout(()=>reject(Error('Expected all three metadata requests before release')),5000);})]);}finally{clearTimeout(registrationTimer);}
+  assert.equal(releases.length,3,'all sources are intercepted before releasing the held responses');
   await Promise.all(releases.map(release=>release()));await page.waitForFunction(()=>document.querySelector('[data-library-metrics="base-ui"]').textContent.includes('3,456,789'));
   assert.deepEqual(await page.evaluate(()=>({config:PaletteCatalog.getConfig(),hash:location.hash,files:PaletteWorkspace.outputs()})),changed);assert.match(await page.locator('[data-library-metrics="radix"]').innerText(),/조회 전/);
   for(const width of [1440,390]){await page.setViewportSize({width,height:1000});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'metric cards do not overflow '+width);}

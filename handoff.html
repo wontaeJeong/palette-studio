@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Palette Studio: coding agents를 위한 재현 가능한 디자인 선택 및 핸드오프">
-<title>Agent Handoff · Palette Studio</title>
+<meta name="description" content="디자인 설정 및 파일 내보내기">
+<title>내보내기 · Palette Studio</title>
 <link rel="stylesheet" href="css/palettes.css">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/handoff.css">
@@ -16,18 +16,18 @@
 <header class="ah-top">
   <a class="ah-brand" href="index.html">Palette Studio</a>
   <nav aria-label="도구 선택">
-    <a href="index.html">팔레트 · 폰트</a>
+    <a href="index.html">디자인 설정</a>
     <a href="catalog.html">디자인 도감</a>
     <a href="icons.html">아이콘</a>
-    <a href="handoff.html" aria-current="page">Agent Handoff</a>
-  <button type="button" data-ui-theme-toggle aria-label="도구 다크 모드">다크 UI</button>
+    <a href="handoff.html" aria-current="page">내보내기</a>
+  <button type="button" data-ui-theme-toggle aria-label="도구 다크 모드">다크 모드</button>
   </nav>
 </header>
 <main class="ah-container">
   <div class="ah-head">
     <div>
-      <h1>디자인 적용 설정 · 파일 내보내기</h1>
-      <p>프로젝트·적용 범위·프레임워크를 설정하고 CSS, 프로필, 작업지시, QA 목록을 생성합니다.</p>
+      <h1>내보내기</h1>
+      <p>적용 범위와 파일을 확인하세요.</p>
     </div>
     <a class="ah-doclink" href="docs/AGENT-WORKFLOW.md">에이전트 사용 가이드</a>
   </div>
@@ -39,18 +39,18 @@
         <label>팔레트<select id="ah-palette"></select></label>
         <label>스타일<select id="ah-style"></select></label>
         <label>UI 라이브러리<select id="ah-ui-library"></select></label>
-        <label>레이아웃 목적<select id="ah-layout">
+        <label>화면 종류<select id="ah-layout">
           <option value="existing">기존 앱 구조 유지</option>
-          <option value="dashboard">운영·데이터 대시보드</option>
+          <option value="dashboard">운영·데이터</option>
           <option value="content">문서·콘텐츠</option>
-          <option value="workflow">입력·승인 워크플로</option>
+          <option value="workflow">입력·승인</option>
           <option value="marketing">소개·랜딩</option>
         </select></label>
         <label>적용 대상<select id="ah-target"><option value="new-app">새 앱</option><option value="existing-app">기존 앱</option></select></label>
         <label>수정 범위<select id="ah-scope">
-          <option value="both">Light + Dark</option>
-          <option value="dark-only">Dark only</option>
-          <option value="light-only">Light only</option>
+          <option value="both">라이트 + 다크</option>
+          <option value="dark-only">다크만</option>
+          <option value="light-only">라이트만</option>
         </select></label>
         <label>프레임워크<select id="ah-framework">
           <option value="react">React / Vite / Next</option>
@@ -59,37 +59,37 @@
         </select></label>
         <label>본문 폰트<select id="ah-body-font"></select></label>
         <label>코드 폰트<select id="ah-code-font"></select></label>
-        <label>폰트 공급<select id="ah-font-source">
-          <option value="cdn-first">고정 CDN → 동봉 폴백</option>
-          <option value="local-only">로컬 동봉만</option>
+        <label>폰트 불러오기<select id="ah-font-source">
+          <option value="cdn-first">CDN 우선 · 실패 시 동봉 폰트</option>
+          <option value="local-only">동봉 폰트</option>
           <option value="system">시스템 폰트만</option>
         </select></label>
       </div>
       <section class="ah-icons-section" aria-labelledby="icons-heading">
-        <div class="ah-subhead"><h3 id="icons-heading">사용할 기본 아이콘</h3><span id="ah-icon-count"></span></div>
+        <div class="ah-subhead"><h3 id="icons-heading">아이콘</h3><span id="ah-icon-count"></span></div>
         <label class="ah-search">아이콘 검색<input type="search" id="ah-icon-search" placeholder="검색, 설정, shield…"></label>
         <div class="ah-icon-picker" id="ah-icon-picker" aria-label="기본 아이콘 선택"></div>
-        <p class="ah-note">최대 24개를 선택할 수 있습니다. 필요한 화면에서 추가해도 되며, 선택값이 전체 아이콘 번들을 강제로 가져오지 않습니다.</p>
+        <p class="ah-note">아이콘을 최대 24개 선택할 수 있습니다.</p>
       </section>
     </section>
     <section class="ah-panel ah-preview-panel" aria-labelledby="preview-heading">
-      <div class="ah-panel-top"><span>미리보기</span><h2 id="preview-heading">즉시 비교</h2></div>
+      <div class="ah-panel-top"><span>미리보기</span><h2 id="preview-heading">화면 예시</h2></div>
       <div class="ah-switch" role="group" aria-label="테마 미리보기">
         <button type="button" data-mode="split" aria-pressed="true">둘 다</button>
-        <button type="button" data-mode="light" aria-pressed="false">Light</button>
-        <button type="button" data-mode="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-mode="light" aria-pressed="false">라이트</button>
+        <button type="button" data-mode="dark" aria-pressed="false">다크</button>
       </div>
       <div class="ah-preview-grid" id="ah-preview-grid"></div>
-      <p class="ah-note">위 화면은 색·간격을 비교하는 더미 데이터 예시입니다. 실제 UI 수용 기준은 내보낸 체크리스트로 검증하세요.</p>
+      <p class="ah-note">샘플 데이터입니다. 적용 결과는 검증 목록으로 확인하세요.</p>
       <section class="ah-code-panel" aria-labelledby="markdown-heading">
         <div class="ah-subhead"><h3 id="markdown-heading">design.md 미리보기</h3><button type="button" id="ah-copy-design">내용 복사</button></div>
         <pre tabindex="0" id="ah-markdown-preview"></pre>
       </section>
     </section>
     <section class="ah-panel ah-export-panel" aria-labelledby="export-heading">
-      <div class="ah-panel-top"><span>내보내기</span><h2 id="export-heading">구현 산출물</h2></div>
+      <div class="ah-panel-top"><span>내보내기</span><h2 id="export-heading">파일 목록</h2></div>
       <p>이 JSON은 CLI의 입력입니다. CLI로 실행하면 SVG·폰트 바이너리·라이선스까지 함께 묶습니다.</p>
-      <button class="ah-primary" type="button" id="ah-config-download">핸드오프 설정 JSON 저장</button>
+      <button class="ah-primary" type="button" id="ah-config-download">설정 JSON 저장</button>
       <div class="ah-export-actions">
         <button type="button" data-export="design.md">design.md 저장</button>
         <button type="button" data-export="design-profile.json">프로필 JSON 저장</button>
@@ -98,17 +98,18 @@
         <button type="button" data-export="selected-style.css">스타일 CSS 저장</button>
         <button type="button" data-export="selected-fonts.css">폰트 CSS 저장</button>
         <button type="button" data-export="AGENT-TASK.md">작업 지시 저장</button>
-        <button type="button" data-export="QA-CHECKLIST.md">QA 체크리스트 저장</button>
+        <button type="button" data-export="QA-CHECKLIST.md">검증 목록 저장</button>
       </div>
-      <h3>전체 번들 만들기 (로컬 CLI)</h3>
+      <h3>라이브러리 파일</h3>
       <p id="ah-library-note" class="help"></p><div id="ah-library-files" class="ah-export-actions"></div>
+      <h3>폰트 · SVG 파일 저장</h3>
       <pre class="ah-command"><code id="ah-cli">node scripts/create-design-handoff.cjs --config handoff-config.json --out design/handoff</code></pre>
       <button type="button" id="ah-copy-cli">명령 복사</button>
       <p class="ah-note">브라우저 단독 실행에서는 폰트 바이너리를 ZIP으로 묶지 않습니다. 오프라인 배포용 전체 파일은 위 CLI를 사용하세요.</p>
       <div id="ah-error" class="ah-error" role="alert" hidden></div>
     </section>
   </div>
-  <footer class="ah-footer">Palette Studio · Offline agent design handoff · <a href="design.md">디자인 원칙</a> · <a href="packages/icons-react/README.md">React 패키지</a></footer>
+  <footer class="ah-footer">Palette Studio · <a href="design.md">디자인 원칙</a> · <a href="packages/icons-react/README.md">React 패키지</a></footer>
 </main>
 <div id="ah-toast" class="ah-toast" role="status" aria-live="polite"></div>
 <noscript><p>이 도구는 JavaScript가 필요합니다. scripts/create-design-handoff.cjs CLI를 사용할 수도 있습니다.</p></noscript>

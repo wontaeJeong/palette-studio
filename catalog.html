@@ -11,7 +11,7 @@
     <title>디자인 도감 · Palette Studio</title>
     <meta
       name="description"
-      content="디자인 프리셋, 권장 팔레트·컴포넌트 선택, 미리보기, 에이전트 작업지시 생성"
+      content="디자인 세트, 권장 팔레트·컴포넌트 선택, 미리보기, 작업지시 생성"
     />
     <link rel="stylesheet" href="css/palettes.css" />
     <link rel="stylesheet" href="css/styles.css" />
@@ -26,15 +26,15 @@
       </a>
       <nav aria-label="도구 선택">
         <a href="catalog.html" aria-current="page">디자인 도감</a
-        ><a href="index.html">팔레트 · 폰트</a><a href="icons.html">아이콘</a
-        ><a href="handoff.html">Agent Handoff</a
+        ><a href="index.html">디자인 설정</a><a href="icons.html">아이콘</a
+        ><a href="handoff.html">내보내기</a
         ><button
           type="button"
           id="ui-theme"
           aria-label="도구 다크 모드"
           aria-pressed="false"
         >
-          다크 UI
+          다크 모드
         </button>
       </nav>
     </header>
@@ -42,13 +42,13 @@
       <section class="intro">
         <div>
           <h1>디자인 도감</h1>
-          <p class="lede">프리셋 선택 · 컴포넌트 비교 · 작업지시 내보내기</p>
+          <p class="lede">디자인 세트 · 컴포넌트 · 내보내기</p>
         </div>
       </section>
       <section id="sets" aria-labelledby="sets-heading">
         <div class="section-head">
           <div>
-            <h2 id="sets-heading">디자인 프리셋</h2>
+            <h2 id="sets-heading">디자인 세트</h2>
           </div>
           <p>색상·형태·폰트·컴포넌트가 함께 선택됩니다.</p>
         </div>
@@ -71,7 +71,7 @@
             >컴포넌트 검색<input
               type="search"
               id="catalog-search"
-              placeholder="예: 잠깐 뜨는 알림, 확인창, Toast…" /></label
+              placeholder="알림, 버튼…" /></label
           ><label
             >종류<select id="catalog-category">
               <option value="all">모든 요소</option>
@@ -79,19 +79,19 @@
           ><label>색상<select id="catalog-palette"></select></label
           ><label>형태<select id="catalog-style"></select></label
           ><label>메뉴 배치<select id="catalog-navigation"></select></label
-          ><label>CSS 애니메이션<select id="catalog-motion"></select></label>
+          ><label>전환<select id="catalog-motion"></select></label>
         </div>
         <p class="help">
           요소를 선택하면 표현과 동작을 확인할 수 있습니다. 프리셋을 다시
           선택하면 개별 변경이 초기화됩니다.
         </p>
         <details class="preview-options" id="layout-options">
-          <summary>메뉴 배치 미리보기 · Light / Dark</summary>
+          <summary>메뉴 배치 미리보기 · 라이트 / 다크</summary>
           <div id="navigation-preview" class="paired-layout"></div>
           <p id="navigation-description" class="help"></p>
         </details>
         <details class="preview-options" id="motion-options">
-          <summary>CSS 애니메이션 미리보기 · Light / Dark</summary>
+          <summary>전환 미리보기 · 라이트 / 다크</summary>
           <p class="help">
             각 효과의 재생 버튼으로 선택한 속도를 확인합니다. 시스템 동작 줄이기
             설정에서는 애니메이션을 실행하지 않습니다.
@@ -124,7 +124,7 @@
       </section>
       <section id="handoff" class="handoff" aria-labelledby="handoff-heading">
         <div>
-          <h2 id="handoff-heading">에이전트 작업지시</h2>
+          <h2 id="handoff-heading">작업지시</h2>
           <p>색상·간격·요소별 표현과 동작까지 담긴 작업지시입니다.</p>
           <div class="export-buttons">
             <button class="primary" id="copy-brief" type="button">
@@ -141,7 +141,7 @@
           </p>
         </div>
         <label class="brief-label"
-          >에이전트 작업지시 미리보기<textarea
+          >작업지시 미리보기<textarea
             id="agent-brief"
             readonly
             rows="13"
@@ -174,7 +174,7 @@
         미리보기에서 동작을 확인할 수 있습니다. 아래 구현 기준은 작업지시에
         포함됩니다.
       </p>
-      <h3>구현 동작 기준</h3>
+      <h3>구현 기준</h3>
       <p id="detail-behavior" lang="en"></p>
       <button class="primary" type="button" data-close="component-dialog">
         선택 적용

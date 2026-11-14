@@ -26,6 +26,13 @@
   };
   function normalize(id){if(id===undefined)return 'vanilla';if(!libraries.some(l=>l.id===id))throw Error('Invalid uiLibrary: '+id);return id;}
   function get(id){return libraries.find(l=>l.id===normalize(id));}
+  function summary(config){
+    const library=get(config.uiLibrary);
+    const scope=config.scope==='dark-only'?'다크 색상만 적용합니다.':config.scope==='light-only'?'라이트 색상만 적용합니다.':'라이트·다크 색상을 적용합니다.';
+    const runtime=library.runtime==='native'?'현재 컴포넌트를 유지합니다.':config.framework==='astro'?'Astro React island가 필요합니다.':config.framework==='vanilla'?'React root와 번들이 필요합니다.':'React 런타임이 필요합니다.';
+    const existing=config.target==='existing-app'?' 기존 앱의 라이브러리와 Provider를 우선 유지하세요.':'';
+    return library.name+' · '+scope+' '+runtime+existing+' 자세한 적용 방법은 library-README.md를 확인하세요.';
+  }
   function recipe(config,catalog){
     const id=normalize(config.uiLibrary),library=get(id),notes=[
       'For an existing application, preserve its existing library and ThemeProvider first. This selection is a comparison/reference, not authorization to replace components.',
@@ -67,5 +74,5 @@
     files['library-README.md']='# '+library.name+' integration\n\n'+notes.join('\n\n')+'\n\nOfficial docs: '+library.docs+'\nSource: https://github.com/'+library.repo+'\n';
     return {files,notes};
   }
-  return {libraries,references,packages,get,normalize,recipe};
+  return {libraries,references,packages,get,normalize,summary,recipe};
 });

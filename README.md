@@ -111,6 +111,8 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 
 메트릭 이미지는 `previews/library-metrics-observation.json`의 실제 2026-11-14 공개 API 응답을 오프라인 캐시로 다시 표시한 화면입니다. 현재 실시간 수치라는 뜻은 아닙니다. [다크 지표](previews/studio-library-metrics-dark.png) · [모바일 지표](previews/studio-library-metrics-mobile.png) · [모바일 팝오버](previews/studio-popover-mobile.png) · [Radix](previews/studio-library-radix.png) · [React Aria](previews/studio-library-react-aria.png) · [MUI](previews/studio-library-mui.png) · [Mantine](previews/studio-library-mantine.png)
 
+[라이브러리 내보내기 안내](previews/studio-export-desktop.png) · [모바일 내보내기](previews/studio-export-mobile.png): 화면에는 선택 라이브러리·적용 범위·필요 런타임만 간결하게 표시하고, 전체 기술 지침은 `library-README.md`로 저장합니다.
+
 독립 실행 도구의 추가 화면:
 
 | 디자인 도감 | 컴포넌트 Light / Dark |
@@ -190,6 +192,7 @@ node scripts/check-component-concepts.cjs
 node scripts/check-component-gallery.cjs
 node scripts/check-library-browser.cjs
 node scripts/check-library-selection.cjs
+node scripts/check-library-export-summary.cjs
 node scripts/check-library-metrics-browser.cjs
 node scripts/capture-previews.cjs
 node scripts/check-screenshot-freshness.cjs

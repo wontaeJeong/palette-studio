@@ -84,6 +84,7 @@
       "selected-fonts.css": core.fontCSS(config, window.PALETTE_FONT_CATALOG),
       "AGENT-TASK.md": core.agentTask(config, kit),
       "QA-CHECKLIST.md": core.checklist(config),
+      ...core.libraryFiles(config, kit),
     };
   }
   function notify(message) {
@@ -225,6 +226,8 @@
       kit.styles.find((s) => s.id === config.style).name;
   }
   function renderExport() {
+    $("library-export-note").textContent = window.PaletteUILibraries.recipe(config,kit).notes.join(" ");
+    $("library-export-files").innerHTML = Object.keys(core.libraryFiles(config,kit)).map(name=>`<button type="button" data-export="${name}">${name} 저장</button>`).join("");
     const names = [
       fonts.resolve(config.fonts.body, "body").name,
       fonts.resolve(config.fonts.code, "code").name,
@@ -422,7 +425,7 @@
         `<button type="button" data-export="${name}">${label} 저장</button>`,
     )
     .join("");
-  $("export-files").addEventListener("click", (e) => {
+  $("export-dialog").addEventListener("click", (e) => {
     const b = e.target.closest("[data-export]");
     if (!b) return;
     const name = b.dataset.export,

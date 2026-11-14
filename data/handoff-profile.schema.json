@@ -494,6 +494,18 @@
           ]
         }
       }
+    },
+    "uiLibrary": {
+      "type": "string",
+      "enum": [
+        "vanilla",
+        "base-ui",
+        "radix",
+        "react-aria",
+        "mui",
+        "mantine"
+      ],
+      "default": "vanilla"
     }
   }
 }

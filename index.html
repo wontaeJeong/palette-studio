@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="css/catalog.css" />
     <link rel="stylesheet" href="css/workspace.css" />
       <link rel="stylesheet" href="css/concepts.css" />
+    <link rel="stylesheet" href="assets/library-preview.css" />
+    <link rel="stylesheet" href="css/library-workspace.css" />
   </head>
   <body>
     <a class="skip" href="#selection-panel">디자인 편집으로 이동</a>
@@ -85,6 +87,10 @@
           ></div>
           <p id="appearance-summary" class="help"></p>
         </section>
+        <details id="library-options" class="inspector-section">
+          <summary><span>UI 라이브러리</span><small id="library-summary"></small></summary>
+          <div class="details-content"><p class="help">실제 패키지의 동작을 오프라인으로 비교하세요. 기존 앱에서는 현재 라이브러리를 우선 유지합니다. 선택은 프레임워크를 자동 변경하지 않습니다.</p><div id="library-grid" class="library-grid"></div><p class="help"><a href="assets/library-preview-LICENSES.txt" data-library-license-link>라이브러리 전체 라이선스 · 고지 보기</a></p></div>
+        </details>
         <details id="typography-options" class="inspector-section">
           <summary><span>글꼴</span><small id="font-summary"></small></summary>
           <div class="details-content">
@@ -233,9 +239,10 @@
               </select></label
             ><label id="compare-control" hidden
               >비교 팔레트<select id="compare-palette"></select></label
-            ><span class="help">프로젝트 UI 예시</span>
+            ><span class="help">프로젝트 UI 예시 · 프레임워크 중립</span>
           </div>
           <div id="project-stage"></div>
+          <section class="library-preview" aria-labelledby="library-preview-title"><h3 id="library-preview-title">실제 라이브러리 동작</h3><p id="library-runtime-note" class="help"></p><div id="library-stage"></div></section>
           <div class="preview-caption">
             <span id="preview-selection"></span
             ><button id="share-selection" type="button">선택 링크 복사</button>
@@ -316,6 +323,8 @@
       <details>
         <summary>파일별 저장 · CSS / 프로필 / 문서</summary>
         <div id="export-files" class="export-buttons"></div>
+        <p id="library-export-note" class="library-export-note"></p>
+        <div id="library-export-files" class="export-buttons"></div>
       </details>
       <details>
         <summary>생성된 작업지시 미리보기</summary>
@@ -406,9 +415,13 @@
     <script src="data/ui-presets.js"></script>
     <script src="data/design-concepts.js"></script>
     <script src="data/design-catalog.js"></script>
+    <script src="data/library-sources.js"></script>
+    <script src="data/ui-libraries.js"></script>
     <script src="data/handoff-core.js"></script>
     <script src="component-demos.js"></script>
     <script src="catalog.js"></script>
     <script src="workspace.js"></script>
+    <script src="assets/library-preview.js"></script>
+    <script src="library-workspace.js"></script>
   </body>
 </html>

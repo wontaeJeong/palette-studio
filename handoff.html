@@ -38,6 +38,7 @@
         <label>프로젝트 이름<input id="ah-project" type="text" maxlength="64" value="My Web App"></label>
         <label>팔레트<select id="ah-palette"></select></label>
         <label>스타일<select id="ah-style"></select></label>
+        <label>UI 라이브러리<select id="ah-ui-library"></select></label>
         <label>레이아웃 목적<select id="ah-layout">
           <option value="existing">기존 앱 구조 유지</option>
           <option value="dashboard">운영·데이터 대시보드</option>
@@ -100,6 +101,7 @@
         <button type="button" data-export="QA-CHECKLIST.md">QA 체크리스트 저장</button>
       </div>
       <h3>전체 번들 만들기 (로컬 CLI)</h3>
+      <p id="ah-library-note" class="help"></p><div id="ah-library-files" class="ah-export-actions"></div>
       <pre class="ah-command"><code id="ah-cli">node scripts/create-design-handoff.cjs --config handoff-config.json --out design/handoff</code></pre>
       <button type="button" id="ah-copy-cli">명령 복사</button>
       <p class="ah-note">브라우저 단독 실행에서는 폰트 바이너리를 ZIP으로 묶지 않습니다. 오프라인 배포용 전체 파일은 위 CLI를 사용하세요.</p>
@@ -123,7 +125,9 @@
 <script src="data/ui-presets.js"></script>
 <script src="data/design-concepts.js"></script>
     <script src="data/design-catalog.js"></script>
-<script src="data/handoff-core.js"></script>
+<script src="data/library-sources.js"></script>
+    <script src="data/ui-libraries.js"></script>
+    <script src="data/handoff-core.js"></script>
 <script src="handoff.js"></script>
 <script src="ui-theme.js"></script>
 </body>

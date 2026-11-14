@@ -105,6 +105,7 @@
         "scope",
         "layout",
         "framework",
+        "uiLibrary",
         "project",
       ])
         if (params.has(key)) candidate[key] = params.get(key);
@@ -911,6 +912,7 @@
   $("share-selection").addEventListener("click", () => copy(shareURL()));
   window.PaletteCatalog = {
     getConfig: () => JSON.parse(JSON.stringify(config)),
+    libraryFiles: () => core.libraryFiles(config,palettes),
     update(patch) {
       config = core.normalize(
         { ...config, ...patch, fonts: { ...config.fonts, ...patch.fonts } },

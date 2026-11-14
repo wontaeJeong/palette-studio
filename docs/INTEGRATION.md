@@ -69,3 +69,30 @@
 프레임워크 중립 예시는 19종입니다. 툴팁은 고정 앵커·hover/focus·Escape 후 재열기를 지원하며 인터랙티브 내용은 별도 Popover를 씁니다. Toast는 최대 3개, 남은 시간 기준 hover/focus 일시정지, 되돌리기, 영구 오류 안내를 제공합니다. 모달에서 실행하는 알림은 해당 모달 아래 DOM에 두고 top layer로 표시해 보이면서도 조작 가능하게 합니다. 기존 앱에서는 이미 사용하는 접근성 라이브러리를 우선 재사용하세요.
 
 검증: `node scripts/test-design-concepts.cjs`, `node scripts/check-component-concepts.cjs`(Playwright), 기존 카탈로그·작업실·handoff 회귀 검사, `node scripts/audit.mjs`. 최종 단일 HTML은 `python3 scripts/bundle.py`로 다시 만듭니다.
+
+## 실제 UI 라이브러리 비교와 내보내기
+
+`uiLibrary`는 색상·콘셉트·프레임워크와 독립된 선택입니다. 이전 설정은 `vanilla`(기존 UI 재사용)로 정규화됩니다. Base UI, Radix Primitives, React Aria, MUI, Mantine을 고르면 작업실의 별도 실제 라이브러리 영역에서 Button · Tooltip · Dialog · Popover · 알림을 비교합니다. 프로젝트와 컴포넌트 도감 예시는 계속 프레임워크 중립이며, 실제 패키지를 사용한 화면으로 표시하지 않습니다. 기존 앱에서는 선택한 참고 라이브러리보다 현재 앱의 컴포넌트·Provider를 우선합니다.
+
+- Base UI는 자체 Toast, MUI는 Snackbar/Alert, Mantine은 자체 Notifications를 사용합니다. Radix와 React Aria의 알림은 명시적으로 Sonner입니다. React Aria의 alpha Toast API는 사용하지 않습니다. Radix Primitives에는 스타일된 Button이 없으므로 실제 Trigger에 연결한 네이티브 버튼이 올바른 예입니다.
+- 모든 외부 대상은 React 런타임이 필요합니다. Astro는 `@astrojs/react`와 클라이언트 island, Vanilla 대상은 의도적인 React root/bundle 추가가 필요합니다. 미리보기 선택만으로 프레임워크가 변경되지 않으며 UI와 `library-README.md`에서 이 조건을 표시합니다.
+- shadcn/ui는 독립 런타임 패키지가 아니라 복사해서 관리하는 컴포넌트 레시피입니다. Base UI/Radix 선택 시 실제 선택 HEX의 `shadcn-tokens.css`가 함께 나옵니다. 현재 컴포넌트의 Tailwind 매핑에 연결하고 과거 `hsl(var(...))` 래퍼를 제거해야 합니다. `shadcn` CLI 다운로드를 컴포넌트 사용량으로 해석하지 않습니다.
+
+`data/ui-libraries.js`의 순수 `recipe(config,catalog)`를 `PaletteHandoff.libraryFiles`가 공유합니다. 확인·내보내기 화면과 독립 handoff 화면 및 CLI는 같은 파일을 생성합니다. `library-theme.ts`에는 허용된 색상 모드의 실제 HEX만 있고 제외 모드는 `applyLibraryTokens(existing,mode)`가 기존 값을 그대로 반환합니다. `library-components.tsx`, 실제 `library-adapter.tsx`, `library-shared.tsx`, `library.css`, 정확한 의존성 목록 `library-packages.json`, 적용 설명이 함께 나옵니다. 이 샘플 전체로 앱을 대체하지 말고 이미 쓰는 Provider에 토큰/shape/font를 병합하세요. 폰트 파일과 OFL은 기존 CLI의 fonts 폴더 내보내기를 사용합니다.
+
+포털은 선택 색상·본문 폰트·콘셉트 변수를 가진 별도 DOM 컨테이너 안에 렌더합니다. 실제 앱에 매핑할 때도 해당 스코프와 모드가 포털까지 이어져야 합니다. Light/Dark 예시는 각각 별도 Base UI Provider, Sonner toaster ID, Mantine notification store와 MUI 상태를 소유합니다. 한쪽 알림이 다른 쪽에 복제되지 않으며 해제 시 React root와 포털을 제거합니다. Mantine CSS는 파서로 `.ps-library` 안에 한정하고 CssBaseline 같은 전역 reset은 사용하지 않습니다. 유지해야 할 필수 오류는 토스트에만 두지 마세요.
+
+사용자 실행에는 npm이나 네트워크가 필요하지 않습니다. 번들은 classic script이며 `START-HERE.html`에 그대로 인라인됩니다. 개발 재빌드는 다음과 같습니다.
+
+```bash
+cd examples/library-preview
+npm ci
+npm test
+npm run build
+cd ../..
+node scripts/test-ui-libraries.cjs
+node scripts/check-library-browser.cjs  # Playwright + Chromium 필요
+python3 scripts/bundle.py
+```
+
+원본은 `examples/library-preview/src/`, 버전과 무결성은 `package-lock.json`에 고정합니다. 빌드는 `assets/library-preview.js`, 스코프 CSS, `data/library-sources.js`(같은 실제 소스를 내보내는 생성물), 완전한 `assets/library-preview-LICENSES.txt`를 만듭니다. 번들 재배포 시 전체 라이선스와 고지를 유지하세요. npm tarball에 누락된 한 MIT 라이선스는 `examples/library-preview/licenses/`에 출처와 함께 보존합니다. 검증한 패키지 버전과 온라인 최신 릴리스/다운로드 지표는 별개입니다. 메타데이터 표시 슬롯은 초기 로드에서 네트워크를 요청하지 않습니다.

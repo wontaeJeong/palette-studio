@@ -1,10 +1,11 @@
 /* Shared pure renderers for file:// Studio and dependency-free Node CLI. */
 (function (root, createCore) {
   var designs = typeof module !== "undefined" && module.exports ? require("./design-catalog.js") : root.PaletteDesignCatalog;
-  var api = createCore(designs);
+  var libraries = typeof module !== "undefined" && module.exports ? require("./ui-libraries.js") : root.PaletteUILibraries;
+  var api = createCore(designs, libraries);
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.PaletteHandoff = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function (designs) {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (designs, libraries) {
   "use strict";
   var layouts = {
     existing: "Preserve the existing application shell, information architecture and interaction conventions.",
@@ -40,6 +41,7 @@
       scope: "both",
       layout: "dashboard",
       framework: "react",
+      uiLibrary: "vanilla",
       fonts: {
         body: fontCatalog.defaults.body,
         code: fontCatalog.defaults.code,
@@ -59,6 +61,7 @@
       scope: config.scope === undefined ? def.scope : config.scope,
       layout: config.layout === undefined ? def.layout : config.layout,
       framework: config.framework === undefined ? def.framework : config.framework,
+      uiLibrary: libraries.normalize(config.uiLibrary),
       fonts: Object.assign({}, def.fonts, config.fonts),
       icons: config.icons === undefined ? def.icons : config.icons
     };
@@ -105,6 +108,7 @@
       target: config.target,
       scope: config.scope,
       framework: config.framework,
+      uiLibrary: libraries.normalize(config.uiLibrary),
       layout: config.layout,
       icons: { names: config.icons, source: "palette-studio/assets/icons", strategy: "static-import" },
       fonts: config.fonts,
@@ -225,6 +229,7 @@
       "| Palette | " + p.name + " (" + config.palette + ") |",
       "| Style | " + s.name + " (" + config.style + ") |",
       "| Framework | " + config.framework + " |",
+      "| UI library | " + libraries.get(config.uiLibrary).name + " |",
       "| Layout intent | " + config.layout + " |",
       "| Target | " + config.target + " |",
       "| Change scope | " + config.scope + " |",
@@ -279,6 +284,8 @@
       "- Filled tile is a colored wrapper behind the original outline glyph, not a different solid icon shape.",
       "",
       designs.brief(config.designSelection),
+      "## UI library integration", "",
+      ...libraries.recipe(config, catalog).notes, "",
       "## Components and data",
       "",
       "- Reuse existing UI components (e.g. Radix/shadcn), toast and chart packages where present; this kit is not a replacement component framework.",
@@ -309,6 +316,7 @@
   function agentTask(config, catalog) {
     return [
       "# Agent task — apply selected design",
+      ...(config.target === "existing-app" ? ["", "Preserve the existing component library and ThemeProvider first. The selected UI library is comparison/reference guidance; do not migrate packages or replace the application architecture without an explicit project requirement."] : []),
       ...(config.designSelection && catalog ? [
         "", "## Inline handoff for a standalone prompt", "",
         "The following locked profile and CSS are included so this brief can be used on its own. Save the profile as design-profile.json and the CSS as the canonical selected-theme.css / selected-style.css sources, adapt existing selectors, and produce design.md and QA evidence from these decisions. Do not add a second theme engine.",
@@ -325,6 +333,7 @@
       "- Target: " + config.target + "; scope: " + config.scope + "; framework: " + config.framework + ".",
       "- Fonts: " + config.fonts.body + " / " + config.fonts.code + " (" + config.fonts.source + ").",
       "- Icons: " + config.icons.join(", ") + ".",
+      "- UI library: " + libraries.get(config.uiLibrary).name + ". Preserve the existing application library first; see library-README.md for runtime and scope requirements.",
       "- Existing UX and app theme selector win over demo-only class names. Map tokens once; do not duplicate theme providers or CSS tokens.",
       "- If dark-only, do not import a whole two-mode palette and change light by accident.",
       "- Work with realistic content and errors; check components, navigation/focus and mobile overflow in the actual app.",
@@ -368,6 +377,7 @@
   }
   return {layouts: layouts, frameworks: frameworks, scopes: scopes, targets: targets,
     fontSources: fontSources, iconPresets: iconPresets,
+    libraryFiles: function(config,catalog) { return libraries.recipe(config,catalog).files; },
     motionCSS: motionCSS, defaults: defaults, normalize: normalize, profile: profile, themeCSS: themeCSS,
     styleCSS: styleCSS, fontCSS: fontCSS, designMD: designMD,
     agentTask: agentTask, checklist: checklist, chosenFonts: chosenFonts};

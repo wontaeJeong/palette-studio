@@ -7,6 +7,14 @@ const { pathToFileURL } = require("node:url");
 (async () => {
   const browser = await chromium.launch({ headless: true });
   try {
+    await require("./check-preset-recommendations.cjs")(browser);
+    await require("./check-preset-recommendations.cjs")(
+      browser,
+      "START-HERE.html",
+    );
+    await require("./check-inline-previews.cjs")(browser);
+    await require("./check-inline-previews.cjs")(browser, "catalog.html");
+    await require("./check-inline-previews.cjs")(browser, "START-HERE.html");
     await require("./check-workspace-review.cjs")(browser);
     await require("./check-navigation-browser.cjs")(browser);
     const context = await browser.newContext({

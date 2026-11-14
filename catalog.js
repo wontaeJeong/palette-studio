@@ -169,17 +169,14 @@
         '<label class="sample-check sample-emphasis"><input class="sample-switch" type="checkbox" role="switch" checked>이메일 알림 받기</label>',
       checkbox:
         '<label class="sample-check sample-emphasis"><input type="checkbox" checked>작업 알림</label><label class="sample-check sample-emphasis"><input type="checkbox">주간 요약</label>',
-      toast: preview
-        ? '<div class="sample-box sample-emphasis">✓ 변경 내용을 저장했습니다.</div>'
-        : button("저장 알림 띄우기", "toast", true),
+      toast:
+        '<div class="sample-box sample-emphasis">✓ 변경 내용을 저장했습니다.</div>',
       alert:
         '<div class="sample-box sample-warning"><strong>△ 입력 확인 필요</strong><p>변경 내용을 한 번 더 확인하세요.</p></div>',
-      dialog: preview
-        ? '<div class="sample-box"><h4 class="sample-emphasis">변경 내용을 저장할까요?</h4><p>작업 내용을 반영합니다.</p><div class="sample-actions"><span class="sample-badge">취소</span><span class="sample-badge sample-primary">저장</span></div></div>'
-        : button("확인창 열기", "dialog", true),
-      drawer: preview
-        ? '<div class="sample-box sample-emphasis" style="margin-left:22%;width:78%;border-radius:0"><h4>프로젝트 상세</h4><p>프로젝트 상세 정보입니다.</p><div class="mini-line"></div></div>'
-        : button("패널 열기", "drawer", true),
+      dialog:
+        '<div class="sample-box"><h4 class="sample-emphasis">변경 내용을 저장할까요?</h4><p>작업 내용을 반영합니다.</p><div class="sample-actions"><span class="sample-badge">취소</span><span class="sample-badge sample-primary">저장</span></div></div>',
+      drawer:
+        '<div class="sample-box sample-emphasis" style="margin-left:22%;width:78%;border-radius:0"><h4>프로젝트 상세</h4><p>프로젝트 상세 정보입니다.</p><div class="mini-line"></div></div>',
       tooltip:
         '<div class="sample-tooltip">' +
         button("도움말 보기", "tooltip").replace(
@@ -188,12 +185,12 @@
         ) +
         '<span id="' +
         uid +
-        '" class="tip" role="tooltip"' +
-        (preview ? ' style="display:block"' : "") +
+        '" class="tip" role="tooltip" data-inline-preview' +
+        ' style="display:block"' +
         ">프로젝트 설정을 표시합니다.</span></div>",
       menu: preview
         ? '<div class="sample-box sample-emphasis">프로젝트 동작 ▾<hr>이름 바꾸기<br>복제하기</div>'
-        : '<details><summary class="sample-button sample-emphasis">프로젝트 동작 ▾</summary><ul class="menu-items"><li>' +
+        : '<details open><summary class="sample-button sample-emphasis">프로젝트 동작 ▾</summary><ul class="menu-items"><li>' +
           button("이름 바꾸기", "action") +
           "</li><li>" +
           button("복제하기", "action") +
@@ -226,7 +223,20 @@
         button("프로젝트 만들기", "action", variant === "solid") +
         "</div>",
     }[id];
-    return '<div class="treatment ' + esc(variant) + '">' + content + "</div>";
+    const interaction =
+      !preview && ["dialog", "drawer", "toast"].includes(id)
+        ? '<div class="sample-interaction">' +
+          button("동작 확인", id) +
+          "</div>"
+        : "";
+    return (
+      '<div class="treatment ' +
+      esc(variant) +
+      '">' +
+      content +
+      interaction +
+      "</div>"
+    );
   }
   function notice(text) {
     $("catalog-status").textContent = text;
@@ -394,15 +404,44 @@
       );
     $("catalog-palette").value = config.palette;
   }
+  function choiceStatus(selected, recommended) {
+    return (
+      '<span class="choice-statuses">' +
+      (recommended
+        ? '<span class="preset-recommendation">프리셋 추천</span>'
+        : "") +
+      (selected ? '<span class="selection-status">선택됨</span>' : "") +
+      "</span>"
+    );
+  }
   function renderAuxiliary() {
     const selection = config.designSelection;
-    $("catalog-motion").value = selection.motion;
-    $("catalog-navigation").value = selection.navigation;
-    $("catalog-navigationStructure").value = selection.navigationStructure;
+    const recommended = designs.selection(selection.set);
+    for (const [key, items] of [
+      ["navigation", designs.navigationPresets],
+      ["navigationStructure", designs.navigationDesigns.structures],
+      ["motion", designs.motionPresets],
+    ]) {
+      $("catalog-" + key).innerHTML = items
+        .map(
+          (item) =>
+            '<option value="' +
+            item.id +
+            '">' +
+            esc(item.name) +
+            (item.id === recommended[key] ? " · 프리셋 추천" : "") +
+            "</option>",
+        )
+        .join("");
+      $("catalog-" + key).value = selection[key];
+      $(key + "-recommendation").textContent =
+        "프리셋 추천: " +
+        items.find((item) => item.id === recommended[key]).name;
+    }
     $("navigation-style-picker").innerHTML = designs.navigationDesigns.styles
       .map(
         (style) =>
-          `<button type="button" class="navigation-choice" data-navigation-style="${style.id}" aria-pressed="${style.id === selection.navigationStyle}"><span class="navigation-choice-label">${style.name}</span><span class="navigation-choice-demo" aria-hidden="true">${menuSample({ ...selection, navigationStyle: style.id, navigationStructure: "list" })}</span><small>${style.description}</small></button>`,
+          `<button type="button" class="navigation-choice" data-navigation-style="${style.id}" aria-pressed="${style.id === selection.navigationStyle}"><span class="navigation-choice-label">${style.name}</span>${choiceStatus(style.id === selection.navigationStyle, style.id === recommended.navigationStyle)}<span class="navigation-choice-demo" aria-hidden="true">${menuSample({ ...selection, navigationStyle: style.id, navigationStructure: "list" })}</span><small>${style.description}</small></button>`,
       )
       .join("");
     $("navigation-description").textContent =
@@ -450,6 +489,7 @@
       category = $("catalog-category").value;
     const set = designs.sets.find((s) => s.id === config.designSelection.set);
     const recommended = set.recommendedComponents;
+    const defaults = designs.selection(set.id).components;
     const matches = designs.components.filter(
       (c) =>
         (category === "all" || category === c.category) &&
@@ -475,12 +515,14 @@
           '"><strong>' +
           c.label +
           (recommended.includes(c.id)
-            ? ' <span class="recommend-badge">권장</span>'
+            ? ' <span class="recommend-badge">권장 요소</span>'
             : "") +
           "</strong><small>" +
           c.name +
-          " / " +
+          " · 선택됨: " +
           designs.treatments[config.designSelection.components[c.id]].name +
+          "</small><small>프리셋 추천: " +
+          designs.treatments[defaults[c.id]].name +
           "</small><span>" +
           c.purpose +
           " ↗</span></button></article>",
@@ -491,7 +533,10 @@
   function renderDetail() {
     if (!active) return;
     const c = designs.components.find((c) => c.id === active),
-      variant = config.designSelection.components[active];
+      variant = config.designSelection.components[active],
+      recommended = designs.selection(config.designSelection.set).components[
+        active
+      ];
     $("detail-category").textContent = c.category + " / " + c.name;
     $("detail-title").textContent = c.label;
     $("detail-purpose").textContent = c.purpose;
@@ -506,6 +551,7 @@
           (v === variant) +
           '">' +
           designs.treatments[v].name +
+          choiceStatus(v === variant, v === recommended) +
           "</button>",
       )
       .join("");
@@ -643,17 +689,6 @@
   $("catalog-palette").innerHTML = palettes.palettes
     .map((p) => '<option value="' + p.id + '">' + esc(p.name) + "</option>")
     .join("");
-  for (const [key, items] of [
-    ["navigation", designs.navigationPresets],
-    ["navigationStructure", designs.navigationDesigns.structures],
-    ["motion", designs.motionPresets],
-  ])
-    $("catalog-" + key).innerHTML = items
-      .map(
-        (item) =>
-          '<option value="' + item.id + '">' + esc(item.name) + "</option>",
-      )
-      .join("");
   $("catalog-style").innerHTML = palettes.styles
     .map((s) => '<option value="' + s.id + '">' + esc(s.name) + "</option>")
     .join("");
@@ -837,10 +872,12 @@
       tabs[next].focus();
     }
     if (e.key === "Escape")
-      document.querySelectorAll(".tip").forEach((t) => {
-        t.hidden = true;
-        t.style.display = "none";
-      });
+      document
+        .querySelectorAll(".tip:not([data-inline-preview])")
+        .forEach((t) => {
+          t.hidden = true;
+          t.style.display = "none";
+        });
   });
   $("component-dialog").addEventListener("close", () => {
     clearTimeout(toastTimer);

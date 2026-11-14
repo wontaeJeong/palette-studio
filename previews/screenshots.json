@@ -43,14 +43,14 @@
     "data/icon-parts/system-extra.js",
     "data/icon-parts/system.js"
   ],
-  "sourceHash": "48dc53aff486f0b7cd140db8759a1cc02de0855a672d3400d89437f0587bad1e",
+  "sourceHash": "9afca850c68f3de37ea4dae860b80d32fb6a9886945f3088ab4c47e8f705269d",
   "screenshots": [
     {
       "path": "studio-overview-light.png",
       "width": 1440,
       "height": 980,
-      "bytes": 118269,
-      "sha256": "827ce505026ad51155aa132d3f79145a7813b27c4896dc9c343829b1894a95a0"
+      "bytes": 118308,
+      "sha256": "b77eb17012890d6d78ec669e190e2ca3e9cbb50d8b22803b8df262aacedd1cb2"
     },
     {
       "path": "studio-overview-dark.png",
@@ -70,15 +70,15 @@
       "path": "studio-navigation-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 111136,
-      "sha256": "2133b2509e7431926a9dc5cf8e664a8aed1b050f54b863f2fd43b3e89566c687"
+      "bytes": 111850,
+      "sha256": "dbef9491198aa396b42afbdbeaae9247ea939949485732f5a6a3f9f0312b8de0"
     },
     {
       "path": "studio-navigation-mobile.png",
       "width": 390,
       "height": 844,
-      "bytes": 41578,
-      "sha256": "050aff3a8d2b9792c02f70bb52919a60c816b88ea26214df2181a5820166c83f"
+      "bytes": 44555,
+      "sha256": "4bcf5602a78548a7f0b18d9e6378043837a9927d7022d4d705ce83516ffdc7a9"
     },
     {
       "path": "studio-mobile-light.png",
@@ -147,50 +147,50 @@
       "path": "design-catalog-desktop.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 148327,
-      "sha256": "6041114feb854fb88594ce3e54988727bd1e50282836690b7ec7dfaac4a2280a"
+      "bytes": 156669,
+      "sha256": "c74fb9587bd851e45efefd8a42709e72f72fc2ac1bf4359d37fbfddaacb5a3b6"
     },
     {
       "path": "design-catalog-components.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 189970,
-      "sha256": "c661ed82ef21b49fd044fbe3bd65b5a913f7be379d9a520eebe584a09935718b"
+      "bytes": 196185,
+      "sha256": "7bc0cd9abbeb7e6e1c51715b031bc25f0beac8b2e401f7d17e3e91ff77e74d71"
     },
     {
       "path": "design-catalog-detail.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 138728,
-      "sha256": "afb837eb4e7cba285a45215a2392683f6704f84c7e8b9fc4477401417e5906f4"
+      "bytes": 152105,
+      "sha256": "935635b96e518c47bdb15033cbb4035779dd26a8f7225fa8647bd1205c3adb33"
     },
     {
       "path": "design-catalog-layout.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 105552,
-      "sha256": "ce147f5ed22fbff77cdc987ebe40a34849a89834e52d8e3781162a9fc096644d"
+      "bytes": 107930,
+      "sha256": "060745b11b5315630e1304f86f1bb74e6f4cff10ef3ba24070f2b39ce047eb01"
     },
     {
       "path": "design-catalog-motion.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 89696,
-      "sha256": "51e73392b6bcd3b64a6c33e485f1b5c1008db92fc10dc1cf8e4c327bd4fe7ad0"
+      "bytes": 91274,
+      "sha256": "b253118b763aad19402f2fff113fdad737a6ffca26d10f0afbb6d187c49566d6"
     },
     {
       "path": "design-catalog-ui-dark.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 150447,
-      "sha256": "df266974b8cf2465b5e0ffb1681cc5a1980a4f3e51c9d02d89616fff43c35fac"
+      "bytes": 157275,
+      "sha256": "bdee635f4ac6167bd3f2d15711acda14149dad60f0998ab1bb65a6328dd37d73"
     },
     {
       "path": "design-catalog-mobile.png",
       "width": 390,
-      "height": 8167,
-      "bytes": 485230,
-      "sha256": "7e2483760564531aec781c7ee6de6f8a67c7b7e81fd8df9a6e950707fc2188c4"
+      "height": 8621,
+      "bytes": 528415,
+      "sha256": "ab24fe6f2ed5e2d5ca790dbe984b671158594f521df194be885620c749639e70"
     }
   ]
 }

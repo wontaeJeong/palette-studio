@@ -76,17 +76,39 @@
               <option value="all">모든 요소</option>
             </select></label
           ><label>색상<select id="catalog-palette"></select></label
-          ><label>형태<select id="catalog-style"></select></label
-          ><label>메뉴 배치<select id="catalog-navigation"></select></label
-          ><label>전환<select id="catalog-motion"></select></label>
+          ><label>형태<select id="catalog-style"></select></label>
+          <div class="recommended-field">
+            <label
+              >메뉴 배치<select
+                id="catalog-navigation"
+                aria-describedby="navigation-recommendation"
+              ></select
+            ></label>
+            <p id="navigation-recommendation" class="preset-hint"></p>
+          </div>
+          <div class="recommended-field">
+            <label
+              >전환<select
+                id="catalog-motion"
+                aria-describedby="motion-recommendation"
+              ></select
+            ></label>
+            <p id="motion-recommendation" class="preset-hint"></p>
+          </div>
         </div>
         <p class="help">
           요소를 선택하면 표현과 동작을 확인할 수 있습니다. 프리셋을 다시
           선택하면 개별 변경이 초기화됩니다.
         </p>
-        <label
-          >메뉴 구성<select id="catalog-navigationStructure"></select
-        ></label>
+        <div class="recommended-field">
+          <label
+            >메뉴 구성<select
+              id="catalog-navigationStructure"
+              aria-describedby="navigationStructure-recommendation"
+            ></select
+          ></label>
+          <p id="navigationStructure-recommendation" class="preset-hint"></p>
+        </div>
         <p class="field-label">선택 표시</p>
         <div
           id="navigation-style-picker"

@@ -11,7 +11,7 @@
   const render = () => {
     document.documentElement.dataset.uiTheme = theme;
     document.querySelectorAll("[data-ui-theme-toggle]").forEach((button) => {
-      button.textContent = theme === "dark" ? "라이트 UI" : "다크 UI";
+      button.textContent = theme === "dark" ? "라이트 모드" : "다크 모드";
       button.setAttribute("aria-pressed", String(theme === "dark"));
     });
   };

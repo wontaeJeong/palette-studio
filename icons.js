@@ -78,7 +78,7 @@
   }
   function themePane(mode, filtered) {
     var palette = palettes.find(function (p) { return p.id === state.palette; });
-    var label = mode === "light" ? "LIGHT" : "DARK";
+    var label = mode === "light" ? "라이트" : "다크";
     var caption = escapeHtml(palette ? palette.name : state.palette);
     var markup = filtered.length ? filtered.map(function (icon) {
       return '<button type="button" class="ic-icon-btn" data-icon="' + escapeHtml(icon.name) +
@@ -177,7 +177,7 @@
         return '<div class="ic-theme-palette" data-palette="' + escapeHtml(state.palette) +
           '" data-theme="' + mode + '"><div class="ic-detail-sample">' + visual(icon) +
           '<div><p class="ic-detail-name">' + escapeHtml(icon.name) +
-          '</p><span class="ic-detail-cat">' + (mode === "light" ? "LIGHT" : "DARK") +
+          '</p><span class="ic-detail-cat">' + (mode === "light" ? "라이트" : "다크") +
           " · " + escapeHtml(category ? category[1] : "") + "</span></div></div></div>";
       }).join("") + "</div>";
     $("icon-code").textContent = codeExample(icon);

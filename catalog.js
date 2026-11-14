@@ -162,13 +162,13 @@
         button("취소", "cancel") +
         "</div>",
       input:
-        '<label>이메일<input class="sample-input sample-emphasis" type="email" placeholder="hello@example.com"></label><small>소식을 받을 주소를 입력하세요.</small>',
+        '<label>이메일<input class="sample-input sample-emphasis" type="email" placeholder="hello@example.com"></label><small>이메일 주소를 입력하세요.</small>',
       select:
         '<label>프로젝트 상태<select class="sample-input sample-emphasis"><option>진행 중</option><option>검토 중</option><option>완료</option></select></label>',
       switch:
         '<label class="sample-check sample-emphasis"><input class="sample-switch" type="checkbox" role="switch" checked>이메일 알림 받기</label>',
       checkbox:
-        '<label class="sample-check sample-emphasis"><input type="checkbox" checked>업데이트 소식 받기</label><label class="sample-check sample-emphasis"><input type="checkbox">주간 요약 받기</label>',
+        '<label class="sample-check sample-emphasis"><input type="checkbox" checked>작업 알림</label><label class="sample-check sample-emphasis"><input type="checkbox">주간 요약</label>',
       toast: preview
         ? '<div class="sample-box sample-emphasis">✓ 변경 내용을 저장했습니다.</div>'
         : button("저장 알림 띄우기", "toast", true),
@@ -176,10 +176,10 @@
         '<div class="sample-box sample-warning"><strong>△ 입력 확인 필요</strong><p>변경 내용을 한 번 더 확인하세요.</p></div>',
       dialog: preview
         ? '<div class="sample-box"><h4 class="sample-emphasis">변경 내용을 저장할까요?</h4><p>작업 내용을 반영합니다.</p><div class="sample-actions"><span class="sample-badge">취소</span><span class="sample-badge sample-primary">저장</span></div></div>'
-        : button("확인창 열어보기", "dialog", true),
+        : button("확인창 열기", "dialog", true),
       drawer: preview
         ? '<div class="sample-box sample-emphasis" style="margin-left:22%;width:78%;border-radius:0"><h4>프로젝트 상세</h4><p>프로젝트 상세 정보입니다.</p><div class="mini-line"></div></div>'
-        : button("옆 패널 열어보기", "drawer", true),
+        : button("패널 열기", "drawer", true),
       tooltip:
         '<div class="sample-tooltip">' +
         button("도움말 보기", "tooltip").replace(
@@ -281,8 +281,7 @@
     const linked = linkConfig();
     try {
       localStorage.setItem("palette-studio-handoff-v1", JSON.stringify(linked));
-      $("save-status").textContent =
-        recovery || "이 브라우저에 선택을 저장했습니다.";
+      $("save-status").textContent = recovery || "자동 저장됨";
     } catch {
       $("save-status").textContent =
         "브라우저 저장을 사용할 수 없습니다. 링크나 설정 JSON으로 보관하세요.";
@@ -331,7 +330,7 @@
           '" data-style="' +
           esc(config.style) +
           '"><span class="pane-label">' +
-          (mode === "light" ? "Light" : "Dark") +
+          (mode === "light" ? "라이트" : "다크") +
           "</span>" +
           body(mode) +
           "</div>",
@@ -357,7 +356,7 @@
                 '" data-style="' +
                 set.style +
                 '"><span class="pane-label">' +
-                (mode === "light" ? "Light" : "Dark") +
+                (mode === "light" ? "라이트" : "다크") +
                 "</span>" +
                 shell(set.defaultNavigation, true) +
                 "</span>",
@@ -515,7 +514,7 @@
     document.documentElement.dataset.theme = theme;
     $("catalog-palette").value = config.palette;
     $("catalog-style").value = config.style;
-    $("ui-theme").textContent = theme === "dark" ? "라이트 UI" : "다크 UI";
+    $("ui-theme").textContent = theme === "dark" ? "라이트 모드" : "다크 모드";
     $("ui-theme").setAttribute("aria-pressed", String(theme === "dark"));
     const set = designs.sets.find((s) => s.id === config.designSelection.set),
       p = palettes.palettes.find((p) => p.id === config.palette),
@@ -567,7 +566,7 @@
             (m) => m.id === config.designSelection.motion,
           ).name,
         ],
-        ["디자인 모드", "Light + Dark"],
+        ["디자인 모드", "라이트 + 다크"],
         ["색상", p.name],
         ["형태", s.name],
         ["개별 변경", custom + " / 18"],
@@ -659,7 +658,7 @@
       localStorage.setItem("palette-studio-ui-theme", theme);
     } catch {}
     document.documentElement.dataset.theme = theme;
-    $("ui-theme").textContent = theme === "dark" ? "라이트 UI" : "다크 UI";
+    $("ui-theme").textContent = theme === "dark" ? "라이트 모드" : "다크 모드";
     $("ui-theme").setAttribute("aria-pressed", String(theme === "dark"));
   });
   for (const key of ["motion", "navigation"])

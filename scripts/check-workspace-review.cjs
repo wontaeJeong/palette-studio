@@ -122,6 +122,28 @@ async function checkWorkspaceReview(browser) {
         ["dark", "dark"],
         "legacy dark comparison",
       );
+      await page.reload();
+      assert.deepEqual(
+        await themes(),
+        ["dark", "dark"],
+        "legacy comparison survives immediate reload",
+      );
+      for (const saved of ["null", "{broken"]) {
+        await page.evaluate(
+          (saved) => localStorage.setItem("palette-studio-view-v1", saved),
+          saved,
+        );
+        await page.goto("about:blank");
+        await page.goto(
+          url +
+            "#palette=navy-cyan&mode=compare&compare=slate-blue&compareMode=dark",
+        );
+        assert.deepEqual(
+          await themes(),
+          ["dark", "dark"],
+          "explicit link survives invalid saved view",
+        );
+      }
       await page.selectOption("#compare-mode", "light");
       assert.deepEqual(await themes(), ["light", "light"]);
       await page.selectOption("#compare-mode", "dark");

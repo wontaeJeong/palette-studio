@@ -8,10 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta
-      name="description"
-      content="하나의 작업 화면에서 디자인을 선택하고 다듬어 프로젝트에 전달하세요."
-    />
+    <meta name="description" content="디자인 설정, 미리보기, 파일 내보내기" />
     <title>Palette Studio — 디자인 작업실</title>
     <style>
 /* Generated. Semantic values are literal #RRGGBB. Use ONE theme source. */
@@ -14513,6 +14510,7 @@ body {
 }
 .preview-controls {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 16px;
   margin: 22px 0 18px;
@@ -14752,9 +14750,6 @@ body {
   margin-top: 8px;
   font-size: 10px;
   min-height: 36px;
-}
-.mock-outline {
-  border: 1px solid var(--color-line-strong);
 }
 .mock-bottom {
   display: grid;
@@ -15081,8 +15076,7 @@ body {
     <a class="skip" href="#selection-panel">디자인 편집으로 이동</a>
     <header class="workspace-header">
       <a class="brand" href="index.html"
-        ><span class="brand-mark" aria-hidden="true">P</span>Palette Studio
-        <span class="edition">DESIGN WORKSPACE</span></a
+        ><span class="brand-mark" aria-hidden="true">P</span>Palette Studio</a
       >
       <div class="header-actions">
         <span id="save-status" role="status"></span
@@ -15092,29 +15086,24 @@ body {
           aria-label="도구 다크 모드"
           aria-pressed="false"
         >
-          다크 UI</button
+          다크 모드</button
         ><button id="open-export" class="primary" type="button">
-          확인 · 내보내기 <span aria-hidden="true">↗</span>
+          내보내기 <span aria-hidden="true">↗</span>
         </button>
       </div>
     </header>
     <main id="workspace" class="workspace">
       <div id="selection-panel" class="inspector">
         <div class="workspace-intro">
-          <p class="eyebrow">YOUR NEXT INTERFACE</p>
-          <h1>하나의 디자인,<br />한 곳에서.</h1>
-          <p class="help">
-            마음에 드는 세트에서 시작하세요.<br />바꾼 내용은 옆 미리보기에 바로
-            반영됩니다.
-          </p>
+          <h1>디자인 설정</h1>
+          <p class="help">변경한 내용은 미리보기에 반영됩니다.</p>
         </div>
         <section id="sets" aria-labelledby="sets-heading">
           <div class="section-head">
             <div>
-              <p class="eyebrow">START WITH A SET</p>
-              <h2 id="sets-heading">시작점 고르기</h2>
+              <h2 id="sets-heading">디자인 세트</h2>
             </div>
-            <small>6가지 디자인 세트</small>
+            <small>6종</small>
           </div>
           <div id="set-grid" class="set-grid"></div>
           <p id="recommendation-reason" class="help"></p>
@@ -15122,8 +15111,7 @@ body {
         <section class="inspector-section" aria-labelledby="appearance-heading">
           <div class="section-head">
             <div>
-              <p class="eyebrow">MAKE IT YOURS</p>
-              <h2 id="appearance-heading">색상과 형태</h2>
+              <h2 id="appearance-heading">색상 · 형태</h2>
             </div>
           </div>
           <div class="field-pair">
@@ -15146,10 +15134,10 @@ body {
             </div>
             <p id="font-status" class="help" role="status"></p>
             <details class="font-library">
-              <summary>글꼴 견본 둘러보기 · 24종</summary>
+              <summary>글꼴 목록 · 24종</summary>
               <div id="font-gallery">
                 <section>
-                  <h3 id="body-gallery-heading">본문용 폰트</h3>
+                  <h3 id="body-gallery-heading">본문 폰트</h3>
                   <label
                     >본문 폰트 검색<input
                       id="body-font-search"
@@ -15159,7 +15147,7 @@ body {
                   <div id="body-font-gallery" class="font-gallery"></div>
                 </section>
                 <section>
-                  <h3>코드용 폰트</h3>
+                  <h3>코드 폰트</h3>
                   <label
                     >코드 폰트 검색<input
                       id="code-font-search"
@@ -15178,7 +15166,7 @@ body {
         </details>
         <details id="structure-options" class="inspector-section">
           <summary>
-            <span>배치와 움직임</span><small id="structure-summary"></small>
+            <span>배치 · 전환</span><small id="structure-summary"></small>
           </summary>
           <div class="details-content">
             <div class="field-pair">
@@ -15186,12 +15174,12 @@ body {
               ><label>전환 속도<select id="catalog-motion"></select></label>
             </div>
             <details id="layout-options">
-              <summary>메뉴 배치 비교 · Light / Dark</summary>
+              <summary>메뉴 배치 비교 · 라이트 / 다크</summary>
               <div id="navigation-preview" class="paired-layout"></div>
               <p id="navigation-description" class="help"></p>
             </details>
             <details id="motion-options">
-              <summary>애니메이션 직접 재생</summary>
+              <summary>전환 미리보기</summary>
               <div id="motion-preview"></div>
             </details>
             <style id="selected-motion-preview"></style>
@@ -15199,19 +15187,16 @@ body {
         </details>
         <details id="components-options" class="inspector-section">
           <summary>
-            <span>컴포넌트 다듬기</span><small id="selection-label"></small>
+            <span>컴포넌트</span><small id="selection-label"></small>
           </summary>
           <div class="details-content">
-            <p class="help">
-              요소를 눌러 표현과 동작을 확인하세요. 세트를 다시 고르면 개별
-              표현이 초기화됩니다.
-            </p>
+            <p class="help">세트를 다시 선택하면 개별 설정이 초기화됩니다.</p>
             <div class="field-pair">
               <label
                 >컴포넌트 검색<input
                   id="catalog-search"
                   type="search"
-                  placeholder="잠깐 뜨는 알림, Toast…" /></label
+                  placeholder="알림, 버튼…" /></label
               ><label
                 >종류<select id="catalog-category">
                   <option value="all">모든 요소</option>
@@ -15228,13 +15213,10 @@ body {
         </details>
         <details id="icons-options" class="inspector-section">
           <summary>
-            <span>사용할 아이콘</span><small id="workspace-icon-count"></small>
+            <span>아이콘</span><small id="workspace-icon-count"></small>
           </summary>
           <div class="details-content">
-            <p class="help">
-              프로젝트에서 사용할 기본 아이콘을 선택하세요. 최대 24개까지
-              작업지시에 포함합니다.
-            </p>
+            <p class="help">아이콘을 최대 24개 선택할 수 있습니다.</p>
             <label
               >아이콘 검색<input
                 id="workspace-icon-search"
@@ -15246,10 +15228,7 @@ body {
           </div>
         </details>
         <div class="inspector-footer">
-          <p class="help">
-            선택은 자동으로 저장됩니다.<br />다듬은 디자인은 확인 후 한 번에
-            전달하세요.
-          </p>
+          <p class="help">선택은 자동 저장됩니다.</p>
           <a href="README.md">사용 가이드 ↗</a
           ><small>Lucide 아이콘 · OFL 라이선스 폰트</small>
         </div>
@@ -15261,8 +15240,7 @@ body {
       >
         <div class="preview-heading">
           <div>
-            <p class="eyebrow">LIVE PREVIEW</p>
-            <h2>내 디자인 미리보기</h2>
+            <h2>미리보기</h2>
           </div>
           <div id="compact-preview" aria-hidden="true"></div>
           <button
@@ -15278,13 +15256,18 @@ body {
           <div class="preview-controls">
             <label
               >보기<select id="preview-mode">
-                <option value="split">Light + Dark</option>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+                <option value="split">라이트 + 다크</option>
+                <option value="light">라이트</option>
+                <option value="dark">다크</option>
                 <option value="compare">팔레트 비교</option>
               </select></label
             ><label id="compare-control" hidden
               >비교 팔레트<select id="compare-palette"></select></label
+            ><label id="compare-mode-control" hidden
+              >비교 모드<select id="compare-mode">
+                <option value="light">라이트</option>
+                <option value="dark">다크</option>
+              </select></label
             ><span class="help">프로젝트 UI 예시</span>
           </div>
           <div id="project-stage"></div>
@@ -15293,7 +15276,7 @@ body {
             ><button id="share-selection" type="button">선택 링크 복사</button>
           </div>
           <details id="selection-details">
-            <summary>선택한 디자인 상세</summary>
+            <summary>선택 상세</summary>
             <div id="recipe"></div>
           </details>
         </div>
@@ -15305,7 +15288,6 @@ body {
       aria-labelledby="export-heading"
     >
       <div class="detail-top">
-        <p class="eyebrow">REVIEW & EXPORT</p>
         <button
           type="button"
           data-close="export-dialog"
@@ -15314,10 +15296,8 @@ body {
           닫기 ×
         </button>
       </div>
-      <h2 id="export-heading">디자인을 프로젝트로</h2>
-      <p class="help">
-        적용 범위를 확인하고 선택한 디자인과 작업지시를 함께 전달하세요.
-      </p>
+      <h2 id="export-heading">내보내기</h2>
+      <p class="help">적용 범위와 파일을 확인하세요.</p>
       <div id="export-summary" class="export-summary"></div>
       <div class="export-fields">
         <label
@@ -15343,7 +15323,7 @@ body {
             <option value="astro">Astro</option>
           </select></label
         ><label
-          >레이아웃 목적<select id="layout">
+          >화면 종류<select id="layout">
             <option value="existing">기존 앱 구조 유지</option>
             <option value="dashboard">운영 · 데이터</option>
             <option value="content">문서 · 콘텐츠</option>
@@ -15351,9 +15331,9 @@ body {
             <option value="marketing">소개 · 랜딩</option>
           </select></label
         ><label
-          >폰트 공급<select id="font-source">
-            <option value="cdn-first">고정 CDN → 동봉 폴백</option>
-            <option value="local-only">로컬 동봉만</option>
+          >폰트 불러오기<select id="font-source">
+            <option value="cdn-first">CDN 우선 · 실패 시 동봉 폰트</option>
+            <option value="local-only">동봉 폰트</option>
             <option value="system">시스템 폰트만</option>
           </select></label
         >
@@ -15362,7 +15342,7 @@ body {
       <p id="scope-note" class="help"></p>
       <div class="export-buttons">
         <button id="copy-brief" class="primary" type="button">
-          에이전트 작업지시 복사</button
+          작업지시 복사</button
         ><button id="download-config" type="button">설정 JSON 저장</button>
       </div>
       <details>
@@ -15370,7 +15350,7 @@ body {
         <div id="export-files" class="export-buttons"></div>
       </details>
       <details>
-        <summary>생성된 작업지시 미리보기</summary>
+        <summary>작업지시 미리보기</summary>
         <label class="brief-label"
           >AGENT-TASK.md<textarea
             id="agent-brief"
@@ -15380,7 +15360,7 @@ body {
         </label>
       </details>
       <details>
-        <summary>로컬 CLI로 폰트 · SVG까지 묶기</summary>
+        <summary>폰트 · SVG 파일 저장</summary>
         <p class="help">
           설정 JSON을 저장한 뒤 저장소에서 실행하세요. 선택한 폰트·SVG와
           라이선스까지 포함합니다.
@@ -15414,7 +15394,7 @@ body {
         미리보기에서 동작을 확인할 수 있습니다. 아래 구현 기준은 작업지시에
         포함됩니다.
       </p>
-      <h3>구현 동작 기준</h3>
+      <h3>구현 기준</h3>
       <p id="detail-behavior" lang="en"></p>
       <button class="primary" type="button" data-close="component-dialog">
         선택 적용
@@ -16668,13 +16648,13 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         button("취소", "cancel") +
         "</div>",
       input:
-        '<label>이메일<input class="sample-input sample-emphasis" type="email" placeholder="hello@example.com"></label><small>소식을 받을 주소를 입력하세요.</small>',
+        '<label>이메일<input class="sample-input sample-emphasis" type="email" placeholder="hello@example.com"></label><small>이메일 주소를 입력하세요.</small>',
       select:
         '<label>프로젝트 상태<select class="sample-input sample-emphasis"><option>진행 중</option><option>검토 중</option><option>완료</option></select></label>',
       switch:
         '<label class="sample-check sample-emphasis"><input class="sample-switch" type="checkbox" role="switch" checked>이메일 알림 받기</label>',
       checkbox:
-        '<label class="sample-check sample-emphasis"><input type="checkbox" checked>업데이트 소식 받기</label><label class="sample-check sample-emphasis"><input type="checkbox">주간 요약 받기</label>',
+        '<label class="sample-check sample-emphasis"><input type="checkbox" checked>작업 알림</label><label class="sample-check sample-emphasis"><input type="checkbox">주간 요약</label>',
       toast: preview
         ? '<div class="sample-box sample-emphasis">✓ 변경 내용을 저장했습니다.</div>'
         : button("저장 알림 띄우기", "toast", true),
@@ -16682,10 +16662,10 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         '<div class="sample-box sample-warning"><strong>△ 입력 확인 필요</strong><p>변경 내용을 한 번 더 확인하세요.</p></div>',
       dialog: preview
         ? '<div class="sample-box"><h4 class="sample-emphasis">변경 내용을 저장할까요?</h4><p>작업 내용을 반영합니다.</p><div class="sample-actions"><span class="sample-badge">취소</span><span class="sample-badge sample-primary">저장</span></div></div>'
-        : button("확인창 열어보기", "dialog", true),
+        : button("확인창 열기", "dialog", true),
       drawer: preview
         ? '<div class="sample-box sample-emphasis" style="margin-left:22%;width:78%;border-radius:0"><h4>프로젝트 상세</h4><p>프로젝트 상세 정보입니다.</p><div class="mini-line"></div></div>'
-        : button("옆 패널 열어보기", "drawer", true),
+        : button("패널 열기", "drawer", true),
       tooltip:
         '<div class="sample-tooltip">' +
         button("도움말 보기", "tooltip").replace(
@@ -16787,8 +16767,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     const linked = linkConfig();
     try {
       localStorage.setItem("palette-studio-handoff-v1", JSON.stringify(linked));
-      $("save-status").textContent =
-        recovery || "이 브라우저에 선택을 저장했습니다.";
+      $("save-status").textContent = recovery || "자동 저장됨";
     } catch {
       $("save-status").textContent =
         "브라우저 저장을 사용할 수 없습니다. 링크나 설정 JSON으로 보관하세요.";
@@ -16837,7 +16816,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
           '" data-style="' +
           esc(config.style) +
           '"><span class="pane-label">' +
-          (mode === "light" ? "Light" : "Dark") +
+          (mode === "light" ? "라이트" : "다크") +
           "</span>" +
           body(mode) +
           "</div>",
@@ -16863,7 +16842,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
                 '" data-style="' +
                 set.style +
                 '"><span class="pane-label">' +
-                (mode === "light" ? "Light" : "Dark") +
+                (mode === "light" ? "라이트" : "다크") +
                 "</span>" +
                 shell(set.defaultNavigation, true) +
                 "</span>",
@@ -17021,7 +17000,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     document.documentElement.dataset.theme = theme;
     $("catalog-palette").value = config.palette;
     $("catalog-style").value = config.style;
-    $("ui-theme").textContent = theme === "dark" ? "라이트 UI" : "다크 UI";
+    $("ui-theme").textContent = theme === "dark" ? "라이트 모드" : "다크 모드";
     $("ui-theme").setAttribute("aria-pressed", String(theme === "dark"));
     const set = designs.sets.find((s) => s.id === config.designSelection.set),
       p = palettes.palettes.find((p) => p.id === config.palette),
@@ -17073,7 +17052,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
             (m) => m.id === config.designSelection.motion,
           ).name,
         ],
-        ["디자인 모드", "Light + Dark"],
+        ["디자인 모드", "라이트 + 다크"],
         ["색상", p.name],
         ["형태", s.name],
         ["개별 변경", custom + " / 18"],
@@ -17165,7 +17144,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       localStorage.setItem("palette-studio-ui-theme", theme);
     } catch {}
     document.documentElement.dataset.theme = theme;
-    $("ui-theme").textContent = theme === "dark" ? "라이트 UI" : "다크 UI";
+    $("ui-theme").textContent = theme === "dark" ? "라이트 모드" : "다크 모드";
     $("ui-theme").setAttribute("aria-pressed", String(theme === "dark"));
   });
   for (const key of ["motion", "navigation"])
@@ -17341,7 +17320,9 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
   $("download-config").addEventListener("click", () =>
     download("handoff-config.json", JSON.stringify(config, null, 2) + "\n"),
   );
-  $("share-selection").addEventListener("click", () => copy(shareURL()));
+  $("share-selection").addEventListener("click", () =>
+    copy(window.PaletteWorkspace?.shareURL() || shareURL()),
+  );
   window.PaletteCatalog = {
     getConfig: () => JSON.parse(JSON.stringify(config)),
     update(patch) {
@@ -17386,43 +17367,51 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     );
   let config = catalog.getConfig(),
     previewMode = "split",
-    compare = "slate-indigo";
+    compare = "slate-indigo",
+    compareMode = "light";
+  let savedView = {};
   try {
     const saved = JSON.parse(
       localStorage.getItem("palette-studio-view-v1") || "{}",
     );
-    previewMode = initialView.mode || saved.mode || previewMode;
-    compare = initialView.compare || saved.compare || compare;
+    if (saved && typeof saved === "object" && !Array.isArray(saved))
+      savedView = saved;
   } catch {}
+  previewMode = initialView.mode || savedView.mode || previewMode;
+  compare = initialView.compare || savedView.compare || compare;
+  compareMode = initialView.compareMode || savedView.compareMode || compareMode;
   if (!["split", "light", "dark", "compare"].includes(previewMode))
     previewMode = "split";
-  if (!kit.palettes.some((p) => p.id === compare)) compare = "slate-indigo";
+  if (!["light", "dark"].includes(compareMode)) compareMode = "light";
+  if (!kit.palettes.some((p) => p.id === compare))
+    ((compare = "slate-indigo"), (compareMode = "light"));
   function persistView() {
     try {
       localStorage.setItem(
         "palette-studio-view-v1",
-        JSON.stringify({ mode: previewMode, compare }),
+        JSON.stringify({ mode: previewMode, compare, compareMode }),
       );
     } catch {}
   }
+  persistView();
   let projectDraft = config.project,
     projectValid = true;
   const projects = [
     {
       name: "웹사이트 리뉴얼",
-      team: "Product",
+      team: "제품팀",
       status: "review",
       label: "! 검토 필요",
     },
     {
       name: "디자인 가이드",
-      team: "Design",
+      team: "디자인팀",
       status: "passed",
       label: "✓ 완료",
     },
     {
       name: "모바일 프로젝트",
-      team: "Engineering",
+      team: "개발팀",
       status: "running",
       label: "◷ 진행 중",
     },
@@ -17435,7 +17424,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     "selected-motion.css": "애니메이션 CSS",
     "selected-fonts.css": "폰트 CSS",
     "AGENT-TASK.md": "작업지시",
-    "QA-CHECKLIST.md": "QA 체크리스트",
+    "QA-CHECKLIST.md": "검증 목록",
   };
   function outputs() {
     return {
@@ -17529,7 +17518,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       list
         .map(
           (f) =>
-            `<article class="font-card" data-font-id="${f.id}"><div><strong>${esc(f.name)}</strong><small>${f.korean ? "한글 포함" : "영문 중심 · 한글 보완"} · OFL</small></div><p class="font-sample">${role === "body" ? "다음 프로젝트를 위한 글꼴 Aa" : "const project = true; 0O 1lI"}</p><button type="button" data-font-role="${role}" data-apply-font="${f.id}" aria-pressed="${config.fonts[role] === f.id}">${config.fonts[role] === f.id ? "선택됨" : "이 글꼴 사용"}</button></article>`,
+            `<article class="font-card" data-font-id="${f.id}"><div><strong>${esc(f.name)}</strong><small>${f.korean ? "한글 포함" : "영문 중심 · 한글 보완"} · OFL</small></div><p class="font-sample">${role === "body" ? "프로젝트 이름 Aa" : "const project = true; 0O 1lI"}</p><button type="button" data-font-role="${role}" data-apply-font="${f.id}" aria-pressed="${config.fonts[role] === f.id}">${config.fonts[role] === f.id ? "선택됨" : "선택"}</button></article>`,
         )
         .join("") || '<p class="help">검색 결과가 없습니다.</p>';
     for (const card of $(role + "-font-gallery").querySelectorAll(
@@ -17562,12 +17551,14 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       previewMode === "split"
         ? ["light", "dark"]
         : previewMode === "compare"
-          ? ["light", "light"]
+          ? [compareMode, compareMode]
           : [previewMode];
     $("preview-mode").value = previewMode;
     $("compact-preview").innerHTML =
       `<span data-palette="${config.palette}" data-theme="light"><i></i><b>Aa</b><em>✓</em></span>`;
     $("compare-control").hidden = previewMode !== "compare";
+    $("compare-mode-control").hidden = previewMode !== "compare";
+    $("compare-mode").value = compareMode;
     $("project-stage").dataset.view = previewMode;
     $("project-stage").innerHTML = modes
       .map((mode, index) => {
@@ -17576,8 +17567,8 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         const v = config.designSelection.components,
           navigation = config.designSelection.navigation;
         const demo = (id) => catalog.demo(id, v[id], true, mode + "-" + index);
-        const nav = `<nav class="mock-nav" aria-label="샘플 프로젝트 메뉴"><button type="button" aria-current="page">${svg(config.icons[0] || "layout-dashboard")}<span>프로젝트</span></button><button type="button" data-preview-notice="settings">${svg("settings")}<span>설정</span></button></nav>`;
-        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "LIGHT" : "DARK"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} My Workspace</strong><span>Product Team</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><small>WORKSPACE / OVERVIEW</small><h3>좋은 아이디어를,<br>다음 프로젝트로.</h3><p>팀의 작업을 한눈에 확인하세요.</p></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form treatment ${v.input}"><h4>새 프로젝트</h4><label>프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : v.button === "outline" ? "mock-outline" : ""}">${svg("plus", 16)}프로젝트 추가</button></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
+        const nav = `<nav class="mock-nav" aria-label="샘플 프로젝트 메뉴"><button type="button" aria-label="프로젝트" aria-current="page">${svg(config.icons[0] || "layout-dashboard")}<span>프로젝트</span></button><button type="button" aria-label="설정" data-preview-notice="settings">${svg("settings")}<span>설정</span></button></nav>`;
+        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "라이트" : "다크"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} 프로젝트</strong><span>제품팀</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><h3>프로젝트 현황</h3></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form"><h4>새 프로젝트</h4><label class="treatment ${v.input}">프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><div class="treatment ${v.button}"><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : ""}">${svg("plus", 16)}프로젝트 추가</button></div></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
   name: "My Workspace",
   ready: true
 };</code></pre></div></div></section>`;
@@ -17615,7 +17606,13 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
           : "라이트와 다크 색상을 함께 내보냅니다.";
   }
   function render() {
+    const previousSource = config.fonts.source;
     config = catalog.getConfig();
+    if (
+      previousSource !== config.fonts.source &&
+      document.querySelector(".font-library").open
+    )
+      for (const role of ["body", "code"]) renderFontGallery(role);
     for (const role of ["body", "code"])
       $(role + "-font").value = config.fonts[role];
     $("font-summary").textContent =
@@ -17637,20 +17634,28 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     document.querySelectorAll("[data-apply-font]").forEach((b) => {
       const selected = b.dataset.applyFont === config.fonts[b.dataset.fontRole];
       b.setAttribute("aria-pressed", String(selected));
-      b.textContent = selected ? "선택됨" : "이 글꼴 사용";
+      b.textContent = selected ? "선택됨" : "선택";
     });
   }
   $("compare-palette").innerHTML = kit.palettes
     .map((p) => `<option value="${p.id}">${esc(p.name)}</option>`)
     .join("");
   $("compare-palette").value = compare;
+  function selectFont(role, id) {
+    const switchSource = config.fonts.source === "system" && id !== "system";
+    update({
+      fonts: { [role]: id, ...(switchSource ? { source: "local-only" } : {}) },
+    });
+    if (switchSource)
+      notify("선택한 글꼴을 사용하도록 동봉 폰트로 변경했습니다.");
+  }
   for (const role of ["body", "code"]) {
     $(role + "-font").innerHTML = fonts
       .choices(role)
       .map((f) => `<option value="${f.id}">${esc(f.name)}</option>`)
       .join("");
     $(role + "-font").addEventListener("change", (e) =>
-      update({ fonts: { [role]: e.target.value } }),
+      selectFont(role, e.target.value),
     );
     $(role + "-font-search").addEventListener("input", () =>
       renderFontGallery(role),
@@ -17658,8 +17663,11 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     $(role + "-font-gallery").addEventListener("click", (e) => {
       const b = e.target.closest("[data-apply-font]");
       if (b) {
-        update({ fonts: { [role]: b.dataset.applyFont } });
-        b.focus({ preventScroll: true });
+        const id = b.dataset.applyFont;
+        selectFont(role, id);
+        $(role + "-font-gallery")
+          .querySelector(`[data-apply-font="${id}"]`)
+          .focus({ preventScroll: true });
       }
     });
   }
@@ -17712,6 +17720,11 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     persistView();
     renderPreview();
   });
+  $("compare-mode").addEventListener("change", (e) => {
+    compareMode = e.target.value;
+    persistView();
+    renderPreview();
+  });
   $("project-stage").addEventListener("input", (e) => {
     if (!e.target.matches("[data-project-search]")) return;
     const box = e.target.closest(".mock-projects"),
@@ -17732,7 +17745,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     if (name) {
       projects.push({
         name,
-        team: "Product Team",
+        team: "제품팀",
         status: "running",
         label: "◷ 진행 중",
       });
@@ -17833,7 +17846,12 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     outputs,
     shareURL: () => {
       const u = new URL(location.href);
-      u.hash = new URLSearchParams({ selection: JSON.stringify(config) });
+      u.hash = new URLSearchParams({
+        selection: JSON.stringify(config),
+        mode: previewMode,
+        compare,
+        compareMode,
+      });
       return u.href;
     },
   };

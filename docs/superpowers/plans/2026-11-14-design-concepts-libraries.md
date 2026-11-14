@@ -1,6 +1,6 @@
 # Design concepts and library support implementation plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Make genuine style concepts, polished interaction modules, actual library previews and live adoption metadata selectable and exportable in the existing offline workspace.
 
@@ -35,12 +35,12 @@
 - core.styleCSS(config,catalog), core.profile, core.designMD, core.agentTask include concept values/rules. Use a single source of truth for preview/export CSS.
 - All preview scopes and demo portals expose data-concept alongside existing theme/palette/style.
 
-- [ ] Write focused failing normalization/export tests: old studio config normalizes minimal; new concept survives URL/config/CLI; invalid concept rejects; dark-only theme remains dark-only. Add browser regressions that demonstrate tooltip reopen/layout stability and toast hover+focus pause behavior before fixes.
-- [ ] Run those tests and record expected failures in report.
-- [ ] Implement nine visual concepts as a separate picker in the continuous workspace, with comparative same-content previews and meaningful surface/type/shape differences. Keep six task sets and existing font choice authoritative. Add popover to the catalog with real interactions.
-- [ ] Refine all existing sample families and overlay lifecycle per spec. Reuse Lucide SVG data, ensure semantic success/review/rejected/failed remain distinct. Toast stack maximum three, status controls and undo; tooltips anchored and hoverable; dialog/drawer/menu/popover keyboard/focus and responsive layout.
-- [ ] Run node scripts/test-design-catalog.cjs, node scripts/test-design-handoff.cjs, node scripts/test-design-concepts.cjs, node scripts/check-handoff-schemas.cjs, node scripts/audit.mjs and relevant existing/new browser scripts. Regenerate concepts CSS deterministically and START-HERE with scripts/bundle.py. Capture representative evidence to temporary files; final curated screenshots belong to Task 3.
-- [ ] Self-review, commit scoped changes and report RED/GREEN evidence and any limits.
+- [x] Write focused failing normalization/export tests: old studio config normalizes minimal; new concept survives URL/config/CLI; invalid concept rejects; dark-only theme remains dark-only. Add browser regressions that demonstrate tooltip reopen/layout stability and toast hover+focus pause behavior before fixes.
+- [x] Run those tests and record expected failures in report.
+- [x] Implement nine visual concepts as a separate picker in the continuous workspace, with comparative same-content previews and meaningful surface/type/shape differences. Keep six task sets and existing font choice authoritative. Add popover to the catalog with real interactions.
+- [x] Refine all existing sample families and overlay lifecycle per spec. Reuse Lucide SVG data, ensure semantic success/review/rejected/failed remain distinct. Toast stack maximum three, status controls and undo; tooltips anchored and hoverable; dialog/drawer/menu/popover keyboard/focus and responsive layout.
+- [x] Run node scripts/test-design-catalog.cjs, node scripts/test-design-handoff.cjs, node scripts/test-design-concepts.cjs, node scripts/check-handoff-schemas.cjs, node scripts/audit.mjs and relevant existing/new browser scripts. Regenerate concepts CSS deterministically and START-HERE with scripts/bundle.py. Capture representative evidence to temporary files; final curated screenshots belong to Task 3.
+- [x] Self-review, commit scoped changes and report RED/GREEN evidence and any limits.
 
 ### Task 2: Real offline library previews and shared integration exports
 
@@ -53,13 +53,13 @@
 - window.PaletteLibraryPreview.mount(element,{library,theme,palette,concept,style,fonts,tokens}) returns {update(options),unmount()}; React roots and portal containers are owned and cleaned up. It consumes concept CSS/tokens from Task 1.
 - Library cards have data-library-card=ID plus a data-library-metrics=ID slot and button data-refresh-library=ID for Task 3. Metadata module uses those exact IDs and repo/npmPackage fields.
 
-- [ ] Write failing tests for legacy uiLibrary default, invalid values, selected HEX/theme recipes, dark-only scope safety, UI/CLI export parity and React requirement disclosure for vanilla/Astro targets. Browser test requires actual library-marked triggers and theme-aware portals under blocked network.
-- [ ] Run focused tests and record expected failures.
-- [ ] Verify installed package APIs using official docs/local source; choose compatible current stable pinned versions, install with a lockfile and build a local classic-script bundle. Include third-party notices. Existing workbench remains buildless for users.
-- [ ] Implement real Button, Tooltip, Dialog, Popover and Toast demos for all five targets (Sonner where explicitly disclosed). Add library choice, source/package/version labels and plain-language pros/fit. Offer shadcn mapping recipe without runtime identity confusion. Preserve current app library first in existing-app handoffs.
-- [ ] Implement complete usable theme/recipe exports with real selected HEX, shape/density/font and portal instructions. Avoid generated placeholders and duplicate output strings. React runtime requirements must be visible. Preserve dark-only/light-only by merging only permitted color branches.
-- [ ] Run source build/typecheck, pure tests, library browser test in both modes plus 390px, offline START-HERE, and impacted existing tests. Ensure reduced motion and portal CSS work. No external network needed by default runtime.
-- [ ] Self-review, commit and report concise evidence.
+- [x] Write failing tests for legacy uiLibrary default, invalid values, selected HEX/theme recipes, dark-only scope safety, UI/CLI export parity and React requirement disclosure for vanilla/Astro targets. Browser test requires actual library-marked triggers and theme-aware portals under blocked network.
+- [x] Run focused tests and record expected failures.
+- [x] Verify installed package APIs using official docs/local source; choose compatible current stable pinned versions, install with a lockfile and build a local classic-script bundle. Include third-party notices. Existing workbench remains buildless for users.
+- [x] Implement real Button, Tooltip, Dialog, Popover and Toast demos for all five targets (Sonner where explicitly disclosed). Add library choice, source/package/version labels and plain-language pros/fit. Offer shadcn mapping recipe without runtime identity confusion. Preserve current app library first in existing-app handoffs.
+- [x] Implement complete usable theme/recipe exports with real selected HEX, shape/density/font and portal instructions. Avoid generated placeholders and duplicate output strings. React runtime requirements must be visible. Preserve dark-only/light-only by merging only permitted color branches.
+- [x] Run source build/typecheck, pure tests, library browser test in both modes plus 390px, offline START-HERE, and impacted existing tests. Ensure reduced motion and portal CSS work. No external network needed by default runtime.
+- [x] Self-review, commit and report concise evidence.
 
 ### Task 3: Live library adoption metadata and final validation
 
@@ -70,10 +70,19 @@
 - PaletteLibraryMetrics.createClient({fetch,storage,now,timeoutMs,ttlMs}) returns {load(library,{force}),peek(id)}. Default timeout 8000ms, TTL 3600000ms, maximum three concurrent source requests, deduplicate repeated in-flight loads.
 - Result has independent github/release/npm source records with value, fetchedAt, sourceUrl, state (fresh|cached|stale|unavailable) and error message. npm value includes downloads,start,end,package. Storage failures cannot prevent rendering or future refresh.
 
-- [ ] Write failing tests for real response shapes at fetch boundary: exact GitHub/npm endpoints, valid zero, invalid negatives/non-numeric values, npm date range and package mismatch, partial failure, 403/429, timeout, cached stale retention, concurrent refresh, storage exceptions. Assert real client output/state, not a mock UI.
-- [ ] Run focused tests and record expected failures.
-- [ ] Implement public API retrieval and safe response parsing, source-specific cache merge, no token requirement, deduplication, concurrency cap and explicit refresh. Never load remote metrics automatically on initial offline view.
-- [ ] Render exact counts with locale formatting, source links, individual fetch time, last-week date range, loading/errors/stale labels and last release. Explain downloads include CI and stars represent repository attention; no invented adoption score or unique user counts. Add a shadcn reference card (metrics only) labeled CLI downloads if not already present.
-- [ ] Browser-test refresh success/partial failure/rate-limit/cache/blocked-storage and page switching without stale-response races. Perform one live public API smoke check and record whether it succeeded without relying on it as deterministic CI.
-- [ ] Run complete relevant Node/browser suite once on final code, build library assets, regenerate single-file bundle, update representative screenshots and freshness manifest. Review desktop/mobile/light/dark visually. Update docs with exact tested scope and references. Preserve root main and unrelated worktrees.
-- [ ] Self-review, commit and report evidence, final diff and remaining limits.
+- [x] Write failing tests for real response shapes at fetch boundary: exact GitHub/npm endpoints, valid zero, invalid negatives/non-numeric values, npm date range and package mismatch, partial failure, 403/429, timeout, cached stale retention, concurrent refresh, storage exceptions. Assert real client output/state, not a mock UI.
+- [x] Run focused tests and record expected failures.
+- [x] Implement public API retrieval and safe response parsing, source-specific cache merge, no token requirement, deduplication, concurrency cap and explicit refresh. Never load remote metrics automatically on initial offline view.
+- [x] Render exact counts with locale formatting, source links, individual fetch time, last-week date range, loading/errors/stale labels and last release. Explain downloads include CI and stars represent repository attention; no invented adoption score or unique user counts. Add a shadcn reference card (metrics only) labeled CLI downloads if not already present.
+- [x] Browser-test refresh success/partial failure/rate-limit/cache/blocked-storage and page switching without stale-response races. Perform one live public API smoke check and record whether it succeeded without relying on it as deterministic CI.
+- [x] Run complete relevant Node/browser suite once on final code, build library assets, regenerate single-file bundle, update representative screenshots and freshness manifest. Review desktop/mobile/light/dark visually. Update docs with exact tested scope and references. Preserve root main and unrelated worktrees.
+- [x] Self-review, commit and report evidence, final diff and remaining limits.
+
+
+## Completion — 2026-11-14
+
+Implemented and independently reviewed all three tasks in `feat/design-concepts-libraries`. Latest main `d69a80c` was merged into this isolated worktree, preserving the upstream workspace fixes and Korean UI. Final implementation is `90293d3`; whole-branch review and the single scoped wording re-review found no remaining issues.
+
+Validation covers nine concepts and nineteen component families, five actual library runtimes, shared CLI/UI exports and generated TSX compilation, eleven metadata boundary tests, offline single-file execution, desktop/mobile interactions and 11,328 declared contrast/CSS checks. The controller independently exercised concept selection, actual-library dialog/focus, metadata refresh without changing config/share/export, scoped existing-app/Astro settings and real downloaded file parity on file index, mobile START-HERE and HTTP. All 31 screenshot fingerprints are current. Exact scope, commands, public-source evidence and the resolved local HTTP transport diagnosis are recorded in `docs/VERIFICATION.md`.
+
+The feature branch and worktree are retained. Original checkout remains latest `main`; its pre-existing `.serena/` is preserved. No push, merge into main, publication or target-app installation was performed. Per-plan temporary review artifacts were removed after all findings were addressed; historical implementation reports remain in Git history.

@@ -18,9 +18,10 @@ async function checkInlinePreviews(browser, file = "index.html") {
     for (const [id, selector, text] of [
       ["dialog", ".sample-box", "변경 내용을 저장할까요?"],
       ["drawer", ".sample-box", "프로젝트 상세"],
-      ["toast", ".sample-box", "변경 내용을 저장했습니다."],
+      ["toast", ".sample-box", "변경 내용을 저장했습니다"],
       ["tooltip", ".tip", "프로젝트 설정을 표시합니다."],
-      ["menu", ".menu-items", "이름 바꾸기"],
+      ["menu", ".sample-box", "이름 바꾸기"],
+      ["popover", ".sample-box", "표시 설정"],
     ]) {
       await page.locator(`[data-component="${id}"]`).click();
       for (const variant of ["soft", "outline", "solid"]) {
@@ -29,7 +30,7 @@ async function checkInlinePreviews(browser, file = "index.html") {
           .click();
         for (const mode of ["light", "dark"]) {
           const pane = page.locator(`#detail-demo [data-theme="${mode}"]`);
-          const sample = pane.locator(selector);
+          const sample = pane.locator(".inline-sample " + selector);
           assert.equal(
             await sample.count(),
             1,
@@ -56,6 +57,7 @@ async function checkInlinePreviews(browser, file = "index.html") {
       if (["dialog", "drawer", "toast"].includes(id)) {
         await page
           .locator(`#detail-demo [data-theme="light"] [data-demo="${id}"]`)
+          .first()
           .click();
         assert(
           await page.locator("#demo-" + id).isVisible(),

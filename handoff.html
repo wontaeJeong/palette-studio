@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/handoff.css">
 <link rel="stylesheet" href="css/tool-theme.css">
+  <link rel="stylesheet" href="css/concepts.css" />
 </head>
 <body>
 <a class="ah-skip" href="#handoff-selection">설정 선택으로 이동</a>
@@ -37,6 +38,7 @@
         <label>프로젝트 이름<input id="ah-project" type="text" maxlength="64" value="My Web App"></label>
         <label>팔레트<select id="ah-palette"></select></label>
         <label>스타일<select id="ah-style"></select></label>
+        <label>UI 라이브러리<select id="ah-ui-library"></select></label>
         <label>화면 종류<select id="ah-layout">
           <option value="existing">기존 앱 구조 유지</option>
           <option value="dashboard">운영·데이터</option>
@@ -98,6 +100,8 @@
         <button type="button" data-export="AGENT-TASK.md">작업 지시 저장</button>
         <button type="button" data-export="QA-CHECKLIST.md">검증 목록 저장</button>
       </div>
+      <h3>라이브러리 파일</h3>
+      <p id="ah-library-note" class="help"></p><div id="ah-library-files" class="ah-export-actions"></div>
       <h3>폰트 · SVG 파일 저장</h3>
       <pre class="ah-command"><code id="ah-cli">node scripts/create-design-handoff.cjs --config handoff-config.json --out design/handoff</code></pre>
       <button type="button" id="ah-copy-cli">명령 복사</button>
@@ -120,9 +124,12 @@
 <script src="data/icon-parts/data.js"></script>
 <script src="data/icon-parts/essentials.js"></script>
 <script src="data/ui-presets.js"></script>
-<script src="data/navigation-designs.js"></script>
+<script src="data/design-concepts.js"></script>
+    <script src="data/navigation-designs.js"></script>
     <script src="data/design-catalog.js"></script>
-<script src="data/handoff-core.js"></script>
+<script src="data/library-sources.js"></script>
+    <script src="data/ui-libraries.js"></script>
+    <script src="data/handoff-core.js"></script>
 <script src="handoff.js"></script>
 <script src="ui-theme.js"></script>
 </body>

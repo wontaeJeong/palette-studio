@@ -25,6 +25,10 @@ jobs:
           node scripts/build-icons-react.mjs --check
           node scripts/check-handoff-schemas.cjs
           node scripts/test-design-handoff.cjs
+          node scripts/test-navigation-designs.cjs
+          node scripts/test-design-concepts.cjs
+          node scripts/test-ui-libraries.cjs
+          node --test scripts/test-library-metrics.cjs
           node scripts/check-icons.cjs
           node scripts/check-screenshot-freshness.cjs
           python3 scripts/vendor_fonts.py
@@ -52,6 +56,10 @@ jobs:
           node scripts/check-fonts.cjs
           node scripts/check-icon-studio.cjs
           node scripts/check-handoff-browser.cjs
+          node scripts/check-navigation-library-integration.cjs
+          node scripts/check-library-metrics-browser.cjs
+          node scripts/check-library-export-summary.cjs
+          LIBRARY_ID=base-ui node scripts/check-library-browser.cjs
   react-icons:
     runs-on: ubuntu-latest
     steps:

@@ -93,6 +93,7 @@
       "selected-fonts.css": core.fontCSS(config, window.PALETTE_FONT_CATALOG),
       "AGENT-TASK.md": core.agentTask(config, kit),
       "QA-CHECKLIST.md": core.checklist(config),
+      ...core.libraryFiles(config, kit),
     };
   }
   function notify(message) {
@@ -235,7 +236,7 @@
             settings: svg("settings"),
           },
         });
-        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "라이트" : "다크"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-menu-structure="${config.designSelection.navigationStructure}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} 프로젝트</strong><span>제품팀</span></div>${navigation === "hybrid" ? `<div class="mock-context-nav"><span>작업 공간</span><button type="button" data-preview-notice="account">계정</button></div>` : ""}${nav}<div class="mock-main"><div data-preview-projects ${previewPage === "projects" ? "" : "hidden"}><div class="mock-title"><div><h3>프로젝트 현황</h3></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form"><h4>새 프로젝트</h4><label class="treatment ${v.input}">프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><div class="treatment ${v.button}"><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : ""}">${svg("plus", 16)}프로젝트 추가</button></div></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
+        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-concept="${config.designSelection.concept}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "라이트" : "다크"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-menu-structure="${config.designSelection.navigationStructure}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} 프로젝트</strong><span>제품팀</span></div>${navigation === "hybrid" ? `<div class="mock-context-nav"><span>작업 공간</span><button type="button" data-preview-notice="account">계정</button></div>` : ""}${nav}<div class="mock-main"><div data-preview-projects ${previewPage === "projects" ? "" : "hidden"}><div class="mock-title"><div><h3>프로젝트 현황</h3></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form"><h4>새 프로젝트</h4><label class="treatment ${v.input}">프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><div class="treatment ${v.button}"><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : ""}">${svg("plus", 16)}프로젝트 추가</button></div></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
   name: "My Workspace",
   ready: true
 };</code></pre></div><section data-preview-settings ${previewPage === "settings" ? "" : "hidden"}><div class="mock-title"><h3>설정</h3></div><label class="sample-check"><input type="checkbox" checked />이메일 알림</label><label class="sample-check"><input type="checkbox" />주간 요약</label><p class="help">미리보기 설정입니다.</p></section></div></div></section>`;
@@ -247,12 +248,16 @@
       kit.styles.find((s) => s.id === config.style).name;
   }
   function renderExport() {
+    $("library-export-note").textContent = window.PaletteUILibraries.summary(config);
+    $("library-export-files").innerHTML = Object.keys(core.libraryFiles(config,kit)).map(name=>`<button type="button" data-export="${name}">${name} 저장</button>`).join("");
     const names = [
       fonts.resolve(config.fonts.body, "body").name,
       fonts.resolve(config.fonts.code, "code").name,
     ];
     $("export-summary").textContent =
       kit.palettes.find((p) => p.id === config.palette).name +
+      " · " +
+      window.PaletteDesignConcepts.get(config.designSelection.concept).name +
       " · " +
       kit.styles.find((s) => s.id === config.style).name +
       " · " +
@@ -480,7 +485,7 @@
         `<button type="button" data-export="${name}">${label} 저장</button>`,
     )
     .join("");
-  $("export-files").addEventListener("click", (e) => {
+  $("export-dialog").addEventListener("click", (e) => {
     const b = e.target.closest("[data-export]");
     if (!b) return;
     const name = b.dataset.export,
@@ -506,11 +511,36 @@
       : "미리보기 확대";
     $("preview-panel").classList.toggle("expanded", expanded);
   });
+  // Pointer focus must not move the control between pointerdown and pointerup.
+  let pointerFocus = false;
+  document.addEventListener(
+    "pointerdown",
+    () => {
+      pointerFocus = true;
+    },
+    true,
+  );
+  document.addEventListener(
+    "keydown",
+    () => {
+      pointerFocus = false;
+    },
+    true,
+  );
+  for (const event of ["pointerup", "pointercancel"])
+    document.addEventListener(
+      event,
+      () => {
+        pointerFocus = false;
+      },
+      true,
+    );
   $("selection-panel").addEventListener("focusin", () => {
     if (innerWidth >= 1000) return;
     $("preview-panel").classList.remove("expanded");
     $("toggle-preview").setAttribute("aria-expanded", "false");
     $("toggle-preview").textContent = "미리보기 확대";
+    if (pointerFocus) return;
     if (document.activeElement.matches(":focus-visible"))
       document.activeElement.scrollIntoView({
         block: "nearest",

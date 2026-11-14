@@ -453,6 +453,14 @@
                 "outline",
                 "solid"
               ]
+            },
+            "popover": {
+              "type": "string",
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
             }
           }
         },
@@ -469,6 +477,20 @@
             "top",
             "left",
             "hybrid"
+          ]
+        },
+        "concept": {
+          "type": "string",
+          "enum": [
+            "minimal",
+            "soft",
+            "editorial",
+            "compact",
+            "brutalist",
+            "glass",
+            "expressive",
+            "terminal",
+            "tactile"
           ]
         },
         "navigationStyle": {
@@ -489,6 +511,18 @@
           ]
         }
       }
+    },
+    "uiLibrary": {
+      "type": "string",
+      "enum": [
+        "vanilla",
+        "base-ui",
+        "radix",
+        "react-aria",
+        "mui",
+        "mantine"
+      ],
+      "default": "vanilla"
     }
   }
 }

@@ -115,3 +115,29 @@ node scripts/check-screenshot-freshness.cjs
 
 
 최신 main의 작업실 회귀도 통합했습니다. `check-workspace-browser.cjs`는 `check-workspace-review.cjs`를 함께 실행해 입력/버튼 표현의 독립성, 라이트/다크 비교 링크·URL·저장 복원, 시스템 폰트 공급에서 역할별 선택 복구, 내비게이션 버튼의 접근 가능한 이름을 확인합니다. 라이브러리 내보내기 화면은 간결한 한국어 적용 범위·React/Astro 요구사항을 표시하며, 전체 canonical `library-README.md`의 실제 다운로드 바이트를 1440/390px에서 검사합니다. 두 내보내기 캡처를 포함한 최신 manifest는 31개 PNG를 검사합니다.
+
+
+### 로컬 HTTP QA의 연결 초기화 추적
+
+2026-11-14 HTTP 검사에서 필수 `/data/ui-libraries.js` 요청의 `net::ERR_CONNECTION_RESET`을 확인했습니다. 이어진 `normalize`/`getConfig`/`libraries` 오류는 이 스크립트가 전달되지 않은 결과였습니다. 모든 브라우저 context를 추적한 증거는 `/private/tmp/palette-http-all-pages.ndjson`이며, 실행 순서나 storage 차단 자체의 제품 결함으로 확인된 것은 아닙니다.
+
+관측한 Python 3.14.8 `ThreadingHTTPServer`의 대기열은 5였습니다. 같은 `SimpleHTTPRequestHandler`에서 대기열만 128로 늘린 8769 서버로 **수정하지 않은** 메트릭 브라우저 검사를 실행해 exit 0을 확인했습니다. 작은 대기열은 유력한 기여 요인이라는 추론이며, 연결 초기화의 유일한 원인까지 입증한 것은 아닙니다. 제품 재시도나 초기화 우회 코드는 추가하지 않았습니다.
+
+HTTP QA를 재현할 때 저장소 루트에서 다음 임시 서버를 사용할 수 있습니다. 제품 배포용 서버를 추가하는 절차가 아닙니다.
+
+```bash
+python3 - <<'PYTHON'
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
+class QAServer(ThreadingHTTPServer):
+    request_queue_size = 128
+QAServer(("127.0.0.1", 8769), SimpleHTTPRequestHandler).serve_forever()
+PYTHON
+```
+
+다른 터미널에서 Playwright 환경을 준비한 뒤 실행합니다.
+
+```bash
+PALETTE_URL=http://127.0.0.1:8769/index.html node scripts/check-library-metrics-browser.cjs
+```
+
+관측한 전송 실패와 제어 조건에서의 통과를 함께 기록하며, 원래 8768 서버의 실패를 통과로 재분류하지 않습니다. 오프라인 기본 검사와 HTTP 검사는 같은 실제 client/UI를 사용합니다.

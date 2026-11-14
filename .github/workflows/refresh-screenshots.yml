@@ -25,11 +25,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install pinned browser runner
+      - name: Install pinned studio and browser runner
         run: |
-          npm install --prefix "$RUNNER_TEMP/palette-qa" playwright@1.62.1 --no-audit --no-fund
-          "$RUNNER_TEMP/palette-qa/node_modules/.bin/playwright" install --with-deps chromium
-          echo "NODE_PATH=$RUNNER_TEMP/palette-qa/node_modules" >> "$GITHUB_ENV"
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+          npm run build
       - name: Capture real pages and create source fingerprint
         run: |
           node scripts/capture-previews.cjs

@@ -12,7 +12,18 @@ const { pathToFileURL } = require("node:url");
 const root = path.resolve(__dirname, "..");
 const previewDir = path.join(root, "previews");
 const sha = (data) => crypto.createHash("sha256").update(data).digest("hex");
+function sourceTree(directory) {
+  return fs.readdirSync(path.join(root,directory),{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name)).flatMap(item=>item.isDirectory()?sourceTree(directory+"/"+item.name):[directory+"/"+item.name]);
+}
 const pathsToHash = [
+  ...sourceTree("src"),
+  "package.json",
+  "package-lock.json",
+  "tsconfig.json",
+  "scripts/build-studio.mjs",
+  "scripts/bundle.py",
+  "assets/studio.js",
+  "sample-markup.js",
   "index.html",
   "app.js",
   "css/studio.css",
@@ -370,6 +381,7 @@ async function main() {
       const {page,context}=await open("index.html","fontSource=system&bodyFont=system&codeFont=system",1440,1100);
       await page.evaluate(id=>{const c=PaletteCatalog.getConfig();PaletteCatalog.update({uiLibrary:id,designSelection:{...c.designSelection,concept:"soft"}});document.querySelector("#library-options").open=true;},id);
       await page.locator(`[data-library-card="${id}"]`).scrollIntoViewIfNeeded();
+      await page.locator(`[data-library-runtime="${id}"] [data-library-trigger="dialog"]`).first().waitFor();
       await page.locator('.library-preview').scrollIntoViewIfNeeded();
       await shoot(page,"studio-library-"+id+".png",{keepScroll:true});
       await context.close();

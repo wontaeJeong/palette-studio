@@ -10,6 +10,7 @@ async function checkWorkspaceReview(browser) {
   async function check(name, run) {
     const context = await browser.newContext({
       viewport: { width: 1440, height: 1000 },
+      reducedMotion: "reduce", // Retained React nodes now run existing border transitions.
     });
     await context.route(/^https?:/, (r) => r.abort());
     const page = await context.newPage();

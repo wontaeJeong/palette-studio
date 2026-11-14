@@ -1,0 +1,107 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": false,
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+    "noEmit": true,
+    "paths": {
+      "@base-ui/react": [
+        "./node_modules/@base-ui/react"
+      ],
+      "@base-ui/react/*": [
+        "./node_modules/@base-ui/react/*"
+      ],
+      "@emotion/react": [
+        "./node_modules/@emotion/react"
+      ],
+      "@emotion/react/*": [
+        "./node_modules/@emotion/react/*"
+      ],
+      "@emotion/styled": [
+        "./node_modules/@emotion/styled"
+      ],
+      "@emotion/styled/*": [
+        "./node_modules/@emotion/styled/*"
+      ],
+      "@mantine/core": [
+        "./node_modules/@mantine/core"
+      ],
+      "@mantine/core/*": [
+        "./node_modules/@mantine/core/*"
+      ],
+      "@mantine/hooks": [
+        "./node_modules/@mantine/hooks"
+      ],
+      "@mantine/hooks/*": [
+        "./node_modules/@mantine/hooks/*"
+      ],
+      "@mantine/notifications": [
+        "./node_modules/@mantine/notifications"
+      ],
+      "@mantine/notifications/*": [
+        "./node_modules/@mantine/notifications/*"
+      ],
+      "@mui/material": [
+        "./node_modules/@mui/material"
+      ],
+      "@mui/material/*": [
+        "./node_modules/@mui/material/*"
+      ],
+      "@radix-ui/react-dialog": [
+        "./node_modules/@radix-ui/react-dialog"
+      ],
+      "@radix-ui/react-dialog/*": [
+        "./node_modules/@radix-ui/react-dialog/*"
+      ],
+      "@radix-ui/react-popover": [
+        "./node_modules/@radix-ui/react-popover"
+      ],
+      "@radix-ui/react-popover/*": [
+        "./node_modules/@radix-ui/react-popover/*"
+      ],
+      "@radix-ui/react-tooltip": [
+        "./node_modules/@radix-ui/react-tooltip"
+      ],
+      "@radix-ui/react-tooltip/*": [
+        "./node_modules/@radix-ui/react-tooltip/*"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "react/*": [
+        "./node_modules/@types/react/*"
+      ],
+      "react-aria-components": [
+        "./node_modules/react-aria-components"
+      ],
+      "react-aria-components/*": [
+        "./node_modules/react-aria-components/*"
+      ],
+      "react-dom": [
+        "./node_modules/@types/react-dom"
+      ],
+      "react-dom/*": [
+        "./node_modules/@types/react-dom/*"
+      ],
+      "sonner": [
+        "./node_modules/sonner"
+      ],
+      "sonner/*": [
+        "./node_modules/sonner/*"
+      ]
+    }
+  },
+  "include": [
+    "src",
+    "data/*.d.ts"
+  ]
+}

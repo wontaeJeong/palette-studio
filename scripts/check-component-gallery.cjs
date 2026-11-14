@@ -12,18 +12,18 @@ async function checkComponentGallery(){
   await page.goto(pathToFileURL(path.resolve(__dirname,'../index.html')).href+'#fontSource=system&bodyFont=system&codeFont=system');
   for(const width of [1440,390]){
    await page.setViewportSize({width,height:1000});
-   const failures=await page.evaluate(()=>{
+   const failures=await page.evaluate(async()=>{
     document.querySelector('#components-options').open=true;document.querySelector('#library-options').open=true;
     const failures=[],concepts=PaletteDesignConcepts.concepts.map(c=>c.id);
     for(const concept of concepts){PaletteCatalog.update({designSelection:{...PaletteCatalog.getConfig().designSelection,concept}});
      const buttons=[...document.querySelectorAll('[data-component]')];if(buttons.length!==47)failures.push('family count '+buttons.length);
-     for(const button of buttons){button.click();const dialog=document.querySelector('#component-dialog');
+     for(const button of buttons){button.click();await new Promise(requestAnimationFrame);const dialog=document.querySelector('#component-dialog');
       if(!dialog.open)failures.push(concept+' '+button.dataset.component+' detail did not open');
       const panes=[...document.querySelectorAll('#detail-demo .preview-pane')];
       if(panes.length!==2)failures.push(concept+' '+button.dataset.component+' missing mode');
       for(const pane of panes)if(pane.scrollWidth>pane.clientWidth+1)failures.push(concept+' '+button.dataset.component+' '+pane.dataset.theme+' pane overflow '+pane.scrollWidth+'/'+pane.clientWidth);
       const r=dialog.getBoundingClientRect();if(r.x<0||r.right>innerWidth+1)failures.push(concept+' '+button.dataset.component+' dialog overflow');
-      dialog.close();
+      await new Promise(resolve=>{dialog.addEventListener('close',()=>requestAnimationFrame(resolve),{once:true});dialog.close();});
      }
      if(document.documentElement.scrollWidth>innerWidth+1)failures.push(concept+' page overflow');
     }return failures;

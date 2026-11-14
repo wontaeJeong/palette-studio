@@ -306,10 +306,12 @@
       }
     return `<div class="treatment ${esc(variant)}" data-dashboard-demo="${esc(id)}"><article class="sample-box dashboard-sample"><h4 class="sample-emphasis">${esc(item.label)}</h4>${content}</article></div>`;
   }
-  const bound = new WeakSet();
+  const bound = new WeakMap();
   function bind(root) {
-    if (bound.has(root)) return;
-    bound.add(root);
+    if (bound.has(root)) return bound.get(root);
+    const controller = new AbortController();
+    const dispose = () => { controller.abort(); bound.delete(root); };
+    bound.set(root, dispose);
     root.addEventListener("input", (event) => {
       const target = event.target,
         sample = target.closest("[data-dashboard-demo]");
@@ -326,7 +328,7 @@
         }
         sample.querySelector("[data-table-empty]").hidden = shown !== 0;
       }
-    });
+    }, {signal: controller.signal});
     root.addEventListener("change", (event) => {
       const target = event.target,
         sample = target.closest("[data-dashboard-demo]");
@@ -336,7 +338,7 @@
           .length
           ? `${target.files[0].name} · 선택됨 (전송하지 않음)`
           : "선택한 파일이 없습니다.";
-    });
+    }, {signal: controller.signal});
     root.addEventListener("click", (event) => {
       const target = event.target.closest("button"),
         sample = target?.closest("[data-dashboard-demo]");
@@ -384,7 +386,8 @@
           "샘플 데이터를 불러왔습니다.";
         target.textContent = "다시 불러오기";
       }
-    });
+    }, {signal: controller.signal});
+    return dispose;
   }
   return { render, bind };
 });

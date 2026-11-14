@@ -10,6 +10,33 @@
     "capturedAt": "2026-11-14T05:56:57.763Z"
   },
   "sourceFiles": [
+    "src/core/selection-persistence.ts",
+    "src/core/selection-store.ts",
+    "src/core/types.ts",
+    "src/studio/App.tsx",
+    "src/studio/ComponentPanel.tsx",
+    "src/studio/context.tsx",
+    "src/studio/data.ts",
+    "src/studio/DemoBoundary.tsx",
+    "src/studio/ExportDialog.tsx",
+    "src/studio/FontPanel.tsx",
+    "src/studio/IconPanel.tsx",
+    "src/studio/library-loader.ts",
+    "src/studio/library-loader.web.ts",
+    "src/studio/LibraryPanel.tsx",
+    "src/studio/main.tsx",
+    "src/studio/navigation.tsx",
+    "src/studio/ProjectPreview.tsx",
+    "src/studio/sample-runtime.ts",
+    "src/studio/SelectionPanel.tsx",
+    "src/studio/shell.html",
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json",
+    "scripts/build-studio.mjs",
+    "scripts/bundle.py",
+    "assets/studio.js",
+    "sample-markup.js",
     "index.html",
     "app.js",
     "css/studio.css",
@@ -74,7 +101,7 @@
     "data/icon-parts/system-extra.js",
     "data/icon-parts/system.js"
   ],
-  "sourceHash": "fa68c25634959d86b45f7baebfe7fa9b644aadc0bc0c31a7720b69f3ef5f24b5",
+  "sourceHash": "2be59d7ce418621083ec47ca13b30a9ec55152798a44af3d15639aca5e0e6e96",
   "screenshots": [
     {
       "path": "studio-overview-light.png",
@@ -95,35 +122,35 @@
       "width": 1440,
       "height": 980,
       "bytes": 96568,
-      "sha256": "93f961bed81b2f67f5d091bb5355233412986c696596f6c13698831ec482ac6a"
+      "sha256": "5b7f317a8aff7989fdd2d163a321f34f5cdc8138ba56476510035b7f565fd9c5"
     },
     {
       "path": "studio-statistics-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 159241,
-      "sha256": "c3559be8d2a15c103129ab3962c117cc37d6b50de5f488bb25a5125467820491"
+      "bytes": 159239,
+      "sha256": "89f49c7e354abaccba385008ad0878a5733c4b23427e3fd89b229d5e3da43da2"
     },
     {
       "path": "studio-statistics-heatmap.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 181244,
-      "sha256": "a1865e11d6bc9d819813d2fc3b5885e5434c187218935cfea3397a8b8f4a2e16"
+      "bytes": 180982,
+      "sha256": "b8cf385157d6d6a21503d97c4fd30019f2fa01a1432bce783481ebc01b3c096b"
     },
     {
       "path": "studio-statistics-mobile.png",
       "width": 390,
       "height": 844,
-      "bytes": 35335,
-      "sha256": "bbe63826759d267f16c1e218265757e4bf8e957d6a722e02717744ec0639f0be"
+      "bytes": 35361,
+      "sha256": "b6385770a8aa88ef5ed6935a3166a82fdf8ac7464faccbfd79eaf0137a68a75f"
     },
     {
       "path": "studio-navigation-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 124725,
-      "sha256": "994b06784ad7e5986d9aa2ed19e30103cc467fd2f8ab174f25fb2a64de1aa895"
+      "bytes": 124711,
+      "sha256": "4dc7ae447e0b33f933d2ed5027afbefb222753115c4109dde945c73461c59d84"
     },
     {
       "path": "studio-navigation-mobile.png",
@@ -255,85 +282,85 @@
       "path": "studio-toast-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 203306,
-      "sha256": "26fb60865273fd366f35b52902da30a1edeea7a85b4658c78497241c7213357c"
+      "bytes": 203158,
+      "sha256": "4b23460931c3c0a760e14b8e887c66c1d6157462874708bab1b28c86a806559a"
     },
     {
       "path": "studio-popover-mobile.png",
       "width": 390,
       "height": 1000,
-      "bytes": 64103,
-      "sha256": "66851f4169b568121f4304e26478fc76a7a02eaf85d93d490f83864b93ab5592"
+      "bytes": 63971,
+      "sha256": "c17eb3fc72e1b45c367f959a82b59643ebd601703a97f87b14e377af8e308c9c"
     },
     {
       "path": "studio-library-base-ui.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 183709,
-      "sha256": "5390cc771599a2a225c5bcab2c1f95f49e7028780adf79ceb61a00da37b3ca41"
+      "bytes": 183685,
+      "sha256": "a18276b06fde4a8696f5c3c876d2aaec580ef52521c00b54d3fb16a6ec1c5a5d"
     },
     {
       "path": "studio-library-radix.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 162083,
-      "sha256": "aadc889687ccc6f8fe1f881dc3bd1f254a9980ff5e9d567977600b04f69605b7"
+      "bytes": 162164,
+      "sha256": "f8d1e4b4343eb67b421e81266ed73e97d9f4d5549a1e14cfe18b12f144ce1bf6"
     },
     {
       "path": "studio-library-react-aria.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 161461,
-      "sha256": "20b2b418c6e14e5ecc4fe7f1fe64d6f4ff65f4ba2e0c855dda4ed3afafdad8c0"
+      "bytes": 161519,
+      "sha256": "bbd63eb109e67ec2d24a62cab0f79f06d18e9af01b0fb4ceb72279838dd6b83c"
     },
     {
       "path": "studio-library-mui.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 157320,
-      "sha256": "7b619c3ff116ea4725e1b058ac2ff31507d0062ebf92a815c9eb0c5697f4a722"
+      "bytes": 157397,
+      "sha256": "be6dc4f1b7ebd5540c11a179c32e0fb13061dd2808fb4350ff2b75070f2e781d"
     },
     {
       "path": "studio-library-mantine.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 155613,
-      "sha256": "1aa6fd09f3fad9499b1efaa7b9ed4497dac6919f155af703aab7826dcad00aa6"
+      "bytes": 155675,
+      "sha256": "43c9e0fdbaf2aec68d73735af057f408fdd498062c9d3f7509385d2243de5f81"
     },
     {
       "path": "studio-library-metrics-light.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 181910,
-      "sha256": "4f54b6ce2298c79bb6492d207a7ab8b241984a86f13e801b28a8f73080e1b944"
+      "bytes": 181935,
+      "sha256": "aaeeef0a4df288e2609a1e26f955797ad2a0bc7b6397059921b7d77d746a7762"
     },
     {
       "path": "studio-library-metrics-dark.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 200905,
-      "sha256": "17e4763cbe58d929365f28db8a8e3eda5143c3dc71a017eb455d1b6fe390daec"
+      "bytes": 200926,
+      "sha256": "6bb394bc98246d772639d1cfc3b923604c7a44aff084a3d1848edd862d0fd510"
     },
     {
       "path": "studio-library-metrics-mobile.png",
       "width": 390,
       "height": 1100,
-      "bytes": 87131,
-      "sha256": "06ec0de86ce61a7b9a62100fba8eda3f3cca921c3bda48171751d6f58fc4e193"
+      "bytes": 87152,
+      "sha256": "4f7af98d3194d89f801ca6937a45d32cf03f10bb66eafb7f68bcce9477bf1100"
     },
     {
       "path": "studio-export-desktop.png",
       "width": 1440,
       "height": 1100,
-      "bytes": 192772,
-      "sha256": "1a2b0d60e064cbe180512110c7ef5ab6a3a602e9fe2c5425e3b82446fae9c571"
+      "bytes": 193048,
+      "sha256": "0c835fd77e1c2c5f8b3b816927d38a0776dcea0259bd5dfeb7268cf7c6cc2f87"
     },
     {
       "path": "studio-export-mobile.png",
       "width": 390,
       "height": 1100,
-      "bytes": 77914,
-      "sha256": "7a15f1f371c6f00b711aa03f24c319ab2d6e5fe739e6bc5a05a11ab7f87252e3"
+      "bytes": 77907,
+      "sha256": "49452f67f3beb551767c6d30aeec2fa585764cf3a98f4ab22aafe9d22b693727"
     }
   ]
 }

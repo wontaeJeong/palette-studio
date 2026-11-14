@@ -78,7 +78,7 @@ ZIP에는 파일별 SHA256과 크기를 담은 `MANIFEST.json`이 들어 있습�
 
 ## 2026-11-14 콘셉트·라이브러리·라이브 지표
 
-기존 여섯 세트와 폰트/아이콘 역할을 유지한 통합 작업실에서 다음 범위를 검증합니다. 루트에는 aggregate `npm test`가 없으며 실제 라이브러리 서브프로젝트의 `npm test`는 설치 패키지 타입과 5개 실제 생성 TSX 내보내기를 컴파일합니다.
+기존 여섯 세트와 폰트/아이콘 역할을 유지한 통합 작업실에서 다음 범위를 검증합니다. 루트 `npm test`는 strict 타입 검사·29개 상태 검사·canonical 계약과 메트릭 검사를 실행합니다. 실제 라이브러리 서브프로젝트의 `npm test`는 설치 패키지 타입과 5개 실제 생성 TSX 내보내기를 컴파일합니다.
 
 ```bash
 node scripts/test-design-handoff.cjs  # catalog 순수 검사도 호출
@@ -111,7 +111,7 @@ node scripts/check-screenshot-freshness.cjs
 
 `capture-previews.cjs`는 기존 화면과 함께 새 콘셉트, 알림/팝오버, 5종 실제 라이브러리, light/dark/mobile 지표를 오프라인 캡처합니다. 지표는 실제 관측 JSON을 캐시로 읽고 원래 시각·캐시/기한 경과를 그대로 표시합니다. 새 authored/runtime JS·CSS·라이브러리 원본/잠금 파일·생성 번들·실제 관측 JSON도 소스 해시에 포함합니다. freshness 검사는 소스 해시와 각 PNG의 크기·해시를 확인하므로 UI가 바뀐 오래된 캡처를 통과시키지 않습니다.
 
-브라우저 범위는 Playwright 1.56.1 / Chromium 141.0.7390.37입니다. Safari/Firefox/iOS·모든 스크린리더나 대상 앱 통합을 검증한 것은 아닙니다. npm 다운로드를 전체 활성 사용자 수로 환산하지 않고, GitHub의 최신 정식 릴리스(게시된 non-prerelease 릴리스, 초안 제외)가 테스트한 대표 패키지 버전과 같다고 가정하지 않습니다. 폰트/아이콘 원본은 이번 변경에서 바꾸지 않았으며 기존 별도 감사 결과는 위의 원래 범위에 한정됩니다. 전체 앱 접근성 인증을 뜻하지 않습니다.
+이 절의 기존 관측 브라우저는 Playwright 1.56.1 / Chromium 141.0.7390.37이며, 아래 React 배포 검증과 새 캡처는 Playwright 1.62.1 / Chromium 151.0.7922.34입니다. Safari/Firefox/iOS·모든 스크린리더나 대상 앱 통합을 검증한 것은 아닙니다. npm 다운로드를 전체 활성 사용자 수로 환산하지 않고, GitHub의 최신 정식 릴리스(게시된 non-prerelease 릴리스, 초안 제외)가 테스트한 대표 패키지 버전과 같다고 가정하지 않습니다. 폰트/아이콘 원본은 이번 변경에서 바꾸지 않았으며 기존 별도 감사 결과는 위의 원래 범위에 한정됩니다. 전체 앱 접근성 인증을 뜻하지 않습니다.
 
 
 최신 main의 작업실 회귀도 통합했습니다. `check-workspace-browser.cjs`는 `check-workspace-review.cjs`를 함께 실행해 입력/버튼 표현의 독립성, 라이트/다크 비교 링크·URL·저장 복원, 시스템 폰트 공급에서 역할별 선택 복구, 내비게이션 버튼의 접근 가능한 이름을 확인합니다. 라이브러리 내보내기 화면은 간결한 한국어 적용 범위·React/Astro 요구사항을 표시하며, 전체 canonical `library-README.md`의 실제 다운로드 바이트를 1440/390px에서 검사합니다. 두 내보내기 캡처를 포함한 최신 manifest는 34개 PNG를 검사합니다.
@@ -144,3 +144,34 @@ PALETTE_URL=http://127.0.0.1:8769/index.html node scripts/check-library-metrics-
 
 
 메뉴 스타일 통합 후 `test-navigation-designs.cjs`는 여섯 선택 표시·세 구성의 기본값/이전 설정 이관/유효성/선택 CSS와 CLI를 검증합니다. 작업실 검사는 `check-navigation-browser.cjs`의 실제 메뉴 클릭·현재 화면·키보드·모바일·독립 내보내기 CSS/마크업 검사도 호출합니다. `check-navigation-library-integration.cjs`는 index 1440px와 단일 HTML 390px에서 Glass + 옆선 + 그룹 + 상단/왼쪽 + 실제 Base UI를 함께 선택해 현재 설정 화면 유지, 자동 메트릭 요청 0건, 명시적 조회 전후 파일 일치, Astro 다크 전용 실제 프로필 다운로드와 UI/CLI 파일 바이트 일치를 확인합니다. 최신 캡처는 기존 31개와 메뉴 데스크톱·모바일·핸드오프 3개를 합친 34개입니다. 옆선 메뉴 대비 쌍 추가로 정적 대비 검사는 11,392건입니다.
+
+
+## 2026-11-14 타입 지정 React 작업실과 두 배포본
+
+개발 도구는 Node 22+ / Python 3.10+입니다. 순수 핸드오프 CLI는 npm 설치 없이 Node 18+에서 사용할 수 있습니다. 루트 TypeScript `paths`는 선언과 React 타입을 루트 설치로 고정하므로 독립 preview 설치 후에도 `skipLibCheck: false`로 검사합니다. esbuild는 타입 경로를 제외한 JSX/타깃 설정을 사용하고 패키지 export 조건을 보존하며 실제 의존성을 루트에서 해결합니다. 따라서 별도 설치 유무가 앱 런타임이나 공유 React를 바꾸지 않습니다. 루트 패키지는 standalone이며 `examples/library-preview`와 `packages/icons-react`의 설치·검사를 합치지 않습니다.
+
+```bash
+npm ci
+npm ci --prefix examples/library-preview
+npx playwright install chromium
+npm test
+npm run build
+npm run check:build
+npm test --prefix examples/library-preview
+npm run test:studio
+npm run test:distributions
+```
+
+`npm run build`는 `build.py`와 고정된 esbuild로 루트 classic React 런타임·`index.html`·폰트와 전체 고지 내장 `START-HERE.html`을 생성합니다. 별도 `out/web/`에는 ESM 런타임·어댑터, 로컬 WOFF2와 라이선스, 상대 문서/README 및 독립 레거시 페이지의 연결 자료를 복사합니다. `check:build`는 재생성 전후 SHA256을 비교하는 검사로 생성 파일을 갱신합니다. 이미 빌드한 웹 폴더가 있으면 전체 트리도 비교하고, 없으면 두 번 빌드해 재현성을 검사합니다. runtime export 목록도 production 조건으로 고정합니다. CI는 루트 런타임과 canonical 출력이 커밋되어 있는지 별도로 확인합니다. 공개 Pages 설정은 변경하지 않았으며 split 결과가 배포되었다는 뜻은 아닙니다.
+
+웹 라이브러리 어댑터는 최초 문서 요청에서 제외되고 선택 때 불러옵니다. 각 어댑터는 자체 라이브러리 의존성을 포함하고, 앱이 이미 불러온 React/React DOM/미리보기 scope 모듈만 공유합니다. 실패한 Promise는 제거하고 새 URL로 다시 import하므로 브라우저의 실패한 모듈 캐시에서 벗어나 실제 재요청합니다. 이전 선택의 늦은 성공·실패는 현재 선택에 적용하지 않습니다. classic/단일 HTML은 같은 앱/어댑터를 IIFE에 모두 포함하므로 청크 요청이 없습니다. 모든 실제 포함 패키지의 transitive 라이선스는 esbuild metafile에서 수집하며 독립 레거시 미리보기의 기존 고지도 보존합니다. 기존 72개 패키지/버전의 전체 고지 내용은 유지하고 새 runtime의 `react-is@16.13.1`을 더한 73개 union을 확인했습니다. 보존된 legacy JS/CSS는 바이트 단위로 변경하지 않았습니다.
+
+`check-studio-distributions.cjs`는 실제 로컬 서버를 루트와 `/palette-studio/`에 각각 실행하고 다섯 실제 라이브러리·dialog, 최초 어댑터 요청 0건, 전송 실패 후 버튼으로 재요청/복구, 느린 이전 선택의 무효화, 문서/README 링크 그래프와 918개 WOFF2의 HTTP 응답을 확인합니다. 웹·classic·다른 임시 디렉터리로 옮긴 단일 HTML의 모든 공통 생성 파일 및 실제 프로필 다운로드 바이트를 비교합니다. 단일 HTML은 로컬/시스템 폰트 모드 모두 외부 HTTP·인접 파일 요청 0건과 전체 라이선스 텍스트를 검사합니다. 자동 메트릭 요청은 없으며 외부 네트워크를 차단합니다.
+
+같은 Chromium 151.0.7922.34, 1440×1000, 새 context, 로컬 폰트 조건에서 최초 JS 원본 바이트를 측정합니다. 이는 압축 전 파일 크기이며 속도나 전송량 개선 주장이 아닙니다. 이전 classic `b2f9aa7`은 2,703,949바이트/35요청, 새 classic은 2,716,043바이트/33요청, split 웹은 1,953,635바이트/42요청입니다. split 최초 어댑터 요청은 0건이고 다섯 선택 후 어댑터 요청은 5건입니다. 단일 HTML은 39,011,988바이트/문서 1요청이며 JS 바이트를 외부 스크립트 합계 0으로 보고 앱 크기가 0이라고 해석하지 않습니다. 실행 시 측정 경로/브라우저/요청 목록은 `out/studio-distribution-resources.json`에 기록합니다.
+
+`npm run dev`는 한 번 빌드한 후 로컬 서버를 실행합니다. 자동 watch는 없으며 변경 후 재시작합니다. `npm run preview -- --base /palette-studio/ --port 4174`로 기존 결과의 하위 경로를 확인할 수 있습니다.
+
+위 배포 검사 외에 기존 필수 브라우저 범위(`check-studio-flow`, `check-fonts`, `check-handoff-browser`, `check-icon-studio`, `check-component-concepts`, `check-component-gallery`, `check-library-browser`, `check-library-selection`, `check-navigation-library-integration`, `check-library-export-summary`, `check-library-metrics-browser`)와 소스 타입/레시피 내보내기 검사를 유지합니다. 새 `check-react-studio`는 React 호스트 소유권, 독립 검색과 유효하지 않은 내보내기 초안 보존, 프로젝트 화면 유지, canonical 생성 및 이동한 단일 HTML을 확인합니다.
+
+실제 34개 PNG는 Chromium으로 다시 캡처합니다. manifest는 모든 `src/**/*.ts(x)`·셸·루트 package/lock/tsconfig·빌드 스크립트·생성 classic 런타임까지 해시하여 오래된 화면을 검출합니다. desktop/mobile light/dark 캡처를 직접 확인했으며 원본과 픽셀 단위로 같다는 주장은 하지 않습니다. Safari/Firefox/iOS 및 모든 보조 기술/대상 앱 통합은 이 검증의 범위 밖입니다.

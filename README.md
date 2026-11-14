@@ -62,7 +62,7 @@ GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다.
 - Lucide SVG 95개. 이름·한국어 검색과 카테고리 필터.
 - Outline / Accent / Duotone / Filled tile 표현, 크기·선 두께 조정.
 - 선택 팔레트의 Light/Dark 미리보기, SVG 복사·다운로드.
-- [React 패키지](packages/icons-react)는 정적 named export, TypeScript, SSR, 접근성 속성을 지원합니다. npm 레지스트리에 공개된 패키지가 아니며 로컬 tarball로 사용합니다.
+- [React 패키지](packages/icons-react/README.md)는 정적 named export, TypeScript, SSR, 접근성 속성을 지원합니다. npm 레지스트리에 공개된 패키지가 아니며 로컬 tarball로 사용합니다.
 
 ### 에이전트 핸드오프
 
@@ -149,8 +149,8 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 | `data/design-concepts.js` | 독립 콘셉트 9종, 공유 CSS·구현 기준 |
 | `component-demos.js` | 툴팁·토스트·메뉴·팝오버·모달 수명과 접근성 |
 | `data/design-catalog.js` | 세트·요소·표현 정의, 선택 검증, 작업지시 규칙 |
-| `index.html`, `workspace.js`, `css/workspace.css` | 통합 편집·프로젝트 미리보기·확인 및 내보내기 |
-| `catalog.js` | 공통 선택 상태·프리셋·컴포넌트 동작 |
+| `src/studio/`, `assets/studio.js`, `css/workspace.css` | React 통합 편집·프로젝트 미리보기·확인 및 내보내기 |
+| `src/core/`, `catalog.js` | 타입 지정 선택 상태와 독립 도감의 프리셋·컴포넌트 동작 |
 | `app.js`, `css/studio.css` | 이전 단계형 편집기의 보존 소스 |
 | `handoff.html`, `handoff.js`, `data/handoff-core.js` | 핸드오프 설정과 공용 생성기 |
 | `scripts/create-design-handoff.cjs` | 오프라인 핸드오프 CLI |
@@ -164,14 +164,42 @@ node scripts/create-design-handoff.cjs --config handoff-config.json --out design
 
 ## 개발·검증
 
-키트 수정에는 Python 3.10+와 Node 18+가 필요합니다. 브라우저 검사에는 Playwright와 Chromium, 팔레트 보드 생성에는 Pillow를 사용합니다.
+개발 도구에는 Python 3.10+와 Node 22+가 필요합니다. 루트 패키지는 npm workspaces를 사용하지 않습니다. 의존성 없는 핸드오프 CLI는 설치 없이 Node 18+에서 계속 실행할 수 있습니다. 브라우저 검사에는 고정된 Playwright와 Chromium, 팔레트 보드 생성에는 Pillow를 사용합니다.
+
+```bash
+npm ci
+npx playwright install chromium
+npm run dev
+# http://127.0.0.1:4173/
+```
+
+`dev`는 처음 한 번 빌드하고 `out/web/`을 로컬 HTTP로 제공합니다. 자동 재빌드는 하지 않으므로 소스 수정 후 중지하고 다시 실행합니다. 이미 빌드한 결과만 보려면 `npm run preview`, 하위 경로는 `npm run preview -- --base /palette-studio/ --port 4174`를 사용합니다.
+
+```bash
+npm test
+npm run build
+npm run check:build
+npm run test:studio
+npm run test:distributions
+```
+
+`build`는 canonical 팔레트 생성기를 실행하고 같은 React 소스로 두 배포본을 만듭니다. 루트 `index.html` + `assets/studio.js`는 classic 스크립트로 `file://`와 기존 Pages 경로를 지원합니다. `START-HERE.html`은 모든 라이브러리·로컬 폰트·전체 런타임 라이선스를 내장한 이동 가능한 단일 파일입니다. 독립적인 `out/web/`은 ESM 청크와 상대 경로 자료·폰트·문서·라이선스를 포함하며 실제 라이브러리를 선택할 때 해당 어댑터만 불러옵니다. 웹 배포본은 HTTP 서버가 필요합니다. 실패하면 다시 시도할 수 있고, 늦게 도착한 이전 선택은 현재 선택을 바꾸지 않습니다.
+
+`check:build`는 파일을 다시 생성하고 이전 결과와 비교하여 커밋 산출물의 드리프트와 재현성을 검사합니다. `out/`은 커밋하지 않습니다. 기존 공개 배포 설정은 루트 classic 파일을 계속 사용하며 split 웹 결과를 자동 배포하지 않습니다. 전체 검증 범위와 측정값은 [VERIFICATION](docs/VERIFICATION.md)에 있습니다.
+
+독립 라이브러리 미리보기의 소스·내보내기 타입 검사는 해당 폴더의 설치를 사용합니다.
+
+```bash
+npm ci --prefix examples/library-preview
+npm test --prefix examples/library-preview
+```
 
 ```bash
 python3 scripts/vendor_fonts.py
 python3 scripts/audit-fonts.py
 python3 scripts/build.py
 node scripts/audit.mjs
-python3 scripts/bundle.py
+npm run build
 node scripts/check-handoff-schemas.cjs
 node scripts/test-design-handoff.cjs
 node scripts/test-design-catalog.cjs

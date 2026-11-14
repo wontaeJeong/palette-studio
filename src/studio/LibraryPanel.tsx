@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { useStudio } from "./context";
 import {
   libraries,
@@ -244,14 +244,7 @@ export function LibraryPanel() {
                     update({ uiLibrary: l.id as UILibraryId });
                     if (l.runtime === "react") {
                       setExpanded(true);
-                      requestAnimationFrame(() => {
-                        const panel = document.getElementById("preview-panel")!,
-                          target = panel.querySelector(".library-preview")!;
-                        panel.scrollTop +=
-                          target.getBoundingClientRect().top -
-                          panel.getBoundingClientRect().top -
-                          24;
-                      });
+                      window.dispatchEvent(new CustomEvent("palette-library-reveal", {detail:l.id}));
                     }
                   }}
                 >
@@ -296,17 +289,53 @@ export function LibraryPreview() {
       id: UILibraryId;
       Adapter: React.ComponentType;
     } | null>(null),
-    [visible, setVisible] = useState(true);
+    [visible, setVisible] = useState(true),
+    [failure, setFailure] = useState<UILibraryId | null>(null),
+    [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let alive = true;
+    setFailure(null);
     if (external)
       loadLibrary(config.uiLibrary).then((Adapter) => {
         if (alive) setLoaded({ id: config.uiLibrary, Adapter });
+      }).catch(() => {
+        if (alive) setFailure(config.uiLibrary);
       });
     return () => {
       alive = false;
     };
-  }, [config.uiLibrary, external]);
+  }, [config.uiLibrary, external, attempt]);
+  // A lazy adapter can change the scroll height after selection. Reveal only
+  // after its real controls mount; never move inspector focus/document scroll.
+  useLayoutEffect(() => {
+    const stage = document.getElementById("library-stage")!,
+      panel = document.getElementById("preview-panel")!;
+    let requested: string | null = null;
+    const reveal = () => {
+      if (stage.dataset.librarySelection !== requested) {
+        requested = null;
+        observer.disconnect();
+        return;
+      }
+      if (!stage.querySelector("[data-library-trigger=dialog]")) return;
+      const target = stage.closest(".library-preview")!;
+      panel.scrollTop += target.getBoundingClientRect().top - panel.getBoundingClientRect().top - 24;
+      requested = null;
+      observer.disconnect();
+    };
+    const observer = new MutationObserver(reveal);
+    const request = (event: Event) => {
+      requested = (event as CustomEvent<string>).detail;
+      observer.disconnect();
+      observer.observe(stage, {childList:true,subtree:true,attributes:true,attributeFilter:["data-library-selection"]});
+      if (stage.dataset.librarySelection === requested) reveal();
+    };
+    window.addEventListener("palette-library-reveal", request);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("palette-library-reveal", request);
+    };
+  }, []);
   useEffect(() => {
     const hide = () => setVisible(false),
       show = () => setVisible(true);
@@ -336,7 +365,7 @@ export function LibraryPreview() {
           ? `${selected.name} 실제 컴포넌트 · React 런타임${config.framework === "astro" ? " / Astro React island 필요" : config.framework === "vanilla" ? " / Vanilla 대상은 React root 추가 필요" : ""}${["radix", "react-aria"].includes(config.uiLibrary) ? " · 알림: Sonner 2.0.8" : ""} · 기존 앱은 현재 라이브러리 우선`
           : "프로젝트·컴포넌트 예시는 프레임워크 중립 UI입니다. 현재 앱의 컴포넌트를 우선 재사용하세요."}
       </p>
-      <div id="library-stage">
+      <div id="library-stage" data-library-selection={config.uiLibrary}>
         {!external ? (
           <p className="help">
             선택한 토큰과 디자인 기준을 현재 앱에 적용합니다. 실제 라이브러리를
@@ -380,6 +409,11 @@ export function LibraryPreview() {
               </div>
             </section>
           ))
+        ) : failure === config.uiLibrary ? (
+          <div role="alert">
+            <p className="help">{selected.name} 미리보기를 불러오지 못했습니다.</p>
+            <button type="button" data-retry-library onClick={() => {setFailure(null);setAttempt(value => value + 1);}}>다시 시도</button>
+          </div>
         ) : (
           <p className="help" role="status">
             불러오는 중…

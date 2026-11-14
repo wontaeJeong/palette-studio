@@ -15,29 +15,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install pinned studio toolchain
+        run: npm ci --no-audit --no-fund
       - name: Check scripts and regenerate contracts
         run: |
+          npm test
           node --check app.js
           node --check font-loader.js
           node --check icons.js
           node --check handoff.js
           node --check data/handoff-core.js
           node scripts/build-icons-react.mjs --check
-          node scripts/check-handoff-schemas.cjs
-          node scripts/test-design-handoff.cjs
-          node scripts/test-navigation-designs.cjs
-          node scripts/test-design-concepts.cjs
-          node scripts/test-ui-libraries.cjs
-          node --test scripts/test-library-metrics.cjs
           node scripts/check-icons.cjs
-          node scripts/check-screenshot-freshness.cjs
           python3 scripts/vendor_fonts.py
           python3 scripts/audit-fonts.py
-          python3 scripts/build.py
+          npm run build
           node scripts/audit.mjs
-          python3 scripts/bundle.py
+          npm run check:build
+          node scripts/check-screenshot-freshness.cjs
       - name: Verify generated sources are committed
-        run: git diff --exit-code -- css data/catalog.js data/font-catalog.js data/fonts.json data/palettes.json data/profile.schema.json START-HERE.html
+        run: git diff --exit-code -- css data/catalog.js data/font-catalog.js data/fonts.json data/palettes.json data/profile.schema.json index.html assets/studio.js assets/library-preview-LICENSES.txt START-HERE.html
   browser:
     runs-on: ubuntu-latest
     steps:
@@ -45,21 +42,31 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install browser QA dependencies
+      - name: Install pinned studio and library QA dependencies
         run: |
-          npm install --prefix "$RUNNER_TEMP/palette-qa" playwright@1.62.1
-          "$RUNNER_TEMP/palette-qa/node_modules/.bin/playwright" install --with-deps chromium
-          echo "NODE_PATH=$RUNNER_TEMP/palette-qa/node_modules" >> "$GITHUB_ENV"
-      - name: Verify selection flow and font fallback
+          npm ci --no-audit --no-fund
+          npm ci --prefix examples/library-preview --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Build both distributions and typecheck generated library recipes
         run: |
+          npm run typecheck
+          npm run build
+          npm test --prefix examples/library-preview
+      - name: Verify React, split distribution and all browser regressions
+        run: |
+          npm run test:studio
+          npm run test:distributions
           node scripts/check-studio-flow.cjs
           node scripts/check-fonts.cjs
           node scripts/check-icon-studio.cjs
           node scripts/check-handoff-browser.cjs
+          node scripts/check-component-concepts.cjs
+          node scripts/check-component-gallery.cjs
+          node scripts/check-library-browser.cjs
+          node scripts/check-library-selection.cjs
           node scripts/check-navigation-library-integration.cjs
           node scripts/check-library-metrics-browser.cjs
           node scripts/check-library-export-summary.cjs
-          LIBRARY_ID=base-ui node scripts/check-library-browser.cjs
   react-icons:
     runs-on: ubuntu-latest
     steps:

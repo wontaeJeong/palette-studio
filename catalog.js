@@ -164,6 +164,9 @@
       id +
       "-" +
       pane;
+    const dashboard = window.PaletteDashboardDemos.render(id, variant, {uid, preview});
+    if (dashboard !== null) return dashboard;
+
     const content = {
       button:
         '<div class="sample-actions">' +
@@ -300,6 +303,7 @@
       : content;
     return '<div class="treatment ' + esc(variant) + '">' + body + "</div>";
   }
+  window.PaletteDashboardDemos.bind(document);
 
   function notice(text) {
     $("catalog-status").textContent = text;

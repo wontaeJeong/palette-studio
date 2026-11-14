@@ -7,6 +7,8 @@ const { pathToFileURL } = require("node:url");
 (async () => {
   const browser = await chromium.launch({ headless: true });
   try {
+    await require("./check-dashboard-browser.cjs")({checkBundle:true});
+    await require("./check-component-gallery.cjs")();
     await require("./check-preset-recommendations.cjs")(browser);
     await require("./check-preset-recommendations.cjs")(
       browser,
@@ -47,10 +49,11 @@ const { pathToFileURL } = require("node:url");
       await page
         .locator("[data-project-preview]")
         .first()
-        .locator("tbody tr:visible")
+        .locator(".mock-projects tbody tr:visible")
         .count(),
       0,
     );
+    assert.equal(await page.locator('[data-project-preview]').first().locator('.dashboard-data tbody tr[hidden]').count(),0,'project search leaves chart data intact');
     await page.locator("[data-project-search]").first().fill("");
     await page
       .locator('.mock-form [name="project"]')
@@ -61,7 +64,7 @@ const { pathToFileURL } = require("node:url");
       await page
         .locator("[data-project-preview]")
         .first()
-        .locator("tbody tr")
+        .locator(".mock-projects tbody tr")
         .count(),
       4,
     );

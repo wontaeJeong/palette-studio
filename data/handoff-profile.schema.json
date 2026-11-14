@@ -461,6 +461,202 @@
                 "outline",
                 "solid"
               ]
+            },
+            "bar-chart": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "stacked-bar": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "line-chart": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "area-chart": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "donut-chart": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "pie-chart": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "histogram": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "scatter-chart": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "heatmap": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "sparkline": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "metric": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "progress": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "circular-progress": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "stepper": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "skeleton": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "spinner": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "error-state": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "radio": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "textarea": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "slider": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "date-picker": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "file-upload": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "combobox": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "data-table": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "avatar": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "timeline": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "list": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
+            },
+            "separator": {
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
             }
           }
         },

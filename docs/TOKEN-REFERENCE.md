@@ -195,5 +195,15 @@
 | `--color-chart-6` | `cp-text-chart-6` | `cp-bg-chart-6` | `cp-border-chart-6` |
 | `--color-chart-7` | `cp-text-chart-7` | `cp-bg-chart-7` | `cp-border-chart-7` |
 | `--color-chart-8` | `cp-text-chart-8` | `cp-bg-chart-8` | `cp-border-chart-8` |
+| `--color-heatmap-1` | `cp-text-heatmap-1` | `cp-bg-heatmap-1` | `cp-border-heatmap-1` |
+| `--color-on-heatmap-1` | `cp-text-on-heatmap-1` | `cp-bg-on-heatmap-1` | `cp-border-on-heatmap-1` |
+| `--color-heatmap-2` | `cp-text-heatmap-2` | `cp-bg-heatmap-2` | `cp-border-heatmap-2` |
+| `--color-on-heatmap-2` | `cp-text-on-heatmap-2` | `cp-bg-on-heatmap-2` | `cp-border-on-heatmap-2` |
+| `--color-heatmap-3` | `cp-text-heatmap-3` | `cp-bg-heatmap-3` | `cp-border-heatmap-3` |
+| `--color-on-heatmap-3` | `cp-text-on-heatmap-3` | `cp-bg-on-heatmap-3` | `cp-border-on-heatmap-3` |
+| `--color-heatmap-4` | `cp-text-heatmap-4` | `cp-bg-heatmap-4` | `cp-border-heatmap-4` |
+| `--color-on-heatmap-4` | `cp-text-on-heatmap-4` | `cp-bg-on-heatmap-4` | `cp-border-on-heatmap-4` |
+| `--color-heatmap-5` | `cp-text-heatmap-5` | `cp-bg-heatmap-5` | `cp-border-heatmap-5` |
+| `--color-on-heatmap-5` | `cp-text-on-heatmap-5` | `cp-bg-on-heatmap-5` | `cp-border-on-heatmap-5` |
 
 원시 램프는 `raw-bg-{paletteId}-{50..950}` / `raw-text-*` / `raw-border-*`입니다. 예: `raw-bg-graphite-plum-100`. 중립 바탕은 `raw-bg-neutral-slate-100`입니다. 제품 컴포넌트에서는 의미 토큰을 우선하세요.

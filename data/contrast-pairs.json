@@ -1245,6 +1245,41 @@
       "bg": "--color-surface",
       "min": 4.5,
       "kind": "text"
+    },
+    {
+      "name": "on-heatmap-1 / heatmap-1",
+      "fg": "--color-on-heatmap-1",
+      "bg": "--color-heatmap-1",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-heatmap-2 / heatmap-2",
+      "fg": "--color-on-heatmap-2",
+      "bg": "--color-heatmap-2",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-heatmap-3 / heatmap-3",
+      "fg": "--color-on-heatmap-3",
+      "bg": "--color-heatmap-3",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-heatmap-4 / heatmap-4",
+      "fg": "--color-on-heatmap-4",
+      "bg": "--color-heatmap-4",
+      "min": 4.5,
+      "kind": "text"
+    },
+    {
+      "name": "on-heatmap-5 / heatmap-5",
+      "fg": "--color-on-heatmap-5",
+      "bg": "--color-heatmap-5",
+      "min": 4.5,
+      "kind": "text"
     }
   ],
   "note": "Decorative line, disabled controls and chart pairwise discrimination are not WCAG pass claims."

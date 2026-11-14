@@ -121,7 +121,7 @@ node scripts/check-screenshot-freshness.cjs
 
 2026-11-14 HTTP 검사에서 필수 `/data/ui-libraries.js` 요청의 `net::ERR_CONNECTION_RESET`을 확인했습니다. 이어진 `normalize`/`getConfig`/`libraries` 오류는 이 스크립트가 전달되지 않은 결과였습니다. 모든 브라우저 context를 추적한 증거는 `/private/tmp/palette-http-all-pages.ndjson`이며, 실행 순서나 storage 차단 자체의 제품 결함으로 확인된 것은 아닙니다.
 
-관측한 Python 3.14.8 `ThreadingHTTPServer`의 대기열은 5였습니다. 같은 `SimpleHTTPRequestHandler`에서 대기열만 128로 늘린 8769 서버로 **수정하지 않은** 메트릭 브라우저 검사를 실행해 exit 0을 확인했습니다. 작은 대기열은 유력한 기여 요인이라는 추론이며, 연결 초기화의 유일한 원인까지 입증한 것은 아닙니다. 제품 재시도나 초기화 우회 코드는 추가하지 않았습니다.
+실제 QA 서버 프로세스에서 확인한 Python 3.9.6 `ThreadingHTTPServer`의 대기열은 5였습니다. 같은 `SimpleHTTPRequestHandler`에서 대기열만 128로 늘린 8769 서버로 **수정하지 않은** 메트릭 브라우저 검사를 실행해 exit 0을 확인했습니다. 작은 대기열은 유력한 기여 요인이라는 추론이며, 연결 초기화의 유일한 원인까지 입증한 것은 아닙니다. 제품 재시도나 초기화 우회 코드는 추가하지 않았습니다.
 
 HTTP QA를 재현할 때 저장소 루트에서 다음 임시 서버를 사용할 수 있습니다. 제품 배포용 서버를 추가하는 절차가 아닙니다.
 

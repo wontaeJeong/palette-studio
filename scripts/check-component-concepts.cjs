@@ -2,6 +2,7 @@ const { chromium } = require("playwright");
 const assert = require("node:assert/strict");
 const { pathToFileURL } = require("node:url");
 const path = require("node:path");
+const os = require("node:os");
 (async () => {
   const browser = await chromium.launch({ headless: true });
   try {
@@ -397,7 +398,7 @@ const path = require("node:path");
           );
       });
       await page.screenshot({
-        path: "/private/tmp/task1-three-toasts-mobile.png",
+        path: path.join(os.tmpdir(), "task1-three-toasts-mobile.png"),
       });
       await page.keyboard.press("Escape");
     }

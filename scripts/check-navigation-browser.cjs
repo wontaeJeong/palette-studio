@@ -162,6 +162,82 @@ async function checkNavigation(browser, file = "index.html") {
       );
       await page.locator("#toggle-preview").click();
     }
+    const exported = await context.newPage();
+    const handoff = await context.newPage();
+    for (const navigation of ["top", "left", "hybrid"]) {
+      const data = await page.evaluate((navigation) => {
+        const c = PaletteCatalog.getConfig();
+        PaletteCatalog.update({
+          designSelection: {
+            ...c.designSelection,
+            navigation,
+            navigationStyle: "edge",
+            navigationStructure: "grouped",
+          },
+        });
+        return {
+          config: PaletteCatalog.getConfig(),
+          outputs: PaletteWorkspace.outputs(),
+        };
+      }, navigation);
+      const example = data.outputs["AGENT-TASK.md"].match(
+        /<nav class="ps-navigation[\s\S]*?<\/nav>/,
+      )[0];
+      await exported.setViewportSize({ width: 1440, height: 1000 });
+      await exported.setContent(
+        `<style>${data.outputs["selected-style.css"]}</style>${example}`,
+      );
+      const expected = navigation === "top" ? "horizontal" : "vertical";
+      assert.equal(
+        await exported
+          .locator(".ps-navigation")
+          .getAttribute("data-nav-orientation"),
+        expected,
+        "exported example orientation",
+      );
+      await exported.setViewportSize({ width: 390, height: 844 });
+      assert.equal(
+        await exported
+          .locator(".ps-navigation")
+          .evaluate((e) => getComputedStyle(e).flexDirection),
+        "row",
+        "exported mobile recipe wraps horizontally",
+      );
+      await handoff.setViewportSize({ width: 1440, height: 1000 });
+      await handoff.goto("about:blank");
+      await handoff.goto(
+        pathToFileURL(path.resolve(__dirname, "../handoff.html")).href +
+          "#catalogConfig=" +
+          encodeURIComponent(JSON.stringify(data.config)),
+      );
+      assert.equal(
+        await handoff
+          .locator(".ah-mock .ps-navigation")
+          .first()
+          .getAttribute("data-nav-orientation"),
+        expected,
+        "handoff preserves placement",
+      );
+      assert.equal(
+        await handoff.locator(".ah-nav-context").count(),
+        navigation === "hybrid" ? 2 : 0,
+      );
+      await handoff.setViewportSize({ width: 390, height: 844 });
+      assert.equal(
+        await handoff
+          .locator(".ah-mock .ps-navigation")
+          .first()
+          .evaluate((e) => getComputedStyle(e).flexDirection),
+        "row",
+      );
+      assert(
+        await handoff.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth + 1,
+        ),
+      );
+    }
+    await exported.close();
+    await handoff.close();
     assert.deepEqual(errors, []);
     console.log(
       "PASS: six navigation shapes × three structures × three layouts, selection, sharing, keyboard and mobile: " +

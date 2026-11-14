@@ -106,6 +106,29 @@ try {
 } finally {
   fs.rmSync(temp, { recursive: true, force: true });
 }
+for (const navigation of ["top", "left", "hybrid"]) {
+  const config = core.normalize(
+    { designSelection: { set: "studio", navigation } },
+    kit,
+    fonts,
+    [],
+  );
+  const brief = core.agentTask(config, kit);
+  assert(
+    !brief.includes("accessible navigation drawer") &&
+      !brief.includes("accessible drawer"),
+    "responsive contract follows wrapping menu",
+  );
+  assert(brief.includes("wrapping horizontal"));
+  assert(
+    brief
+      .match(/<nav class="ps-navigation[^>]+>/)[0]
+      .includes(
+        `data-nav-orientation="${navigation === "top" ? "horizontal" : "vertical"}"`,
+      ),
+    "exported example preserves placement",
+  );
+}
 const legacy = core.normalize({}, kit, fonts, []);
 assert(!core.styleCSS(legacy, kit).includes("ps-navigation"));
 console.log(

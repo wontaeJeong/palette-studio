@@ -15687,19 +15687,19 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       id: "top",
       name: "상단 메뉴",
       description: "상단 높이 56px · 본문 최대 너비 1200px",
-      rule: "Place primary navigation in a 56px top bar, with content max-width 1200px below it. At widths below 768px collapse navigation into a labeled menu trigger and accessible drawer; keep the current page visible.",
+      rule: "Place primary navigation in a 56px top bar, with content max-width 1200px below it. Below 768px use a wrapping horizontal menu with visible item names; keep the current page visible.",
     },
     {
       id: "left",
       name: "좌측 메뉴",
       description: "좌측 너비 232px · 본문 패딩 24px",
-      rule: "Place primary navigation in a 232px left sidebar and content in the remaining width with 24px padding. Below 768px replace the sidebar with a 56px top bar and accessible navigation drawer; preserve focus and current page indication.",
+      rule: "Place primary navigation in a 232px left sidebar and content in the remaining width with 24px padding. Below 768px move the sidebar items into a wrapping horizontal menu above the content; retain visible item names, focus and current page indication.",
     },
     {
       id: "hybrid",
       name: "상단 + 좌측 메뉴",
       description: "상단 56px · 좌측 232px · 본문 패딩 24px",
-      rule: "Use a 56px top bar for workspace/account actions and a 232px left sidebar for section navigation. Keep content padding 24px. Below 768px retain the top bar and move section navigation into an accessible drawer. Avoid duplicating navigation destinations.",
+      rule: "Use a 56px top bar for workspace/account actions and a 232px left sidebar for section navigation. Keep content padding 24px. Below 768px retain the top bar and place section navigation in a wrapping horizontal menu with visible names above the content. Avoid duplicating navigation destinations.",
     },
   ];
   const motionPresets = [
@@ -15892,15 +15892,25 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       rail: `${root} .ps-nav-item { justify-content:center; }\n${root} .ps-nav-label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }\n${root} .ps-nav-item:is(:hover,:focus-visible) .ps-nav-label { clip-path:none; width:max-content; max-width:180px; height:auto; margin:0; padding:6px 8px; inset-inline-start:100%; top:0; background:var(--color-tooltip-bg); color:var(--color-tooltip-fg); border:1px solid var(--color-line-strong); border-radius:4px; z-index:3; }\n${root}[data-nav-orientation="horizontal"] .ps-nav-item:is(:hover,:focus-visible) .ps-nav-label { inset-inline-start:0; top:100%; }\n@media (max-width:767px) { ${root} .ps-nav-item { flex-direction:column; } ${root} .ps-nav-item .ps-nav-label, ${root} .ps-nav-item:is(:hover,:focus-visible) .ps-nav-label { position:static; clip-path:none; width:auto; height:auto; margin:0; padding:0; overflow:visible; white-space:normal; background:inherit; color:inherit; border:0; } }`,
     }[id];
   }
+  const mobileCSS = `
+@media (max-width:767px) {
+  .ps-navigation { flex-direction:row; flex-wrap:wrap; align-items:center; }
+  .ps-navigation .ps-nav-group { flex-direction:inherit; flex-wrap:wrap; }
+  .ps-navigation[data-nav-structure="grouped"] .ps-nav-group + .ps-nav-group { border-top:0; border-inline-start:1px solid var(--color-line); padding-top:0; padding-inline-start:8px; }
+}
+`;
   function css(style, structure) {
-    return baseCSS + styleCSS(style) + "\n" + structureCSS(structure) + "\n";
+    return (
+      baseCSS + styleCSS(style) + "\n" + structureCSS(structure) + mobileCSS
+    );
   }
   function allCSS() {
     return (
       baseCSS +
       styles.map((s) => styleCSS(s.id)).join("\n") +
       "\n" +
-      structures.map((s) => structureCSS(s.id)).join("\n")
+      structures.map((s) => structureCSS(s.id)).join("\n") +
+      mobileCSS
     );
   }
   function iconMarkup(catalog) {
@@ -15940,7 +15950,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       structure === "grouped" ? items.map((item) => [item]) : [items];
     return `<${root} class="ps-navigation ${esc(className)}" data-nav-style="${style}" data-nav-structure="${structure}" data-nav-orientation="${orientation === "horizontal" ? "horizontal" : "vertical"}" aria-label="${esc(label)}">${groups.map((group) => `<span class="ps-nav-group">${structure === "grouped" ? `<span class="ps-nav-heading">${group[0].group}</span>` : ""}${group.map((item) => `<${tag} class="ps-nav-item" ${interactive ? `type="button" data-nav-page="${item.id}"` : ""} aria-label="${item.label}" ${item.id === active ? 'aria-current="page"' : ""}><span class="ps-nav-icon" aria-hidden="true">${icons[item.id] || item.label.slice(0, 1)}</span><span class="ps-nav-label">${item.label}</span></${tag}>`).join("")}</span>`).join("")}</${root}>`;
   }
-  function brief(style, structure) {
+  function brief(style, structure, navigation = "left") {
     const appearance = get(styles, style),
       layout = get(structures, structure);
     return [
@@ -15958,7 +15968,13 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         layout.description,
       "Use .ps-navigation with data-nav-style, data-nav-structure and data-nav-orientation; .ps-nav-group, .ps-nav-heading, .ps-nav-item, .ps-nav-icon and .ps-nav-label match selected-style.css. Use links for routes, buttons for local actions and aria-current=page for the current route. Preserve native keyboard activation, visible focus and accessible names; disabled actions must not activate. Group related routes without duplicating destinations. Retain visible names on narrow screens and focus/hover labels for icon rails. Adapt to the existing app's navigation only within the authorized scope.",
       "Example markup (replace sample buttons with real links for routes and use selected Lucide SVG icons):",
-      markup({ style, structure }),
+      "```html",
+      markup({
+        style,
+        structure,
+        orientation: navigation === "top" ? "horizontal" : "vertical",
+      }),
+      "```",
     ].join("\n");
   }
   return { styles, structures, css, allCSS, markup, iconMarkup, brief };
@@ -16430,6 +16446,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         navigationDesigns.brief(
           selected.navigationStyle,
           selected.navigationStructure,
+          selected.navigation,
         ),
         "Apply the selected style radius, padding, gap and control height from selected-style.css; control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
         "",

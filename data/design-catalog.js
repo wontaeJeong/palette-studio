@@ -462,6 +462,7 @@
         navigationDesigns.brief(
           selected.navigationStyle,
           selected.navigationStructure,
+          selected.navigation,
         ),
         "Apply the selected style radius, padding, gap and control height from selected-style.css; control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
         "",

@@ -59,6 +59,7 @@ const screenshots = [
   "icon-studio-dark.png",
   "icon-studio-mobile.png",
   "agent-handoff-desktop.png",
+  "agent-handoff-navigation.png",
   "agent-handoff-dark.png",
   "agent-handoff-mobile.png",
   "design-catalog-desktop.png",
@@ -252,6 +253,25 @@ async function main() {
       );
       await page.locator("#ah-preview-grid .ah-mock").first().waitFor();
       await shoot(page, "agent-handoff-mobile.png", { fullPage: true });
+      await context.close();
+    }
+    {
+      const selection = require("../data/design-catalog.js").selection(
+        "precision",
+      );
+      const config = {
+        palette: "graphite-plum",
+        style: "operational",
+        designSelection: selection,
+        fonts: { source: "system" },
+      };
+      const { page, context } = await open(
+        "handoff.html",
+        "catalogConfig=" + encodeURIComponent(JSON.stringify(config)),
+        1460,
+        990,
+      );
+      await shoot(page, "agent-handoff-navigation.png");
       await context.close();
     }
     // Set-first library and real interactive component detail.

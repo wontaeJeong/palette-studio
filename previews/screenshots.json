@@ -43,7 +43,7 @@
     "data/icon-parts/system-extra.js",
     "data/icon-parts/system.js"
   ],
-  "sourceHash": "2e3bdf32e6140fc8c5f4814f698745e2f4636dc7aa90b7d6026a3c0b07e73148",
+  "sourceHash": "48dc53aff486f0b7cd140db8759a1cc02de0855a672d3400d89437f0587bad1e",
   "screenshots": [
     {
       "path": "studio-overview-light.png",
@@ -77,22 +77,22 @@
       "path": "studio-navigation-mobile.png",
       "width": 390,
       "height": 844,
-      "bytes": 41408,
-      "sha256": "77e6f6c1733b144eff26b0c489ce23d5b9414220deb5ec241f232bed39b06ff2"
+      "bytes": 41578,
+      "sha256": "050aff3a8d2b9792c02f70bb52919a60c816b88ea26214df2181a5820166c83f"
     },
     {
       "path": "studio-mobile-light.png",
       "width": 390,
       "height": 844,
-      "bytes": 43033,
-      "sha256": "1221517a06e280751375beeb0414d8515da09601cc420e978b6c88cc94dbf37d"
+      "bytes": 42986,
+      "sha256": "83513364e156c6d67ef2fee8d0f8fb3e1db7e55c0c62f05364254b569efb02da"
     },
     {
       "path": "studio-mobile-dark.png",
       "width": 390,
       "height": 844,
-      "bytes": 42990,
-      "sha256": "a1783cea17f14ef6731a25c7e0f2d05186365d36df3b18407a47fde9454ca345"
+      "bytes": 42944,
+      "sha256": "0cf5f059f9e9c82621b9119c35daa766540ae0eb187afb1ad65b576e4df6b1a2"
     },
     {
       "path": "icon-studio-desktop.png",
@@ -135,6 +135,13 @@
       "height": 3298,
       "bytes": 176546,
       "sha256": "d06f8c4b33c9b309157ccc89a5826687347c478a1ada96829ca264671f481210"
+    },
+    {
+      "path": "agent-handoff-navigation.png",
+      "width": 1460,
+      "height": 990,
+      "bytes": 172957,
+      "sha256": "c5ce51a9da8db0a8c7867da0ee5088e03005b8176326c49c851fc9cee25940e2"
     },
     {
       "path": "design-catalog-desktop.png",
@@ -181,9 +188,9 @@
     {
       "path": "design-catalog-mobile.png",
       "width": 390,
-      "height": 8263,
-      "bytes": 485743,
-      "sha256": "212f8807e58165f9e524ddda4c70c052e7b5ac94cfdfaf01132d81e7ef9a7ab5"
+      "height": 8167,
+      "bytes": 485230,
+      "sha256": "7e2483760564531aec781c7ee6de6f8a67c7b7e81fd8df9a6e950707fc2188c4"
     }
   ]
 }

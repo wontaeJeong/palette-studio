@@ -835,7 +835,9 @@
   $("download-config").addEventListener("click", () =>
     download("handoff-config.json", JSON.stringify(config, null, 2) + "\n"),
   );
-  $("share-selection").addEventListener("click", () => copy(shareURL()));
+  $("share-selection").addEventListener("click", () =>
+    copy(window.PaletteWorkspace?.shareURL() || shareURL()),
+  );
   window.PaletteCatalog = {
     getConfig: () => JSON.parse(JSON.stringify(config)),
     update(patch) {

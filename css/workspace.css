@@ -386,7 +386,7 @@ body {
 }
 .mock-app {
   display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
+  grid-template-columns: 112px minmax(0, 1fr);
 }
 .mock-top {
   grid-column: 1/-1;
@@ -407,50 +407,6 @@ body {
 .mock-top > span {
   color: var(--color-ink-muted);
   font-size: 8px;
-}
-.mock-nav {
-  display: flex;
-  flex-direction: column;
-  padding: 12px 5px;
-  gap: 8px;
-  border-right: 1px solid var(--color-line);
-  background: var(--color-raised);
-}
-.mock-nav button {
-  min-height: 36px;
-  padding: 6px;
-  border-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-.mock-nav button[aria-current] {
-  background: var(--color-accent-subtle);
-  color: var(--color-accent-text);
-  border-left: 3px solid var(--color-accent);
-}
-.mock-nav button span {
-  display: none;
-}
-.nav-top {
-  grid-template-columns: 1fr;
-}
-.nav-top .mock-nav,
-.nav-hybrid .mock-nav {
-  grid-column: 1/-1;
-  flex-direction: row;
-  border-right: 0;
-  border-bottom: 1px solid var(--color-line);
-  padding: 6px 12px;
-}
-.nav-top .mock-nav button span,
-.nav-hybrid .mock-nav button span {
-  display: inline;
-  font-size: 9px;
-}
-.nav-hybrid {
-  grid-template-columns: 1fr;
 }
 .mock-main {
   padding: 20px 14px;
@@ -869,20 +825,6 @@ body {
   }
 }
 
-/* Hybrid keeps both navigation regions visible in the project example. */
-.nav-hybrid {
-  grid-template-columns: 46px minmax(0, 1fr);
-}
-.nav-hybrid > .mock-secondary-nav {
-  grid-column: 1;
-  flex-direction: column;
-  border-right: 1px solid var(--color-line);
-  border-bottom: 0;
-  padding: 12px 5px;
-}
-.nav-hybrid > .mock-secondary-nav button span {
-  display: none;
-}
 .mock-projects.solid h4.sample-emphasis {
   padding: 8px;
   border-radius: var(--ui-radius);
@@ -890,5 +832,90 @@ body {
 @media (max-width: 1100px) {
   .nav-hybrid {
     grid-template-columns: 38px minmax(0, 1fr);
+  }
+}
+
+/* Menu layout uses the shared navigation recipe without replacing its selected state. */
+.project-pane {
+  container-type: inline-size;
+}
+.mock-nav.ps-navigation {
+  --ps-nav-font: 11px;
+  --ps-nav-icon: 16px;
+  --ps-nav-padding: 8px;
+  --ps-nav-item-padding: 8px 6px;
+  --ps-nav-group-font: 10px;
+  border-inline-end: 1px solid var(--color-line);
+}
+.mock-app[data-menu-structure="rail"] {
+  grid-template-columns: 58px minmax(0, 1fr);
+}
+.mock-app.nav-top {
+  grid-template-columns: 1fr;
+}
+.mock-app.nav-top .mock-nav {
+  border-inline-end: 0;
+  border-bottom: 1px solid var(--color-line);
+}
+.mock-context-nav {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 14px;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 11px;
+}
+.mock-context-nav button {
+  min-height: 32px;
+  padding: 4px 10px;
+}
+.mock-app.nav-hybrid > .mock-secondary-nav {
+  grid-column: 1;
+}
+.mock-app .mock-nav .ps-nav-group {
+  flex-direction: inherit;
+}
+[data-preview-settings] .sample-check {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+  font-size: 12px;
+}
+@container (max-width:420px) {
+  .mock-app,
+  .mock-app[data-menu-structure="rail"],
+  .mock-app.nav-hybrid {
+    grid-template-columns: 1fr;
+  }
+  .mock-app .mock-nav {
+    grid-column: 1/-1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .mock-app .mock-nav .ps-nav-group {
+    flex-wrap: wrap;
+  }
+  .mock-app .mock-nav .ps-nav-group + .ps-nav-group {
+    border-top: 0;
+    border-inline-start: 1px solid var(--color-line);
+    padding-top: 0;
+    padding-inline-start: 6px;
+  }
+  .mock-app .mock-nav[data-nav-structure="rail"] .ps-nav-item .ps-nav-label {
+    position: static;
+    clip-path: none;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    white-space: normal;
+    overflow: visible;
+    border: 0;
+    background: inherit;
+    color: inherit;
   }
 }

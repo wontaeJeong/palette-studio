@@ -5,21 +5,66 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
   const styles = [
-    { id: "edge", name: "옆선", description: "배경 없이 왼쪽 선", rule: "Keep the selected background unchanged; mark the leading edge with a 3px line and bold text." },
-    { id: "underline", name: "밑줄", description: "글자 아래 선", rule: "Keep the background unchanged; use a 3px underline and bold text." },
-    { id: "pill", name: "알약", description: "둥근 선택 영역", rule: "Use a fully rounded selected surface with a visible boundary and bold text." },
-    { id: "fill", name: "채움", description: "선택 영역 전체 채움", rule: "Fill the selected rectangular item with accent, on-accent text and bold weight." },
-    { id: "outline", name: "테두리", description: "선택 영역 테두리", rule: "Keep the background unchanged; draw a 2px outline around the selected item and use bold text." },
-    { id: "dot", name: "점", description: "항목 앞 선택 표시", rule: "Keep the background unchanged; use a visible leading dot and bold text for the current item." },
+    {
+      id: "edge",
+      name: "옆선",
+      description: "배경 없이 왼쪽 선",
+      rule: "Keep the selected background unchanged; mark the leading edge with a 3px line and bold text.",
+    },
+    {
+      id: "underline",
+      name: "밑줄",
+      description: "글자 아래 선",
+      rule: "Keep the background unchanged; use a 3px underline and bold text.",
+    },
+    {
+      id: "pill",
+      name: "알약",
+      description: "둥근 선택 영역",
+      rule: "Use a fully rounded selected surface with a visible boundary and bold text.",
+    },
+    {
+      id: "fill",
+      name: "채움",
+      description: "선택 영역 전체 채움",
+      rule: "Fill the selected rectangular item with accent, on-accent text and bold weight.",
+    },
+    {
+      id: "outline",
+      name: "테두리",
+      description: "선택 영역 테두리",
+      rule: "Keep the background unchanged; draw a 2px outline around the selected item and use bold text.",
+    },
+    {
+      id: "dot",
+      name: "점",
+      description: "항목 앞 선택 표시",
+      rule: "Keep the background unchanged; use a visible leading dot and bold text for the current item.",
+    },
   ];
   const structures = [
     { id: "list", name: "목록", description: "아이콘과 이름을 한 줄로 표시" },
     { id: "grouped", name: "그룹", description: "그룹 이름과 간격으로 구분" },
-    { id: "rail", name: "아이콘", description: "아이콘 중심 · 포커스 시 이름 표시" },
+    {
+      id: "rail",
+      name: "아이콘",
+      description: "아이콘 중심 · 포커스 시 이름 표시",
+    },
   ];
-  const esc = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  const esc = (text) =>
+    String(text).replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
   function get(items, id) {
-    const item = items.find(item => item.id === id);
+    const item = items.find((item) => item.id === id);
     if (!item) throw Error("Invalid navigation recipe: " + id);
     return item;
   }
@@ -40,8 +85,9 @@
 @media (prefers-reduced-motion:reduce) { .ps-navigation .ps-nav-item { transition:none; } }
 `;
   function styleCSS(id) {
-    get(styles,id);
-    const root = `.ps-navigation[data-nav-style="${id}"]`, active = `${root} .ps-nav-item[aria-current="page"]`;
+    get(styles, id);
+    const root = `.ps-navigation[data-nav-style="${id}"]`,
+      active = `${root} .ps-nav-item[aria-current="page"]`;
     return {
       edge: `${active} { border-radius:0; border-inline-start:3px solid var(--color-nav-active-line); background:var(--color-nav-bg); }`,
       underline: `${active} { border-radius:0; border-bottom:3px solid var(--color-nav-active-line); background:var(--color-nav-bg); }`,
@@ -52,7 +98,7 @@
     }[id];
   }
   function structureCSS(id) {
-    get(structures,id);
+    get(structures, id);
     const root = `.ps-navigation[data-nav-structure="${id}"]`;
     return {
       list: `${root} { gap:var(--ps-nav-gap,6px); }`,
@@ -60,18 +106,74 @@
       rail: `${root} .ps-nav-item { justify-content:center; }\n${root} .ps-nav-label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }\n${root} .ps-nav-item:is(:hover,:focus-visible) .ps-nav-label { clip-path:none; width:max-content; max-width:180px; height:auto; margin:0; padding:6px 8px; inset-inline-start:100%; top:0; background:var(--color-tooltip-bg); color:var(--color-tooltip-fg); border:1px solid var(--color-line-strong); border-radius:4px; z-index:3; }\n${root}[data-nav-orientation="horizontal"] .ps-nav-item:is(:hover,:focus-visible) .ps-nav-label { inset-inline-start:0; top:100%; }\n@media (max-width:767px) { ${root} .ps-nav-item { flex-direction:column; } ${root} .ps-nav-item .ps-nav-label, ${root} .ps-nav-item:is(:hover,:focus-visible) .ps-nav-label { position:static; clip-path:none; width:auto; height:auto; margin:0; padding:0; overflow:visible; white-space:normal; background:inherit; color:inherit; border:0; } }`,
     }[id];
   }
-  function css(style, structure) { return baseCSS + styleCSS(style) + "\n" + structureCSS(structure) + "\n"; }
-  function allCSS() { return baseCSS + styles.map(s => styleCSS(s.id)).join("\n") + "\n" + structures.map(s => structureCSS(s.id)).join("\n"); }
-  function markup({ style, structure, orientation = "vertical", interactive = true, active = "projects", icons = {}, className = "", label = "프로젝트 메뉴" }) {
-    get(styles,style); get(structures,structure);
-    const tag = interactive ? "button" : "span", root = interactive ? "nav" : "span";
-    const items = [{id:"projects",label:"프로젝트",group:"작업"},{id:"settings",label:"설정",group:"관리"}];
-    const groups = structure === "grouped" ? items.map(item => [item]) : [items];
-    return `<${root} class="ps-navigation ${esc(className)}" data-nav-style="${style}" data-nav-structure="${structure}" data-nav-orientation="${orientation === "horizontal" ? "horizontal" : "vertical"}" aria-label="${esc(label)}">${groups.map(group => `<span class="ps-nav-group">${structure === "grouped" ? `<span class="ps-nav-heading">${group[0].group}</span>` : ""}${group.map(item => `<${tag} class="ps-nav-item" ${interactive ? `type="button" data-nav-page="${item.id}"` : ""} aria-label="${item.label}" ${item.id === active ? 'aria-current="page"' : ""}><span class="ps-nav-icon" aria-hidden="true">${icons[item.id] || (item.id === "projects" ? "▦" : "⚙")}</span><span class="ps-nav-label">${item.label}</span></${tag}>`).join("")}</span>`).join("")}</${root}>`;
+  function css(style, structure) {
+    return baseCSS + styleCSS(style) + "\n" + structureCSS(structure) + "\n";
+  }
+  function allCSS() {
+    return (
+      baseCSS +
+      styles.map((s) => styleCSS(s.id)).join("\n") +
+      "\n" +
+      structures.map((s) => structureCSS(s.id)).join("\n")
+    );
+  }
+  function iconMarkup(catalog) {
+    return Object.fromEntries(
+      [
+        ["projects", "layout-dashboard"],
+        ["settings", "settings"],
+      ].map(([key, name]) => {
+        const icon = catalog.find((item) => item.name === name);
+        if (!icon) throw Error("Missing navigation icon: " + name);
+        return [
+          key,
+          `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icon.body}</svg>`,
+        ];
+      }),
+    );
+  }
+  function markup({
+    style,
+    structure,
+    orientation = "vertical",
+    interactive = true,
+    active = "projects",
+    icons = {},
+    className = "",
+    label = "프로젝트 메뉴",
+  }) {
+    get(styles, style);
+    get(structures, structure);
+    const tag = interactive ? "button" : "span",
+      root = interactive ? "nav" : "span";
+    const items = [
+      { id: "projects", label: "프로젝트", group: "작업" },
+      { id: "settings", label: "설정", group: "관리" },
+    ];
+    const groups =
+      structure === "grouped" ? items.map((item) => [item]) : [items];
+    return `<${root} class="ps-navigation ${esc(className)}" data-nav-style="${style}" data-nav-structure="${structure}" data-nav-orientation="${orientation === "horizontal" ? "horizontal" : "vertical"}" aria-label="${esc(label)}">${groups.map((group) => `<span class="ps-nav-group">${structure === "grouped" ? `<span class="ps-nav-heading">${group[0].group}</span>` : ""}${group.map((item) => `<${tag} class="ps-nav-item" ${interactive ? `type="button" data-nav-page="${item.id}"` : ""} aria-label="${item.label}" ${item.id === active ? 'aria-current="page"' : ""}><span class="ps-nav-icon" aria-hidden="true">${icons[item.id] || item.label.slice(0, 1)}</span><span class="ps-nav-label">${item.label}</span></${tag}>`).join("")}</span>`).join("")}</${root}>`;
   }
   function brief(style, structure) {
-    const appearance=get(styles,style), layout=get(structures,structure);
-    return ["Navigation appearance: "+appearance.name+" ("+style+"). "+appearance.rule,"Navigation structure: "+layout.name+" ("+structure+"). "+layout.description,"Use .ps-navigation with data-nav-style, data-nav-structure and data-nav-orientation; .ps-nav-group, .ps-nav-heading, .ps-nav-item, .ps-nav-icon and .ps-nav-label match selected-style.css. Use links for routes, buttons for local actions and aria-current=page for the current route. Preserve native keyboard activation, visible focus and accessible names; disabled actions must not activate. Group related routes without duplicating destinations. Retain visible names on narrow screens and focus/hover labels for icon rails. Adapt to the existing app's navigation only within the authorized scope.","Example markup (replace sample buttons with real links for routes and use selected Lucide SVG icons):",markup({style,structure})].join("\n");
+    const appearance = get(styles, style),
+      layout = get(structures, structure);
+    return [
+      "Navigation appearance: " +
+        appearance.name +
+        " (" +
+        style +
+        "). " +
+        appearance.rule,
+      "Navigation structure: " +
+        layout.name +
+        " (" +
+        structure +
+        "). " +
+        layout.description,
+      "Use .ps-navigation with data-nav-style, data-nav-structure and data-nav-orientation; .ps-nav-group, .ps-nav-heading, .ps-nav-item, .ps-nav-icon and .ps-nav-label match selected-style.css. Use links for routes, buttons for local actions and aria-current=page for the current route. Preserve native keyboard activation, visible focus and accessible names; disabled actions must not activate. Group related routes without duplicating destinations. Retain visible names on narrow screens and focus/hover labels for icon rails. Adapt to the existing app's navigation only within the authorized scope.",
+      "Example markup (replace sample buttons with real links for routes and use selected Lucide SVG icons):",
+      markup({ style, structure }),
+    ].join("\n");
   }
-  return { styles, structures, css, allCSS, markup, brief };
+  return { styles, structures, css, allCSS, markup, iconMarkup, brief };
 });

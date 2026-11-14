@@ -29,6 +29,7 @@
     "catalog.js",
     "css/catalog.css",
     "data/design-catalog.js",
+    "data/navigation-designs.js",
     "data/ui-presets.js",
     "workspace.js",
     "css/workspace.css",
@@ -42,42 +43,56 @@
     "data/icon-parts/system-extra.js",
     "data/icon-parts/system.js"
   ],
-  "sourceHash": "7bf997ab2938f774b12f93cdf4aa79519ef83a661c0e69daa124daea6acb7057",
+  "sourceHash": "2e3bdf32e6140fc8c5f4814f698745e2f4636dc7aa90b7d6026a3c0b07e73148",
   "screenshots": [
     {
       "path": "studio-overview-light.png",
       "width": 1440,
       "height": 980,
-      "bytes": 116217,
-      "sha256": "d985ba253bad38fe7c1e60535eb4db6f5a0f16747c0d522c5250e98b8c5d2d22"
+      "bytes": 118269,
+      "sha256": "827ce505026ad51155aa132d3f79145a7813b27c4896dc9c343829b1894a95a0"
     },
     {
       "path": "studio-overview-dark.png",
       "width": 1440,
       "height": 980,
-      "bytes": 116773,
-      "sha256": "649113150500a7e648e1fbe269d5fc7c278be6ba5dd712739d411fa36eddd34d"
+      "bytes": 118634,
+      "sha256": "72d1a23c1904503dbdfa1734301bf363fb394fd269493deeceae9c59d48e61fa"
     },
     {
       "path": "studio-fonts-desktop.png",
       "width": 1440,
       "height": 980,
-      "bytes": 80691,
-      "sha256": "2c1e2271b6b4d9f85797a3ac3a66ed703e93ccca8c2255a38154aefa3b0fd773"
+      "bytes": 80946,
+      "sha256": "a9c6f59829b80d1d4d3fce6b00141e99cdcea162153debedc9a409a90bc18e74"
+    },
+    {
+      "path": "studio-navigation-desktop.png",
+      "width": 1440,
+      "height": 1100,
+      "bytes": 111136,
+      "sha256": "2133b2509e7431926a9dc5cf8e664a8aed1b050f54b863f2fd43b3e89566c687"
+    },
+    {
+      "path": "studio-navigation-mobile.png",
+      "width": 390,
+      "height": 844,
+      "bytes": 41408,
+      "sha256": "77e6f6c1733b144eff26b0c489ce23d5b9414220deb5ec241f232bed39b06ff2"
     },
     {
       "path": "studio-mobile-light.png",
       "width": 390,
       "height": 844,
-      "bytes": 40221,
-      "sha256": "d42bb1a0ffbd0aed9c0fd36f75acc0a236606e35f4e990e8319cd80bce0adedc"
+      "bytes": 43033,
+      "sha256": "1221517a06e280751375beeb0414d8515da09601cc420e978b6c88cc94dbf37d"
     },
     {
       "path": "studio-mobile-dark.png",
       "width": 390,
       "height": 844,
-      "bytes": 40268,
-      "sha256": "53754579cf632d66be3ed9ba173598a6fdf3866038742230ae69c68051d964ad"
+      "bytes": 42990,
+      "sha256": "a1783cea17f14ef6731a25c7e0f2d05186365d36df3b18407a47fde9454ca345"
     },
     {
       "path": "icon-studio-desktop.png",
@@ -125,50 +140,50 @@
       "path": "design-catalog-desktop.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 156202,
-      "sha256": "4b79e772ddd35add084b68ca2efd35d62f5a66f92239699fdb90cb5759b6cf5a"
+      "bytes": 148327,
+      "sha256": "6041114feb854fb88594ce3e54988727bd1e50282836690b7ec7dfaac4a2280a"
     },
     {
       "path": "design-catalog-components.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 167892,
-      "sha256": "0f71e59304c8bbb039534aac1cd1035587265dda9224613b195575f97fc6f8a8"
+      "bytes": 189970,
+      "sha256": "c661ed82ef21b49fd044fbe3bd65b5a913f7be379d9a520eebe584a09935718b"
     },
     {
       "path": "design-catalog-detail.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 147334,
-      "sha256": "14db72ce179a43068c9154cc5d863391365f5703e11e09a8674fb2d400522c59"
+      "bytes": 138728,
+      "sha256": "afb837eb4e7cba285a45215a2392683f6704f84c7e8b9fc4477401417e5906f4"
     },
     {
       "path": "design-catalog-layout.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 152499,
-      "sha256": "ef28ec1ff239db2bb82e2c570f3d75871de3ff767c06528a62b7ce345f7a79c6"
+      "bytes": 105552,
+      "sha256": "ce147f5ed22fbff77cdc987ebe40a34849a89834e52d8e3781162a9fc096644d"
     },
     {
       "path": "design-catalog-motion.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 119549,
-      "sha256": "12bb4ca63797f3fec01f89f81964b26f1ff5e46fa65bcfa21beea9b191f8ed56"
+      "bytes": 89696,
+      "sha256": "51e73392b6bcd3b64a6c33e485f1b5c1008db92fc10dc1cf8e4c327bd4fe7ad0"
     },
     {
       "path": "design-catalog-ui-dark.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 154007,
-      "sha256": "97ca00c0fcfb40742bf024bd7c769465456fbb434d5441d7423122d160b5b6fb"
+      "bytes": 150447,
+      "sha256": "df266974b8cf2465b5e0ffb1681cc5a1980a4f3e51c9d02d89616fff43c35fac"
     },
     {
       "path": "design-catalog-mobile.png",
       "width": 390,
-      "height": 7613,
-      "bytes": 450295,
-      "sha256": "8726ce254b283ae4fe653c50ab0d7438586cbbdbee24c2d06d91a3a1dec5f76a"
+      "height": 8263,
+      "bytes": 485743,
+      "sha256": "212f8807e58165f9e524ddda4c70c052e7b5ac94cfdfaf01132d81e7ef9a7ab5"
     }
   ]
 }

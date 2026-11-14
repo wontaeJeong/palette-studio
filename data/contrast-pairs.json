@@ -967,6 +967,13 @@
       "kind": "ui"
     },
     {
+      "name": "nav-active-line / nav-bg",
+      "fg": "--color-nav-active-line",
+      "bg": "--color-nav-bg",
+      "min": 3,
+      "kind": "ui"
+    },
+    {
       "name": "tab-active-line / tab-bg",
       "fg": "--color-tab-active-line",
       "bg": "--color-tab-bg",

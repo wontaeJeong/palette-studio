@@ -120,6 +120,9 @@
       '<p class="ah-note">검색 결과가 없습니다.</p>';
     $("ah-icon-count").textContent = config.icons.length + " / 24";
   }
+  const navigationCSS = document.createElement("style");
+  navigationCSS.textContent = window.PaletteNavigationDesigns.allCSS();
+  document.head.append(navigationCSS);
   function renderPreview() {
     const p = catalog.palettes.find((item) => item.id === config.palette);
     const title = config.layout === "content" ? "문서 탐색" :
@@ -132,7 +135,7 @@
         '<div class="ah-mock-header"><span>' + esc(p.name) + '</span><span>' +
         (theme === "light" ? "라이트" : "다크") + '</span></div>' +
         '<div class="ah-mock-area"><div class="ah-mock-title">' + title + '</div>' +
-        '<div class="ah-mock-tab">개요</div>' +
+        (config.designSelection ? window.PaletteNavigationDesigns.markup({style:config.designSelection.navigationStyle,structure:config.designSelection.navigationStructure,orientation:"horizontal",interactive:false,icons:window.PaletteNavigationDesigns.iconMarkup(icons)}) : '<div class="ah-mock-tab">개요</div>') +
         '<div class="ah-mock-metric">1,284</div>' +
         '<div class="ah-mock-desc">샘플 데이터 · 30일 기준</div>' +
         '<div class="ah-mock-row"><span>진행 항목</span><strong>32</strong></div>' +

@@ -1412,4 +1412,100 @@ footer {
     display: none;
   }
 }
-.sample-switch{flex-shrink:0}
+.sample-switch {
+  flex-shrink: 0;
+}
+
+/* Small previews use the same recipes as the exported navigation. */
+.navigation-style-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+.navigation-choice {
+  display: block;
+  padding: 10px;
+  min-width: 0;
+  text-align: start;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-strong);
+  border-radius: 8px;
+}
+.navigation-choice[aria-pressed="true"] {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+.navigation-choice-label {
+  font-size: 12px;
+  font-weight: 700;
+}
+.navigation-choice small {
+  display: block;
+  font-size: 10px;
+  margin-top: 6px;
+  color: var(--color-ink-muted);
+}
+.navigation-choice-demo {
+  display: block;
+  margin-top: 8px;
+  pointer-events: none;
+  --ps-nav-height: 26px;
+  --ps-nav-font: 10px;
+  --ps-nav-padding: 4px;
+  --ps-nav-item-padding: 4px 6px;
+  --ps-nav-icon: 12px;
+  --ps-nav-gap: 4px;
+}
+.field-label {
+  margin: 12px 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.shell .ps-navigation {
+  --ps-nav-font: 9px;
+  --ps-nav-height: 28px;
+  --ps-nav-padding: 4px;
+  --ps-nav-item-padding: 4px;
+  --ps-nav-gap: 4px;
+  --ps-nav-icon: 12px;
+  --ps-nav-group-font: 8px;
+  --ps-nav-section-gap: 8px;
+}
+.shell .shell-side {
+  padding: 0;
+  flex: 0 0 38%;
+  min-width: 0;
+}
+.shell .shell-top {
+  flex-wrap: wrap;
+}
+.shell[data-menu-structure="rail"] .shell-side {
+  flex-basis: 20%;
+}
+.set-mini .shell .ps-navigation {
+  --ps-nav-height: 14px;
+  --ps-nav-font: 6px;
+  --ps-nav-padding: 2px;
+  --ps-nav-item-padding: 1px 2px;
+  --ps-nav-gap: 2px;
+  --ps-nav-icon: 7px;
+  --ps-nav-group-font: 6px;
+  --ps-nav-section-gap: 2px;
+}
+.set-mini .shell .ps-nav-heading {
+  padding: 0 2px;
+}
+.set-mini .shell .ps-nav-group + .ps-nav-group {
+  padding-top: 2px;
+}
+.set-mini .shell .ps-nav-item::before {
+  width: 3px;
+  height: 3px;
+  inset-inline-start: 2px;
+}
+.set-mini .shell .ps-navigation[data-nav-style="dot"] .ps-nav-item {
+  padding-inline-start: 6px;
+}
+
+.set-mini .shell-top > .ps-navigation { display:flex; }

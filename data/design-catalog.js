@@ -1,9 +1,9 @@
 /* One offline catalog for the browser, CLI and generated implementation briefs. */
 (function (root, factory) {
   if (typeof module === "object" && module.exports)
-    module.exports = factory(require("./ui-presets.js"));
-  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets);
-})(typeof globalThis !== "undefined" ? globalThis : this, function (ui) {
+    module.exports = factory(require("./ui-presets.js"), require("./navigation-designs.js"));
+  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets, root.PaletteNavigationDesigns);
+})(typeof globalThis !== "undefined" ? globalThis : this, function (ui, navigationDesigns) {
   "use strict";
   const {
     navigationPresets,
@@ -362,6 +362,8 @@
       set: id,
       motion: set.defaultMotion,
       navigation: set.defaultNavigation,
+      navigationStyle: {studio:"edge",bloom:"pill",precision:"outline",editorial:"underline",console:"fill",signal:"dot"}[id],
+      navigationStructure: {studio:"list",bloom:"list",precision:"grouped",editorial:"grouped",console:"rail",signal:"list"}[id],
       components: Object.fromEntries(
         components.map((c) => [
           c.id,
@@ -383,6 +385,12 @@
       if (!navigationPresets.some((n) => n.id === input.navigation))
         throw Error("Invalid design selection navigation");
       result.navigation = input.navigation;
+    }
+    for (const [field, choices] of [["navigationStyle", navigationDesigns.styles], ["navigationStructure", navigationDesigns.structures]]) {
+      if (input[field] !== undefined) {
+        if (!choices.some(choice => choice.id === input[field])) throw Error("Invalid design selection " + field);
+        result[field] = input[field];
+      }
     }
     const overrides = input.components === undefined ? {} : input.components;
     if (!overrides || typeof overrides !== "object" || Array.isArray(overrides))
@@ -416,6 +424,7 @@
         set.recommendationReason,
       motionBrief(selected.motion),
       navigationBrief(selected.navigation),
+      navigationDesigns.brief(selected.navigationStyle, selected.navigationStructure),
       "Apply the selected style radius, padding, gap and control height from selected-style.css; control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
       "",
       ...components.map(
@@ -446,6 +455,7 @@
     normalize,
     brief,
     navigationPresets,
+    navigationDesigns,
     navigationBrief,
     motionPresets,
     motionCSS,

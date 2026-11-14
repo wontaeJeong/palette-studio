@@ -36,6 +36,7 @@ const pathsToHash = [
   "catalog.js",
   "css/catalog.css",
   "data/design-catalog.js",
+  "data/navigation-designs.js",
   "data/ui-presets.js",
   "workspace.js",
   "css/workspace.css",

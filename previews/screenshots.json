@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "engine": "Chromium (Playwright)",
-  "browserVersion": "149.0.7827.55",
+  "browserVersion": "151.0.7922.34",
   "deviceScaleFactor": 1,
   "network": "offline",
   "sourceFiles": [
@@ -30,6 +30,8 @@
     "css/catalog.css",
     "data/design-catalog.js",
     "data/ui-presets.js",
+    "workspace.js",
+    "css/workspace.css",
     "scripts/capture-previews.cjs",
     "data/icon-parts/actions.js",
     "data/icon-parts/content.js",
@@ -40,42 +42,42 @@
     "data/icon-parts/system-extra.js",
     "data/icon-parts/system.js"
   ],
-  "sourceHash": "e99f83e40e03fabed4c60532168a96cd14321a9b2be347b171c55f28c160f9b2",
+  "sourceHash": "9eb47e7edef309bada624f30c4e0b4b5f9662840424151caf4d2e125783ab495",
   "screenshots": [
     {
       "path": "studio-overview-light.png",
       "width": 1440,
       "height": 980,
-      "bytes": 132273,
-      "sha256": "2deb44fdaf3d951ab888499e507d68cc1da57632a6018e0805ab2fe726a19251"
+      "bytes": 130179,
+      "sha256": "f26c7097aedd4c94ca295c113fb3096ad13490bebc548acbb33cdae19a79093f"
     },
     {
       "path": "studio-overview-dark.png",
       "width": 1440,
       "height": 980,
-      "bytes": 133161,
-      "sha256": "a154853281f7661d58c71366b9684efdfbf82eab094d0efd08cf7c14cf05b941"
+      "bytes": 130952,
+      "sha256": "9e811cd962f8e1cd5aa85d30c1de42f1d15ac2d744158e3caf059b6381a5de1e"
     },
     {
       "path": "studio-fonts-desktop.png",
       "width": 1440,
       "height": 980,
-      "bytes": 139139,
-      "sha256": "964edb2dc734dca3cb7609c53b04b1ae5baff746224ba9e713ef70b8f191ccd5"
+      "bytes": 100834,
+      "sha256": "ee04de6495387c2272888dcf84f902a46470784ae0ecbfd2e10f35235189fff1"
     },
     {
       "path": "studio-mobile-light.png",
       "width": 390,
       "height": 844,
-      "bytes": 60385,
-      "sha256": "6d3da079aebef5677b20abdc6d64e685018cbc9f21e6992aed52849ad62a2982"
+      "bytes": 47418,
+      "sha256": "b0c9b7b4ad5ce0302718e216b4b0e6507971e0990584829906a76361cab15892"
     },
     {
       "path": "studio-mobile-dark.png",
       "width": 390,
       "height": 844,
-      "bytes": 60826,
-      "sha256": "7c49d9fb6f0c4cbf0a088a0e927352e5201d0f7ec531c522f2744cf4991bc050"
+      "bytes": 47757,
+      "sha256": "9b2ecebaa75062024e18ebf92732d0e12be208fc601171556c9fee3291e0669d"
     },
     {
       "path": "icon-studio-desktop.png",
@@ -88,8 +90,8 @@
       "path": "icon-studio-dark.png",
       "width": 1460,
       "height": 990,
-      "bytes": 137167,
-      "sha256": "7db3ca65ba32d0d8dabf3d38512a55d8131840906ffabad0560a56e1116e1f8b"
+      "bytes": 137157,
+      "sha256": "080ef7cee3a006e46111c58db9b9e3270d5d512fb51e9a0dec699d985a1ad81b"
     },
     {
       "path": "icon-studio-mobile.png",
@@ -102,22 +104,22 @@
       "path": "agent-handoff-desktop.png",
       "width": 1460,
       "height": 990,
-      "bytes": 177658,
-      "sha256": "00accba4b5d1e4f2523276f622ebcc769e2ca49b4a21c1e0895f6f64ca0a99f9"
+      "bytes": 177659,
+      "sha256": "a579229251b5c8185da3c31ef2b92335c5e6d5d97e019477274252d8ac31f0e4"
     },
     {
       "path": "agent-handoff-dark.png",
       "width": 1460,
       "height": 990,
-      "bytes": 164478,
-      "sha256": "234f78d8dac203a7481471b580af3c2e609a1fc847c600d909ee9594d1b5142d"
+      "bytes": 164480,
+      "sha256": "c4946c1f34ce3ad486aa67cbab4b9a00e4cee890017f96641c5228767f41e54c"
     },
     {
       "path": "agent-handoff-mobile.png",
       "width": 390,
       "height": 3416,
-      "bytes": 198967,
-      "sha256": "f80e22e8b42c1bafe4be4cdfb17629deca4071e0f22d3acdf0f46cecb7e2b7d9"
+      "bytes": 198968,
+      "sha256": "70a70babaa74fc5b0f5a88f2292d60d7ec86051574ada88813d10945c0cc63ef"
     },
     {
       "path": "design-catalog-desktop.png",
@@ -151,8 +153,8 @@
       "path": "design-catalog-motion.png",
       "width": 1440,
       "height": 1200,
-      "bytes": 123202,
-      "sha256": "ad4d53a89e21f69218c184a87d19bbea7dc87b0fc43963250587d57fc68050e1"
+      "bytes": 123216,
+      "sha256": "2a6a54b4dc1b2b67aa13214f32c9b1f8684c0c27fcc944a7e53f194e65cf496f"
     },
     {
       "path": "design-catalog-ui-dark.png",
@@ -165,8 +167,8 @@
       "path": "design-catalog-mobile.png",
       "width": 390,
       "height": 7613,
-      "bytes": 460460,
-      "sha256": "a77d912f8e207d8b0c6d411e9e5576ae55e0e666c90d1f1628e051b4507fdb66"
+      "bytes": 460421,
+      "sha256": "fded2ead59b152570e583bafa9847a9a607fdb63c8fa63e628647ee9d7a49737"
     }
   ]
 }

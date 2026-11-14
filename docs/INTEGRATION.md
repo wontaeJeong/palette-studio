@@ -42,7 +42,7 @@
 
 첫 페인트 깜박임을 줄이는 `examples/theme-init.js`는 `<head>`에서 CSS보다 먼저 실행할 수 있습니다. CSP가 있는 앱은 기존 nonce/hash 또는 외부 script 정책에 맞춰 사용하세요. 그 정책을 완화할 필요는 없습니다. SSR이면 서버 쿠키·기존 프레임워크 테마 처리와 중복되지 않게 조정합니다.
 
-폰트 선택은 컬러 변경 범위와 별개이며 두 모드에 공통입니다. 기존 로더에 `design-profile.json`의 fonts 정책을 병합하세요. `selected-theme.css`에도 폰트 정의가 들어 있으므로 별도로 `selected-fonts.css`까지 중복 import하지 않습니다. 라이선스·CSP·경로는 `docs/FONTS.md`를 따릅니다.
+폰트 선택은 컬러 변경 범위와 별개이며 두 모드에 공통입니다. 기존 로더에 `design-profile.json`의 fonts 정책을 병합하세요. 통합 작업실과 CLI의 `selected-theme.css`는 색상 토큰을, `selected-fonts.css`는 글꼴 선언을 담당합니다. 선택한 스타일 수치가 필요하면 `selected-style.css`도 연결하고, 각 파일은 한 번만 import합니다. 라이선스·CSP·경로는 `docs/FONTS.md`를 따릅니다.
 
 포털로 렌더링하는 dialog/tooltip은 토큰을 읽는 DOM 범위 밖으로 나가지 않도록 합니다. 앱 토큰을 `html`에 두면 보통 body 포털도 상속합니다. 일부 패널에만 토큰을 둘 때는 포털 컨테이너도 같은 테마 범위로 맞춰야 합니다. 미리보기는 각 테마 범위 안에 dialog를 배치합니다.
 

@@ -23,6 +23,11 @@ const options = {
       }
     : {}),
 };
+async function setFontSource(page, value) {
+  await page.locator("#open-export").click();
+  await page.selectOption("#font-source", value);
+  await page.keyboard.press("Escape");
+}
 async function main() {
   let browser = await chromium.launch(options);
   const report = {
@@ -85,14 +90,17 @@ async function main() {
     const page = await context.newPage();
     page.on("pageerror", (e) => report.errors.push(e.message));
     await page.goto(base + "/index.html#fontSource=cdn-first");
-    await page.click('[data-step="fonts"]');
+    await page.locator("#typography-options > summary").click();
+    await page.locator(".font-library > summary").click();
+    await page.locator(".font-card").first().waitFor();
     await page.evaluate(() => PaletteStudio.readyFonts());
     let status = await page.evaluate(() => PaletteFonts.getStatus());
     assert.equal(status.body.source, "cdn");
     assert.equal(status.code.source, "cdn");
     assert.equal(await page.locator(".font-card").count(), 24);
     report.passed.push("default CDN source loading + 24-card catalog");
-    await page.selectOption("#font-combo", "enterprise");
+    await page.selectOption("#body-font", "ibm-plex-sans-kr");
+    await page.selectOption("#code-font", "ibm-plex-mono");
     await page.evaluate(() => PaletteStudio.readyFonts());
     assert.equal(
       await page.locator("#body-font").inputValue(),
@@ -103,7 +111,9 @@ async function main() {
       "ibm-plex-mono",
     );
     let profile = await page.evaluate(() => PaletteStudio.profile());
-    assert(profile.fonts.fonts.some((f) => f.id === "d2coding"));
+    assert(
+      (await page.evaluate(() => PaletteStudio.fontCSS())).includes("D2Coding"),
+    );
     assert.equal(profile.fonts.source, "cdn-first");
     assert(
       (await page.evaluate(() => PaletteStudio.fontCSS())).includes(
@@ -111,7 +121,7 @@ async function main() {
       ),
     );
     report.passed.push(
-      "suggested pair + Unicode ranges + Korean code fallback in CSS/profile",
+      "role-specific pair + Unicode ranges + Korean code fallback in CSS",
     );
     assert.equal(
       await page.locator("#code-font-gallery .font-card").count(),
@@ -121,7 +131,6 @@ async function main() {
     await page.evaluate(() => PaletteStudio.readyFonts());
     assert.equal(await page.locator("#code-font").inputValue(), "fira-code");
     report.passed.push("separate role catalog + apply from font card");
-    await page.click('[data-font-filter="all"]');
     await page.locator("#body-font-search").fill("Noto Serif");
     assert.equal(
       await page.locator("#body-font-gallery .font-card").count(),
@@ -147,7 +156,7 @@ async function main() {
       "jetbrains-mono",
     );
     report.passed.push("font settings persist in selection link + storage");
-    await page.selectOption("#font-source", "system");
+    await setFontSource(page, "system");
     await page.evaluate(() => PaletteStudio.readyFonts());
     assert(
       !(await page.evaluate(() => PaletteStudio.fontCSS())).includes(
@@ -176,7 +185,9 @@ async function main() {
     );
     await fs.copyFile(path.join(root, "START-HERE.html"), solo);
     await offline.goto("file://" + solo + "#fontSource=cdn-first");
-    await offline.click('[data-step="fonts"]');
+    await offline.locator("#typography-options > summary").click();
+    await offline.locator(".font-library > summary").click();
+    await offline.locator(".font-card").first().waitFor();
     await offline.evaluate(() => PaletteStudio.readyFonts());
     status = await offline.evaluate(() => PaletteFonts.getStatus());
     assert(
@@ -189,7 +200,7 @@ async function main() {
     report.passed.push(
       "blocked CDN -> embedded fallback after standalone HTML is moved",
     );
-    await offline.selectOption("#font-source", "local-only");
+    await setFontSource(offline, "local-only");
     await offline.evaluate(() => PaletteStudio.readyFonts());
     for (const font of catalog.fonts) {
       const result = await offline.evaluate(async (id) => {
@@ -215,11 +226,6 @@ async function main() {
     await offline.selectOption("#body-font", "pretendard");
     await offline.selectOption("#code-font", "d2coding");
     await offline.evaluate(() => PaletteStudio.readyFonts());
-    await offline
-      .locator(".studio-font-details")
-      .first()
-      .locator("summary")
-      .click();
     await offline.evaluate(() => scrollTo(0, 0));
     await offline.screenshot({
       path: path.join(root, "previews/typography-picker.png"),
@@ -244,7 +250,7 @@ async function main() {
     offline.on("request", (r) => {
       if (/^https?:/.test(r.url())) net.push(r.url());
     });
-    await offline.selectOption("#font-source", "system");
+    await setFontSource(offline, "system");
     await offline.evaluate(() => PaletteStudio.readyFonts());
     assert.equal(net.length, 0);
     report.passed.push("system switch makes no CDN requests");

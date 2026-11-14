@@ -2,7 +2,7 @@
   "families": 24,
   "passed": [
     "default CDN source loading + 24-card catalog",
-    "suggested pair + Unicode ranges + Korean code fallback in CSS/profile",
+    "role-specific pair + Unicode ranges + Korean code fallback in CSS",
     "separate role catalog + apply from font card",
     "font settings persist in selection link + storage",
     "system export has no downloadable font declarations",

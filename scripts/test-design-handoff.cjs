@@ -15,6 +15,7 @@ const icons = fs.readdirSync(path.join(root,"data/icon-parts")).filter((n)=>n.en
   });
 const defaults = core.defaults(catalog, fonts, icons);
 const testCases = [
+  {fonts:{body:"inter",code:"jetbrains-mono",source:"local-only"},icons:["house"]},
   {target:"existing-app",scope:"dark-only",layout:"existing",fonts:{body:"system",code:"system",source:"system"},icons:["house","search"]},
   {target:"existing-app",scope:"light-only",layout:"workflow",fonts:{body:"system",code:"system",source:"system"},icons:["check"]},
   {target:"new-app",scope:"both",layout:"dashboard",fonts:{body:"pretendard",code:"d2coding",source:"local-only"},icons:["shield-check"]},
@@ -26,6 +27,10 @@ assert.equal(icons.length,95);
 assert.throws(() => core.normalize({palette:"not-a-palette"},catalog,fonts,icons),/Invalid palette/);
 assert.throws(() => core.normalize({icons:["../../../secret"]},catalog,fonts,icons),/Invalid icon/);
 assert.throws(() => core.normalize({scope:"all-modes"},catalog,fonts,icons),/Invalid scope/);
+const english = core.normalize({fonts:{body:'inter',code:'jetbrains-mono',source:'local-only'}},catalog,fonts,icons);
+assert(core.chosenFonts(english,fonts).some(f=>f?.id==='d2coding'),'English code font must ship its Korean fallback');
+assert(core.fontCSS(english,fonts).includes('unicode-range:'),'Unicode subsets must retain their glyph ranges');
+assert(core.fontCSS(english,fonts).includes('"JetBrains Mono", "D2Coding"'),'Export must match the preview Korean fallback stack');
 const temp = fs.mkdtempSync(path.join(os.tmpdir(),"palette-handoff-test-"));
 try {
   testCases.forEach((testCase, index) => {

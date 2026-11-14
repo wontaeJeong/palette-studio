@@ -20,6 +20,7 @@
         })[c],
     );
   const params = new URLSearchParams(location.hash.slice(1));
+  window.PaletteInitialView = Object.fromEntries(params);
   let config,
     theme = "light",
     active = null,
@@ -44,16 +45,86 @@
     );
   try {
     let candidate;
-    if (params.has("selection"))
-      candidate = JSON.parse(params.get("selection"));
-    else {
-      const stored = JSON.parse(
-        localStorage.getItem("palette-studio-handoff-v1") || "null",
+    if (params.has("selection") || params.has("catalogConfig"))
+      candidate = JSON.parse(
+        params.get("selection") || params.get("catalogConfig"),
       );
-      candidate = stored || initial();
+    else {
+      let stored;
+      try {
+        stored = JSON.parse(
+          localStorage.getItem("palette-studio-handoff-v1") || "null",
+        );
+      } catch {
+        recovery =
+          "저장된 선택을 읽지 못했습니다. 링크의 선택값을 우선 사용합니다.";
+      }
+      let legacy = {};
+      try {
+        legacy = JSON.parse(localStorage.getItem("palette-studio-v1") || "{}");
+      } catch {}
+      if (!legacy || typeof legacy !== "object" || Array.isArray(legacy))
+        legacy = {};
+      candidate = stored || {
+        ...initial(),
+        ...legacy,
+        fonts: {
+          body: legacy.bodyFont || initial().fonts.body,
+          code: legacy.codeFont || initial().fonts.code,
+          source: legacy.fontSource || initial().fonts.source,
+        },
+      };
     }
-    if (!candidate || typeof candidate !== "object" || Array.isArray(candidate))
-      throw Error("Invalid selection");
+    if (
+      !candidate ||
+      typeof candidate !== "object" ||
+      Array.isArray(candidate)
+    ) {
+      if (params.has("selection") || params.has("catalogConfig"))
+        throw Error("Invalid selection");
+      candidate = initial();
+      recovery =
+        "저장된 설정을 복원할 수 없어 기본값에서 시작합니다. 링크의 선택값을 우선 사용합니다.";
+    }
+    if (!params.has("selection") && !params.has("catalogConfig")) {
+      // Recover persisted data before applying the link's explicit choices.
+      if (candidate.target === "existing-gate") {
+        candidate.target = "existing-app";
+        candidate.scope = "dark-only";
+      }
+      try {
+        candidate = core.normalize(candidate, palettes, fonts, icons);
+      } catch {
+        candidate = initial();
+        recovery =
+          "저장된 설정이 오래되어 기본값을 복원했습니다. 링크의 선택값을 우선 사용합니다.";
+      }
+      for (const key of [
+        "palette",
+        "style",
+        "target",
+        "scope",
+        "layout",
+        "framework",
+        "project",
+      ])
+        if (params.has(key)) candidate[key] = params.get(key);
+      if (candidate.target === "existing-gate") {
+        candidate.target = "existing-app";
+        candidate.scope = "dark-only";
+      }
+      candidate.fonts = { ...candidate.fonts };
+      for (const [key, name] of [
+        ["bodyFont", "body"],
+        ["codeFont", "code"],
+        ["fontSource", "source"],
+      ])
+        if (params.has(key)) candidate.fonts[name] = params.get(key);
+      if (params.has("icons"))
+        candidate.icons = params.get("icons").split(",").filter(Boolean);
+      if (params.has("designSelection"))
+        candidate.designSelection = JSON.parse(params.get("designSelection"));
+    }
     config = core.normalize(
       {
         ...candidate,
@@ -225,9 +296,10 @@
       );
     } catch {}
     // Explicit fragment carries the configuration across file:// storage isolation.
-    $("open-handoff").href =
-      "handoff.html#catalogConfig=" +
-      encodeURIComponent(JSON.stringify(linked));
+    if ($("open-handoff"))
+      $("open-handoff").href =
+        "handoff.html#catalogConfig=" +
+        encodeURIComponent(JSON.stringify(linked));
   }
   function shell(navigation, mini = false) {
     return (
@@ -515,16 +587,33 @@
     renderSets();
     renderComponents();
     persist();
-    window.PaletteFonts.apply({
-      bodyFont: config.fonts.body,
-      codeFont: config.fonts.code,
-      fontSource: config.fonts.source,
-    });
+    const fontKey = JSON.stringify(config.fonts);
+    if (fontKey !== appliedFontKey) {
+      appliedFontKey = fontKey;
+      fontsReady = window.PaletteFonts.apply({
+        bodyFont: config.fonts.body,
+        codeFont: config.fonts.code,
+        fontSource: config.fonts.source,
+      });
+    }
+    window.dispatchEvent(
+      new CustomEvent("palette-selection", { detail: linkConfig() }),
+    );
   }
   function chooseSet(id) {
     const set = designs.sets.find((s) => s.id === id);
     config = core.normalize(
-      { ...config, ...set.config, designSelection: designs.selection(id) },
+      {
+        ...config,
+        ...set.config,
+        project: config.project,
+        target: config.target,
+        scope: config.scope,
+        framework: config.framework,
+        layout: config.layout,
+        fonts: { ...set.config.fonts, source: config.fonts.source },
+        designSelection: designs.selection(id),
+      },
       palettes,
       fonts,
       icons,
@@ -597,7 +686,7 @@
     void sample.offsetWidth;
     sample.classList.add("ps-motion-" + b.dataset.motionPlay);
   });
-  $("download-motion").addEventListener("click", () =>
+  $("download-motion")?.addEventListener("click", () =>
     download("selected-motion.css", core.motionCSS(config)),
   );
   for (const key of ["palette", "style"])
@@ -740,7 +829,7 @@
   $("copy-brief").addEventListener("click", () =>
     copy(core.agentTask(config, palettes)),
   );
-  $("download-brief").addEventListener("click", () =>
+  $("download-brief")?.addEventListener("click", () =>
     download("AGENT-TASK.md", core.agentTask(config, palettes)),
   );
   $("download-config").addEventListener("click", () =>
@@ -749,6 +838,18 @@
   $("share-selection").addEventListener("click", () => copy(shareURL()));
   window.PaletteCatalog = {
     getConfig: () => JSON.parse(JSON.stringify(config)),
+    update(patch) {
+      config = core.normalize(
+        { ...config, ...patch, fonts: { ...config.fonts, ...patch.fonts } },
+        palettes,
+        fonts,
+        icons,
+      );
+      render();
+    },
+    readyFonts: () => fontsReady,
+    demo,
   };
+  let fontsReady, appliedFontKey;
   render();
 })();

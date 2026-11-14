@@ -161,12 +161,19 @@
     ].join("\n");
   }
   function chosenFonts(config, fontCatalog) {
-    return ["body", "code"].map(function (role) {
+    var selected = ["body", "code"].map(function (role) {
       var id = config.fonts[role];
       return id === "system" ? null : fontCatalog.fonts.find(function (f) {
         return f.id === id && f.role === role;
       });
     });
+    if (config.fonts.source !== "system") selected.slice().forEach(function (font, index) {
+      if (font && font.korean === false) {
+        var fallback = fontCatalog.fonts.find(function (f) { return f.id === (index === 0 ? "pretendard" : "d2coding"); });
+        if (fallback && !selected.some(function (f) { return f && f.id === fallback.id; })) selected.push(fallback);
+      }
+    });
+    return selected;
   }
   function fontCSS(config, fontCatalog) {
     var faces = [], names = [];
@@ -182,13 +189,13 @@
         faces.push('@font-face {\n  font-family: "' +
           font.family.replace(/"/g, "") + '";\n  src: ' + src.join(", ") +
           ';\n  font-style: normal;\n  font-weight: ' + face.weight +
-          ';\n  font-display: swap;\n}');
+          ';\n  font-display: swap;\n' + (face.unicodeRange ? '  unicode-range: ' + face.unicodeRange + ';\n' : '') + '}');
       }
     });
     var body = config.fonts.source === "system" || !fontList[0] ?
-      "system-ui, -apple-system, sans-serif" : '"' + names[0] + '", system-ui, sans-serif';
+      "system-ui, -apple-system, sans-serif" : '"' + names[0] + '", ' + (fontList[0].korean === false ? '"Pretendard Variable", ' : '') + 'system-ui, sans-serif';
     var code = config.fonts.source === "system" || !fontList[1] ?
-      "ui-monospace, SFMono-Regular, monospace" : '"' + names[1] + '", ui-monospace, monospace';
+      "ui-monospace, SFMono-Regular, monospace" : '"' + names[1] + '", ' + (fontList[1].korean === false ? '"D2Coding", ' : '') + 'ui-monospace, monospace';
     return ["/* Font CSS; local font assets are included by the CLI generator. */",
       ...faces, ":root {", "  --kit-font-sans: " + body + ";",
       "  --kit-font-mono: " + code + ";", "}", ""].join("\n\n");

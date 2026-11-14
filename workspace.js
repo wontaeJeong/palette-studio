@@ -213,7 +213,7 @@
           navigation = config.designSelection.navigation;
         const demo = (id) => catalog.demo(id, v[id], true, mode + "-" + index);
         const nav = `<nav class="mock-nav" aria-label="샘플 프로젝트 메뉴"><button type="button" aria-current="page">${svg(config.icons[0] || "layout-dashboard")}<span>프로젝트</span></button><button type="button" data-preview-notice="settings">${svg("settings")}<span>설정</span></button></nav>`;
-        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "LIGHT" : "DARK"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} My Workspace</strong><span>Product Team</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><small>WORKSPACE / OVERVIEW</small><h3>좋은 아이디어를,<br>다음 프로젝트로.</h3><p>팀의 작업을 한눈에 확인하세요.</p></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form treatment ${v.input}"><h4>새 프로젝트</h4><label>프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : v.button === "outline" ? "mock-outline" : ""}">${svg("plus", 16)}프로젝트 추가</button></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
+        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-concept="${config.designSelection.concept}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "LIGHT" : "DARK"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} My Workspace</strong><span>Product Team</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><small>WORKSPACE / OVERVIEW</small><h3>좋은 아이디어를,<br>다음 프로젝트로.</h3><p>팀의 작업을 한눈에 확인하세요.</p></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form treatment ${v.input}"><h4>새 프로젝트</h4><label>프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : v.button === "outline" ? "mock-outline" : ""}">${svg("plus", 16)}프로젝트 추가</button></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
   name: "My Workspace",
   ready: true
 };</code></pre></div></div></section>`;
@@ -231,6 +231,8 @@
     ];
     $("export-summary").textContent =
       kit.palettes.find((p) => p.id === config.palette).name +
+      " · " +
+      window.PaletteDesignConcepts.get(config.designSelection.concept).name +
       " · " +
       kit.styles.find((s) => s.id === config.style).name +
       " · " +
@@ -446,11 +448,36 @@
       : "미리보기 확대";
     $("preview-panel").classList.toggle("expanded", expanded);
   });
+  // Pointer focus must not move the control between pointerdown and pointerup.
+  let pointerFocus = false;
+  document.addEventListener(
+    "pointerdown",
+    () => {
+      pointerFocus = true;
+    },
+    true,
+  );
+  document.addEventListener(
+    "keydown",
+    () => {
+      pointerFocus = false;
+    },
+    true,
+  );
+  for (const event of ["pointerup", "pointercancel"])
+    document.addEventListener(
+      event,
+      () => {
+        pointerFocus = false;
+      },
+      true,
+    );
   $("selection-panel").addEventListener("focusin", () => {
     if (innerWidth >= 1000) return;
     $("preview-panel").classList.remove("expanded");
     $("toggle-preview").setAttribute("aria-expanded", "false");
     $("toggle-preview").textContent = "미리보기 확대";
+    if (pointerFocus) return;
     document.activeElement.scrollIntoView({
       block: "center",
       behavior: "instant",

@@ -158,7 +158,7 @@
       "  --ui-shadow: " + s.shadow + ";",
       "}",
       ""
-    ].join("\n");
+    ].join("\n") + (config.designSelection ? designs.concepts.css(designs.normalize(config.designSelection).concept) : "");
   }
   function chosenFonts(config, fontCatalog) {
     var selected = ["body", "code"].map(function (role) {

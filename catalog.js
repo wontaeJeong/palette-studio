@@ -24,7 +24,6 @@
   let config,
     theme = "light",
     active = null,
-    toastTimer,
     statusTimer;
   let recovery = "";
   try {
@@ -122,6 +121,11 @@
         if (params.has(key)) candidate.fonts[name] = params.get(key);
       if (params.has("icons"))
         candidate.icons = params.get("icons").split(",").filter(Boolean);
+      if (params.has("concept"))
+        candidate.designSelection = {
+          ...(candidate.designSelection || designs.selection("studio")),
+          concept: params.get("concept"),
+        };
       if (params.has("designSelection"))
         candidate.designSelection = JSON.parse(params.get("designSelection"));
     }
@@ -170,10 +174,39 @@
       checkbox:
         '<label class="sample-check sample-emphasis"><input type="checkbox" checked>업데이트 소식 받기</label><label class="sample-check sample-emphasis"><input type="checkbox">주간 요약 받기</label>',
       toast: preview
-        ? '<div class="sample-box sample-emphasis">✓ 변경 내용을 저장했습니다.</div>'
-        : button("저장 알림 띄우기", "toast", true),
+        ? '<div class="sample-box sample-feedback">' +
+          window.PaletteComponentDemos.icon("circle-check") +
+          "<div><strong>변경 내용을 저장했습니다</strong><p>팀과 공유할 준비가 되었습니다.</p></div></div>"
+        : '<div class="sample-actions">' +
+          [
+            ["success", "저장 완료"],
+            ["info", "안내"],
+            ["warning", "주의"],
+            ["error", "오류"],
+          ]
+            .map(([status, label]) =>
+              button(label, "toast", status === "success").replace(
+                'data-demo="toast"',
+                'data-demo="toast" data-toast-status="' + status + '"',
+              ),
+            )
+            .join("") +
+          '</div><p class="demo-hint" data-save-state>저장한 디자인을 알림에서 되돌릴 수 있습니다.</p><div class="sample-box sample-danger persistent-error" hidden><strong>동기화되지 않은 변경 내용</strong><p>연결을 확인한 후 다시 시도하세요. 작성한 내용은 보관됩니다.</p>' +
+          button("다시 시도", "toast").replace(
+            'data-demo="toast"',
+            'data-demo="toast" data-toast-status="success"',
+          ) +
+          "</div>",
+      popover: preview
+        ? '<div class="sample-box"><h4>표시 설정</h4><p>완료한 프로젝트 포함</p><span class="sample-badge">설정 적용</span></div>'
+        : button("표시 설정", "popover").replace(
+            "<button ",
+            '<button aria-haspopup="dialog" aria-expanded="false" ',
+          ),
       alert:
-        '<div class="sample-box sample-warning"><strong>△ 입력 확인 필요</strong><p>변경 내용을 한 번 더 확인하세요.</p></div>',
+        '<div class="sample-box sample-warning sample-feedback">' +
+        window.PaletteComponentDemos.icon("triangle-alert") +
+        '<div><strong>입력 확인 필요</strong><p>이메일 주소를 확인하고 다시 저장하세요.</p><a href="#detail-title">입력 기준 확인</a></div></div>',
       dialog: preview
         ? '<div class="sample-box"><h4 class="sample-emphasis">변경 내용을 저장할까요?</h4><p>작업 내용을 반영합니다.</p><div class="sample-actions"><span class="sample-badge">취소</span><span class="sample-badge sample-primary">저장</span></div></div>'
         : button("확인창 열어보기", "dialog", true),
@@ -189,15 +222,18 @@
         '<span id="' +
         uid +
         '" class="tip" role="tooltip"' +
-        (preview ? ' style="display:block"' : "") +
+        (preview ? " data-static-tip" : " hidden") +
         ">프로젝트 설정을 표시합니다.</span></div>",
       menu: preview
-        ? '<div class="sample-box sample-emphasis">프로젝트 동작 ▾<hr>이름 바꾸기<br>복제하기</div>'
-        : '<details><summary class="sample-button sample-emphasis">프로젝트 동작 ▾</summary><ul class="menu-items"><li>' +
-          button("이름 바꾸기", "action") +
-          "</li><li>" +
-          button("복제하기", "action") +
-          "</li></ul></details>",
+        ? '<div class="sample-box"><h4>프로젝트 동작</h4><p>이름 바꾸기</p><span>복제하기</span></div>'
+        : button(
+            "프로젝트 동작 " +
+              window.PaletteComponentDemos.icon("chevron-down"),
+            "menu",
+          ).replace(
+            "<button ",
+            '<button aria-haspopup="menu" aria-expanded="false" ',
+          ),
       tabs:
         '<div class="sample-tabs" role="tablist" aria-label="프로젝트 내용"><button type="button" class="sample-tab sample-emphasis" role="tab" id="' +
         uid +
@@ -218,11 +254,30 @@
         '<nav class="sample-actions" aria-label="페이지"><button type="button" class="sample-button" data-page="prev" aria-label="이전 페이지" disabled>‹</button><span class="sample-badge sample-emphasis" aria-current="page" data-page-number>1 / 3</span><button type="button" class="sample-button" data-page="next" aria-label="다음 페이지">›</button></nav>',
       card: '<article class="sample-box"><h4 class="sample-emphasis">샘플 프로젝트</h4><p>담당 팀: Product Team</p><span class="sample-badge">멤버 3명</span></article>',
       badge:
-        '<div class="sample-actions"><span class="sample-badge sample-emphasis">진행 중</span><span class="sample-badge sample-success">✓ 완료</span></div>',
+        '<div class="sample-actions">' +
+        [
+          ["success", "circle-check", "완료"],
+          ["review", "clock", "검토"],
+          ["rejected", "circle-x", "거절"],
+          ["failed", "triangle-alert", "실패"],
+        ]
+          .map(
+            ([status, glyph, label]) =>
+              '<span class="sample-badge sample-' +
+              status +
+              '">' +
+              window.PaletteComponentDemos.icon(glyph) +
+              label +
+              "</span>",
+          )
+          .join("") +
+        "</div>",
       accordion:
         '<details class="sample-box"><summary class="sample-emphasis">어떻게 시작하나요?</summary><p>세트를 고르고 프로젝트에 필요한 요소를 확인하세요.</p></details>',
       empty:
-        '<div class="sample-empty"><strong class="sample-emphasis">등록된 프로젝트 없음</strong><p>프로젝트를 추가하면 목록에 표시됩니다.</p>' +
+        '<div class="sample-empty"><span class="empty-symbol">' +
+        window.PaletteComponentDemos.icon("folder-open") +
+        '</span><strong class="sample-emphasis">등록된 프로젝트 없음</strong><p>프로젝트를 추가하면 목록에 표시됩니다.</p>' +
         button("프로젝트 만들기", "action", variant === "solid") +
         "</div>",
     }[id];
@@ -330,6 +385,8 @@
           esc(config.palette) +
           '" data-style="' +
           esc(config.style) +
+          '" data-concept="' +
+          config.designSelection.concept +
           '"><span class="pane-label">' +
           (mode === "light" ? "Light" : "Dark") +
           "</span>" +
@@ -356,6 +413,8 @@
                 set.palette +
                 '" data-style="' +
                 set.style +
+                '" data-concept="' +
+                designs.selection(set.id).concept +
                 '"><span class="pane-label">' +
                 (mode === "light" ? "Light" : "Dark") +
                 "</span>" +
@@ -376,6 +435,61 @@
       )
       .join("");
   }
+  function renderConcepts() {
+    const chosen = config.designSelection.concept;
+    if ($("concept-grid"))
+      $("concept-grid").innerHTML = designs.concepts.concepts
+        .map(
+          (c) =>
+            '<button type="button" class="concept-card" data-choose-concept="' +
+            c.id +
+            '" aria-pressed="' +
+            (c.id === chosen) +
+            '"><span class="concept-mini" data-concept="' +
+            c.id +
+            '" data-palette="' +
+            config.palette +
+            '" data-theme="' +
+            theme +
+            '"><span class="concept-surface"><span class="concept-kicker">PROJECT / 03</span><strong class="concept-title">새로운 시작</strong><span class="concept-lines"><i></i><i></i></span><span class="mini-action">프로젝트 열기</span></span></span><span class="concept-caption"><strong>' +
+            c.name +
+            "</strong><small>" +
+            c.traits.slice(0, 2).join(" · ") +
+            "</small></span></button>",
+        )
+        .join("");
+    if ($("catalog-concept")) {
+      $("catalog-concept").innerHTML = designs.concepts.concepts
+        .map((c) => '<option value="' + c.id + '">' + c.name + "</option>")
+        .join("");
+      $("catalog-concept").value = chosen;
+    }
+    if ($("concept-description"))
+      $("concept-description").textContent =
+        designs.concepts.get(chosen).description;
+  }
+  function chooseConcept(id) {
+    config = core.normalize(
+      {
+        ...config,
+        designSelection: { ...config.designSelection, concept: id },
+      },
+      palettes,
+      fonts,
+      icons,
+    );
+    render();
+    document
+      .querySelector('[data-choose-concept="' + id + '"]')
+      ?.focus({ preventScroll: true });
+  }
+  $("concept-grid")?.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-choose-concept]");
+    if (b) chooseConcept(b.dataset.chooseConcept);
+  });
+  $("catalog-concept")?.addEventListener("change", (e) =>
+    chooseConcept(e.target.value),
+  );
   function renderPalettes(set) {
     const group = (label, rows) =>
       '<optgroup label="' +
@@ -505,6 +619,7 @@
           "</button>",
       )
       .join("");
+    window.PaletteComponentDemos.cleanup();
     $("detail-demo").innerHTML = paired((mode) =>
       demo(active, variant, false, mode),
     );
@@ -555,6 +670,7 @@
         .join("") +
       [
         ["프리셋", set.name],
+        ["콘셉트", designs.concepts.get(config.designSelection.concept).name],
         [
           "메뉴 배치",
           designs.navigationPresets.find(
@@ -570,7 +686,7 @@
         ["디자인 모드", "Light + Dark"],
         ["색상", p.name],
         ["형태", s.name],
-        ["개별 변경", custom + " / 18"],
+        ["개별 변경", custom + " / " + designs.components.length],
         ["본문 폰트", config.fonts.body],
         ["적용 범위", config.scope],
       ]
@@ -585,6 +701,7 @@
         .join("");
     $("agent-brief").value = core.agentTask(config, palettes);
     renderSets();
+    renderConcepts();
     renderComponents();
     persist();
     const fontKey = JSON.stringify(config.fonts);
@@ -726,32 +843,7 @@
     const b = e.target.closest("[data-demo]");
     if (b) {
       const mode = b.closest("[data-theme]")?.dataset.theme || "light";
-      for (const id of ["demo-toast", "demo-dialog", "demo-drawer"]) {
-        $(id).dataset.theme = mode;
-        $(id).dataset.palette = config.palette;
-        $(id).dataset.style = config.style;
-      }
-      if (b.dataset.demo === "toast") {
-        $("component-dialog").append($("demo-toast"));
-        clearTimeout(toastTimer);
-        $("demo-toast").hidden = false;
-        const variant = config.designSelection.components.toast;
-        $("demo-toast").className = "demo-toast treatment " + variant;
-        $("demo-toast").style.width = "auto";
-        toastTimer = setTimeout(() => ($("demo-toast").hidden = true), 5000);
-      } else if (b.dataset.demo === "dialog") {
-        $("demo-dialog").dataset.treatment =
-          config.designSelection.components.dialog;
-        $("demo-dialog").showModal();
-      } else if (b.dataset.demo === "drawer") {
-        $("demo-drawer").dataset.treatment =
-          config.designSelection.components.drawer;
-        $("demo-drawer").showModal();
-      } else if (b.dataset.demo === "tooltip") {
-        const tip = b.parentElement.querySelector(".tip");
-        tip.hidden = false;
-        tip.style.display = "block";
-      } else
+      if (!window.PaletteComponentDemos.handle(b))
         notice(
           b.dataset.demo === "cancel"
             ? "취소했습니다."
@@ -800,32 +892,13 @@
       selectTab(tabs[next]);
       tabs[next].focus();
     }
-    if (e.key === "Escape")
-      document.querySelectorAll(".tip").forEach((t) => {
-        t.hidden = true;
-        t.style.display = "none";
-      });
   });
   $("component-dialog").addEventListener("close", () => {
-    clearTimeout(toastTimer);
-    $("demo-toast").hidden = true;
-    document.body.append($("demo-toast"));
     const opener = $("component-grid").querySelector(
       '[data-component="' + active + '"]',
     );
     (opener || $("catalog-search")).focus({ preventScroll: true });
   });
-  $("dismiss-toast").addEventListener(
-    "click",
-    () => ($("demo-toast").hidden = true),
-  );
-  for (const event of ["mouseenter", "focusin"])
-    $("demo-toast").addEventListener(event, () => clearTimeout(toastTimer));
-  for (const event of ["mouseleave", "focusout"])
-    $("demo-toast").addEventListener(event, () => {
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => ($("demo-toast").hidden = true), 5000);
-    });
   $("copy-brief").addEventListener("click", () =>
     copy(core.agentTask(config, palettes)),
   );
@@ -851,5 +924,6 @@
     demo,
   };
   let fontsReady, appliedFontKey;
+  window.PaletteComponentDemos.init(() => config);
   render();
 })();

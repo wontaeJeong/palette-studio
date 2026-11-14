@@ -14174,7 +14174,414 @@ footer {
     display: none;
   }
 }
-.sample-switch{flex-shrink:0}
+.sample-switch {
+  flex-shrink: 0;
+}
+
+/* Refined shared samples and viewport-anchored overlays. */
+.treatment {
+  line-height: 1.65;
+}
+.sample-box h4 {
+  line-height: 1.4;
+}
+.sample-box p:last-child {
+  margin-bottom: 0;
+}
+.sample-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.sample-feedback > svg {
+  flex: none;
+  margin-top: 2px;
+}
+.sample-feedback p {
+  margin: 5px 0 8px;
+  font-size: 11px;
+}
+.sample-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-weight: 600;
+}
+.sample-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 550;
+}
+.sample-badge svg {
+  width: 13px;
+  height: 13px;
+}
+.sample-review {
+  background: var(--color-status-review);
+  color: var(--color-status-review-text);
+  border-color: var(--color-status-review-line);
+}
+.sample-rejected {
+  background: var(--color-status-rejected);
+  color: var(--color-status-rejected-text);
+  border-color: var(--color-status-rejected-line);
+}
+.sample-failed {
+  background: var(--color-status-failed);
+  color: var(--color-status-failed-text);
+  border-color: var(--color-status-failed-line);
+}
+.sample-danger {
+  background: var(--color-danger-subtle);
+  color: var(--color-danger);
+  border-color: var(--color-danger-line);
+}
+.sample-tabs {
+  border-bottom: 1px solid var(--color-line);
+  padding-bottom: 4px;
+}
+.sample-empty {
+  padding: 16px 4px;
+}
+.empty-symbol {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 12px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+.demo-hint {
+  color: var(--color-ink-muted);
+  font-size: 11px;
+  margin-top: 14px;
+}
+.sample-tooltip .tip {
+  display: none;
+  margin: 0;
+}
+.tip[popover] {
+  position: fixed;
+  inset: auto;
+  width: max-content;
+  max-width: min(280px, calc(100vw - 24px));
+  border: 1px solid var(--color-line-strong);
+  padding: 9px 12px;
+  margin: 0;
+  font: 12px/1.6 var(--kit-font-sans, system-ui);
+  overflow-wrap: anywhere;
+  box-shadow: 0 4px 16px #00000024;
+}
+.tip[popover]:popover-open {
+  display: block;
+}
+.tip[data-static-tip] {
+  display: block;
+  position: relative;
+  margin-top: 8px;
+  font-size: 10px;
+}
+.anchored-surface {
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  width: 288px;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-raised);
+  color: var(--color-ink);
+  box-shadow: 0 12px 36px #00000028;
+  font: 13px/1.6 var(--kit-font-sans, system-ui);
+}
+.anchored-surface p {
+  color: var(--color-ink-muted);
+  font-size: 12px;
+}
+.anchored-surface h3 {
+  font-size: 15px;
+  margin: 0;
+}
+.anchored-surface .sample-check {
+  margin: 12px 0;
+}
+.anchored-surface .sample-button {
+  margin-top: 8px;
+  width: 100%;
+}
+.overlay-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.overlay-eyebrow {
+  margin: 0 8px 8px;
+  font-weight: 650;
+}
+.anchored-surface[role="menu"] {
+  width: 240px;
+  padding: 8px;
+}
+.anchored-surface [role="menuitem"] {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  border: 0;
+  background: var(--color-raised);
+  text-align: left;
+}
+.anchored-surface [role="menuitem"]:focus {
+  background: var(--color-accent-subtle);
+  color: var(--color-accent-text);
+}
+.anchored-surface kbd {
+  margin-left: auto;
+}
+.anchored-surface hr {
+  border: 0;
+  border-top: 1px solid var(--color-line);
+}
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+.toast-stack {
+  position: fixed;
+  inset: auto 20px 20px auto;
+  width: min(384px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  padding: 6px;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+}
+.toast-stack:popover-open {
+  display: grid;
+  gap: 10px;
+}
+.toast-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px 10px 14px 16px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 12px;
+  background: var(--color-raised);
+  box-shadow: 0 6px 24px #00000024;
+  font: 12px/1.6 var(--kit-font-sans, system-ui);
+}
+.toast-content {
+  flex: 1;
+  min-width: 0;
+}
+.toast-title {
+  display: block;
+  line-height: 1.5;
+  padding-top: 2px;
+}
+.toast-content p {
+  color: var(--color-ink-muted);
+  font-size: 11px;
+  margin: 5px 0 0;
+}
+.toast-icon {
+  display: flex;
+  margin-top: 3px;
+}
+.toast-item[data-status="success"] .toast-icon {
+  color: var(--color-success);
+}
+.toast-item[data-status="info"] .toast-icon {
+  color: var(--color-info);
+}
+.toast-item[data-status="warning"] .toast-icon {
+  color: var(--color-warning);
+}
+.toast-item[data-status="error"] .toast-icon {
+  color: var(--color-danger);
+}
+.toast-undo {
+  background: none;
+  color: var(--color-link);
+  border: 0;
+  text-decoration: underline;
+  padding: 8px 0 0;
+  min-height: 32px;
+  font-size: 11px;
+}
+.demo-surface > .sample-box {
+  margin: 20px 0;
+}
+.demo-surface h2 {
+  line-height: 1.35;
+  font-weight: var(--concept-weight, 700);
+}
+.demo-surface.drawer {
+  border-radius: 0;
+  padding: 24px;
+}
+.demo-surface.drawer > [data-close] {
+  float: right;
+}
+.demo-surface.drawer h2 {
+  clear: both;
+  padding-top: 24px;
+}
+.demo-surface.drawer label {
+  margin-top: 24px;
+}
+@media (max-width: 440px) {
+  .toast-stack {
+    right: 10px;
+    bottom: 10px;
+  }
+  .demo-surface.drawer {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+@media (forced-colors: active) {
+  .toast-item,
+  .tip,
+  .anchored-surface {
+    border: 1px solid CanvasText;
+    box-shadow: none;
+  }
+}
+.catalog-concept-label {
+  max-width: 360px;
+  margin-top: 24px;
+}
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.concept-card {
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  text-align: left;
+  background: var(--color-raised);
+  border: 1px solid var(--color-line);
+  border-radius: 9px;
+}
+.concept-mini {
+  display: block;
+  height: 146px;
+  padding: 12px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  overflow: hidden;
+  pointer-events: none;
+}
+.concept-mini .concept-surface {
+  display: grid;
+  gap: 8px;
+  border-style: solid;
+  border-color: var(--color-line-strong);
+  padding: 11px;
+  background: var(--color-raised);
+  min-height: 116px;
+}
+.concept-kicker {
+  font: 6px/1.4 var(--kit-font-mono, monospace);
+  letter-spacing: 0.1em;
+  color: var(--color-ink-muted);
+}
+.concept-mini .concept-title {
+  font-size: calc(var(--concept-title) * 0.5);
+  white-space: nowrap;
+}
+.concept-lines {
+  display: grid;
+  gap: 3px;
+}
+.concept-lines i {
+  height: 2px;
+  background: var(--color-line);
+  width: 90%;
+}
+.concept-lines i:last-child {
+  width: 65%;
+}
+.concept-mini .mini-action {
+  font-size: 7px;
+  padding: 5px;
+}
+.concept-caption {
+  display: block;
+  padding: 10px 8px;
+}
+.concept-caption strong {
+  font-size: 10px;
+  display: block;
+}
+.concept-caption small {
+  font-size: 8px;
+  display: block;
+  margin-top: 4px;
+}
+@media (max-width: 440px) {
+  .concept-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .concept-mini {
+    height: 150px;
+    padding: 14px;
+  }
+  .concept-caption strong {
+    font-size: 11px;
+  }
+}
+
+/* Miniatures scale hierarchy without clipping the selected concept's shape. */
+.concept-card .concept-mini .concept-title {
+  font-size: calc(var(--concept-title) * 0.5);
+}
+.concept-card .concept-mini .concept-surface {
+  padding: 10px;
+  min-width: 0;
+}
+
+.toast-item[data-treatment="outline"] {
+  background: var(--color-canvas);
+  border-color: var(--color-line-strong);
+}
+.toast-item[data-treatment="solid"] .toast-title {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  padding: 6px 8px;
+  border-radius: var(--concept-radius);
+}
+
+.demo-surface {
+  --sample-bg: var(--color-surface);
+  --sample-line: var(--color-line);
+  --sample-ink: var(--color-ink);
+}
+.toast-title {
+  font-weight: 650;
+  letter-spacing: normal;
+}
 
 </style>
     <style>
@@ -15076,6 +15483,265 @@ body {
 }
 
 </style>
+      <style>
+/* Concept: minimal. Generated by data/design-concepts.js. */
+[data-concept="minimal"] {
+  --concept-radius: 6px;
+  --concept-card: 10px;
+  --concept-border: 1px;
+  --concept-space: 16px;
+  --concept-title: 24px;
+  --concept-weight: 650;
+  --concept-tracking: -0.025em;
+  --concept-elevation: none;
+  --concept-duration: 160ms;
+}
+[data-concept="minimal"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+[data-concept="minimal"] :is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"]) { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+[data-concept="minimal"] :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+[data-concept="minimal"] :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+[data-concept="minimal"] :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+[data-concept="minimal"]:is(.demo-surface,.anchored-surface,.toast-item), [data-concept="minimal"] :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+
+
+
+
+
+
+@media (prefers-reduced-motion: reduce) { [data-concept="minimal"] { --concept-duration: 0ms; } [data-concept="minimal"] *, [data-concept="minimal"] *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { [data-concept="minimal"] :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+
+/* Concept: soft. Generated by data/design-concepts.js. */
+[data-concept="soft"] {
+  --concept-radius: 14px;
+  --concept-card: 22px;
+  --concept-border: 1px;
+  --concept-space: 20px;
+  --concept-title: 25px;
+  --concept-weight: 650;
+  --concept-tracking: -0.035em;
+  --concept-elevation: 0 8px 24px #00000012;
+  --concept-duration: 200ms;
+}
+[data-concept="soft"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+[data-concept="soft"] :is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"]) { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+[data-concept="soft"] :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+[data-concept="soft"] :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+[data-concept="soft"] :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+[data-concept="soft"]:is(.demo-surface,.anchored-surface,.toast-item), [data-concept="soft"] :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+
+
+
+
+
+
+@media (prefers-reduced-motion: reduce) { [data-concept="soft"] { --concept-duration: 0ms; } [data-concept="soft"] *, [data-concept="soft"] *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { [data-concept="soft"] :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+
+/* Concept: editorial. Generated by data/design-concepts.js. */
+[data-concept="editorial"] {
+  --concept-radius: 2px;
+  --concept-card: 2px;
+  --concept-border: 1px;
+  --concept-space: 22px;
+  --concept-title: 30px;
+  --concept-weight: 500;
+  --concept-tracking: -0.045em;
+  --concept-elevation: none;
+  --concept-duration: 160ms;
+}
+[data-concept="editorial"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+[data-concept="editorial"] :is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"]) { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+[data-concept="editorial"] :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+[data-concept="editorial"] :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+[data-concept="editorial"] :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+[data-concept="editorial"]:is(.demo-surface,.anchored-surface,.toast-item), [data-concept="editorial"] :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+[data-concept="editorial"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-left-width: 0; border-right-width: 0; }
+[data-concept="editorial"] .mock-title { border-bottom: 2px solid var(--color-line-strong); margin-bottom: 18px; }
+
+
+
+
+
+@media (prefers-reduced-motion: reduce) { [data-concept="editorial"] { --concept-duration: 0ms; } [data-concept="editorial"] *, [data-concept="editorial"] *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { [data-concept="editorial"] :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+
+/* Concept: compact. Generated by data/design-concepts.js. */
+[data-concept="compact"] {
+  --concept-radius: 3px;
+  --concept-card: 5px;
+  --concept-border: 1px;
+  --concept-space: 10px;
+  --concept-title: 20px;
+  --concept-weight: 700;
+  --concept-tracking: -0.015em;
+  --concept-elevation: none;
+  --concept-duration: 100ms;
+}
+[data-concept="compact"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+[data-concept="compact"] :is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"]) { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+[data-concept="compact"] :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+[data-concept="compact"] :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+[data-concept="compact"] :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+[data-concept="compact"]:is(.demo-surface,.anchored-surface,.toast-item), [data-concept="compact"] :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+
+[data-concept="compact"] :is(.mock-projects td,.mock-projects th) { padding-block: 7px; font-variant-numeric: tabular-nums; }
+[data-concept="compact"] .mock-main { padding: 14px 12px; }
+
+
+
+
+@media (prefers-reduced-motion: reduce) { [data-concept="compact"] { --concept-duration: 0ms; } [data-concept="compact"] *, [data-concept="compact"] *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { [data-concept="compact"] :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+
+/* Concept: brutalist. Generated by data/design-concepts.js. */
+[data-concept="brutalist"] {
+  --concept-radius: 0px;
+  --concept-card: 0px;
+  --concept-border: 2px;
+  --concept-space: 16px;
+  --concept-title: 27px;
+  --concept-weight: 850;
+  --concept-tracking: -0.04em;
+  --concept-elevation: 4px 4px 0 var(--color-line-strong);
+  --concept-duration: 100ms;
+}
+[data-concept="brutalist"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+[data-concept="brutalist"] :is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"]) { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+[data-concept="brutalist"] :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+[data-concept="brutalist"] :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+[data-concept="brutalist"] :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+[data-concept="brutalist"]:is(.demo-surface,.anchored-surface,.toast-item), [data-concept="brutalist"] :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+
+
+
+
+
+[data-concept="brutalist"] .sample-button { box-shadow: 0 3px 0 var(--color-line-strong); }
+[data-concept="brutalist"] .sample-button:active { transform: translateY(2px); box-shadow: none; }
+@media (prefers-reduced-motion: reduce) { [data-concept="brutalist"] { --concept-duration: 0ms; } [data-concept="brutalist"] *, [data-concept="brutalist"] *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { [data-concept="brutalist"] :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+
+/* Concept: glass. Generated by data/design-concepts.js. */
+[data-concept="glass"] {
+  --concept-radius: 12px;
+  --concept-card: 18px;
+  --concept-border: 1px;
+  --concept-space: 18px;
+  --concept-title: 25px;
+  --concept-weight: 600;
+  --concept-tracking: -0.03em;
+  --concept-elevation: 0 12px 30px #00000022;
+  --concept-duration: 200ms;
+}
+[data-concept="glass"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+[data-concept="glass"] :is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"]) { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+[data-concept="glass"] :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+[data-concept="glass"] :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+[data-concept="glass"] :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+[data-concept="glass"]:is(.demo-surface,.anchored-surface,.toast-item), [data-concept="glass"] :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+
+
+
+
+[data-concept="glass"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { box-shadow: none; }
+[data-concept="glass"] .mock-top, [data-concept="glass"] .mock-nav, [data-concept="glass"]:is(.demo-surface,.anchored-surface) { position: relative; isolation: isolate; background: var(--color-raised); box-shadow: inset 0 1px 0 #FFFFFF55, 0 6px 20px #00000018; }
+[data-concept="glass"]:is(.demo-surface,.anchored-surface) { position: fixed; }
+[data-concept="glass"] .mock-top { margin: 10px; border: 1px solid var(--color-line-strong); border-radius: 12px; }
+[data-concept="glass"] .mock-nav { border-radius: 10px; margin: 0 0 10px 5px; padding: 8px 0; min-width: 0; }
+[data-concept="glass"] .mock-top::before, [data-concept="glass"] .mock-nav::before, [data-concept="glass"]:is(.demo-surface,.anchored-surface)::before { content: ''; pointer-events: none; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background-image: linear-gradient(115deg, #FFFFFF44, #FFFFFF00 38%, #FFFFFF18 62%, #FFFFFF00); }
+@supports (backdrop-filter: blur(16px)) { [data-concept="glass"] .mock-top::before, [data-concept="glass"] .mock-nav::before, [data-concept="glass"]:is(.demo-surface,.anchored-surface)::before { backdrop-filter: blur(16px); } }
+@media (forced-colors: active) { [data-concept="glass"] .mock-top::before, [data-concept="glass"] .mock-nav::before, [data-concept="glass"]:is(.demo-surface,.anchored-surface)::before { display: none; } }
+
+@media (prefers-reduced-motion: reduce) { [data-concept="glass"] { --concept-duration: 0ms; } [data-concept="glass"] *, [data-concept="glass"] *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { [data-concept="glass"] :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+
+/* Concept: expressive. Generated by data/design-concepts.js. */
+[data-concept="expressive"] {
+  --concept-radius: 18px;
+  --concept-card: 26px;
+  --concept-border: 2px;
+  --concept-space: 20px;
+  --concept-title: 32px;
+  --concept-weight: 850;
+  --concept-tracking: -0.055em;
+  --concept-elevation: none;
+  --concept-duration: 220ms;
+}
+[data-concept="expressive"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+[data-concept="expressive"] :is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"]) { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+[data-concept="expressive"] :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+[data-concept="expressive"] :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+[data-concept="expressive"] :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+[data-concept="expressive"]:is(.demo-surface,.anchored-surface,.toast-item), [data-concept="expressive"] :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+
+
+
+[data-concept="expressive"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-radius: 26px 8px 26px 8px; }
+[data-concept="expressive"] :is(.sample-primary,.mini-action) { border-radius: 18px 6px 18px 6px; }
+
+
+@media (prefers-reduced-motion: reduce) { [data-concept="expressive"] { --concept-duration: 0ms; } [data-concept="expressive"] *, [data-concept="expressive"] *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { [data-concept="expressive"] :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+
+/* Concept: terminal. Generated by data/design-concepts.js. */
+[data-concept="terminal"] {
+  --concept-radius: 0px;
+  --concept-card: 0px;
+  --concept-border: 1px;
+  --concept-space: 12px;
+  --concept-title: 21px;
+  --concept-weight: 650;
+  --concept-tracking: 0.01em;
+  --concept-elevation: none;
+  --concept-duration: 0ms;
+}
+[data-concept="terminal"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+[data-concept="terminal"] :is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"]) { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+[data-concept="terminal"] :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+[data-concept="terminal"] :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+[data-concept="terminal"] :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+[data-concept="terminal"]:is(.demo-surface,.anchored-surface,.toast-item), [data-concept="terminal"] :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+
+[data-concept="terminal"] :is(.mock-projects td,.mock-projects th) { padding-block: 7px; font-variant-numeric: tabular-nums; }
+[data-concept="terminal"] .mock-main { padding: 14px 12px; }
+[data-concept="terminal"] .sample-box h4::before, [data-concept="terminal"] .concept-title::before { content: '> '; }
+[data-concept="terminal"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-style: dashed; }
+
+
+
+@media (prefers-reduced-motion: reduce) { [data-concept="terminal"] { --concept-duration: 0ms; } [data-concept="terminal"] *, [data-concept="terminal"] *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { [data-concept="terminal"] :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+
+/* Concept: tactile. Generated by data/design-concepts.js. */
+[data-concept="tactile"] {
+  --concept-radius: 8px;
+  --concept-card: 12px;
+  --concept-border: 1px;
+  --concept-space: 18px;
+  --concept-title: 25px;
+  --concept-weight: 700;
+  --concept-tracking: -0.025em;
+  --concept-elevation: 0 3px 0 var(--color-line-strong), 0 8px 18px #00000012;
+  --concept-duration: 120ms;
+}
+[data-concept="tactile"] :is(.sample-box,.concept-surface,[data-concept-part="surface"]) { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+[data-concept="tactile"] :is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"]) { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+[data-concept="tactile"] :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+[data-concept="tactile"] :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+[data-concept="tactile"] :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+[data-concept="tactile"]:is(.demo-surface,.anchored-surface,.toast-item), [data-concept="tactile"] :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+
+
+
+
+
+[data-concept="tactile"] .sample-button { box-shadow: 0 3px 0 var(--color-line-strong); }
+[data-concept="tactile"] .sample-button:active { transform: translateY(2px); box-shadow: none; }
+@media (prefers-reduced-motion: reduce) { [data-concept="tactile"] { --concept-duration: 0ms; } [data-concept="tactile"] *, [data-concept="tactile"] *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { [data-concept="tactile"] :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+
+</style>
   </head>
   <body>
     <a class="skip" href="#selection-panel">디자인 편집으로 이동</a>
@@ -15118,6 +15784,12 @@ body {
           </div>
           <div id="set-grid" class="set-grid"></div>
           <p id="recommendation-reason" class="help"></p>
+        </section>
+        <section class="inspector-section concept-section" aria-labelledby="concept-heading">
+          <div class="section-head"><div><p class="eyebrow">SHAPE THE EXPERIENCE</p><h2 id="concept-heading">디자인의 성격</h2></div><small>9가지 콘셉트</small></div>
+          <p class="help">같은 내용으로 형태와 깊이를 비교하세요. 색상과 글꼴은 선택한 그대로 유지됩니다.</p>
+          <div id="concept-grid" class="concept-grid"></div>
+          <p id="concept-description" class="help" aria-live="polite"></p>
         </section>
         <section class="inspector-section" aria-labelledby="appearance-heading">
           <div class="section-head">
@@ -15420,9 +16092,9 @@ body {
         선택 적용
       </button>
     </dialog>
-    <dialog id="demo-dialog" aria-labelledby="demo-title">
+    <dialog class="demo-surface" id="demo-dialog" aria-labelledby="demo-title">
       <h2 id="demo-title">변경 내용을 저장할까요?</h2>
-      <p>프로젝트의 새 디자인을 적용합니다.</p>
+      <p>프로젝트의 새 디자인을 적용합니다. 팀원에게도 변경 사항이 표시됩니다.</p><div class="sample-box"><strong>샘플 프로젝트</strong><p>색상 · 글꼴 · 컴포넌트 설정</p></div><button type="button" class="sample-button" data-demo="toast" data-toast-status="info">저장 안내 확인</button>
       <div class="demo-actions">
         <button type="button" data-close="demo-dialog">취소</button
         ><button type="button" class="primary" data-close="demo-dialog">
@@ -15430,10 +16102,10 @@ body {
         </button>
       </div>
     </dialog>
-    <dialog id="demo-drawer" class="drawer" aria-labelledby="drawer-title">
+    <dialog id="demo-drawer" class="drawer demo-surface" aria-labelledby="drawer-title">
       <button type="button" data-close="demo-drawer">닫기 ×</button>
       <h2 id="drawer-title">프로젝트 상세</h2>
-      <p>선택한 프로젝트의 상세 정보입니다.</p>
+      <p>팀의 진행 상황과 프로젝트 정보를 확인하세요.</p><div class="sample-box"><span class="sample-badge sample-review">검토 중</span><p>Product Team · 멤버 3명</p></div>
       <label>프로젝트 이름<input value="샘플 프로젝트" /></label>
     </dialog>
     <div id="demo-toast" class="demo-toast" role="status" hidden>
@@ -15670,12 +16342,255 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
 
 </script>
     <script>
+/* Shared appearance contracts. Color values and explicit font families remain owned by the profile. */
+(function (root, factory) {
+  if (typeof module === "object" && module.exports) module.exports = factory();
+  else root.PaletteDesignConcepts = factory();
+})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+  "use strict";
+  const rows = [
+    [
+      "minimal",
+      "담백한 · Minimal",
+      "정보와 여백에 집중하는 차분한 기본형. 업무 도구와 장기 사용에 적합합니다.",
+      ["절제된 경계", "명료한 위계", "평평한 표면"],
+      6,
+      10,
+      1,
+      16,
+      24,
+      650,
+      "-0.025em",
+      "none",
+      "160ms",
+    ],
+    [
+      "soft",
+      "부드러운 · Soft",
+      "넉넉한 곡선과 포근한 표면으로 설정·개인 공간을 편안하게 만듭니다.",
+      ["넓은 곡선", "여유 있는 간격", "부드러운 깊이"],
+      14,
+      22,
+      1,
+      20,
+      25,
+      650,
+      "-0.035em",
+      "0 8px 24px #00000012",
+      "200ms",
+    ],
+    [
+      "editorial",
+      "읽기 좋은 · Editorial",
+      "문서의 제목과 구분선을 중심으로 읽는 순서를 설계합니다. 콘텐츠 중심 화면에 적합합니다.",
+      ["큰 제목", "수평 구분선", "긴 호흡"],
+      2,
+      2,
+      1,
+      22,
+      30,
+      500,
+      "-0.045em",
+      "none",
+      "160ms",
+    ],
+    [
+      "compact",
+      "촘촘한 · Compact",
+      "작은 형태와 정렬된 수치로 많은 정보를 빠르게 훑습니다. 데이터·운영 화면에 적합합니다.",
+      ["밀도 높은 배치", "작은 곡선", "정렬된 수치"],
+      3,
+      5,
+      1,
+      10,
+      20,
+      700,
+      "-0.015em",
+      "none",
+      "100ms",
+    ],
+    [
+      "brutalist",
+      "선명한 · Brutalist",
+      "굵은 경계와 단단한 오프셋으로 동작과 구조를 선명하게 드러냅니다.",
+      ["직각", "굵은 경계", "단단한 그림자"],
+      0,
+      0,
+      2,
+      16,
+      27,
+      850,
+      "-0.04em",
+      "4px 4px 0 var(--color-line-strong)",
+      "100ms",
+    ],
+    [
+      "glass",
+      "유리 같은 · Glass",
+      "중요한 떠 있는 레이어에 유리 질감을 제한적으로 씁니다. 본문은 불투명 표면을 유지합니다.",
+      ["얇은 윤곽", "떠 있는 레이어", "불투명 대체 표면"],
+      12,
+      18,
+      1,
+      18,
+      25,
+      600,
+      "-0.03em",
+      "0 12px 30px #00000022",
+      "200ms",
+    ],
+    [
+      "expressive",
+      "대담한 · Expressive",
+      "비대칭 곡선과 큰 제목으로 주요 행동에 리듬을 줍니다. 시작 화면과 창작 도구에 적합합니다.",
+      ["비대칭 곡선", "강한 제목", "뚜렷한 행동"],
+      18,
+      26,
+      2,
+      20,
+      32,
+      850,
+      "-0.055em",
+      "none",
+      "220ms",
+    ],
+    [
+      "terminal",
+      "정밀한 · Terminal",
+      "직각 프레임과 숫자 정렬로 작업의 상태를 명확히 읽습니다. 선택한 본문 폰트는 유지합니다.",
+      ["직각 프레임", "촘촘한 규칙선", "작업 상태"],
+      0,
+      0,
+      1,
+      12,
+      21,
+      650,
+      "0.01em",
+      "none",
+      "0ms",
+    ],
+    [
+      "tactile",
+      "손에 닿는 · Tactile",
+      "낮은 입체감과 눌리는 버튼으로 조작 가능한 표면을 구분합니다.",
+      ["낮은 입체감", "단단한 버튼", "차분한 곡선"],
+      8,
+      12,
+      1,
+      18,
+      25,
+      700,
+      "-0.025em",
+      "0 3px 0 var(--color-line-strong), 0 8px 18px #00000012",
+      "120ms",
+    ],
+  ];
+  const concepts = rows.map(
+    ([
+      id,
+      name,
+      description,
+      traits,
+      radius,
+      card,
+      border,
+      space,
+      title,
+      weight,
+      tracking,
+      elevation,
+      duration,
+    ]) => ({
+      id,
+      name,
+      description,
+      traits,
+      tokens: {
+        radius: radius + "px",
+        card: card + "px",
+        border: border + "px",
+        space: space + "px",
+        title: title + "px",
+        weight,
+        tracking,
+        elevation,
+        duration,
+      },
+    }),
+  );
+  function get(id) {
+    const value = concepts.find((c) => c.id === id);
+    if (!value) throw Error("Invalid design concept: " + id);
+    return value;
+  }
+  function css(id) {
+    const c = get(id),
+      t = c.tokens,
+      s = '[data-concept="' + id + '"]';
+    const surfaces =
+      ':is(.sample-box,.concept-surface,[data-concept-part="surface"])';
+    const controls =
+      ':is(.sample-button,.sample-input,.sample-tab,.sample-check,[data-concept-part="control"])';
+    return `/* Concept: ${id}. Generated by data/design-concepts.js. */
+${s} {
+${Object.entries(t)
+  .map(([k, v]) => "  --concept-" + k + ": " + v + ";")
+  .join("\n")}
+}
+${s} ${surfaces} { border-width: var(--concept-border); border-radius: var(--concept-card); padding: calc(var(--concept-space) * .5 + var(--ui-padding, 20px) * .5); box-shadow: var(--concept-elevation); }
+${s} ${controls} { border-width: var(--concept-border); border-radius: var(--concept-radius); min-height: max(40px, var(--ui-height, 40px)); transition: transform var(--concept-duration), border-color var(--concept-duration); }
+${s} :is(.mock-title h3,.concept-title,[data-concept-part="title"]) { font-size: var(--concept-title); font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); line-height: 1.2; }
+${s} :is(.sample-box h4,.sample-empty strong) { font-weight: var(--concept-weight); letter-spacing: var(--concept-tracking); }
+${s} :is(.sample-badge,.mini-action) { border-radius: var(--concept-radius); }
+${s}:is(.demo-surface,.anchored-surface,.toast-item), ${s} :is(.demo-surface,.anchored-surface,.toast-item) { border-width: var(--concept-border); border-radius: var(--concept-card); box-shadow: var(--concept-elevation); }
+${id === "editorial" ? `${s} ${surfaces} { border-left-width: 0; border-right-width: 0; }\n${s} .mock-title { border-bottom: 2px solid var(--color-line-strong); margin-bottom: 18px; }` : ""}
+${id === "compact" || id === "terminal" ? `${s} :is(.mock-projects td,.mock-projects th) { padding-block: 7px; font-variant-numeric: tabular-nums; }\n${s} .mock-main { padding: 14px 12px; }` : ""}
+${id === "terminal" ? `${s} .sample-box h4::before, ${s} .concept-title::before { content: '> '; }\n${s} ${surfaces} { border-style: dashed; }` : ""}
+${id === "expressive" ? `${s} ${surfaces} { border-radius: 26px 8px 26px 8px; }\n${s} :is(.sample-primary,.mini-action) { border-radius: 18px 6px 18px 6px; }` : ""}
+${
+  id === "glass"
+    ? `${s} ${surfaces} { box-shadow: none; }
+${s} .mock-top, ${s} .mock-nav, ${s}:is(.demo-surface,.anchored-surface) { position: relative; isolation: isolate; background: var(--color-raised); box-shadow: inset 0 1px 0 #FFFFFF55, 0 6px 20px #00000018; }
+${s}:is(.demo-surface,.anchored-surface) { position: fixed; }
+${s} .mock-top { margin: 10px; border: 1px solid var(--color-line-strong); border-radius: 12px; }
+${s} .mock-nav { border-radius: 10px; margin: 0 0 10px 5px; padding: 8px 0; min-width: 0; }
+${s} .mock-top::before, ${s} .mock-nav::before, ${s}:is(.demo-surface,.anchored-surface)::before { content: ''; pointer-events: none; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background-image: linear-gradient(115deg, #FFFFFF44, #FFFFFF00 38%, #FFFFFF18 62%, #FFFFFF00); }
+@supports (backdrop-filter: blur(16px)) { ${s} .mock-top::before, ${s} .mock-nav::before, ${s}:is(.demo-surface,.anchored-surface)::before { backdrop-filter: blur(16px); } }
+@media (forced-colors: active) { ${s} .mock-top::before, ${s} .mock-nav::before, ${s}:is(.demo-surface,.anchored-surface)::before { display: none; } }`
+    : ""
+}
+${id === "brutalist" || id === "tactile" ? `${s} .sample-button { box-shadow: 0 3px 0 var(--color-line-strong); }\n${s} .sample-button:active { transform: translateY(2px); box-shadow: none; }` : ""}
+@media (prefers-reduced-motion: reduce) { ${s} { --concept-duration: 0ms; } ${s} *, ${s} *::before { animation: none !important; transition: none !important; } }
+@media (forced-colors: active) { ${s} :is(.sample-box,.demo-surface,.anchored-surface,.toast-item,.sample-button) { box-shadow: none; background-image: none; backdrop-filter: none; border: 1px solid CanvasText; } }
+`;
+  }
+  function brief(id) {
+    const c = get(id);
+    return (
+      "Design concept: " +
+      c.name +
+      " (" +
+      id +
+      "). " +
+      c.description +
+      " Traits: " +
+      c.traits.join(", ") +
+      '. Use --concept-* from selected-style.css; map these to existing component selectors, with data-concept="' +
+      id +
+      '" on preview/portal roots. Selected fonts stay authoritative; styles control density and sizes. Material/elevation is intentional only for this explicit concept, never an excuse to reduce text contrast. Retain opaque semantic surfaces, focus rings, status meanings and reduced-motion/forced-colors fallbacks.'
+    );
+  }
+  return { concepts, get, css, brief };
+});
+
+</script>
+    <script>
 /* One offline catalog for the browser, CLI and generated implementation briefs. */
 (function (root, factory) {
   if (typeof module === "object" && module.exports)
-    module.exports = factory(require("./ui-presets.js"));
-  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets);
-})(typeof globalThis !== "undefined" ? globalThis : this, function (ui) {
+    module.exports = factory(require("./ui-presets.js"), require("./design-concepts.js"));
+  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets, root.PaletteDesignConcepts);
+})(typeof globalThis !== "undefined" ? globalThis : this, function (ui, concepts) {
   "use strict";
   const {
     navigationPresets,
@@ -15691,7 +16606,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     },
     outline: {
       name: "윤곽선",
-      rule: "Use --color-canvas background, --color-ink text and --color-line-strong 1px border; no shadow.",
+      rule: "Use --color-canvas background, --color-ink text and --color-line-strong border; no shadow by default, unless the explicit concept selects purposeful elevation.",
     },
     solid: {
       name: "강조색",
@@ -15699,6 +16614,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     },
   };
   const rows = [
+    ["popover", "추가 설정 팝오버", "Popover", "오버레이", "현재 작업 옆에서 설정을 바꾸는 작은 창", "설정 필터 보조 팝업", "Anchor an interactive dialog to its trigger, keep within viewport; move focus inside, close on Escape/outside click and restore trigger focus. Use labels for controls; never put interactive content in a tooltip."],
     [
       "button",
       "버튼",
@@ -15832,7 +16748,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       "콘텐츠",
       "관련 내용을 한 덩어리로 모은 상자",
       "패널 박스 정보",
-      "Use semantic article/section with heading, 20px padding and selected style radius; only add a card boundary for a genuinely grouped entity.",
+      "Use semantic article/section with heading, selected concept padding and shape with the selected style density; only add a card boundary for a genuinely grouped entity.",
     ],
     [
       "badge",
@@ -16032,6 +16948,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     if (!set) throw Error("Invalid design selection set: " + id);
     return {
       set: id,
+      concept: {studio:"minimal",bloom:"soft",precision:"minimal",editorial:"editorial",console:"compact",signal:"brutalist"}[id],
       motion: set.defaultMotion,
       navigation: set.defaultNavigation,
       components: Object.fromEntries(
@@ -16046,6 +16963,10 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     if (!input || typeof input !== "object" || Array.isArray(input))
       throw Error("Invalid design selection");
     const result = selection(input.set);
+    if (input.concept !== undefined) {
+      concepts.get(input.concept);
+      result.concept = input.concept;
+    }
     if (input.motion !== undefined) {
       if (!motionPresets.some((m) => m.id === input.motion))
         throw Error("Invalid design selection motion");
@@ -16086,9 +17007,10 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         set.recommendedComponents.join(", ") +
         ". " +
         set.recommendationReason,
+      concepts.brief(selected.concept),
       motionBrief(selected.motion),
       navigationBrief(selected.navigation),
-      "Apply the selected style radius, padding, gap and control height from selected-style.css; control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
+      "Apply the explicit concept shape, hierarchy and elevation from --concept-* in selected-style.css; the selected style remains the density/control-size adjustment, and selected fonts take precedence. Control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
       "",
       ...components.map(
         (c) =>
@@ -16112,6 +17034,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
   }
   return {
     sets,
+    concepts,
     components,
     treatments,
     selection,
@@ -16287,7 +17210,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       "  --ui-shadow: " + s.shadow + ";",
       "}",
       ""
-    ].join("\n");
+    ].join("\n") + (config.designSelection ? designs.concepts.css(designs.normalize(config.designSelection).concept) : "");
   }
   function chosenFonts(config, fontCatalog) {
     var selected = ["body", "code"].map(function (role) {
@@ -16504,6 +17427,439 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
 
 </script>
     <script>
+/* Own the lifetime, focus, anchoring and clocks of framework-neutral demo overlays. */
+(() => {
+  "use strict";
+  const icons = (window.PALETTE_ICON_PARTS || []).flat();
+  const icon = (name) =>
+    '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    (icons.find((i) => i.name === name)?.body || "") +
+    "</svg>";
+  let getConfig,
+    tip = null,
+    popup = null,
+    tipClose,
+    toastSerial = 0;
+  const notices = new Map();
+  const $ = (id) => document.getElementById(id);
+  function scope(el, trigger) {
+    const c = getConfig();
+    Object.assign(el.dataset, {
+      theme: trigger.closest("[data-theme]")?.dataset.theme || "light",
+      palette: c.palette,
+      style: c.style,
+      concept: c.designSelection.concept,
+    });
+  }
+  function place(el, trigger) {
+    const r = trigger.getBoundingClientRect(),
+      w = el.offsetWidth,
+      h = el.offsetHeight,
+      gap = 8,
+      inset = 12;
+    el.style.left =
+      Math.max(inset, Math.min(r.left, innerWidth - w - inset)) + "px";
+    el.style.top =
+      Math.max(
+        inset,
+        r.bottom + gap + h <= innerHeight - inset
+          ? r.bottom + gap
+          : r.top - h - gap,
+      ) + "px";
+  }
+  function showTip(trigger) {
+    clearTimeout(tipClose);
+    if (tip?.trigger === trigger) return;
+    hideTip();
+    const el = trigger.parentElement.querySelector(".tip");
+    if (!el) return;
+    el.hidden = false;
+    el.style.removeProperty("display");
+    el.setAttribute("popover", "manual");
+    scope(el, trigger);
+    el.showPopover();
+    tip = { el, trigger };
+    place(el, trigger);
+  }
+  function hideTip() {
+    clearTimeout(tipClose);
+    if (tip) {
+      tip.el.hidePopover();
+      tip.el.hidden = true;
+      tip = null;
+    }
+  }
+  function laterHide() {
+    clearTimeout(tipClose);
+    tipClose = setTimeout(() => {
+      if (
+        tip &&
+        !tip.el.matches(":hover") &&
+        !tip.trigger.matches(":hover") &&
+        document.activeElement !== tip.trigger
+      )
+        hideTip();
+    }, 180);
+  }
+  function closePopup(restore = true) {
+    if (!popup) return;
+    const { el, trigger } = popup;
+    popup = null;
+    el.hidePopover();
+    el.remove();
+    trigger.setAttribute("aria-expanded", "false");
+    if (restore && trigger.isConnected) trigger.focus({ preventScroll: true });
+  }
+  function showPopup(trigger, kind) {
+    if (popup?.trigger === trigger) {
+      closePopup();
+      return;
+    }
+    closePopup(false);
+    hideTip();
+    const el = document.createElement("section");
+    el.id = "demo-" + kind;
+    el.className = "anchored-surface";
+    el.setAttribute("popover", "manual");
+    el.setAttribute("role", kind === "menu" ? "menu" : "dialog");
+    el.setAttribute(
+      "aria-label",
+      kind === "menu" ? "프로젝트 동작" : "프로젝트 표시 설정",
+    );
+    el.innerHTML =
+      kind === "menu"
+        ? '<p class="overlay-eyebrow">프로젝트 동작</p><button role="menuitem" data-popup-action="rename">' +
+          icon("pencil") +
+          '이름 바꾸기<kbd>↵</kbd></button><button role="menuitem" data-popup-action="duplicate">' +
+          icon("copy") +
+          '복제하기</button><hr><button role="menuitem" data-popup-action="archive">' +
+          icon("archive") +
+          "보관하기</button>"
+        : '<div class="overlay-heading"><h3>표시 설정</h3><button class="icon-button" data-popup-close aria-label="설정 닫기">' +
+          icon("x") +
+          '</button></div><p>이 프로젝트에서 표시할 정보를 선택하세요.</p><label class="sample-check"><input type="checkbox" checked>완료한 프로젝트 포함</label><label class="sample-check"><input type="checkbox" checked>담당 팀 표시</label><button class="sample-button sample-primary" data-popup-apply>설정 적용</button>';
+    if (kind === "popover" && trigger.dataset.displaySettings) {
+      const values = JSON.parse(trigger.dataset.displaySettings);
+      el.querySelectorAll("input").forEach((input, i) => {
+        input.checked = values[i];
+      });
+    }
+    scope(el, trigger);
+    (trigger.closest("dialog[open]") || document.body).append(el);
+    el.showPopover();
+    place(el, trigger);
+    popup = { el, trigger, kind };
+    trigger.setAttribute("aria-expanded", "true");
+    trigger.setAttribute("aria-controls", el.id);
+    el.querySelector("button,input")?.focus();
+  }
+  function dismissToast(el) {
+    const state = notices.get(el);
+    if (!state) return;
+    clearTimeout(state.timer);
+    notices.delete(el);
+    const host = $("demo-toast");
+    const focused = el.contains(document.activeElement);
+    el.remove();
+    if (!notices.size) {
+      host.hidePopover();
+      host.hidden = true;
+      if (focused && state.trigger.isConnected)
+        state.trigger.focus({ preventScroll: true });
+    }
+  }
+  function updateClock(el) {
+    const state = notices.get(el);
+    if (!state) return;
+    clearTimeout(state.timer);
+    if (state.started !== null) {
+      state.remaining -= performance.now() - state.started;
+      state.started = null;
+    }
+    if (!state.hover && !state.focus) {
+      state.started = performance.now();
+      state.timer = setTimeout(
+        () => dismissToast(el),
+        Math.max(0, state.remaining),
+      );
+    }
+  }
+  function toast(trigger, status = "success") {
+    const host = $("demo-toast");
+    const owner = trigger.closest("dialog[open]") || document.body;
+    if (host.parentElement !== owner) {
+      if (host.matches(":popover-open")) host.hidePopover();
+      owner.append(host);
+    }
+    scope(host, trigger);
+    host.className = "toast-stack";
+    host.setAttribute("popover", "manual");
+    host.removeAttribute("role");
+    host.hidden = false;
+    host.showPopover();
+    const messages = {
+      success: [
+        "circle-check",
+        "변경 내용을 저장했습니다",
+        "프로젝트의 새 디자인을 팀과 공유할 수 있습니다.",
+      ],
+      info: [
+        "info",
+        "팀과 연결되었습니다",
+        "새로운 프로젝트 소식을 이곳에서 확인하세요.",
+      ],
+      warning: [
+        "triangle-alert",
+        "연결이 불안정합니다",
+        "작성한 내용은 이 브라우저에 보관하고 있습니다.",
+      ],
+      error: [
+        "circle-alert",
+        "동기화하지 못했습니다",
+        "아래 오류 안내에서 다시 시도할 수 있습니다.",
+      ],
+    };
+    const [glyph, title, description] = messages[status] || messages.success;
+    while (notices.size >= 3) dismissToast(notices.keys().next().value);
+    const el = document.createElement("article");
+    el.className = "toast-item";
+    scope(el, trigger);
+    el.dataset.status = status;
+    el.dataset.treatment = getConfig().designSelection.components.toast;
+    el.setAttribute("role", status === "error" ? "alert" : "status");
+    el.setAttribute("aria-atomic", "true");
+    el.innerHTML =
+      '<span class="toast-icon">' +
+      icon(glyph) +
+      '</span><div class="toast-content"><strong class="toast-title">' +
+      title +
+      "</strong><p>" +
+      description +
+      "</p>" +
+      (status === "success"
+        ? '<button class="toast-undo" data-toast-undo>되돌리기</button>'
+        : "") +
+      '</div><button class="icon-button" data-toast-dismiss aria-label="알림 닫기">' +
+      icon("x") +
+      "</button>";
+    if (!notices.size)
+      el.querySelector("[data-toast-dismiss]").id = "dismiss-toast";
+    el.dataset.notice = String(++toastSerial);
+    host.append(el);
+    const state = {
+      remaining: 5000,
+      started: null,
+      hover: false,
+      focus: false,
+      trigger,
+    };
+    notices.set(el, state);
+    el.addEventListener("pointerenter", () => {
+      state.hover = true;
+      updateClock(el);
+    });
+    el.addEventListener("pointerleave", () => {
+      state.hover = false;
+      updateClock(el);
+    });
+    el.addEventListener("focusin", () => {
+      state.focus = true;
+      updateClock(el);
+    });
+    el.addEventListener("focusout", () => {
+      queueMicrotask(() => {
+        state.focus = el.contains(document.activeElement);
+        updateClock(el);
+      });
+    });
+    updateClock(el);
+    const treatment = trigger.closest(".treatment");
+    const inline = treatment?.querySelector(".persistent-error");
+    if (inline) inline.hidden = status !== "error";
+    if (status === "success") {
+      const saved = treatment?.querySelector("[data-save-state]");
+      if (saved)
+        saved.textContent =
+          "새 디자인을 저장했습니다. 되돌리기로 이전 디자인을 복원하세요.";
+    }
+  }
+  function cleanup() {
+    hideTip();
+    closePopup(false);
+    for (const el of [...notices.keys()]) dismissToast(el);
+  }
+  function init(config) {
+    getConfig = config;
+    const host = $("demo-toast");
+    host.replaceChildren();
+    document.addEventListener("pointerover", (e) => {
+      const trigger = e.target.closest('[data-demo="tooltip"]');
+      if (trigger) showTip(trigger);
+      if (tip?.el.contains(e.target)) clearTimeout(tipClose);
+    });
+    document.addEventListener("pointerout", (e) => {
+      if (e.target.closest('[data-demo="tooltip"],.tip')) laterHide();
+    });
+    document.addEventListener("focusin", (e) => {
+      const trigger = e.target.closest('[data-demo="tooltip"]');
+      if (trigger) showTip(trigger);
+      else if (tip) hideTip();
+    });
+    document.addEventListener("focusout", (e) => {
+      if (e.target.closest('[data-demo="tooltip"]')) laterHide();
+    });
+    document.addEventListener(
+      "pointerdown",
+      (e) => {
+        if (
+          popup &&
+          !popup.el.contains(e.target) &&
+          !popup.trigger.contains(e.target)
+        )
+          closePopup(false);
+      },
+      true,
+    );
+    document.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === "Escape" && (tip || popup)) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          if (tip) hideTip();
+          else closePopup();
+          return;
+        }
+        if (!popup) return;
+        const { el, kind } = popup;
+        if (!el.contains(e.target)) return;
+        const list = [...el.querySelectorAll("button,input")];
+        let i = list.indexOf(document.activeElement);
+        if (
+          kind === "menu" &&
+          ["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)
+        ) {
+          e.preventDefault();
+          i =
+            e.key === "Home"
+              ? 0
+              : e.key === "End"
+                ? list.length - 1
+                : (i + (e.key === "ArrowDown" ? 1 : -1) + list.length) %
+                  list.length;
+          list[i].focus();
+        }
+        if (e.key === "Tab") {
+          if (kind === "menu") {
+            e.preventDefault();
+            closePopup();
+          } else {
+            e.preventDefault();
+            list[
+              (i + (e.shiftKey ? -1 : 1) + list.length) % list.length
+            ].focus();
+          }
+        }
+      },
+      true,
+    );
+    document.addEventListener("click", (e) => {
+      const dismiss = e.target.closest("[data-toast-dismiss]");
+      if (dismiss) {
+        dismissToast(dismiss.closest(".toast-item"));
+        return;
+      }
+      const undo = e.target.closest("[data-toast-undo]");
+      if (undo) {
+        const el = undo.closest(".toast-item");
+        el.querySelector(".toast-title").textContent = "저장을 되돌렸습니다";
+        el.querySelector("p").textContent =
+          "프로젝트가 저장하기 전 상태로 복원되었습니다.";
+        const state = notices.get(el);
+        const trigger = state.trigger;
+        trigger
+          .closest(".treatment")
+          ?.querySelector("[data-save-state]")
+          ?.replaceChildren(document.createTextNode("이전 디자인으로 복원됨"));
+        undo.disabled = true;
+        return;
+      }
+      if (e.target.closest("[data-popup-close]")) closePopup();
+      if (e.target.closest("[data-popup-apply]")) {
+        const trigger = popup.trigger;
+        const settings = [...popup.el.querySelectorAll("input")].map(
+          (input) => input.checked,
+        );
+        trigger.dataset.displaySettings = JSON.stringify(settings);
+        trigger.textContent =
+          "표시 설정 · " + settings.filter(Boolean).length + "개 적용됨";
+        closePopup();
+      }
+      const action = e.target.closest("[data-popup-action]");
+      if (action) {
+        const trigger = popup.trigger;
+        trigger.dataset.lastAction = action.dataset.popupAction;
+        trigger.textContent =
+          action.dataset.popupAction === "duplicate"
+            ? "프로젝트 복제됨"
+            : action.dataset.popupAction === "archive"
+              ? "프로젝트 보관됨"
+              : "이름 변경 준비됨";
+        closePopup();
+      }
+    });
+    for (const event of ["resize", "scroll"])
+      window.addEventListener(
+        event,
+        () => {
+          if (tip) place(tip.el, tip.trigger);
+          if (popup) place(popup.el, popup.trigger);
+        },
+        true,
+      );
+    for (const id of ["component-dialog", "demo-dialog", "demo-drawer"])
+      $(id).addEventListener("close", () => {
+        hideTip();
+        closePopup(false);
+        if (id === "component-dialog")
+          for (const el of [...notices.keys()]) dismissToast(el);
+      });
+  }
+  function handle(trigger) {
+    const action = trigger.dataset.demo;
+    if (action === "tooltip") {
+      showTip(trigger);
+      return true;
+    }
+    if (action === "toast") {
+      toast(trigger, trigger.dataset.toastStatus);
+      return true;
+    }
+    if (action === "menu" || action === "popover") {
+      showPopup(trigger, action);
+      return true;
+    }
+    if (action === "dialog" || action === "drawer") {
+      const el = $("demo-" + action);
+      scope(el, trigger);
+      el.dataset.treatment = getConfig().designSelection.components[action];
+      el.showModal();
+      el.addEventListener(
+        "close",
+        () => {
+          if (trigger.isConnected) trigger.focus({ preventScroll: true });
+        },
+        { once: true },
+      );
+      return true;
+    }
+    return false;
+  }
+  window.PaletteComponentDemos = { init, handle, cleanup, icon };
+})();
+
+</script>
+    <script>
 /* Set-first offline design library. Exports use the existing shared handoff core. */
 (() => {
   "use strict";
@@ -16530,7 +17886,6 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
   let config,
     theme = "light",
     active = null,
-    toastTimer,
     statusTimer;
   let recovery = "";
   try {
@@ -16628,6 +17983,11 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         if (params.has(key)) candidate.fonts[name] = params.get(key);
       if (params.has("icons"))
         candidate.icons = params.get("icons").split(",").filter(Boolean);
+      if (params.has("concept"))
+        candidate.designSelection = {
+          ...(candidate.designSelection || designs.selection("studio")),
+          concept: params.get("concept"),
+        };
       if (params.has("designSelection"))
         candidate.designSelection = JSON.parse(params.get("designSelection"));
     }
@@ -16676,10 +18036,39 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       checkbox:
         '<label class="sample-check sample-emphasis"><input type="checkbox" checked>업데이트 소식 받기</label><label class="sample-check sample-emphasis"><input type="checkbox">주간 요약 받기</label>',
       toast: preview
-        ? '<div class="sample-box sample-emphasis">✓ 변경 내용을 저장했습니다.</div>'
-        : button("저장 알림 띄우기", "toast", true),
+        ? '<div class="sample-box sample-feedback">' +
+          window.PaletteComponentDemos.icon("circle-check") +
+          "<div><strong>변경 내용을 저장했습니다</strong><p>팀과 공유할 준비가 되었습니다.</p></div></div>"
+        : '<div class="sample-actions">' +
+          [
+            ["success", "저장 완료"],
+            ["info", "안내"],
+            ["warning", "주의"],
+            ["error", "오류"],
+          ]
+            .map(([status, label]) =>
+              button(label, "toast", status === "success").replace(
+                'data-demo="toast"',
+                'data-demo="toast" data-toast-status="' + status + '"',
+              ),
+            )
+            .join("") +
+          '</div><p class="demo-hint" data-save-state>저장한 디자인을 알림에서 되돌릴 수 있습니다.</p><div class="sample-box sample-danger persistent-error" hidden><strong>동기화되지 않은 변경 내용</strong><p>연결을 확인한 후 다시 시도하세요. 작성한 내용은 보관됩니다.</p>' +
+          button("다시 시도", "toast").replace(
+            'data-demo="toast"',
+            'data-demo="toast" data-toast-status="success"',
+          ) +
+          "</div>",
+      popover: preview
+        ? '<div class="sample-box"><h4>표시 설정</h4><p>완료한 프로젝트 포함</p><span class="sample-badge">설정 적용</span></div>'
+        : button("표시 설정", "popover").replace(
+            "<button ",
+            '<button aria-haspopup="dialog" aria-expanded="false" ',
+          ),
       alert:
-        '<div class="sample-box sample-warning"><strong>△ 입력 확인 필요</strong><p>변경 내용을 한 번 더 확인하세요.</p></div>',
+        '<div class="sample-box sample-warning sample-feedback">' +
+        window.PaletteComponentDemos.icon("triangle-alert") +
+        '<div><strong>입력 확인 필요</strong><p>이메일 주소를 확인하고 다시 저장하세요.</p><a href="#detail-title">입력 기준 확인</a></div></div>',
       dialog: preview
         ? '<div class="sample-box"><h4 class="sample-emphasis">변경 내용을 저장할까요?</h4><p>작업 내용을 반영합니다.</p><div class="sample-actions"><span class="sample-badge">취소</span><span class="sample-badge sample-primary">저장</span></div></div>'
         : button("확인창 열어보기", "dialog", true),
@@ -16695,15 +18084,18 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         '<span id="' +
         uid +
         '" class="tip" role="tooltip"' +
-        (preview ? ' style="display:block"' : "") +
+        (preview ? " data-static-tip" : " hidden") +
         ">프로젝트 설정을 표시합니다.</span></div>",
       menu: preview
-        ? '<div class="sample-box sample-emphasis">프로젝트 동작 ▾<hr>이름 바꾸기<br>복제하기</div>'
-        : '<details><summary class="sample-button sample-emphasis">프로젝트 동작 ▾</summary><ul class="menu-items"><li>' +
-          button("이름 바꾸기", "action") +
-          "</li><li>" +
-          button("복제하기", "action") +
-          "</li></ul></details>",
+        ? '<div class="sample-box"><h4>프로젝트 동작</h4><p>이름 바꾸기</p><span>복제하기</span></div>'
+        : button(
+            "프로젝트 동작 " +
+              window.PaletteComponentDemos.icon("chevron-down"),
+            "menu",
+          ).replace(
+            "<button ",
+            '<button aria-haspopup="menu" aria-expanded="false" ',
+          ),
       tabs:
         '<div class="sample-tabs" role="tablist" aria-label="프로젝트 내용"><button type="button" class="sample-tab sample-emphasis" role="tab" id="' +
         uid +
@@ -16724,11 +18116,30 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         '<nav class="sample-actions" aria-label="페이지"><button type="button" class="sample-button" data-page="prev" aria-label="이전 페이지" disabled>‹</button><span class="sample-badge sample-emphasis" aria-current="page" data-page-number>1 / 3</span><button type="button" class="sample-button" data-page="next" aria-label="다음 페이지">›</button></nav>',
       card: '<article class="sample-box"><h4 class="sample-emphasis">샘플 프로젝트</h4><p>담당 팀: Product Team</p><span class="sample-badge">멤버 3명</span></article>',
       badge:
-        '<div class="sample-actions"><span class="sample-badge sample-emphasis">진행 중</span><span class="sample-badge sample-success">✓ 완료</span></div>',
+        '<div class="sample-actions">' +
+        [
+          ["success", "circle-check", "완료"],
+          ["review", "clock", "검토"],
+          ["rejected", "circle-x", "거절"],
+          ["failed", "triangle-alert", "실패"],
+        ]
+          .map(
+            ([status, glyph, label]) =>
+              '<span class="sample-badge sample-' +
+              status +
+              '">' +
+              window.PaletteComponentDemos.icon(glyph) +
+              label +
+              "</span>",
+          )
+          .join("") +
+        "</div>",
       accordion:
         '<details class="sample-box"><summary class="sample-emphasis">어떻게 시작하나요?</summary><p>세트를 고르고 프로젝트에 필요한 요소를 확인하세요.</p></details>',
       empty:
-        '<div class="sample-empty"><strong class="sample-emphasis">등록된 프로젝트 없음</strong><p>프로젝트를 추가하면 목록에 표시됩니다.</p>' +
+        '<div class="sample-empty"><span class="empty-symbol">' +
+        window.PaletteComponentDemos.icon("folder-open") +
+        '</span><strong class="sample-emphasis">등록된 프로젝트 없음</strong><p>프로젝트를 추가하면 목록에 표시됩니다.</p>' +
         button("프로젝트 만들기", "action", variant === "solid") +
         "</div>",
     }[id];
@@ -16836,6 +18247,8 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
           esc(config.palette) +
           '" data-style="' +
           esc(config.style) +
+          '" data-concept="' +
+          config.designSelection.concept +
           '"><span class="pane-label">' +
           (mode === "light" ? "Light" : "Dark") +
           "</span>" +
@@ -16862,6 +18275,8 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
                 set.palette +
                 '" data-style="' +
                 set.style +
+                '" data-concept="' +
+                designs.selection(set.id).concept +
                 '"><span class="pane-label">' +
                 (mode === "light" ? "Light" : "Dark") +
                 "</span>" +
@@ -16882,6 +18297,61 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       )
       .join("");
   }
+  function renderConcepts() {
+    const chosen = config.designSelection.concept;
+    if ($("concept-grid"))
+      $("concept-grid").innerHTML = designs.concepts.concepts
+        .map(
+          (c) =>
+            '<button type="button" class="concept-card" data-choose-concept="' +
+            c.id +
+            '" aria-pressed="' +
+            (c.id === chosen) +
+            '"><span class="concept-mini" data-concept="' +
+            c.id +
+            '" data-palette="' +
+            config.palette +
+            '" data-theme="' +
+            theme +
+            '"><span class="concept-surface"><span class="concept-kicker">PROJECT / 03</span><strong class="concept-title">새로운 시작</strong><span class="concept-lines"><i></i><i></i></span><span class="mini-action">프로젝트 열기</span></span></span><span class="concept-caption"><strong>' +
+            c.name +
+            "</strong><small>" +
+            c.traits.slice(0, 2).join(" · ") +
+            "</small></span></button>",
+        )
+        .join("");
+    if ($("catalog-concept")) {
+      $("catalog-concept").innerHTML = designs.concepts.concepts
+        .map((c) => '<option value="' + c.id + '">' + c.name + "</option>")
+        .join("");
+      $("catalog-concept").value = chosen;
+    }
+    if ($("concept-description"))
+      $("concept-description").textContent =
+        designs.concepts.get(chosen).description;
+  }
+  function chooseConcept(id) {
+    config = core.normalize(
+      {
+        ...config,
+        designSelection: { ...config.designSelection, concept: id },
+      },
+      palettes,
+      fonts,
+      icons,
+    );
+    render();
+    document
+      .querySelector('[data-choose-concept="' + id + '"]')
+      ?.focus({ preventScroll: true });
+  }
+  $("concept-grid")?.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-choose-concept]");
+    if (b) chooseConcept(b.dataset.chooseConcept);
+  });
+  $("catalog-concept")?.addEventListener("change", (e) =>
+    chooseConcept(e.target.value),
+  );
   function renderPalettes(set) {
     const group = (label, rows) =>
       '<optgroup label="' +
@@ -17011,6 +18481,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
           "</button>",
       )
       .join("");
+    window.PaletteComponentDemos.cleanup();
     $("detail-demo").innerHTML = paired((mode) =>
       demo(active, variant, false, mode),
     );
@@ -17061,6 +18532,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         .join("") +
       [
         ["프리셋", set.name],
+        ["콘셉트", designs.concepts.get(config.designSelection.concept).name],
         [
           "메뉴 배치",
           designs.navigationPresets.find(
@@ -17076,7 +18548,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         ["디자인 모드", "Light + Dark"],
         ["색상", p.name],
         ["형태", s.name],
-        ["개별 변경", custom + " / 18"],
+        ["개별 변경", custom + " / " + designs.components.length],
         ["본문 폰트", config.fonts.body],
         ["적용 범위", config.scope],
       ]
@@ -17091,6 +18563,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
         .join("");
     $("agent-brief").value = core.agentTask(config, palettes);
     renderSets();
+    renderConcepts();
     renderComponents();
     persist();
     const fontKey = JSON.stringify(config.fonts);
@@ -17232,32 +18705,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     const b = e.target.closest("[data-demo]");
     if (b) {
       const mode = b.closest("[data-theme]")?.dataset.theme || "light";
-      for (const id of ["demo-toast", "demo-dialog", "demo-drawer"]) {
-        $(id).dataset.theme = mode;
-        $(id).dataset.palette = config.palette;
-        $(id).dataset.style = config.style;
-      }
-      if (b.dataset.demo === "toast") {
-        $("component-dialog").append($("demo-toast"));
-        clearTimeout(toastTimer);
-        $("demo-toast").hidden = false;
-        const variant = config.designSelection.components.toast;
-        $("demo-toast").className = "demo-toast treatment " + variant;
-        $("demo-toast").style.width = "auto";
-        toastTimer = setTimeout(() => ($("demo-toast").hidden = true), 5000);
-      } else if (b.dataset.demo === "dialog") {
-        $("demo-dialog").dataset.treatment =
-          config.designSelection.components.dialog;
-        $("demo-dialog").showModal();
-      } else if (b.dataset.demo === "drawer") {
-        $("demo-drawer").dataset.treatment =
-          config.designSelection.components.drawer;
-        $("demo-drawer").showModal();
-      } else if (b.dataset.demo === "tooltip") {
-        const tip = b.parentElement.querySelector(".tip");
-        tip.hidden = false;
-        tip.style.display = "block";
-      } else
+      if (!window.PaletteComponentDemos.handle(b))
         notice(
           b.dataset.demo === "cancel"
             ? "취소했습니다."
@@ -17306,32 +18754,13 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       selectTab(tabs[next]);
       tabs[next].focus();
     }
-    if (e.key === "Escape")
-      document.querySelectorAll(".tip").forEach((t) => {
-        t.hidden = true;
-        t.style.display = "none";
-      });
   });
   $("component-dialog").addEventListener("close", () => {
-    clearTimeout(toastTimer);
-    $("demo-toast").hidden = true;
-    document.body.append($("demo-toast"));
     const opener = $("component-grid").querySelector(
       '[data-component="' + active + '"]',
     );
     (opener || $("catalog-search")).focus({ preventScroll: true });
   });
-  $("dismiss-toast").addEventListener(
-    "click",
-    () => ($("demo-toast").hidden = true),
-  );
-  for (const event of ["mouseenter", "focusin"])
-    $("demo-toast").addEventListener(event, () => clearTimeout(toastTimer));
-  for (const event of ["mouseleave", "focusout"])
-    $("demo-toast").addEventListener(event, () => {
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => ($("demo-toast").hidden = true), 5000);
-    });
   $("copy-brief").addEventListener("click", () =>
     copy(core.agentTask(config, palettes)),
   );
@@ -17357,6 +18786,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     demo,
   };
   let fontsReady, appliedFontKey;
+  window.PaletteComponentDemos.init(() => config);
   render();
 })();
 
@@ -17577,7 +19007,7 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
           navigation = config.designSelection.navigation;
         const demo = (id) => catalog.demo(id, v[id], true, mode + "-" + index);
         const nav = `<nav class="mock-nav" aria-label="샘플 프로젝트 메뉴"><button type="button" aria-current="page">${svg(config.icons[0] || "layout-dashboard")}<span>프로젝트</span></button><button type="button" data-preview-notice="settings">${svg("settings")}<span>설정</span></button></nav>`;
-        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "LIGHT" : "DARK"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} My Workspace</strong><span>Product Team</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><small>WORKSPACE / OVERVIEW</small><h3>좋은 아이디어를,<br>다음 프로젝트로.</h3><p>팀의 작업을 한눈에 확인하세요.</p></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form treatment ${v.input}"><h4>새 프로젝트</h4><label>프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : v.button === "outline" ? "mock-outline" : ""}">${svg("plus", 16)}프로젝트 추가</button></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
+        return `<section class="project-pane" data-theme="${mode}" data-palette="${palette}" data-style="${config.style}" data-concept="${config.designSelection.concept}" data-project-preview><div class="project-pane-label"><span>${mode === "light" ? "LIGHT" : "DARK"}</span><span>${esc(kit.palettes.find((p) => p.id === palette).name)}</span></div><div class="mock-app nav-${navigation}" data-ps-motion="${config.designSelection.motion}"><div class="mock-top"><strong>${svg("layers")} My Workspace</strong><span>Product Team</span></div>${nav}${navigation === "hybrid" ? nav.replace('class="mock-nav"', 'class="mock-nav mock-secondary-nav"') : ""}<div class="mock-main"><div class="mock-title"><div><small>WORKSPACE / OVERVIEW</small><h3>좋은 아이디어를,<br>다음 프로젝트로.</h3><p>팀의 작업을 한눈에 확인하세요.</p></div></div><div class="mock-metrics"><article class="treatment ${v.card}"><div class="sample-box"><small>전체 프로젝트</small><strong>${projects.length + 9}<span>개</span></strong></div></article><article class="treatment ${v.card}"><div class="sample-box"><small>이번 주 완료</small><strong>8<span>개</span></strong></div></article></div><article class="mock-projects treatment ${v.card}"><div class="sample-box"><h4 class="sample-emphasis">최근 프로젝트</h4><label class="mock-search">${svg("search", 16)}<input type="search" data-project-search placeholder="프로젝트 검색" aria-label="샘플 프로젝트 검색" /></label><table><thead><tr><th scope="col">프로젝트</th><th scope="col">상태</th></tr></thead><tbody>${projectRows()}</tbody></table><p class="help mock-empty" hidden>검색 결과가 없습니다.</p></div></article><form class="mock-form treatment ${v.input}"><h4>새 프로젝트</h4><label>프로젝트 이름<input class="sample-input sample-emphasis" name="project" required placeholder="프로젝트 이름을 입력하세요" /></label><button type="submit" class="sample-button ${v.button === "solid" ? "sample-primary" : v.button === "outline" ? "mock-outline" : ""}">${svg("plus", 16)}프로젝트 추가</button></form><div class="mock-bottom">${demo("switch")}${demo("badge")}</div><pre class="workspace-code mock-code"><code>const project = {
   name: "My Workspace",
   ready: true
 };</code></pre></div></div></section>`;
@@ -17595,6 +19025,8 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
     ];
     $("export-summary").textContent =
       kit.palettes.find((p) => p.id === config.palette).name +
+      " · " +
+      window.PaletteDesignConcepts.get(config.designSelection.concept).name +
       " · " +
       kit.styles.find((s) => s.id === config.style).name +
       " · " +
@@ -17810,11 +19242,36 @@ window.PALETTE_EMBEDDED_FONTS = {"assets/fonts/pretendard/PretendardVariable.wof
       : "미리보기 확대";
     $("preview-panel").classList.toggle("expanded", expanded);
   });
+  // Pointer focus must not move the control between pointerdown and pointerup.
+  let pointerFocus = false;
+  document.addEventListener(
+    "pointerdown",
+    () => {
+      pointerFocus = true;
+    },
+    true,
+  );
+  document.addEventListener(
+    "keydown",
+    () => {
+      pointerFocus = false;
+    },
+    true,
+  );
+  for (const event of ["pointerup", "pointercancel"])
+    document.addEventListener(
+      event,
+      () => {
+        pointerFocus = false;
+      },
+      true,
+    );
   $("selection-panel").addEventListener("focusin", () => {
     if (innerWidth >= 1000) return;
     $("preview-panel").classList.remove("expanded");
     $("toggle-preview").setAttribute("aria-expanded", "false");
     $("toggle-preview").textContent = "미리보기 확대";
+    if (pointerFocus) return;
     document.activeElement.scrollIntoView({
       block: "center",
       behavior: "instant",

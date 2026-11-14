@@ -13,6 +13,7 @@ Use this project to *choose and lock* a design vocabulary (color, typography, de
 | Dimension | Reference | Rule |
 |---|---|---|
 | Color | 32 palettes × 2 modes | Semantic roles; select one, respect mode scope |
+| Concept | 9 independent presets | Shape, hierarchy and purposeful material/elevation; explicit fonts stay authoritative |
 | Shape & density | 6 style presets | Independent of color, responsive to app density |
 | Typography | 24 OFL fonts | Separate body/code roles, explicit fallback and license |
 | Iconography | 95 pinned Lucide SVGs | currentColor, accessible names, fixed source and tests |
@@ -24,6 +25,7 @@ Use this project to *choose and lock* a design vocabulary (color, typography, de
 
 - **Hierarchy over decoration:** primary action and current selection should be obvious; decorative accent everywhere weakens focus.
 - **Shape with purpose:** use cards for genuinely bounded entities, tables/lists for scan-friendly data and text flows for documentation.
+- **Explicit concepts:** `designSelection.concept` authorizes its documented shape and material choices. Glass belongs to functional navigation/overlay layers with an opaque fallback; reading surfaces stay solid. Concept decoration never redefines semantic colors or removes focus, reduced-motion or forced-colors support.
 - **Anti-patterns:** no obligatory colored left borders on every callout, no redundant nested cards, no arbitrary giant radii, needless glow, gradient or pill badges.
 - **State clarity:** running, queued, success, review, rejected, failed and severity are different meanings; preserve text as well as symbol/color.
 - **Density-aware:** compact operating consoles can be dense without losing touch targets, focus outlines or readable rows.

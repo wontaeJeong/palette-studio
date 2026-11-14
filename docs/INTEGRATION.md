@@ -57,3 +57,15 @@
 ## 파일 변경·검사
 
 생성 원본은 `scripts/build.py`입니다. JSON과 CSS를 따로 손으로 바꿔 drift를 만들지 마세요. `node scripts/audit.mjs`는 모든 테마와 생성 CSS의 값 일치도 확인합니다. raw ramp에 대해서는 접근성 승인 결과를 제공하지 않습니다. 색상 변경 후에는 기존 앱의 실제 상태·겹침·focus-ring을 별도로 확인하세요.
+
+## 독립 콘셉트와 컴포넌트 미리보기
+
+작업실의 여섯 세트는 업무 시작점이고, 아홉 콘셉트는 별도로 선택하는 형태·타이포 위계·재질 기준입니다. `designSelection.concept`는 `minimal`, `soft`, `editorial`, `compact`, `brutalist`, `glass`, `expressive`, `terminal`, `tactile` 중 하나입니다. 기존 선택에서 이 값이 없으면 studio/precision은 minimal, bloom은 soft, editorial은 editorial, console은 compact, signal은 brutalist로 정규화합니다. 기존 세트 ID와 개별 soft/outline/solid 표현은 보존됩니다.
+
+`data/design-concepts.js`가 브라우저와 CLI의 단일 원본입니다. `node scripts/build-concepts.cjs`는 미리보기용 `css/concepts.css`를 생성합니다. 내보내기의 `selected-style.css`에는 선택한 콘셉트 하나만 같은 함수로 들어갑니다. 샘플 클래스명을 앱의 클래스라고 가정하지 말고 `--concept-*`를 현재 컴포넌트에 연결하세요. 형태·위계·깊이는 콘셉트가, 밀도·컨트롤 크기는 스타일이 담당하며 본문/코드 글꼴 선택은 그대로 유지합니다.
+
+포털 루트에 `data-theme`, `data-palette`, `data-style`, `data-concept`를 전달합니다. Glass의 장식층은 내비게이션·팝오버·대화상자에 제한되고 본문에는 불투명 의미 표면을 유지합니다. 선택된 재질도 토큰의 literal HEX 규칙과 dark-only 색상 범위를 바꾸지 않습니다.
+
+프레임워크 중립 예시는 19종입니다. 툴팁은 고정 앵커·hover/focus·Escape 후 재열기를 지원하며 인터랙티브 내용은 별도 Popover를 씁니다. Toast는 최대 3개, 남은 시간 기준 hover/focus 일시정지, 되돌리기, 영구 오류 안내를 제공합니다. 모달에서 실행하는 알림은 해당 모달 아래 DOM에 두고 top layer로 표시해 보이면서도 조작 가능하게 합니다. 기존 앱에서는 이미 사용하는 접근성 라이브러리를 우선 재사용하세요.
+
+검증: `node scripts/test-design-concepts.cjs`, `node scripts/check-component-concepts.cjs`(Playwright), 기존 카탈로그·작업실·handoff 회귀 검사, `node scripts/audit.mjs`. 최종 단일 HTML은 `python3 scripts/bundle.py`로 다시 만듭니다.

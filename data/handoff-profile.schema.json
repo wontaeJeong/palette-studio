@@ -453,6 +453,14 @@
                 "outline",
                 "solid"
               ]
+            },
+            "popover": {
+              "type": "string",
+              "enum": [
+                "soft",
+                "outline",
+                "solid"
+              ]
             }
           }
         },
@@ -469,6 +477,20 @@
             "top",
             "left",
             "hybrid"
+          ]
+        },
+        "concept": {
+          "type": "string",
+          "enum": [
+            "minimal",
+            "soft",
+            "editorial",
+            "compact",
+            "brutalist",
+            "glass",
+            "expressive",
+            "terminal",
+            "tactile"
           ]
         }
       }

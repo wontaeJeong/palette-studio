@@ -1,9 +1,9 @@
 /* One offline catalog for the browser, CLI and generated implementation briefs. */
 (function (root, factory) {
   if (typeof module === "object" && module.exports)
-    module.exports = factory(require("./ui-presets.js"));
-  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets);
-})(typeof globalThis !== "undefined" ? globalThis : this, function (ui) {
+    module.exports = factory(require("./ui-presets.js"), require("./design-concepts.js"));
+  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets, root.PaletteDesignConcepts);
+})(typeof globalThis !== "undefined" ? globalThis : this, function (ui, concepts) {
   "use strict";
   const {
     navigationPresets,
@@ -19,7 +19,7 @@
     },
     outline: {
       name: "윤곽선",
-      rule: "Use --color-canvas background, --color-ink text and --color-line-strong 1px border; no shadow.",
+      rule: "Use --color-canvas background, --color-ink text and --color-line-strong border; no shadow by default, unless the explicit concept selects purposeful elevation.",
     },
     solid: {
       name: "강조색",
@@ -27,6 +27,7 @@
     },
   };
   const rows = [
+    ["popover", "추가 설정 팝오버", "Popover", "오버레이", "현재 작업 옆에서 설정을 바꾸는 작은 창", "설정 필터 보조 팝업", "Anchor an interactive dialog to its trigger, keep within viewport; move focus inside, close on Escape/outside click and restore trigger focus. Use labels for controls; never put interactive content in a tooltip."],
     [
       "button",
       "버튼",
@@ -160,7 +161,7 @@
       "콘텐츠",
       "관련 내용을 한 덩어리로 모은 상자",
       "패널 박스 정보",
-      "Use semantic article/section with heading, 20px padding and selected style radius; only add a card boundary for a genuinely grouped entity.",
+      "Use semantic article/section with heading, selected concept padding and shape with the selected style density; only add a card boundary for a genuinely grouped entity.",
     ],
     [
       "badge",
@@ -360,6 +361,7 @@
     if (!set) throw Error("Invalid design selection set: " + id);
     return {
       set: id,
+      concept: {studio:"minimal",bloom:"soft",precision:"minimal",editorial:"editorial",console:"compact",signal:"brutalist"}[id],
       motion: set.defaultMotion,
       navigation: set.defaultNavigation,
       components: Object.fromEntries(
@@ -374,6 +376,10 @@
     if (!input || typeof input !== "object" || Array.isArray(input))
       throw Error("Invalid design selection");
     const result = selection(input.set);
+    if (input.concept !== undefined) {
+      concepts.get(input.concept);
+      result.concept = input.concept;
+    }
     if (input.motion !== undefined) {
       if (!motionPresets.some((m) => m.id === input.motion))
         throw Error("Invalid design selection motion");
@@ -414,9 +420,10 @@
         set.recommendedComponents.join(", ") +
         ". " +
         set.recommendationReason,
+      concepts.brief(selected.concept),
       motionBrief(selected.motion),
       navigationBrief(selected.navigation),
-      "Apply the selected style radius, padding, gap and control height from selected-style.css; control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
+      "Apply the explicit concept shape, hierarchy and elevation from --concept-* in selected-style.css; the selected style remains the density/control-size adjustment, and selected fonts take precedence. Control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
       "",
       ...components.map(
         (c) =>
@@ -440,6 +447,7 @@
   }
   return {
     sets,
+    concepts,
     components,
     treatments,
     selection,

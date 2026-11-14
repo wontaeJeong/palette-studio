@@ -128,10 +128,10 @@
     const panes = mode === "split" ? ["light", "dark"] : [mode];
     $("ah-preview-grid").innerHTML = panes.map((theme) =>
       '<div class="ah-mock" data-theme="' + esc(theme) + '" data-palette="' +
-        esc(config.palette) + '" data-style="' + esc(config.style) + '">' +
+        esc(config.palette) + '" data-style="' + esc(config.style) + '" data-concept="' + (config.designSelection?.concept || 'minimal') + '">' +
         '<div class="ah-mock-header"><span>' + esc(p.name) + '</span><span>' +
         theme.toUpperCase() + '</span></div>' +
-        '<div class="ah-mock-area"><div class="ah-mock-title">' + title + '</div>' +
+        '<div class="ah-mock-area" data-concept-part="surface"><div class="ah-mock-title" data-concept-part="title">' + title + '</div>' +
         '<div class="ah-mock-tab">개요</div>' +
         '<div class="ah-mock-metric">1,284</div>' +
         '<div class="ah-mock-desc">샘플 데이터 · 30일 기준</div>' +

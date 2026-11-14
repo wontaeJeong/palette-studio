@@ -16,7 +16,7 @@ const { pathToFileURL } = require("node:url");
     const url = pathToFileURL(path.resolve(__dirname, "../catalog.html")).href;
     await page.goto(url);
     assert.equal(await page.locator("[data-set]").count(), 6);
-    assert.equal(await page.locator("[data-component]").count(), 18);
+    assert.equal(await page.locator("[data-component]").count(), 19);
     assert.equal(await page.locator("h1").innerText(), "디자인 도감");
     assert(
       await page
@@ -46,8 +46,9 @@ const { pathToFileURL } = require("node:url");
     await page.locator('#component-dialog [data-variant="solid"]').click();
     await page
       .locator(
-        '#component-dialog .preview-pane[data-theme="light"] [data-demo="toast"]',
+        '#component-dialog .preview-pane[data-theme="light"] [data-demo="toast"][data-toast-status="success"]',
       )
+      .first()
       .click();
     assert(await page.locator("#demo-toast").isVisible());
     await page.locator("#dismiss-toast").click({ timeout: 2000 });
@@ -66,7 +67,7 @@ const { pathToFileURL } = require("node:url");
     assert(await page.locator("#no-results").isVisible());
     await page.fill("#catalog-search", "");
     await page.selectOption("#catalog-category", "오버레이");
-    assert.equal(await page.locator("[data-component]").count(), 3);
+    assert.equal(await page.locator("[data-component]").count(), 4);
     await page.locator('[data-component="dialog"]').click();
     await page.locator('#component-dialog [data-variant="solid"]').click();
     await page

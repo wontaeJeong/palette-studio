@@ -1,6 +1,6 @@
 # Typed React Studio Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Replace the unified workbench's imperative rendering with typed state and React components, preserving the existing editor and offline/CLI contracts.
 
@@ -39,12 +39,12 @@
 - `restoreSelection(dependencies, hash, storage)` returns normalized config, view and recovery message. `serializeSelectionURL(url, config, view)` preserves path/query and restores the same selection/view. `persistSelection(storage, config)` returns a save status without throwing for unavailable storage. Storage may be supplied by an accessor so getter failures can be tested.
 - Root `npm run typecheck`, `npm run test:state`, `npm run test:contracts` are repeatable commands. Use pinned packages already in the library preview lock and the CI Playwright pin; share dependencies through a root workspace if useful. CLI remains runnable with no npm install.
 
-- [ ] Add behavior tests before implementation. Assert nested font/style/component patches preserve all other config fields, invalid palette/project/variant leaves snapshot identity/value and notification count unchanged, subscriber fires once per committed update, and defensive reads cannot mutate store.
-- [ ] Pin preset reset against current chooseSet behavior. Test full URL over storage, legacy `catalogConfig`, single-field links and `existing-gate`, corrupt/missing/nonobject storage, throwing getter/getItem/setItem, malformed fragments and view exclusions from export.
-- [ ] Run `npm run test:state`; Expected: FAIL for missing store/persistence before implementation, not a broken dependency install.
-- [ ] Implement typed state/persistence and root tooling. Avoid duplicating output generators or weakening strict checking with blanket any/ts-nocheck. Capture baseline browser resource sizes for Task 3 in a small JSON under this plan's scratch directory if useful.
-- [ ] Run `npm run typecheck && npm run test:state && npm run test:contracts`; Expected: all PASS; old pages and CLI unchanged.
-- [ ] Commit `refactor: add typed studio selection state` and report RED/GREEN commands and results.
+- [x] Add behavior tests before implementation. Assert nested font/style/component patches preserve all other config fields, invalid palette/project/variant leaves snapshot identity/value and notification count unchanged, subscriber fires once per committed update, and defensive reads cannot mutate store.
+- [x] Pin preset reset against current chooseSet behavior. Test full URL over storage, legacy `catalogConfig`, single-field links and `existing-gate`, corrupt/missing/nonobject storage, throwing getter/getItem/setItem, malformed fragments and view exclusions from export.
+- [x] Run `npm run test:state`; Expected: FAIL for missing store/persistence before implementation, not a broken dependency install.
+- [x] Implement typed state/persistence and root tooling. Avoid duplicating output generators or weakening strict checking with blanket any/ts-nocheck. Capture baseline browser resource sizes for Task 3 in a small JSON under this plan's scratch directory if useful.
+- [x] Run `npm run typecheck && npm run test:state && npm run test:contracts`; Expected: all PASS; old pages and CLI unchanged.
+- [x] Commit `refactor: add typed studio selection state` and report RED/GREEN commands and results.
 
 ## Task 2: React-owned unified editor and classic offline runtime
 
@@ -57,12 +57,12 @@
 - Share real library React components/runtimes within the app. Introduce a `src/studio/library-loader.ts` interface `loadLibrary(id): Promise<ComponentType>` so Task 3 can split adapters without redesigning the UI. Retain existing standalone preview bundle for independent pages.
 - `npm run build:studio` builds classic `assets/studio.js` plus root shell; existing bundle.py creates START-HERE. Task 3 adds web output.
 
-- [ ] Add `check-react-studio.cjs` before implementation. Assert main page has React-owned app without loading catalog.js/workspace.js/library-workspace.js or the old React preview bundle, then exercise palette/font/icon/component selection, exact output parity, invalid name drafts, search retention and active preview page. Expected: FAIL on old runtime ownership.
-- [ ] Build React panels with existing selectors and layout. Derive set thumbnails, concepts, navigation/motion previews, component search/details, recipe summary and export controls from catalogs. Reuse immutable data and pure generator; maintain all existing working behavior, including project sample form/search.
-- [ ] Manage external demo/font/metrics lifecycles explicitly; no competing writes into React-owned nodes. Keep focus return, native dialogs, independent body/code filtering, limit 24 icons, tool theme exclusion and view sharing.
-- [ ] Build classic assets and standalone HTML. Run `npm run typecheck && npm run build:studio && python3 scripts/bundle.py && node scripts/check-react-studio.cjs`; Expected: PASS including relocated standalone smoke. Avoid auto-updating screenshot evidence until Task 3 final validation.
-- [ ] Run existing relevant browser contracts: check-studio-flow, check-fonts, check-handoff-browser, check-icon-studio, check-component-concepts, check-component-gallery, check-library-browser for all five libraries, check-library-selection, check-navigation-library-integration, check-library-export-summary, check-library-metrics-browser. Keep behavioral assertions; only adjust waiting/transport plumbing where React scheduling requires it. Expected: all PASS.
-- [ ] Run state/contracts suite and commit `refactor: migrate unified studio to React` with report of exact browser scope and any limitations.
+- [x] Add `check-react-studio.cjs` before implementation. Assert main page has React-owned app without loading catalog.js/workspace.js/library-workspace.js or the old React preview bundle, then exercise palette/font/icon/component selection, exact output parity, invalid name drafts, search retention and active preview page. Expected: FAIL on old runtime ownership.
+- [x] Build React panels with existing selectors and layout. Derive set thumbnails, concepts, navigation/motion previews, component search/details, recipe summary and export controls from catalogs. Reuse immutable data and pure generator; maintain all existing working behavior, including project sample form/search.
+- [x] Manage external demo/font/metrics lifecycles explicitly; no competing writes into React-owned nodes. Keep focus return, native dialogs, independent body/code filtering, limit 24 icons, tool theme exclusion and view sharing.
+- [x] Build classic assets and standalone HTML. Run `npm run typecheck && npm run build:studio && python3 scripts/bundle.py && node scripts/check-react-studio.cjs`; Expected: PASS including relocated standalone smoke. Avoid auto-updating screenshot evidence until Task 3 final validation.
+- [x] Run existing relevant browser contracts: check-studio-flow, check-fonts, check-handoff-browser, check-icon-studio, check-component-concepts, check-component-gallery, check-library-browser for all five libraries, check-library-selection, check-navigation-library-integration, check-library-export-summary, check-library-metrics-browser. Keep behavioral assertions; only adjust waiting/transport plumbing where React scheduling requires it. Expected: all PASS.
+- [x] Run state/contracts suite and commit `refactor: migrate unified studio to React` with report of exact browser scope and any limitations.
 
 ## Task 3: Split web distribution and final delivery validation
 
@@ -74,12 +74,12 @@
 - Loading/error/retry state is explicit and latest-choice-wins. Retry must actually retry failed imports rather than keeping a rejected cached promise.
 - Include all transitive shipped package licenses in distributable artifacts. Add build drift verification with deterministic outputs; screenshot hashes cover TS/TSX sources, config and lock.
 
-- [ ] Add distribution browser tests before implementation. Assert root and subpath HTTP runs/export, selected library runtime absent from initial network until selection, failures show retry and recover, slow earlier selection cannot replace later one, relocated START-HERE has no dependent HTTP/file assets in local/system mode. Expected: FAIL until split artifact exists.
-- [ ] Implement dual output and development scripts using existing pinned esbuild. Retain root Pages behavior and no npm dependency for CLI.
-- [ ] Run `npm run typecheck && npm run test:state && npm run test:contracts && npm run build && node scripts/check-studio-distributions.cjs`; Expected: PASS, deterministic web/offline outputs and byte-equal common export outputs.
-- [ ] Integrate required checks into CI without changing public deployment configuration. Verify canonical generator regeneration, schema checks, contrast audit, all Task 2 browser regressions, existing React icon npm test/pack dry run if the root workspace changes its resolution, and library source type/export checks.
-- [ ] Refresh actual Chromium previews, inspect desktop/mobile light/dark captures, run freshness checks. Record before/after initial JS bytes and request behavior under the same browser environment; no unsupported speed claims.
-- [ ] Run build twice and verify no generated tracked diff on second build; run `git diff --check`. Document exact verification commands, remaining environment limits, root/classic vs web artifact distinction. Commit `build: produce web and offline studio distributions`.
+- [x] Add distribution browser tests before implementation. Assert root and subpath HTTP runs/export, selected library runtime absent from initial network until selection, failures show retry and recover, slow earlier selection cannot replace later one, relocated START-HERE has no dependent HTTP/file assets in local/system mode. Expected: FAIL until split artifact exists.
+- [x] Implement dual output and development scripts using existing pinned esbuild. Retain root Pages behavior and no npm dependency for CLI.
+- [x] Run `npm run typecheck && npm run test:state && npm run test:contracts && npm run build && node scripts/check-studio-distributions.cjs`; Expected: PASS, deterministic web/offline outputs and byte-equal common export outputs.
+- [x] Integrate required checks into CI without changing public deployment configuration. Verify canonical generator regeneration, schema checks, contrast audit, all Task 2 browser regressions, existing React icon npm test/pack dry run if the root workspace changes its resolution, and library source type/export checks.
+- [x] Refresh actual Chromium previews, inspect desktop/mobile light/dark captures, run freshness checks. Record before/after initial JS bytes and request behavior under the same browser environment; no unsupported speed claims.
+- [x] Run build twice and verify no generated tracked diff on second build; run `git diff --check`. Document exact verification commands, remaining environment limits, root/classic vs web artifact distinction. Commit `build: produce web and offline studio distributions`.
 
 ## Task 4: Preserve features added to main during the migration
 
@@ -89,11 +89,11 @@
 
 **Interfaces:** Same typed state, canonical outputs, real React ownership, bounded legacy demos, classic/offline/web build contracts. Dashboard demo listeners require explicit lifecycle cleanup in the React boundary. New finite component IDs must be accurately typed. Do not duplicate shared sample generation in legacy and React pages.
 
-- [ ] Inspect incoming commits and execute their new behavior tests against the migration before adaptation; record expected missing recommendations/dashboard/inline samples (RED). Integrate `origin/main` at `b034ae0` into this isolated branch, preserving both sources of authored behavior. Regenerate large derived conflicts from source, never silently choose stale generated output.
-- [ ] Preserve all preset recommendation versus selected-state labels and independent choice behavior, inline visible overlay samples with optional interactive controls/focus, all 47 component families, dashboard charts/tables/status and project search isolation. Reuse canonical dashboard metadata/markup through explicit React lifecycle boundaries; keep the editor React-owned.
-- [ ] Pass incoming `check-preset-recommendations`, `check-inline-previews`, `check-dashboard-browser` and expanded gallery/workspace tests for classic, offline and legacy pages. Extend focused web distribution coverage for new dashboard/recommendation behavior at root/subpath. Only adapt transport/scheduling waits when React requires them; retain behavioral assertions.
-- [ ] Pass `npm test`, contrast/schema checks, affected existing flow/navigation/library/React browser contracts, dual distribution tests and deterministic build checks. Update measured resource values against the new main baseline in the same browser if comparisons are retained; distinguish the original migration baseline from the concurrent feature additions.
-- [ ] Regenerate actual captures for the now-current 37-screen manifest; visually inspect desktop/mobile dashboard and baseline editor, run screenshot freshness and `git diff --check`. Update verification docs, self-review and commit the integrated result. Do not push, merge into main or deploy.
+- [x] Inspect incoming commits and execute their new behavior tests against the migration before adaptation; record expected missing recommendations/dashboard/inline samples (RED). Integrate `origin/main` at `b034ae0` into this isolated branch, preserving both sources of authored behavior. Regenerate large derived conflicts from source, never silently choose stale generated output.
+- [x] Preserve all preset recommendation versus selected-state labels and independent choice behavior, inline visible overlay samples with optional interactive controls/focus, all 47 component families, dashboard charts/tables/status and project search isolation. Reuse canonical dashboard metadata/markup through explicit React lifecycle boundaries; keep the editor React-owned.
+- [x] Pass incoming `check-preset-recommendations`, `check-inline-previews`, `check-dashboard-browser` and expanded gallery/workspace tests for classic, offline and legacy pages. Extend focused web distribution coverage for new dashboard/recommendation behavior at root/subpath. Only adapt transport/scheduling waits when React requires them; retain behavioral assertions.
+- [x] Pass `npm test`, contrast/schema checks, affected existing flow/navigation/library/React browser contracts, dual distribution tests and deterministic build checks. Update measured resource values against the new main baseline in the same browser if comparisons are retained; distinguish the original migration baseline from the concurrent feature additions.
+- [x] Regenerate actual captures for the now-current 37-screen manifest; visually inspect desktop/mobile dashboard and baseline editor, run screenshot freshness and `git diff --check`. Update verification docs, self-review and commit the integrated result. Do not push, merge into main or deploy.
 
 ## Final integration
 

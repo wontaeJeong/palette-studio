@@ -82,7 +82,7 @@
 
 세부 파일 배치, 컴포넌트 이름, 내부 store API, 라이브러리 chunk 분할 방식, 동등한 동작을 보존하는 테스트 보조 함수는 구현 계획에서 정한다. 새 상태 라이브러리는 필요성을 입증하지 않으면 추가하지 않는다. 생성기 TypeScript 전면 이식, 서버 도입, 신규 기능은 후속 범위다.
 
-## 현재 준비 상태
+## 설계 작성 시 준비 상태
 
 - 네이티브 격리 worktree: `/Users/wt.jeong/.codex/worktrees/1c36/palette-studio`
 - 브랜치: `refactor/typed-react-studio`
@@ -90,3 +90,10 @@
 - 변경 전 검사 통과: handoff/catalog/navigation, design-concepts, ui-libraries, library-metrics 11건.
 - 아직 제품 코드를 변경하거나 새로운 브라우저/빌드 검증을 수행하지 않았다.
 - 독립 builder 검토: 구현 계획 전에 추가로 결정해야 할 중요한 누락 없음.
+
+## 구현 결과 (2026-11-14)
+
+- 타입 지정 상태·저장/URL 경계, React 편집기, 웹/오프라인 이중 빌드의 세 단계를 구현하고 각 단계의 독립 검토를 통과했다.
+- 진행 중 main에 추가된 프리셋 추천·인라인 팝업 견본·47종 컴포넌트와 대시보드도 격리 브랜치에 통합하고 별도 검토했다. 최신 main 기준점은 `b034ae0`이다.
+- strict 타입, 29개 상태 검사, canonical/CLI 계약, 기존 11개 브라우저 검사와 신규 React/배포 검사, 11,712개 대비 검사, 37장 실제 캡처 및 재현 가능한 빌드를 확인했다. 정확한 환경과 제한은 [검증 기록](../../VERIFICATION.md)에 남겼다.
+- 구현 결과는 `refactor/typed-react-studio`에 커밋하며 기본 main과 `.serena/`를 보존한다. 공개 배포·원격 push·main으로의 병합은 수행하지 않는다.

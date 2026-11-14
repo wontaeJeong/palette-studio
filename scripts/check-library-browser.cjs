@@ -4,6 +4,7 @@ const assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const fs=require('node:fs');
 const path=require('node:path');
+const os=require('node:os');
 const {pathToFileURL}=require('node:url');
 (async()=>{
  const browser=await chromium.launch({headless:true});
@@ -65,7 +66,7 @@ const {pathToFileURL}=require('node:url');
     await page.evaluate(()=>{const c=window.PaletteCatalog.getConfig();window.PaletteCatalog.update({designSelection:{...c.designSelection,concept:'minimal'}});});
    }
    assert(await page.evaluate(()=>{const c=window.PaletteCatalog.getConfig(),files=window.PaletteHandoff.libraryFiles(c,window.PALETTE_KIT),ui=window.PaletteWorkspace.outputs();return Object.entries(files).every(([name,body])=>ui[name]===body);}), 'workspace uses exact shared library files');
-   await page.locator('.library-preview').screenshot({path:`/private/tmp/palette-library-${id}-${width}.png`});
+   await page.locator('.library-preview').screenshot({path:path.join(os.tmpdir(),`palette-library-${id}-${width}.png`)});
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no document horizontal overflow');
   }
  }

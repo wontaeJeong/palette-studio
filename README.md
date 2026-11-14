@@ -20,8 +20,8 @@ GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다.
 
 - 6개 세트: 기본 프로젝트, 설정·개인화, 입력·승인, 문서·콘텐츠, 운영·데이터, 상태·알림.
 - 세트 선택 시 팔레트·스타일·본문/코드 폰트·컴포넌트 기본 표현을 적용합니다.
-- 19개 요소를 한국어 설명, 정식 이름, 영문 이름, 용도로 검색할 수 있습니다.
-- 입력·피드백·오버레이·탐색·콘텐츠로 분류합니다.
+- 47개 요소를 한국어 설명, 정식 이름, 영문 이름, 용도로 검색할 수 있습니다.
+- 입력·피드백·오버레이·탐색·콘텐츠·통계·진행 상태·데이터로 분류합니다.
 - 요소별로 기본 배경 / 윤곽선 / 강조색 표현을 선택합니다. 세트를 다시 고르면 개별 표현이 초기화됩니다.
 - 알림, 확인창, 드로어, 입력, 스위치, 체크박스, 탭, 페이지 이동, 접기 등의 동작을 확인할 수 있습니다.
 - 모든 프리셋·요소·배치·애니메이션은 Light/Dark를 나란히 표시합니다. 도구 자체의 라이트/다크 설정은 별도로 저장하며 내보내는 프로필에 포함하지 않습니다.
@@ -33,11 +33,24 @@ GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다.
 
 | 분류 | 요소 |
 |---|---|
-| 입력 | Button, Text field, Select, Switch, Checkbox |
+| 입력 | Button, Text field, Select, Switch, Checkbox, Radio group, Textarea, Slider, Date picker, File upload, Combobox |
 | 피드백 | Toast, Alert |
 | 오버레이 | Dialog, Drawer, Tooltip, Popover |
 | 탐색 | Dropdown menu, Tabs, Breadcrumb, Pagination |
-| 콘텐츠 | Card, Badge, Accordion, Empty state |
+| 콘텐츠 | Card, Badge, Accordion, Empty state, Avatar, List, Separator |
+| 통계 | Bar, Stacked bar, Line, Area, Donut, Pie, Histogram, Scatter, Heatmap, Sparkline |
+| 진행·상태 | Progress bar, Circular progress, Stepper, Skeleton, Spinner, Error state |
+| 데이터 | Metric card, Data table, Timeline |
+
+### 통계와 대시보드 미리보기
+
+- 프로젝트 미리보기에서 지표·막대·선·도넛 차트와 진행률을 함께 비교합니다. 전체 47종은 컴포넌트 검색과 종류 필터로 확인합니다.
+- 차트 8색은 선택 팔레트의 포인트색을 기준으로 생성되며, 히트맵은 수치 크기에 따른 5단계 색상과 각 단계의 글자색을 사용합니다. 데이터 시리즈와 성공·오류 등의 상태색은 별개입니다.
+- 차트는 고정 샘플 데이터로 표시하며 축·단위·범례·값과 펼칠 수 있는 데이터 표를 제공합니다. 선그래프는 선 패턴과 점 모양으로도 구분합니다.
+- 표 검색·진행률 정렬, 키보드 슬라이더, 단계 이동, 파일 선택 결과, 오류 재시도를 확인할 수 있습니다. 파일은 전송하지 않습니다.
+- 새 요소의 표현 선택도 공유 링크·프로필·브라우저/CLI 작업지시에 포함됩니다. 미리보기는 HTML/CSS/SVG이며 실제 앱에서는 기존 차트·컴포넌트 라이브러리를 재사용합니다.
+
+![통계와 진행률이 포함된 대시보드](previews/studio-statistics-desktop.png)
 
 ### 독립 콘셉트와 실제 UI 라이브러리
 
@@ -191,6 +204,8 @@ node scripts/check-handoff-browser.cjs
 node scripts/check-catalog-browser.cjs
 node scripts/check-component-concepts.cjs
 node scripts/check-component-gallery.cjs
+node scripts/test-dashboard-components.cjs
+CHECK_BUNDLE=1 node scripts/check-dashboard-browser.cjs
 node scripts/check-library-browser.cjs
 node scripts/check-library-selection.cjs
 node scripts/check-navigation-library-integration.cjs

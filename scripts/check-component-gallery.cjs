@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
 const path=require('node:path');
 const {pathToFileURL}=require('node:url');
 const {chromium}=require('playwright');
-(async()=>{
+async function checkComponentGallery(){
  const browser=await chromium.launch({headless:true});
  try{
   const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),errors=[];
@@ -16,7 +16,7 @@ const {chromium}=require('playwright');
     document.querySelector('#components-options').open=true;document.querySelector('#library-options').open=true;
     const failures=[],concepts=PaletteDesignConcepts.concepts.map(c=>c.id);
     for(const concept of concepts){PaletteCatalog.update({designSelection:{...PaletteCatalog.getConfig().designSelection,concept}});
-     const buttons=[...document.querySelectorAll('[data-component]')];if(buttons.length!==19)failures.push('family count '+buttons.length);
+     const buttons=[...document.querySelectorAll('[data-component]')];if(buttons.length!==47)failures.push('family count '+buttons.length);
      for(const button of buttons){button.click();const dialog=document.querySelector('#component-dialog');
       if(!dialog.open)failures.push(concept+' '+button.dataset.component+' detail did not open');
       const panes=[...document.querySelectorAll('#detail-demo .preview-pane')];
@@ -27,8 +27,10 @@ const {chromium}=require('playwright');
      }
      if(document.documentElement.scrollWidth>innerWidth+1)failures.push(concept+' page overflow');
     }return failures;
-   });assert.deepEqual(failures,[],'all19 families across9 concepts, width '+width);
+   });assert.deepEqual(failures,[],'all47 families across9 concepts, width '+width);
   }
-  assert.deepEqual(errors,[]);console.log('Component gallery: PASS (19 families × 9 concepts × 2 widths, paired light/dark, zero overflow/errors)');
+  assert.deepEqual(errors,[]);console.log('Component gallery: PASS (47 families × 9 concepts × 2 widths, paired light/dark, zero overflow/errors)');
  }finally{await browser.close();}
-})().catch(e=>{console.error(e);process.exit(1);});
+}
+module.exports=checkComponentGallery;
+if(require.main===module)checkComponentGallery().catch(e=>{console.error(e);process.exit(1);});

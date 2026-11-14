@@ -66,7 +66,7 @@
 
 포털 루트에 `data-theme`, `data-palette`, `data-style`, `data-concept`를 전달합니다. Glass의 장식층은 내비게이션·팝오버·대화상자에 제한되고 본문에는 불투명 의미 표면을 유지합니다. 선택된 재질도 토큰의 literal HEX 규칙과 dark-only 색상 범위를 바꾸지 않습니다.
 
-프레임워크 중립 예시는 19종입니다. 툴팁은 고정 앵커·hover/focus·Escape 후 재열기를 지원하며 인터랙티브 내용은 별도 Popover를 씁니다. Toast는 최대 3개, 남은 시간 기준 hover/focus 일시정지, 되돌리기, 영구 오류 안내를 제공합니다. 모달에서 실행하는 알림은 해당 모달 아래 DOM에 두고 top layer로 표시해 보이면서도 조작 가능하게 합니다. 기존 앱에서는 이미 사용하는 접근성 라이브러리를 우선 재사용하세요.
+프레임워크 중립 예시는 통계·진행 상태·데이터 요소를 포함해 47종입니다. 툴팁은 고정 앵커·hover/focus·Escape 후 재열기를 지원하며 인터랙티브 내용은 별도 Popover를 씁니다. Toast는 최대 3개, 남은 시간 기준 hover/focus 일시정지, 되돌리기, 영구 오류 안내를 제공합니다. 모달에서 실행하는 알림은 해당 모달 아래 DOM에 두고 top layer로 표시해 보이면서도 조작 가능하게 합니다. 기존 앱에서는 이미 사용하는 접근성 라이브러리를 우선 재사용하세요.
 
 검증: `node scripts/test-design-concepts.cjs`, `node scripts/check-component-concepts.cjs`(Playwright), 기존 카탈로그·작업실·handoff 회귀 검사, `node scripts/audit.mjs`. 최종 단일 HTML은 `python3 scripts/bundle.py`로 다시 만듭니다.
 
@@ -125,6 +125,15 @@ node scripts/smoke-library-metrics.cjs          # 선택 실행: 실제 공개 A
 프리셋마다 기본 조합이 다릅니다. 팔레트를 바꿔도 메뉴 선택은 유지됩니다. 미리보기의 프로젝트·설정 메뉴를 눌러 선택 표시와 화면 전환을 확인할 수 있습니다.
 
 `designSelection.navigationStyle`과 `navigationStructure`가 설정 JSON, 프로필, 공유 링크에 저장됩니다. 기존 설정에 두 값이 없으면 해당 프리셋의 기본값을 사용합니다. `selected-style.css`에 선택한 메뉴 CSS가 포함되고 `design.md`와 작업지시에 같은 선택 및 마크업 예시가 들어갑니다. 대상 앱에서는 기존 내비게이션을 우선하며 경로 이동은 링크, 화면 내 동작은 버튼으로 연결합니다. 색상 범위가 제한된 경우 기존 테마 토큰을 유지하세요.
+
+
+## 통계·진행 상태 컴포넌트
+
+`data/dashboard-components.js`는 추가 28종의 선택·동작 계약이며 `data/design-catalog.js`가 기존 요소와 함께 정규화합니다. 이전 설정에는 새 요소의 프리셋 기본 표현이 자동으로 채워집니다. 브라우저와 CLI가 같은 선택을 내보내며, `dashboard-demos.js`와 `css/dashboard.css`는 고정 샘플의 미리보기 소스입니다. 앱에 이 도감 전체를 추가할 필요는 없습니다.
+
+`--color-chart-1..8`은 팔레트별 범주형 시리즈, `--color-heatmap-1..5`와 `--color-on-heatmap-1..5`는 순차 색상과 해당 값의 글자색입니다. 생성 원본은 `scripts/build.py`입니다. 상태 결과에는 기존 status/severity 의미 토큰을 사용하고, 증가·감소를 자동으로 성공·실패로 해석하지 않습니다. 제품의 기존 차트 패키지에 선택 범위의 토큰을 연결하며, 축·단위·범례·직접 값·표 대안을 유지하세요. 선언된 대비 검사는 시리즈 간 식별성이나 색각 이상 적합성의 인증이 아닙니다.
+
+검증: `node scripts/test-dashboard-components.cjs`, `CHECK_BUNDLE=1 node scripts/check-dashboard-browser.cjs`, `node scripts/check-component-gallery.cjs`, `node scripts/audit.mjs`.
 
 ## 프리셋 추천과 현재 선택
 

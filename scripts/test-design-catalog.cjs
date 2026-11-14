@@ -31,7 +31,7 @@ assert.throws(
   () => designs.normalize({ set: "studio", navigation: "bottom" }),
   /Invalid design selection navigation/,
 );
-assert.equal(designs.components.length, 19);
+assert.equal(designs.components.length, 47);
 for (const set of designs.sets) {
   assert(set.recommendedPalettes.includes(set.palette));
   assert(
@@ -100,7 +100,7 @@ const normalized = core.normalize(
   [],
 );
 assert.equal(normalized.designSelection.components.toast, "outline");
-assert.equal(Object.keys(normalized.designSelection.components).length, 19);
+assert.equal(Object.keys(normalized.designSelection.components).length, 47);
 const temp = fs.mkdtempSync(path.join(os.tmpdir(), "catalog-test-"));
 try {
   const input = {
@@ -141,5 +141,5 @@ try {
   fs.rmSync(temp, { recursive: true, force: true });
 }
 console.log(
-  "PASS: six sets, 19 components, all variants, legacy/invalid input, CLI parity and drift",
+  "PASS: six sets, 47 components, all variants, legacy/invalid input, CLI parity and drift",
 );

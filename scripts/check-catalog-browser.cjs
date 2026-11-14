@@ -26,7 +26,7 @@ const { pathToFileURL } = require("node:url");
       6,
       "captions remain outside thumbnails",
     );
-    assert.equal(await page.locator("[data-component]").count(), 19);
+    assert.equal(await page.locator("[data-component]").count(), 47);
     assert.equal(await page.locator("h1").innerText(), "디자인 도감");
     assert(
       await page

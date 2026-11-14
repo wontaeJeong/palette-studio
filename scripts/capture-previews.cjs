@@ -42,6 +42,9 @@ const pathsToHash = [
   "workspace.js",
   "css/workspace.css",
   "component-demos.js",
+  "dashboard-demos.js",
+  "css/dashboard.css",
+  "data/dashboard-components.js",
   "data/design-concepts.js",
   "css/concepts.css",
   "library-workspace.js",
@@ -67,6 +70,9 @@ const pathsToHash = [
 const screenshots = [
   "studio-overview-light.png",
   "studio-overview-dark.png",
+  "studio-statistics-desktop.png",
+  "studio-statistics-mobile.png",
+  "studio-statistics-heatmap.png",
   "studio-fonts-desktop.png",
   "studio-navigation-desktop.png",
   "studio-navigation-mobile.png",
@@ -192,6 +198,19 @@ async function main() {
           ),
       );
       await shoot(page, "studio-fonts-desktop.png", { keepScroll: true });
+      await context.close();
+    }
+    // Statistics: dashboard composition and readable paired component details.
+    {
+      const { page, context } = await open("index.html", "mode=light&fontSource=local-only", 1440, 1100);
+      await shoot(page, "studio-statistics-desktop.png");
+      await page.locator("#components-options").evaluate(el => el.open = true);
+      await page.locator('[data-component="heatmap"]').click();
+      await shoot(page, "studio-statistics-heatmap.png");
+      await page.locator('#component-dialog [data-close]').first().click();
+      await page.setViewportSize({width:390,height:844});
+      await page.locator('[data-component="bar-chart"]').click();
+      await shoot(page, "studio-statistics-mobile.png");
       await context.close();
     }
     // Menu recipes: same palette, distinct selected shape and grouping.

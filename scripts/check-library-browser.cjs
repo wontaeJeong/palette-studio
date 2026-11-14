@@ -28,8 +28,13 @@ const {pathToFileURL}=require('node:url');
     assert(!(await pane.locator('[data-library-trigger="tooltip"]').evaluate(el=>el.classList.contains('ps-tooltip'))),'tooltip surface styling must not leak onto the trigger');
     const colors=await pane.locator('[data-library-runtime]').evaluate(el=>{const css=getComputedStyle(el);const hex=css.getPropertyValue('--color-canvas').trim();return {background:css.backgroundColor,expected:'rgb('+[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)).join(', ')+')'};});
     assert.equal(colors.background,colors.expected,'whole real library canvas consumes selected theme');
+    // Enter via real keyboard navigation; jumping focus from outside the viewport
+    // can dismiss an overlay during the focus-induced scroll.
+    const precedingButton=pane.locator('[data-library-trigger="button"]');
+    await precedingButton.scrollIntoViewIfNeeded();
+    await precedingButton.focus();
     await page.keyboard.press('Tab');
-    await pane.locator('[data-library-trigger="tooltip"]').focus();
+    assert.equal(await page.evaluate(()=>document.activeElement.dataset.libraryTrigger),'tooltip','Tab reaches tooltip trigger');
     await portal.locator('[data-library-component="tooltip"]').waitFor({state:'visible'});
     await page.keyboard.press('Escape');
     await pane.locator('[data-library-trigger="popover"]').click();

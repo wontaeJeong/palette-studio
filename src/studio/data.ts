@@ -181,9 +181,13 @@ declare global {
       demo(
         id: string,
         variant: string,
-        preview?: boolean,
+        preview?: boolean | "inline",
         pane?: string,
       ): string;
+    };
+    PaletteDashboardDemos: {
+      render(id: string, variant: string, options?: {uid?: string; preview?: boolean | "inline"}): string | null;
+      bind(root: HTMLElement | Document): () => void;
     };
     PaletteComponentDemos: {
       init(get: () => SelectionConfig): () => void;

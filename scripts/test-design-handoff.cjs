@@ -87,3 +87,5 @@ try {
 require('./test-design-catalog.cjs');
 
 require("./test-navigation-designs.cjs");
+
+require("./test-dashboard-components.cjs");

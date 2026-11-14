@@ -5,7 +5,7 @@ import { kit, designs, style, core } from "./data";
 import { Shell, Navigation } from "./navigation";
 import { FontPanel } from "./FontPanel";
 import { IconPanel } from "./IconPanel";
-import { ComponentPanel } from "./ComponentPanel";
+import { ComponentPanel, ChoiceStatus } from "./ComponentPanel";
 import { LibraryPanel } from "./LibraryPanel";
 import type {
   PaletteId,
@@ -18,6 +18,7 @@ export function SelectionPanel() {
   const { config, update, theme, notice, setExpanded } = useStudio(),
     set = designs.sets.find((s) => s.id === config.designSelection.set)!,
     selection = config.designSelection,
+    recommended = designs.selection(selection.set),
     layout = useRef<HTMLDetailsElement>(null),
     motion = useRef<HTMLDetailsElement>(null),
     pointerFocus = useRef(false);
@@ -275,69 +276,87 @@ export function SelectionPanel() {
         </summary>
         <div className="details-content">
           <div className="field-pair">
+            <div className="recommended-field">
+              <label>
+                메뉴 배치
+                <select
+                  id="catalog-navigation"
+                  aria-describedby="navigation-recommendation"
+                  value={selection.navigation}
+                  onChange={(e) => {
+                    update({
+                      designSelection: {
+                        navigation: e.target.value as NavigationId,
+                      },
+                    });
+                    layout.current!.open = true;
+                  }}
+                >
+                  {designs.navigationPresets.map((n) => (
+                    <option key={n.id} value={n.id}>
+                      {n.name}{n.id === recommended.navigation ? " · 프리셋 추천" : ""}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <p id="navigation-recommendation" className="preset-hint">
+                프리셋 추천: {designs.navigationPresets.find(n => n.id === recommended.navigation)!.name}
+              </p>
+            </div>
+            <div className="recommended-field">
+              <label>
+                전환 속도
+                <select
+                  id="catalog-motion"
+                  aria-describedby="motion-recommendation"
+                  value={selection.motion}
+                  onChange={(e) => {
+                    update({
+                      designSelection: { motion: e.target.value as MotionId },
+                    });
+                    motion.current!.open = true;
+                  }}
+                >
+                  {designs.motionPresets.map((n) => (
+                    <option key={n.id} value={n.id}>
+                      {n.name}{n.id === recommended.motion ? " · 프리셋 추천" : ""}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <p id="motion-recommendation" className="preset-hint">
+                프리셋 추천: {designs.motionPresets.find(n => n.id === recommended.motion)!.name}
+              </p>
+            </div>
+          </div>
+          <div className="recommended-field">
             <label>
-              메뉴 배치
+              메뉴 구성
               <select
-                id="catalog-navigation"
-                value={selection.navigation}
+                id="catalog-navigationStructure"
+                aria-describedby="navigationStructure-recommendation"
+                value={selection.navigationStructure}
                 onChange={(e) => {
                   update({
                     designSelection: {
-                      navigation: e.target.value as NavigationId,
+                      navigationStructure: e.target
+                        .value as NavigationStructureId,
                     },
                   });
                   layout.current!.open = true;
                 }}
               >
-                {designs.navigationPresets.map((n) => (
+                {designs.navigationDesigns.structures.map((n) => (
                   <option key={n.id} value={n.id}>
-                    {n.name}
+                    {n.name}{n.id === recommended.navigationStructure ? " · 프리셋 추천" : ""}
                   </option>
                 ))}
               </select>
             </label>
-            <label>
-              전환 속도
-              <select
-                id="catalog-motion"
-                value={selection.motion}
-                onChange={(e) => {
-                  update({
-                    designSelection: { motion: e.target.value as MotionId },
-                  });
-                  motion.current!.open = true;
-                }}
-              >
-                {designs.motionPresets.map((n) => (
-                  <option key={n.id} value={n.id}>
-                    {n.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <p id="navigationStructure-recommendation" className="preset-hint">
+              프리셋 추천: {designs.navigationDesigns.structures.find(n => n.id === recommended.navigationStructure)!.name}
+            </p>
           </div>
-          <label>
-            메뉴 구성
-            <select
-              id="catalog-navigationStructure"
-              value={selection.navigationStructure}
-              onChange={(e) => {
-                update({
-                  designSelection: {
-                    navigationStructure: e.target
-                      .value as NavigationStructureId,
-                  },
-                });
-                layout.current!.open = true;
-              }}
-            >
-              {designs.navigationDesigns.structures.map((n) => (
-                <option key={n.id} value={n.id}>
-                  {n.name}
-                </option>
-              ))}
-            </select>
-          </label>
           <p className="field-label">선택 표시</p>
           <div
             id="navigation-style-picker"
@@ -357,6 +376,7 @@ export function SelectionPanel() {
                 }
               >
                 <span className="navigation-choice-label">{s.name}</span>
+                <ChoiceStatus selected={s.id === selection.navigationStyle} recommended={s.id === recommended.navigationStyle} />
                 <span className="navigation-choice-demo" aria-hidden="true">
                   <Navigation
                     selection={{

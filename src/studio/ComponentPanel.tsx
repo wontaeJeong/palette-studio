@@ -3,6 +3,12 @@ import { useStudio } from "./context";
 import { designs } from "./data";
 import { DemoBoundary } from "./DemoBoundary";
 import type { ComponentId } from "../core/types";
+export function ChoiceStatus({ selected, recommended }: { selected: boolean; recommended: boolean }) {
+  return <span className="choice-statuses">
+    {recommended && <span className="preset-recommendation">프리셋 추천</span>}
+    {selected && <span className="selection-status">선택됨</span>}
+  </span>;
+}
 export function PairedDemo({
   id,
   preview = false,
@@ -135,18 +141,19 @@ export function ComponentPanel() {
                     {recommended.includes(c.id) && (
                       <>
                         {" "}
-                        <span className="recommend-badge">권장</span>
+                        <span className="recommend-badge">권장 요소</span>
                       </>
                     )}
                   </strong>
                   <small>
-                    {c.name} /{" "}
+                    {c.name} · 선택됨: {" "}
                     {
                       designs.treatments[
                         config.designSelection.components[c.id]
                       ].name
                     }
                   </small>
+                  <small>프리셋 추천: {designs.treatments[defaults[c.id]].name}</small>
                   <span>{c.purpose} ↗</span>
                 </button>
               </article>
@@ -202,6 +209,7 @@ export function ComponentPanel() {
               }
             >
               {designs.treatments[v].name}
+              <ChoiceStatus selected={v === variant} recommended={v === defaults[c.id]} />
             </button>
           ))}
         </div>

@@ -1913,4 +1913,48 @@ footer {
   padding-inline-start: 6px;
 }
 
-.set-mini .shell-top > .ps-navigation { display:flex; }
+.set-mini .shell-top > .ps-navigation {
+  display: flex;
+}
+
+/* Recommendation and current selection are independent text states. */
+.choice-statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  margin-top: 6px;
+}
+.choice-statuses:empty {
+  display: none;
+}
+.preset-recommendation,
+.selection-status {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 4px;
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.preset-recommendation {
+  color: var(--color-ink-muted);
+  background: var(--color-surface);
+}
+.selection-status {
+  color: var(--color-accent-text);
+  background: var(--color-accent-subtle);
+  font-weight: 700;
+}
+.recommended-field {
+  min-width: 0;
+}
+.preset-hint {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: var(--color-ink-muted);
+  overflow-wrap: anywhere;
+}
+.sample-interaction {
+  margin-top: 16px;
+}

@@ -11,7 +11,9 @@ export function DemoBoundary({
   useLayoutEffect(() => {
     const el = ref.current!;
     el.innerHTML = html;
+    const disposeDashboard = window.PaletteDashboardDemos.bind(el);
     return () => {
+      disposeDashboard();
       window.PaletteComponentDemos.cleanup();
       el.replaceChildren();
     };

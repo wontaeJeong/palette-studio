@@ -26,7 +26,7 @@ const { pathToFileURL } = require("node:url");
       6,
       "captions remain outside thumbnails",
     );
-    assert.equal(await page.locator("[data-component]").count(), 19);
+    assert.equal(await page.locator("[data-component]").count(), 47);
     assert.equal(await page.locator("h1").innerText(), "디자인 도감");
     assert(
       await page
@@ -101,6 +101,22 @@ const { pathToFileURL } = require("node:url");
     await page.keyboard.press("Escape");
     await page.keyboard.press("Escape");
     await page.selectOption("#catalog-category", "all");
+    // The retained legacy page uses the same visible dashboard markup/runtime.
+    await page.locator('[data-component="heatmap"]').click();
+    assert.equal(await page.locator('#detail-demo [data-dashboard-demo="heatmap"] svg').count(), 2);
+    const dashboardPane = page.locator('#detail-demo .preview-pane').first();
+    await dashboardPane.locator('details summary').click();
+    assert(await dashboardPane.locator('details table').isVisible());
+    await page.keyboard.press('Escape');
+    await page.locator('[data-component="slider"]').click();
+    await dashboardPane.locator('input[type=range]').fill('75');
+    assert.equal(await dashboardPane.locator('output').textContent(), '75%');
+    assert.equal(await page.locator('#detail-demo .preview-pane').nth(1).locator('output').textContent(), '40%');
+    await page.keyboard.press('Escape');
+    assert.equal(await page.locator('[data-navigation-style="outline"] .preset-recommendation').count(), 1);
+    await page.locator('[data-navigation-style="pill"]').click();
+    assert.equal(await page.locator('[data-navigation-style="outline"] .preset-recommendation').count(), 1);
+    assert.equal(await page.locator('[data-navigation-style="pill"] .selection-status').innerText(), '선택됨');
     const designBeforeTheme = await page.evaluate(() =>
       PaletteCatalog.getConfig(),
     );

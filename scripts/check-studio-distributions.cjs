@@ -24,6 +24,36 @@ async function ready(page, id) {
   await page.locator(`[data-library-runtime="${id}"] [data-library-trigger="dialog"]`).first().waitFor();
   assert.equal(await page.locator(`[data-library-runtime="${id}"]`).count(), 2);
 }
+async function currentMainFeatures(page) {
+  const before = await page.evaluate(() => PaletteCatalog.getConfig());
+  assert.equal(await page.locator('[data-component]').count(),47,'all shipped component families');
+  assert.equal(await page.locator('#project-stage [data-dashboard-demo="bar-chart"] svg').count(),2,'paired dashboard charts');
+  await page.locator('#structure-options').evaluate(el=>el.open=true);
+  await page.locator('[data-set="studio"]').click();
+  await page.locator('[data-navigation-style="pill"]').click();
+  assert.equal(await page.locator('[data-navigation-style="edge"] .preset-recommendation').count(),1);
+  assert.equal(await page.locator('[data-navigation-style="pill"] .selection-status').innerText(),'선택됨');
+  await page.locator('#components-options').evaluate(el=>el.open=true);
+  await page.locator('[data-component="slider"]').click();
+  const pane=page.locator('#detail-demo .preview-pane').first();
+  await pane.locator('input[type=range]').fill('75');
+  assert.equal(await pane.locator('output').textContent(),'75%');
+  assert.equal(await page.locator('#detail-demo .preview-pane').nth(1).locator('output').textContent(),'40%');
+  await page.keyboard.press('Escape');
+  await page.locator('[data-component="dialog"]').click();
+  assert(await pane.locator('.inline-sample .sample-box').isVisible(),'overlay sample visible before interaction');
+  await page.locator('[data-variant="outline"]').click();
+  assert.equal(await page.locator('[data-variant="soft"] .preset-recommendation').count(),1);
+  assert.equal(await page.locator('[data-variant="outline"] .selection-status').innerText(),'선택됨');
+  await pane.locator('[data-demo="dialog"]').click();
+  assert(await page.locator('#demo-dialog').isVisible());
+  await page.keyboard.press('Escape'); await page.keyboard.press('Escape');
+  await page.locator('[data-project-search]').first().fill('no matching project');
+  assert.equal(await page.locator('[data-project-preview]').first().locator('.mock-projects tbody tr:visible').count(),0);
+  assert.equal(await page.locator('[data-project-preview]').first().locator('.dashboard-data tbody tr[hidden]').count(),0,'project search preserves chart data');
+  await page.locator('[data-project-search]').first().fill('');
+  await page.evaluate(config => PaletteCatalog.update(config), before);
+}
 async function outputs(page) {
   return page.evaluate(() => {
     PaletteCatalog.update({palette:'warm-sage',scope:'dark-only',framework:'astro',target:'existing-app',uiLibrary:'radix',fonts:{source:'system'},icons:['house']});
@@ -96,6 +126,7 @@ async function verifyLocalLinks(page, origin, prefix) {
       await page.evaluate(async()=>{await PaletteCatalog.readyFonts();await document.fonts.ready;});
       assert.equal(requests.filter(libraryRequest).length, 0, 'no adapter runtime requested at startup');
       const initial = [...requests];
+      await currentMainFeatures(page);
       await verifyLocalLinks(page, hostingOrigin, prefix);
       for (const id of ids) {
         await select(page,id); await ready(page,id);
@@ -115,6 +146,7 @@ async function verifyLocalLinks(page, origin, prefix) {
     {
       const {ctx,page} = await context();
       await page.goto(classicHttp.origin+'/#fontSource=system');
+      await currentMainFeatures(page);
       assert.deepEqual(await outputs(page),reference,'public root classic HTTP canonical exports match split web');
       await ready(page,'radix');
       assert.equal(await downloadProfile(page),profile,'classic HTTP profile download matches split web');
@@ -191,6 +223,7 @@ async function verifyLocalLinks(page, origin, prefix) {
         await page.locator('[data-project-preview]').first().waitFor();
         await page.evaluate(async()=>{await PaletteCatalog.readyFonts();await document.fonts.ready;});
         const initial=[...requests];
+        await currentMainFeatures(page);
         for (const id of ids) {await select(page,id);await ready(page,id);}
         assert.deepEqual(await outputs(page),reference,distribution+' canonical exports match web');
         assert.equal(await downloadProfile(page),profile,distribution+' actual profile download matches web');

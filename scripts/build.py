@@ -147,8 +147,15 @@ def theme(spec,mode):
       'function':('#855D0E','#EDD18E'),'keyword':('#78469E','#D4A1EB'),'tag':('#A63850','#F2A0B0'),'attribute':('#385EAD','#A8C3FF'),
     }
     for k,p in syntax.items():setv('syntax-'+k,fit(p[0 if mode=='light' else 1],[surface]))
-    chart=['#5252BE','#277B86','#A36216','#B23862','#28704D','#775BA9','#54677B','#9B4F35'] if mode=='light' else ['#AAA9FF','#80D5DB','#F0B86E','#F3A1C0','#89D1AB','#C8A8ED','#B0C4DA','#E9B198']
+    # Rotate categorical hues around the palette accent; labels/patterns still identify series.
+    hue, saturation, _ = colorsys.rgb_to_hsv(*rgb(a))
+    offsets = [0, .40, .72, .18, .58, .88, .30, .79]
+    chart = [a] + [hx(colorsys.hsv_to_rgb((hue+offset)%1, .68 if mode=='light' else .38, .64 if mode=='light' else .94)) for offset in offsets[1:]]
     for i,c in enumerate(chart,1):setv('chart-'+str(i),fit(c,[raised,surface],3.1))
+    for i,weight in enumerate([.12,.30,.50,.72,1.0],1):
+        background=mix(raised,a,weight)
+        setv('heatmap-'+str(i),background)
+        setv('on-heatmap-'+str(i),fit(ink,[background],4.6))
     return t
 
 def cssblock(selector,t,mode):return selector+' {\n  color-scheme: '+mode+';\n'+''.join(f'  {k}: {v};\n' for k,v in t.items())+'}\n'
@@ -235,6 +242,7 @@ def main():
     for n in range(1,9):
         pair('chart-'+str(n),'raised',3,'chart');pair('chart-'+str(n),'surface',3,'chart')
     for bg in ['raised','surface']:pair('chart-axis',bg)
+    for n in range(1,6):pair('on-heatmap-'+str(n),'heatmap-'+str(n))
     write('data/contrast-pairs.json',json.dumps({'pairs':pairs,'note':'Decorative line, disabled controls and chart pairwise discrimination are not WCAG pass claims.'},ensure_ascii=False,indent=2)+'\n')
     index=['# 팔레트 선택표\n','아래 32종은 이 키트의 큐레이션이며 인기 순위가 아닙니다. 기본 바탕과 포인트를 함께 설계했습니다.\n','| ID | 조합 | 용도 | Light accent | Dark accent |\n|---|---|---|---|---|']
     for p,s in zip(palettes,SPECS):index.append(f'| `{p["id"]}` | {p["name"]} | {p["use"]} | `{s[2]}` | `{s[4]}` |')

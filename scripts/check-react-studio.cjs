@@ -41,6 +41,25 @@ const fs = require("node:fs/promises");
         ),
       "editor fields, project form and navigation are React host nodes",
     );
+    // A boundary can detach listeners and later rebind the same element.
+    // Dispatching on a detached owned sample must not retain live callbacks.
+    assert.deepEqual(await page.evaluate(() => {
+      const host = document.createElement("div");
+      host.innerHTML = PaletteDashboardDemos.render("slider", "soft");
+      document.body.append(host);
+      const input = host.querySelector("input"), output = host.querySelector("output");
+      const dispose = PaletteDashboardDemos.bind(host);
+      input.value = "75"; input.dispatchEvent(new Event("input", {bubbles:true}));
+      const mounted = output.textContent;
+      dispose(); host.remove();
+      input.value = "90"; input.dispatchEvent(new Event("input", {bubbles:true}));
+      const detached = output.textContent;
+      const disposeAgain = PaletteDashboardDemos.bind(host);
+      input.dispatchEvent(new Event("input", {bubbles:true}));
+      const rebound = output.textContent;
+      disposeAgain();
+      return {mounted, detached, rebound};
+    }), {mounted:"75%", detached:"75%", rebound:"90%"}, "dashboard listener cleanup and remount");
     await page.locator('[data-set="precision"]').click();
     await page.selectOption("#catalog-palette", "warm-sage");
     await page.locator("#typography-options").evaluate((e) => (e.open = true));

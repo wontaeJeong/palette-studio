@@ -1,9 +1,9 @@
 /* One offline catalog for the browser, CLI and generated implementation briefs. */
 (function (root, factory) {
   if (typeof module === "object" && module.exports)
-    module.exports = factory(require("./ui-presets.js"), require("./design-concepts.js"), require("./navigation-designs.js"));
-  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets, root.PaletteDesignConcepts, root.PaletteNavigationDesigns);
-})(typeof globalThis !== "undefined" ? globalThis : this, function (ui, concepts, navigationDesigns) {
+    module.exports = factory(require("./ui-presets.js"), require("./design-concepts.js"), require("./navigation-designs.js"), require("./dashboard-components.js"));
+  else root.PaletteDesignCatalog = factory(root.PaletteUIPresets, root.PaletteDesignConcepts, root.PaletteNavigationDesigns, root.PaletteDashboardComponents);
+})(typeof globalThis !== "undefined" ? globalThis : this, function (ui, concepts, navigationDesigns, dashboard) {
   "use strict";
   const {
     navigationPresets,
@@ -203,6 +203,7 @@
       variants: Object.keys(treatments),
     }),
   );
+  components.push(...dashboard.components);
   const sets = [
     {
       id: "studio",
@@ -305,15 +306,10 @@
       variant: "soft",
       recommendedPalettes: ["navy-cyan", "midnight-periwinkle", "slate-slate"],
       recommendedComponents: [
-        "tabs",
-        "menu",
-        "pagination",
-        "toast",
-        "alert",
-        "badge",
+        "metric", "bar-chart", "line-chart", "donut-chart", "data-table", "progress",
       ],
       recommendationReason:
-        "데이터 탐색을 위한 탭·메뉴·페이지 이동과 운영 상태·오류 안내를 권장합니다.",
+        "지표·차트·검색 가능한 표와 진행 상태를 함께 확인합니다.",
       componentOverrides: {
         button: "outline",
         badge: "outline",

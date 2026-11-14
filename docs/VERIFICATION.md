@@ -13,8 +13,8 @@ node scripts/check-fonts.cjs
 
 | 확인 | 방법 | 범위 |
 |---|---|---|
-| 정적 대비 | Node 표준 라이브러리로 상대 휘도 계산 | 64개 테마 × 178쌍 = 11,392건 |
-| 토큰 일치 | 생성 CSS와 JSON 비교 | 테마별 의미 토큰 189개 |
+| 정적 대비 | Node 표준 라이브러리로 상대 휘도 계산 | 64개 테마 × 183쌍 = 11,712건 |
+| 토큰 일치 | 생성 CSS와 JSON 비교 | 테마별 의미 토큰 199개 |
 | 브라우저 적용 | Chromium에서 computed custom properties 비교 | 64개 테마 |
 | 스타일 적용 | 컨트롤 높이 computed value 비교 | 6개 스타일 |
 | UI 동작 | 실제 브라우저 조작 | 검색·목록 필터·모달·비교·다운로드·선택 복원 |
@@ -22,7 +22,7 @@ node scripts/check-fonts.cjs
 | 반응형 외형 | 실제 viewport와 document 폭 확인 | 360 / 390 / 768 / 1440px, light / split / compare |
 | 시스템 표시 설정 | CSS 미디어 에뮬레이션 | reduced motion / forced colors의 일부 렌더링 |
 | 오프라인 | HTTP 요청 이벤트 관찰 | 동봉/시스템 모드의 외부 요청 0건; CDN 모드는 선택 폰트·견본 WOFF2만 요청 |
-| Tailwind | v4 custom utilities 실제 컴파일 | 945개 클래스와 4개 상태 variant |
+| Tailwind | v4 custom utilities 실제 컴파일 | 995개 클래스와 4개 상태 variant |
 | React 예제 | TSX strict typecheck | ThemeProvider / ProjectPanel / 호환 ScanPanel / Button 소스 |
 | 프로필 | JSON Schema 검사 | 예제와 브라우저 내보내기 2개 |
 
@@ -102,7 +102,7 @@ node scripts/capture-previews.cjs
 node scripts/check-screenshot-freshness.cjs
 ```
 
-- 9개 콘셉트의 실제 geometry/type/elevation 차이, 저장/공유/내보내기와 기존 정규화, 범위별 HEX, UI/CLI 동일 생성 결과를 확인합니다. 19종 샘플 × 9개 콘셉트 × 1440/390px에서 Light/Dark 두 pane 및 가로 넘침을 검사합니다.
+- 9개 콘셉트의 실제 geometry/type/elevation 차이, 저장/공유/내보내기와 기존 정규화, 범위별 HEX, UI/CLI 동일 생성 결과를 확인합니다. 47종 샘플 × 9개 콘셉트 × 1440/390px에서 Light/Dark 두 pane 및 가로 넘침을 검사합니다.
 - 앵커 tooltip의 무이동·hover/focus·Escape·재열기, 메뉴 키, popover 적용/복원, modal/drawer 복귀 포커스, 최대 3개 토스트·실제 남은 시간 pause·undo·영구 오류·키보드 dismiss와 모바일 쌓임, reduced-motion/일부 forced-colors를 확인합니다.
 - 실제 Base UI/Radix/React Aria/MUI/Mantine의 Button·Tooltip·Dialog·Popover·알림을 양 모드와 390px에서 실행합니다. 설치된 컴포넌트의 포커스·포털·선택 HEX·본문 폰트·콘셉트 geometry, 알림 격리와 해제를 검사합니다. Radix/React Aria 알림은 Sonner임을 표시합니다. 오프라인 `file://START-HERE.html`에서도 5종 실제 dialog와 pagehide/pageshow 수명을 검사합니다.
 - 메트릭 Node 검사는 외부 fetch/storage 경계만 제어해 실제 응답 형태와 정확한 엔드포인트, 유효한 0, 음수/문자/unsafe 수치 거절, 날짜·패키지 검증, 부분 실패, release 404, 403/429·retry 시각, 독립 TTL/캐시 보존, 진행 중 중복 제거, 최대 동시 3요청, 슬롯 확보 후 8초 기본 timeout, 늦은 응답·abort, storage getter/method 오류와 손상 캐시를 확인합니다.
@@ -114,7 +114,7 @@ node scripts/check-screenshot-freshness.cjs
 이 절의 기존 관측 브라우저는 Playwright 1.56.1 / Chromium 141.0.7390.37이며, 아래 React 배포 검증과 새 캡처는 Playwright 1.62.1 / Chromium 151.0.7922.34입니다. Safari/Firefox/iOS·모든 스크린리더나 대상 앱 통합을 검증한 것은 아닙니다. npm 다운로드를 전체 활성 사용자 수로 환산하지 않고, GitHub의 최신 정식 릴리스(게시된 non-prerelease 릴리스, 초안 제외)가 테스트한 대표 패키지 버전과 같다고 가정하지 않습니다. 폰트/아이콘 원본은 이번 변경에서 바꾸지 않았으며 기존 별도 감사 결과는 위의 원래 범위에 한정됩니다. 전체 앱 접근성 인증을 뜻하지 않습니다.
 
 
-최신 main의 작업실 회귀도 통합했습니다. `check-workspace-browser.cjs`는 `check-workspace-review.cjs`를 함께 실행해 입력/버튼 표현의 독립성, 라이트/다크 비교 링크·URL·저장 복원, 시스템 폰트 공급에서 역할별 선택 복구, 내비게이션 버튼의 접근 가능한 이름을 확인합니다. 라이브러리 내보내기 화면은 간결한 한국어 적용 범위·React/Astro 요구사항을 표시하며, 전체 canonical `library-README.md`의 실제 다운로드 바이트를 1440/390px에서 검사합니다. 두 내보내기 캡처를 포함한 최신 manifest는 34개 PNG를 검사합니다.
+최신 main의 작업실 회귀도 통합했습니다. `check-workspace-browser.cjs`는 `check-workspace-review.cjs`를 함께 실행해 입력/버튼 표현의 독립성, 라이트/다크 비교 링크·URL·저장 복원, 시스템 폰트 공급에서 역할별 선택 복구, 내비게이션 버튼의 접근 가능한 이름을 확인합니다. 라이브러리 내보내기 화면은 간결한 한국어 적용 범위·React/Astro 요구사항을 표시하며, 전체 canonical `library-README.md`의 실제 다운로드 바이트를 1440/390px에서 검사합니다. 두 내보내기와 통계 캡처를 포함한 최신 manifest는 37개 PNG를 검사합니다.
 
 
 ### 로컬 HTTP QA의 연결 초기화 추적
@@ -168,10 +168,29 @@ npm run test:distributions
 
 `check-studio-distributions.cjs`는 실제 로컬 서버를 루트와 `/palette-studio/`에 각각 실행하고 다섯 실제 라이브러리·dialog, 최초 어댑터 요청 0건, 전송 실패 후 버튼으로 재요청/복구, 느린 이전 선택의 무효화, 문서/README 링크 그래프와 918개 WOFF2의 HTTP 응답을 확인합니다. 웹·classic·다른 임시 디렉터리로 옮긴 단일 HTML의 모든 공통 생성 파일 및 실제 프로필 다운로드 바이트를 비교합니다. 단일 HTML은 로컬/시스템 폰트 모드 모두 외부 HTTP·인접 파일 요청 0건과 전체 라이선스 텍스트를 검사합니다. 자동 메트릭 요청은 없으며 외부 네트워크를 차단합니다.
 
-같은 Chromium 151.0.7922.34, 1440×1000, 새 context, 로컬 폰트 조건에서 최초 JS 원본 바이트를 측정합니다. 이는 압축 전 파일 크기이며 속도나 전송량 개선 주장이 아닙니다. 이전 classic `b2f9aa7`은 2,703,949바이트/35요청, 새 classic은 2,716,043바이트/33요청, split 웹은 1,953,635바이트/42요청입니다. split 최초 어댑터 요청은 0건이고 다섯 선택 후 어댑터 요청은 5건입니다. 단일 HTML은 39,011,988바이트/문서 1요청이며 JS 바이트를 외부 스크립트 합계 0으로 보고 앱 크기가 0이라고 해석하지 않습니다. 실행 시 측정 경로/브라우저/요청 목록은 `out/studio-distribution-resources.json`에 기록합니다.
+같은 Chromium 151.0.7922.34, 1440×1000, 새 context, 로컬 폰트 조건에서 최초 JS 원본 바이트를 측정합니다. 이는 압축 전 파일 크기이며 속도나 전송량 개선 주장이 아닙니다. 동시 추가된 추천·통계 기능을 포함한 최신 main `b034ae0`은 2,758,306바이트/38요청, 통합 classic은 2,771,656바이트/36요청, split 웹은 2,009,222바이트/45요청입니다. split 최초 어댑터 요청은 0건이고 다섯 선택 후 어댑터 요청은 5건입니다. 단일 HTML은 39,098,194바이트/문서 1요청이며 JS 바이트를 외부 스크립트 합계 0으로 보고 앱 크기가 0이라고 해석하지 않습니다. 이전 `b2f9aa7` 비교는 추천·통계 추가 전 측정이므로 현재 비교 수치에 섞지 않습니다. 실행 시 측정 경로/브라우저/요청 목록은 `out/studio-distribution-resources.json`에 기록합니다.
 
 `npm run dev`는 한 번 빌드한 후 로컬 서버를 실행합니다. 자동 watch는 없으며 변경 후 재시작합니다. `npm run preview -- --base /palette-studio/ --port 4174`로 기존 결과의 하위 경로를 확인할 수 있습니다.
 
 위 배포 검사 외에 기존 필수 브라우저 범위(`check-studio-flow`, `check-fonts`, `check-handoff-browser`, `check-icon-studio`, `check-component-concepts`, `check-component-gallery`, `check-library-browser`, `check-library-selection`, `check-navigation-library-integration`, `check-library-export-summary`, `check-library-metrics-browser`)와 소스 타입/레시피 내보내기 검사를 유지합니다. 새 `check-react-studio`는 React 호스트 소유권, 독립 검색과 유효하지 않은 내보내기 초안 보존, 프로젝트 화면 유지, canonical 생성 및 이동한 단일 HTML을 확인합니다.
 
-실제 34개 PNG는 Chromium으로 다시 캡처합니다. manifest는 모든 `src/**/*.ts(x)`·셸·루트 package/lock/tsconfig·빌드 스크립트·생성 classic 런타임까지 해시하여 오래된 화면을 검출합니다. desktop/mobile light/dark 캡처를 직접 확인했으며 원본과 픽셀 단위로 같다는 주장은 하지 않습니다. Safari/Firefox/iOS 및 모든 보조 기술/대상 앱 통합은 이 검증의 범위 밖입니다.
+실제 37개 PNG는 Chromium으로 다시 캡처합니다. manifest는 모든 `src/**/*.ts(x)`·셸·루트 package/lock/tsconfig·빌드 스크립트·생성 classic 런타임까지 해시하여 오래된 화면을 검출합니다. desktop/mobile light/dark 캡처를 직접 확인했으며 원본과 픽셀 단위로 같다는 주장은 하지 않습니다. Safari/Firefox/iOS 및 모든 보조 기술/대상 앱 통합은 이 검증의 범위 밖입니다.
+
+
+### 동시 main 기능 보존
+
+`b034ae0`의 프리셋 추천, 인라인 오버레이 견본과 28개 대시보드 요소를 타입 지정 React 작업실에 통합했습니다. 기존 19개를 합친 47개 ID는 유한 타입이며, canonical 메타데이터·리터럴 차트/히트맵 토큰·스키마·CLI 생성물을 유지합니다. 추천 표시는 현재 선택과 따로 계산합니다. 내비게이션·컴포넌트 변경 후에도 추천 표시와 설명이 남고, 저장/공유/내보내기는 실제 선택을 따릅니다.
+
+`sample-markup.js`는 레거시 catalog와 React의 오버레이/대시보드 본문 생성 경로를 공유합니다. React는 편집기, 폼, 내비게이션, 통계 섹션을 소유하며 프레임워크 독립 견본 본문만 명시적 경계 안에서 렌더링합니다. 대시보드 `bind`는 해제 함수를 반환하고 경계의 변경/언마운트 때 이벤트를 abort합니다. React 소유권 검사는 해제 뒤 분리된 슬라이더가 더 이상 동작하지 않고 같은 요소에 다시 연결할 수 있는 것도 확인합니다.
+
+```bash
+node scripts/check-preset-recommendations.cjs
+node scripts/check-inline-previews.cjs
+CHECK_BUNDLE=1 node scripts/check-dashboard-browser.cjs
+node scripts/check-component-gallery.cjs
+node scripts/check-studio-flow.cjs
+npm run test:studio
+npm run test:distributions
+```
+
+원래 추천/인라인/통계 동작 assertion을 유지합니다. gallery는 React 렌더와 native dialog close 처리를 기다린 뒤 47종 × 9개 콘셉트 × 2개 너비의 양 모드와 넘침을 검사합니다. 슬라이더/파일 선택/표 정렬과 검색/단계 이동/재시도, SVG 데이터 표, reduced motion, 저장과 내보내기를 확인합니다. 프로젝트 검색은 최근 프로젝트 행만 필터링하며 차트 데이터 표를 건드리지 않습니다. split 웹 루트와 하위 경로, classic 및 이동한 단일 HTML에서도 47개 요소, 추천과 선택의 독립성, 대시보드, 인라인 견본과 선택적 dialog를 실제로 조작합니다. 레거시 catalog는 같은 본문 경로와 기존 브라우저 검사를 유지합니다.

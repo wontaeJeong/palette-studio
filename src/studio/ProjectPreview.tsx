@@ -124,6 +124,21 @@ function ProjectPane({
                 </article>
               ))}
             </div>
+            <section className="mock-dashboard" aria-label="통계와 진행 상태">
+              <div className="mock-dashboard-title"><h4>작업 통계</h4><span>샘플 데이터 · 최근 6주</span></div>
+              <DemoBoundary
+                className="dashboard-summary"
+                html={(["metric", "progress"] as const)
+                  .map(id => window.PaletteSampleMarkup.demo(id, v[id], false, "project-" + index + "-" + mode))
+                  .join("")}
+              />
+              <DemoBoundary
+                className="dashboard-charts"
+                html={(["bar-chart", "line-chart", "donut-chart"] as const)
+                  .map(id => window.PaletteSampleMarkup.demo(id, v[id], false, "project-" + index + "-" + mode))
+                  .join("")}
+              />
+            </section>
             <article className={"mock-projects treatment " + v.card}>
               <div className="sample-box">
                 <h4 className="sample-emphasis">최근 프로젝트</h4>

@@ -25,7 +25,14 @@
     text +
     "</button>";
   function demo(id, variant, preview = false, pane = "light") {
-    const uid = (preview ? "preview-" : "detail-") + id + "-" + pane;
+    const uid =
+      (preview === "inline" ? "inline-" : preview ? "preview-" : "detail-") +
+      id +
+      "-" +
+      pane;
+    const dashboard = window.PaletteDashboardDemos.render(id, variant, {uid, preview});
+    if (dashboard !== null) return dashboard;
+
     const content = {
       button:
         '<div class="sample-actions">' +
@@ -148,7 +155,20 @@
         button("프로젝트 만들기", "action", variant === "solid") +
         "</div>",
     }[id];
-    return '<div class="treatment ' + esc(variant) + '">' + content + "</div>";
+    // Static samples and interactive demos share the same markup and treatment.
+    if (preview === "inline") return content.replace(/ data-demo="[^"]*"/g, "");
+    const showSample =
+      !preview &&
+      ["toast", "dialog", "drawer", "tooltip", "menu", "popover"].includes(id);
+    const body = showSample
+      ? '<div class="inline-sample" inert aria-hidden="true">' +
+        demo(id, variant, "inline", pane) +
+        '</div><div class="sample-interaction">' +
+        content +
+        "</div>"
+      : content;
+    return '<div class="treatment ' + esc(variant) + '">' + body + "</div>";
   }
+
   window.PaletteSampleMarkup = { demo };
 })();

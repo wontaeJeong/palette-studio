@@ -4,27 +4,8 @@ import { palette, style, kit, designs } from "./data";
 import { Navigation } from "./navigation";
 import { DemoBoundary, Svg } from "./DemoBoundary";
 import { LibraryPreview } from "./LibraryPanel";
+import { DashboardSummary, initialRecentProjects, type SampleProject } from "./DashboardSummary";
 import type { PaletteId } from "../core/types";
-const initialProjects = [
-  {
-    name: "웹사이트 리뉴얼",
-    team: "제품팀",
-    status: "review",
-    label: "! 검토 필요",
-  },
-  {
-    name: "디자인 가이드",
-    team: "디자인팀",
-    status: "passed",
-    label: "✓ 완료",
-  },
-  {
-    name: "모바일 프로젝트",
-    team: "개발팀",
-    status: "running",
-    label: "◷ 진행 중",
-  },
-];
 function ProjectPane({
   mode,
   index,
@@ -37,7 +18,7 @@ function ProjectPane({
   index: number;
   previewPage: string;
   setPreviewPage: (page: string) => void;
-  projects: typeof initialProjects;
+  projects: readonly SampleProject[];
   addProject: (name: string) => void;
 }) {
   const { config, view, notice } = useStudio(),
@@ -108,27 +89,12 @@ function ProjectPane({
                 <h3>프로젝트 현황</h3>
               </div>
             </div>
-            <div className="mock-metrics">
-              {[
-                ["전체 프로젝트", projects.length + 9],
-                ["이번 주 완료", 8],
-              ].map(([label, total]) => (
-                <article key={label} className={"treatment " + v.card}>
-                  <div className="sample-box">
-                    <small>{label}</small>
-                    <strong>
-                      {total}
-                      <span>개</span>
-                    </strong>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <DashboardSummary key={selection.dashboardLayout} layout={selection.dashboardLayout} recent={projects} treatment={v.card} />
             <section className="mock-dashboard" aria-label="통계와 진행 상태">
               <div className="mock-dashboard-title"><h4>작업 통계</h4><span>샘플 데이터 · 최근 6주</span></div>
               <DemoBoundary
                 className="dashboard-summary"
-                html={(["metric", "progress"] as const)
+                html={(selection.dashboardLayout === "cards" ? ["metric", "progress"] as const : ["progress"] as const)
                   .map(id => window.PaletteSampleMarkup.demo(id, v[id], false, "project-" + index + "-" + mode))
                   .join("")}
               />
@@ -281,6 +247,7 @@ function Recipe() {
   const rows = [
     ["프리셋", set.name],
     ["콘셉트", designs.concepts.get(selection.concept).name],
+    ["대시보드 요약", designs.dashboardLayouts.find(p => p.id === selection.dashboardLayout)!.name],
     [
       "메뉴 배치",
       designs.navigationPresets.find((n) => n.id === selection.navigation)!
@@ -337,7 +304,7 @@ function Recipe() {
 export function ProjectPreview({ copy }: { copy: (text: string) => void }) {
   const { config, view, setView, expanded, setExpanded, notice } = useStudio(),
     [previewPage, setPreviewPage] = useState("projects"),
-    [projects, setProjects] = useState(initialProjects);
+    [projects, setProjects] = useState<SampleProject[]>(initialRecentProjects);
   const modes: ("light" | "dark")[] =
     view.mode === "split"
       ? ["light", "dark"]

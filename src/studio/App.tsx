@@ -63,7 +63,7 @@ export function App() {
         </div>
       </header>
       <main id="workspace" className="workspace">
-        <SelectionPanel />
+        <SelectionPanel copy={copy} />
         <ProjectPreview copy={copy} />
       </main>
       <ExportDialog ref={exportRef} copy={copy} />

@@ -13,6 +13,7 @@ import type {
   ConceptId,
   NavigationStyleId,
   NavigationStructureId,
+  DashboardLayoutId,
   NavigationId,
   MotionId,
   PaletteId,
@@ -127,6 +128,8 @@ interface Designs extends DesignCatalog {
     variants: ComponentVariant[];
   }[];
   treatments: Record<ComponentVariant, { name: string; rule: string }>;
+  dashboardLayouts: (Named<DashboardLayoutId> & { englishName: string; when: string; avoid: string; rule: string })[];
+  dashboardLayoutBrief(id: DashboardLayoutId): string;
   concepts: {
     concepts: (Named<ConceptId> & {
       traits: string[];

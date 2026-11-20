@@ -82,13 +82,26 @@ test('selectSet resets preset fields and preserves chooseSet context including u
   store.selectSet('bloom');
   const config = store.getConfig();
   assert.deepEqual({ ...config, designSelection: undefined }, { project: 'Existing App', palette: 'pearl-lavender', style: 'soft', target: 'existing-app', scope: 'dark-only', framework: 'astro', layout: 'content', uiLibrary: 'mui', icons: ['house'], fonts: { body: 'pretendard', code: 'd2coding', source: 'cdn-first' }, designSelection: undefined });
-  assert.deepEqual(config.designSelection, { set: 'bloom', concept: 'soft', motion: 'standard', navigation: 'top', navigationStyle: 'pill', navigationStructure: 'list', components: { popover: 'soft', button: 'solid', input: 'soft', select: 'soft', switch: 'solid', checkbox: 'soft', toast: 'soft', alert: 'soft', dialog: 'soft', drawer: 'soft', tooltip: 'soft', menu: 'soft', tabs: 'soft', breadcrumb: 'soft', pagination: 'soft', card: 'soft', badge: 'soft', accordion: 'soft', empty: 'soft', 'bar-chart': 'soft', 'stacked-bar': 'soft', 'line-chart': 'soft', 'area-chart': 'soft', 'donut-chart': 'soft', 'pie-chart': 'soft', 'histogram': 'soft', 'scatter-chart': 'soft', 'heatmap': 'soft', 'sparkline': 'soft', 'metric': 'soft', 'progress': 'soft', 'circular-progress': 'soft', 'stepper': 'soft', 'skeleton': 'soft', 'spinner': 'soft', 'error-state': 'soft', 'radio': 'soft', 'textarea': 'soft', 'slider': 'soft', 'date-picker': 'soft', 'file-upload': 'soft', 'combobox': 'soft', 'data-table': 'soft', 'avatar': 'soft', 'timeline': 'soft', 'list': 'soft', 'separator': 'soft' } });
+  assert.deepEqual(config.designSelection, { set: 'bloom', concept: 'soft', motion: 'standard', navigation: 'top', navigationStyle: 'pill', navigationStructure: 'list', dashboardLayout: 'cards', components: { popover: 'soft', button: 'solid', input: 'soft', select: 'soft', switch: 'solid', checkbox: 'soft', toast: 'soft', alert: 'soft', dialog: 'soft', drawer: 'soft', tooltip: 'soft', menu: 'soft', tabs: 'soft', breadcrumb: 'soft', pagination: 'soft', card: 'soft', badge: 'soft', accordion: 'soft', empty: 'soft', 'bar-chart': 'soft', 'stacked-bar': 'soft', 'line-chart': 'soft', 'area-chart': 'soft', 'donut-chart': 'soft', 'pie-chart': 'soft', 'histogram': 'soft', 'scatter-chart': 'soft', 'heatmap': 'soft', 'sparkline': 'soft', 'metric': 'soft', 'progress': 'soft', 'circular-progress': 'soft', 'stepper': 'soft', 'skeleton': 'soft', 'spinner': 'soft', 'error-state': 'soft', 'radio': 'soft', 'textarea': 'soft', 'slider': 'soft', 'date-picker': 'soft', 'file-upload': 'soft', 'combobox': 'soft', 'data-table': 'soft', 'avatar': 'soft', 'timeline': 'soft', 'list': 'soft', 'separator': 'soft' } });
   const snapshot = store.getSnapshot(); assert.throws(() => store.selectSet('missing')); assert.equal(store.getSnapshot(), snapshot);
 });
 
 test('system font normalization also applies when switching presets', () => {
   const store = createSelectionStore(deps, initial()); store.update({ fonts: { source: 'system' } }); store.selectSet('console');
   assert.deepEqual(store.getConfig().fonts, { body: 'system', code: 'system', source: 'system' });
+});
+
+test('dashboard layout is an independent choice retained across design sets and shared selections', () => {
+  const store = createSelectionStore(deps, initial());
+  store.update({ designSelection: { dashboardLayout: 'status-distribution' } });
+  assert.equal(store.getConfig().designSelection.dashboardLayout, 'status-distribution');
+  store.selectSet('console');
+  assert.equal(store.getConfig().designSelection.dashboardLayout, 'status-distribution');
+  const config = store.getConfig(), restored = restoreSelection(deps, fullHash(config), undefined);
+  assert.equal(restored.config.designSelection.dashboardLayout, 'status-distribution');
+  const saved = storage();
+  assert(persistSelection(saved, config).saved);
+  assert.equal(restoreSelection(deps, '', saved).config.designSelection.dashboardLayout, 'status-distribution');
 });
 
 for (const key of ['selection', 'catalogConfig']) test(`${key} full URL wins over storage and ignores single-field config overrides`, () => {

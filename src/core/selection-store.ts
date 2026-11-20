@@ -65,7 +65,7 @@ export function createSelectionStore(dependencies: SelectionDependencies, initia
         framework: snapshot.framework,
         layout: snapshot.layout,
         fonts: { ...preset.config.fonts, source: snapshot.fonts.source },
-        designSelection: dependencies.designs.selection(id),
+        designSelection: { ...dependencies.designs.selection(id), dashboardLayout: snapshot.designSelection.dashboardLayout },
       });
     },
     subscribe(listener: () => void): () => void {

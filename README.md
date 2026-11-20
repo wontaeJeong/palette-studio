@@ -52,6 +52,24 @@ GitHub Pages는 `main` 브랜치의 루트 디렉터리를 배포합니다.
 
 ![통계와 진행률이 포함된 대시보드](previews/studio-statistics-desktop.png)
 
+#### KPI 카드 대체 레이아웃
+
+작업실의 **대시보드 요약 프리셋**에서 9종을 비교할 수 있습니다. 선택한 팔레트·폰트·콘셉트로 예시를 확인하고 적용하면 프로젝트 미리보기의 요약 영역이 바뀝니다. 모든 패턴은 샘플이며 실제 앱의 수치나 지표를 대체하지 않습니다.
+
+| 프리셋 | 적합한 상황 |
+|---|---|
+| 카드형 (비교 기준) | 독립적인 핵심 지표를 각각 강조 |
+| 분리선 요약 (Metric strip) | 목록 위 간단한 등록 수·사용량 |
+| 상태 분포 바 (Segmented status bar) | 상호 배타적인 상태별 비율 |
+| 조치 우선 목록 (Action-first queue) | 검토·처리 대기열, 운영 작업함 |
+| 핵심 지표 + 보조 수치 | 화면의 대표 총량·비율을 중심으로 설명 |
+| 예외 알림 + 요약 | 실패·기한 초과 등 먼저 조치할 예외 |
+| 상태 필터 탭 (Counted status filters) | 상태별 수치를 눌러 실제 목록을 필터링 |
+| 미니 추세 목록 (Sparkline metric rows) | 실제 일별·주별 시계열과 최근 값 |
+| 목표 대비 진척 (Target progress summary) | 명시된 목표·할당량과 현재 실적 |
+
+각 패턴에는 적합한 상황·피할 상황과 **패턴 작업지시 복사**가 제공됩니다. 선택은 디자인 세트를 변경해도 유지되며 `designSelection.dashboardLayout`, `AGENT-TASK.md`, `design.md`, `QA-CHECKLIST.md`에 반영됩니다. 기존 설정은 카드형으로 호환됩니다.
+
 ### 독립 콘셉트와 실제 UI 라이브러리
 
 - 세트와 별도로 미니멀(Minimal), 소프트(Soft), 에디토리얼(Editorial), 컴팩트(Compact), 브루탈리스트(Brutalist), 글래스(Glass), 익스프레시브(Expressive), 터미널(Terminal), 택타일(Tactile) 9종을 비교합니다. 실제 컴포넌트의 형태·위계·경계·깊이·간격이 달라지며 선택한 본문/코드 폰트는 유지합니다.

@@ -135,6 +135,16 @@ node scripts/smoke-library-metrics.cjs          # 선택 실행: 실제 공개 A
 
 검증: `node scripts/test-dashboard-components.cjs`, `CHECK_BUNDLE=1 node scripts/check-dashboard-browser.cjs`, `node scripts/check-component-gallery.cjs`, `node scripts/audit.mjs`.
 
+### 대시보드 요약 레이아웃
+
+작업실의 대시보드 요약 프리셋은 개별 `metric`, `card`, 차트의 표현 방식과 별개로 상단 요약의 정보 구조를 선택합니다. `data/design-catalog.js`의 `dashboardLayouts`가 명칭·사용 조건·작업지시의 원본입니다. `designSelection.dashboardLayout`은 공유 링크와 프로필에 저장되고 브라우저/CLI에서 같은 계약으로 내보냅니다. 생략한 과거 설정은 `cards`로 정규화됩니다. 디자인 세트를 바꿔도 이 선택은 유지되며 기존 앱에서는 요청한 대시보드 영역만 개선합니다.
+
+- 분리선 요약·핵심 지표 강조는 수치의 위계를 정리합니다. 상태 분포 바는 동일한 분모에 속하는 서로 배타적인 범주에만 적용하고 겹치는 상태를 합산하지 않습니다.
+- 조치 우선·예외 요약은 실제 대응이 필요한 항목을 우선합니다. 0건을 경고로 표시하지 않습니다. 상태 필터는 실제 목록과 동일한 조회 범위의 개수를 사용하고 키보드·빈 결과를 지원합니다.
+- 미니 추세에는 실제 시계열이, 목표 진척에는 명확한 목표·분모가 필요합니다. 추세·목표를 샘플 수치로 만들어 내지 않습니다.
+
+미리보기의 샘플은 `src/studio/DashboardSummary.tsx`에 있고, 스타일은 `css/dashboard.css`의 KPI 레이아웃 영역입니다. 실제 앱에 도감을 복제하지 말고 기존 컴포넌트·필터·접근성 계약에 선택한 구조를 연결하세요. `node scripts/test-dashboard-layouts.cjs`와 빌드 후 `node scripts/check-dashboard-layouts.cjs`로 선택·핸드오프·상태 비율·필터·좁은 화면·오프라인 동작을 확인합니다.
+
 ## 프리셋 추천과 현재 선택
 
 컴포넌트 표현과 메뉴 선택 표시의 `프리셋 추천`은 선택한 세트의 기본 디자인이고, `선택됨`은 현재 적용한 디자인입니다. 메뉴 배치·구성·전환 속도는 옵션과 필드 아래에서 추천값을 확인합니다. 개별 변경 후에도 추천 기준은 유지되며 내보내기에는 실제 선택이 반영됩니다.

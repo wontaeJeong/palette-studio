@@ -96,6 +96,7 @@ export const ExportDialog = forwardRef<
         {palette(config.palette).name} ·{" "}
         {designs.concepts.get(config.designSelection.concept).name} ·{" "}
         {style(config.style).name} ·{" "}
+        {designs.dashboardLayouts.find(p => p.id === config.designSelection.dashboardLayout)!.name} ·{" "}
         {fontLoader.resolve(config.fonts.body, "body").name} /{" "}
         {fontLoader.resolve(config.fonts.code, "code").name} · 아이콘{" "}
         {config.icons.length}개

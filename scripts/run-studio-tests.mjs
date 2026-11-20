@@ -6,7 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const contracts = ['check-handoff-schemas.cjs', 'test-design-handoff.cjs', 'test-design-catalog.cjs', 'test-navigation-designs.cjs', 'test-design-concepts.cjs', 'test-ui-libraries.cjs', 'test-library-metrics.cjs'];
+const contracts = ['check-handoff-schemas.cjs', 'test-design-handoff.cjs', 'test-design-catalog.cjs', 'test-navigation-designs.cjs', 'test-dashboard-layouts.cjs', 'test-design-concepts.cjs', 'test-ui-libraries.cjs', 'test-library-metrics.cjs'];
 function run(args, env = process.env) {
   const result = spawnSync(process.execPath, args, { cwd: root, env, stdio: 'inherit' });
   if (result.error) throw result.error;

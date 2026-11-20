@@ -18,6 +18,7 @@ export type MotionId = "none" | "quick" | "standard" | "extended";
 export type NavigationId = "top" | "left" | "hybrid";
 export type NavigationStyleId = "edge" | "underline" | "pill" | "fill" | "outline" | "dot";
 export type NavigationStructureId = "list" | "grouped" | "rail";
+export type DashboardLayoutId = "cards" | "metric-strip" | "status-distribution" | "action-queue" | "primary-stat" | "exception-summary" | "status-filters" | "trend-rows" | "target-progress";
 
 export interface FontSelection { body: BodyFontId; code: CodeFontId; source: FontSource }
 export interface DesignSelection {
@@ -27,6 +28,7 @@ export interface DesignSelection {
   navigation: NavigationId;
   navigationStyle: NavigationStyleId;
   navigationStructure: NavigationStructureId;
+  dashboardLayout: DashboardLayoutId;
   components: Record<ComponentId, ComponentVariant>;
 }
 export interface SelectionConfig {

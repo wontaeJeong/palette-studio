@@ -655,6 +655,10 @@
             "grouped",
             "rail"
           ]
+        },
+        "dashboardLayout": {
+          "enum": ["cards", "metric-strip", "status-distribution", "action-queue", "primary-stat", "exception-summary", "status-filters", "trend-rows", "target-progress"],
+          "default": "cards"
         }
       }
     },

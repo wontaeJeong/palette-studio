@@ -26,6 +26,73 @@
       rule: "Use --color-accent background and --color-on-accent text for the leading control or header, with neutral content surfaces. Keep warning/error semantic colors.",
     },
   };
+  // Layout recipes are independent of component surface treatments and theme sets.
+  // Keep this catalog shared by the editor, CLI and handoff generators.
+  const dashboardLayouts = [
+    {
+      id: "cards", name: "카드형 (비교 기준)", englishName: "KPI cards",
+      description: "독립된 수치를 같은 크기의 카드로 나열합니다.",
+      when: "서로 다른 핵심 지표를 각각 강조해야 할 때",
+      avoid: "모든 상태를 같은 비중으로 보여주거나 목록 위 공간을 낭비할 때",
+      rule: "Use KPI cards for genuinely independent metrics, not every status in a list. Keep labels, period, units and a restrained visual hierarchy; use fewer cards rather than cloning identical icon-and-number tiles.",
+    },
+    {
+      id: "metric-strip", name: "분리선 요약", englishName: "Metric strip",
+      description: "배경 카드 없이 수치와 레이블을 한 줄의 요약으로 묶습니다.",
+      when: "등록 수·사용량처럼 단순한 수치를 목록 위에서 빠르게 읽을 때",
+      avoid: "긴 설명이나 복잡한 추세가 필수인 지표",
+      rule: "Use one borderless metric strip with subtle separators, compact labels, tabular figures and a consistent baseline. Group metrics by scope and period; wrap naturally on narrow screens. Do not add individual card backgrounds, shadows or decorative icons.",
+    },
+    {
+      id: "status-distribution", name: "상태 분포 바", englishName: "Segmented status bar",
+      description: "전체 수치 아래 하나의 가로 누적 막대로 상태별 구성 비율을 표시합니다.",
+      when: "활성·만료·폐기나 처리 상태처럼 전체를 이루는 범주를 비교할 때",
+      avoid: "검토 요청·기한 초과처럼 서로 겹치는 상태 또는 다른 기간의 지표",
+      rule: "Use a 100% horizontal segmented bar under a labeled total. Only combine mutually exclusive, exhaustive statuses with the same denominator and snapshot; compute segment widths from counts, omit zero-width segments but retain zero in the text legend. Provide exact counts and percentages alongside semantic labels; never encode state by color alone. Do not stack overlapping, missing or unrelated metrics; handle an empty denominator honestly.",
+    },
+    {
+      id: "action-queue", name: "조치 우선 목록", englishName: "Action-first queue",
+      description: "처리할 항목부터 정렬하고 완료·전체 수치는 보조 줄로 내립니다.",
+      when: "검토 대기열이나 사용자 작업함에서 다음 행동이 중요할 때",
+      avoid: "조치 순서가 없는 분석 전용 지표를 비교할 때",
+      rule: "Lead with actionable states ordered by urgency, using concise label/count rows and a link or filter to the corresponding list when available. Keep completion and total counts secondary. Emphasize exceptional nonzero counts with semantic text cues; do not render a zero-count warning or a fake action.",
+    },
+    {
+      id: "primary-stat", name: "핵심 지표 + 보조 수치", englishName: "Primary metric with supporting stats",
+      description: "대표 지표 하나에 시선을 모으고 나머지는 작게 정렬합니다.",
+      when: "총량·성공률·사용량 등 화면의 중심 질문이 하나일 때",
+      avoid: "동등하게 비교해야 하는 지표를 임의로 하나만 크게 표시할 때",
+      rule: "Establish one primary metric hierarchy with a larger figure and explicit label/unit; put related supporting values in a compact, unboxed group. Use a shared baseline and clear denominator/period where relevant. Do not use hero typography for an arbitrary metric or repeat the same value in neighboring cards.",
+    },
+    {
+      id: "exception-summary", name: "예외 알림 + 요약", englishName: "Exception-first summary",
+      description: "주의가 필요한 상황만 얇은 인라인 안내로 분리하고 정상 수치는 담백하게 표시합니다.",
+      when: "기한 초과·실패·미처리 같은 예외를 운영자가 먼저 확인해야 할 때",
+      avoid: "정상 상태에도 항상 경고 배너를 보여주거나 단순 수치를 오류처럼 꾸밀 때",
+      rule: "Show a concise inline exception notification only when a real actionable exception exists, with a meaningful severity label and recovery/filter action where applicable. For zero exceptions show a quiet normal state, not a warning. Keep routine totals in a neutral summary below it; avoid duplicated counts and gratuitous notice cards.",
+    },
+    {
+      id: "status-filters", name: "상태 필터 탭", englishName: "Counted status filters",
+      description: "통계 수치를 목록을 좁히는 상태 필터에 통합합니다.",
+      when: "내 리소스·검토 목록처럼 수치를 누르면 해당 행을 바로 확인해야 할 때",
+      avoid: "상태별로 걸러 볼 데이터가 없거나 집계 기간·권한이 목록과 다를 때",
+      rule: "Render labeled status filter buttons with counts and selected state; filter the actual list on activation, preserve other search/date predicates, and announce the result count/empty state. Count and list must share the same query scope; make controls keyboard accessible and use non-color selection indicators. Use filters, not decorative tabs or a duplicate KPI grid.",
+    },
+    {
+      id: "trend-rows", name: "미니 추세 목록", englishName: "Sparkline metric rows",
+      description: "수치 옆에 짧은 스파크라인으로 시간에 따른 변화를 보여줍니다.",
+      when: "일별 호출·완료 수처럼 실제 시계열 데이터와 최근 값이 있을 때",
+      avoid: "시점별 원자료 없이 현재 총량만 있을 때",
+      rule: "Use compact rows with the latest value, explicit time window, and a small sparkline derived from the real ordered time series. Provide an accessible text/data equivalent and comparable scales where comparisons are intended. Distinguish missing history from zero; do not invent trends or imply that an increase is necessarily good.",
+    },
+    {
+      id: "target-progress", name: "목표 대비 진척", englishName: "Target progress summary",
+      description: "실적과 목표를 한 수치 쌍으로 제시하고 얇은 진행률 막대로 관계를 표시합니다.",
+      when: "주간 처리 목표·할당량처럼 명확한 목표값이 있을 때",
+      avoid: "목표나 분모가 없거나 단순 상태 분포를 진행률로 오해하게 할 때",
+      rule: "Show the real target and denominator next to the completed amount, remaining amount or excess and time window. Use a thin progress bar with a text label and accessible value; handle missing/zero targets and over-target results without a misleading percentage or invented goal.",
+    },
+  ];
   const rows = [
     ["popover", "추가 설정 팝오버", "Popover", "오버레이", "현재 작업 옆에서 설정을 바꾸는 작은 창", "설정 필터 보조 팝업", "Anchor an interactive dialog to its trigger, keep within viewport; move focus inside, close on Escape/outside click and restore trigger focus. Use labels for controls; never put interactive content in a tooltip."],
     [
@@ -362,6 +429,7 @@
       navigation: set.defaultNavigation,
       navigationStyle: {studio:"edge",bloom:"pill",precision:"outline",editorial:"underline",console:"fill",signal:"dot"}[id],
       navigationStructure: {studio:"list",bloom:"list",precision:"grouped",editorial:"grouped",console:"rail",signal:"list"}[id],
+      dashboardLayout: "cards",
       components: Object.fromEntries(
         components.map((c) => [
           c.id,
@@ -394,6 +462,10 @@
         result[field] = input[field];
       }
     }
+    if (input.dashboardLayout !== undefined) {
+      if (!dashboardLayouts.some((p) => p.id === input.dashboardLayout)) throw Error("Invalid design selection dashboardLayout");
+      result.dashboardLayout = input.dashboardLayout;
+    }
     const overrides = input.components === undefined ? {} : input.components;
     if (!overrides || typeof overrides !== "object" || Array.isArray(overrides))
       throw Error("Invalid design selection components");
@@ -404,6 +476,11 @@
       result.components[id] = variant;
     }
     return result;
+  }
+  function dashboardLayoutBrief(id) {
+    const preset = dashboardLayouts.find((p) => p.id === id);
+    if (!preset) throw Error("Invalid design selection dashboardLayout");
+    return "Dashboard summary layout: " + preset.name + " (" + preset.id + ") / " + preset.englishName + ". " + preset.rule + " Apply only to relevant, requested dashboard summaries; retain real data, filters and existing component libraries. Do not copy demo numbers or invent new metrics.";
   }
   function brief(input) {
     if (input === undefined) return "";
@@ -428,6 +505,7 @@
       motionBrief(selected.motion),
       navigationBrief(selected.navigation),
       navigationDesigns.brief(selected.navigationStyle,selected.navigationStructure,selected.navigation),
+      dashboardLayoutBrief(selected.dashboardLayout),
       "Apply the explicit concept shape, hierarchy and elevation from --concept-* in selected-style.css; the selected style remains the density/control-size adjustment, and selected fonts take precedence. Control targets at least 40px. Honor reduced motion. Test light/dark only within the selected scope.",
       "",
       ...components.map(
@@ -454,6 +532,8 @@
     sets,
     concepts,
     components,
+    dashboardLayouts,
+    dashboardLayoutBrief,
     treatments,
     selection,
     normalize,

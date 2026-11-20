@@ -647,7 +647,7 @@
         framework: config.framework,
         layout: config.layout,
         fonts: { ...set.config.fonts, source: config.fonts.source },
-        designSelection: designs.selection(id),
+        designSelection: { ...designs.selection(id), dashboardLayout: config.designSelection.dashboardLayout },
       },
       palettes,
       fonts,

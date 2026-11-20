@@ -84,6 +84,9 @@ const screenshots = [
   "studio-statistics-desktop.png",
   "studio-statistics-mobile.png",
   "studio-statistics-heatmap.png",
+  "studio-kpi-layouts-gallery.png",
+  "studio-kpi-layouts-distribution.png",
+  "studio-kpi-layouts-mobile.png",
   "studio-fonts-desktop.png",
   "studio-navigation-desktop.png",
   "studio-navigation-mobile.png",
@@ -222,6 +225,21 @@ async function main() {
       await page.setViewportSize({width:390,height:844});
       await page.locator('[data-component="bar-chart"]').click();
       await shoot(page, "studio-statistics-mobile.png");
+      await context.close();
+    }
+    // KPI recipes: compare the same summary content and show a card-free layout.
+    {
+      const { page, context } = await open("index.html", "mode=light&fontSource=local-only", 1440, 1100);
+      await page.locator("#dashboard-layout-options > summary").click();
+      await page.locator("#browse-dashboard-layouts").click();
+      await shoot(page, "studio-kpi-layouts-gallery.png", { keepScroll: true });
+      await page.locator('[data-dashboard-layout-choice="status-distribution"]').click();
+      await page.locator("#dashboard-layout-options").scrollIntoViewIfNeeded();
+      await shoot(page, "studio-kpi-layouts-distribution.png", { keepScroll: true });
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.selectOption("#dashboard-layout", "status-filters");
+      await page.locator("#toggle-preview").click();
+      await shoot(page, "studio-kpi-layouts-mobile.png", { keepScroll: true });
       await context.close();
     }
     // Menu recipes: same palette, distinct selected shape and grouping.

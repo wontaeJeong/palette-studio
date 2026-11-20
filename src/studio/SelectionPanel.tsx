@@ -7,6 +7,7 @@ import { FontPanel } from "./FontPanel";
 import { IconPanel } from "./IconPanel";
 import { ComponentPanel, ChoiceStatus } from "./ComponentPanel";
 import { LibraryPanel } from "./LibraryPanel";
+import { DashboardLayoutPanel } from "./DashboardLayoutPanel";
 import type {
   PaletteId,
   StyleId,
@@ -14,7 +15,7 @@ import type {
   NavigationStructureId,
   MotionId,
 } from "../core/types";
-export function SelectionPanel() {
+export function SelectionPanel({ copy }: { copy: (text: string) => void }) {
   const { config, update, theme, notice, setExpanded } = useStudio(),
     set = designs.sets.find((s) => s.id === config.designSelection.set)!,
     selection = config.designSelection,
@@ -485,6 +486,7 @@ export function SelectionPanel() {
           <style id="selected-motion-preview">{core.motionCSS(config)}</style>
         </div>
       </details>
+      <DashboardLayoutPanel copy={copy} />
       <ComponentPanel />
       <IconPanel />
       <div className="inspector-footer">
